@@ -1,0 +1,21 @@
+.track_name {
+  font-variant: small-caps;
+}
+
+.artist {
+  font-weight: bold;
+  font-size: 120%;
+}
+
+.album_name {
+  font-style: italic;
+}
+
+.release_date, .genres {
+  font-size: 75%;
+}
+
+img {
+  width: 75px;
+  height: 75px;
+}
