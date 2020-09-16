@@ -2,40 +2,55 @@
 <html>
 <head>
   <link rel="stylesheet" href="contentcreators-lab2-part3.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <title>Playlist of Ten Favorite Songs</title>
   <h1>Playlist of Ten Favorite Songs</h1>
 
-  <div class ="song">
-    <img src="images/NotesOnAConditionalForm.jpg" alt="Album Cover">
-    <div class="track_name">"If You're Too Shy (Let Me Know)"</div>
-    <div class="artist"> <a href="https://the1975.com/">the 1975</a></div>
-    <div class="album_name"><a href="https://www.allmusic.com/album/notes-on-a-conditional-form-mw0003328609">Notes on a Conditional Form</a></div>
-    <div class="release_date">Release Date: May 22, 2020</div>
-    <div class="genres"> Genre(s):
-      <ul>
-        <li>Pop</li>
-        <li>Rock</li>
-        <li>Electrnoic Pop</li>
-        <li>Dance</li>
-      </ul>
-    </div>
-  </div>
+  <div class="list">
 
-  <div class ="song">
-    <div class="track_name">"Collar Full"</div>
-    <div class="artist"> <a href="https://panicatthedisco.com/">Panic! at the Disco</a></div>
-    <div class="album_name"><a href="https://www.allmusic.com/album/too-weird-to-live-too-rare-to-die%21-mw0002565550/releases">Too Weird to Live, Too Rare to Die!</a></div>
-    <div class="album_cover"><img src="images/TooWeirdToLive.jpg" alt="Album Cover" width="75" height="75"></div>
-    <div class="release_date">Release Date: October 8, 2013</div>
-    <div class="genres"> Genre(s):
-      <ul>
-        <li>Alternative</li>
-        <li>Indie</li>
-      </ul>
+    <div class="headers">
+      <h3 id="track">Track Name</h3>
+      <h3 id="artist">Artist</h3>
+      <h3 id="album_name">Album Name</h3>
+      <h3 id="release_date">Release Date</h3>
+      <h3 id="genres">Genres</h3>
+      <h3 id="album_cover">Album Cover</h3>
     </div>
+
+    <div class="song">
+      <div class="track" id=favorite_song>"If You're Too Shy (Let Me Know)"</div>
+      <div class="artist"> <a href="https://the1975.com/">the 1975</a></div>
+      <div class="album_name"><a href="https://www.allmusic.com/album/notes-on-a-conditional-form-mw0003328609">Notes on a Conditional Form</a></div>
+      <div class="release_date">May 22, 2020</div>
+      <div class="genres">
+        <ul>
+          <li>Pop</li>
+          <li>Rock</li>
+          <li>Electrnoic Pop</li>
+          <li>Dance</li>
+        </ul>
+      </div>
+      <div class="album_cover"><img src="images/NotesOnAConditionalForm.jpg" alt="Album Cover"></div>
+    </div>
+
+    <div class="song">
+      <div class="track">"Collar Full"</div>
+      <div class="artist"> <a href="https://panicatthedisco.com/">Panic! at the Disco</a></div>
+      <div class="album_name"><a href="https://www.allmusic.com/album/too-weird-to-live-too-rare-to-die%21-mw0002565550/releases">Too Weird to Live, Too Rare to Die!</a></div>
+      <div class="release_date">October 8, 2013</div>
+      <div class="genres">
+        <ul>
+          <li>Alternative</li>
+          <li>Indie</li>
+        </ul>
+      </div>
+      <div class="album_cover"><img src="images/TooWeirdToLive.jpg" alt="Album Cover"></div>
+    </div>
+
+    <div id="end">end of list</div>
   </div>
 
 </body>

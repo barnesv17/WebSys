@@ -1,4 +1,67 @@
-.track_name {
+html {
+  background-color: #1c1c1b;
+}
+body {
+  color: #a6a5a4;
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #1DB954;
+}
+
+.list {
+  border-style: solid;
+  border-color: #a6a5a4;
+}
+
+.headers {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
+.song {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 25px;
+}
+
+#track, .track {
+  width: 16.6%;
+  text-align: center;
+}
+#artist, .artist {
+  width: 16.6%;
+  text-align: center;
+}
+#album_name, .album_name {
+  width: 16.6%;
+  text-align: center;
+}
+#release_date, .release_date {
+  width: 16.6%;
+  text-align: center;
+}
+#genres, .genres {
+  width: 16.6%;
+  text-align: center;
+}
+#album_cover, .album_cover {
+  width: 16.6%;
+  text-align: center;
+}
+
+img {
+  width: 125px;
+  height: 125px;
+}
+a, a.link {
+  color: #a6a5a4;
+}
+
+.track {
   font-variant: small-caps;
 }
 
@@ -15,7 +78,12 @@
   font-size: 75%;
 }
 
-img {
-  width: 75px;
-  height: 75px;
+#favorite_song {
+  color: #1DB954;
+}
+
+#end {
+  font-size: 75%;
+  font-style: italic;
+  text-align: center;
 }
