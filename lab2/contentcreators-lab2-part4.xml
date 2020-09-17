@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="contentcreators-lab2-part4.css"?>
+
+<root_element xmlns:html="http://www.w3.org/1999/xhtml">
+  <playlist_10_favorite_songs>
+
+    <heading>Playlist of Ten Favorite Songs</heading>
+
+    <song>
+      <track>"If You're Too Shy (Let Me Know)"</track>
+      <artist><a href="https://the1975.com/">the 1975</a></artist>
+      <album>Notes on a Conditional Form</album>
+      <album_cover></album_cover>
+      <release_date>May 22, 2020</release_date>
+      <genres>Pop; Rock; Electronic Pop; Dance;</genres>
+    </song>
+
+    <song>
+      <track>"Collar Full"</track>
+      <artist>Panic! at the Disco</artist>
+      <album>Too Weird to Live, Too Rare to Die!</album>
+      <album_cover></album_cover>
+      <release_date>October 8, 2013</release_date>
+      <genres>Alternative; Indie</genres>
+    </song>
+
+  </playlist_10_favorite_songs>
+</root_element>

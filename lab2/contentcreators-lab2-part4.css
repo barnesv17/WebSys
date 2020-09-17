@@ -1,0 +1,13 @@
+track, artist, album, album_cover, release_date, genres {
+  display: block;
+}
+
+track {
+  font-size: 80%;
+}
+artist {
+  color: blue;
+}
+album {
+  font-style: italic;
+}
