@@ -29,27 +29,31 @@ h1 {
 }
 
 #track, .track {
-  width: 16.6%;
+  width: 14.2%;
   text-align: center;
 }
 #artist, .artist {
-  width: 16.6%;
+  width: 14.2%;
   text-align: center;
 }
 #album_name, .album_name {
-  width: 16.6%;
+  width: 14.2%;
   text-align: center;
 }
 #release_date, .release_date {
-  width: 16.6%;
+  width: 14.2%;
   text-align: center;
 }
 #genres, .genres {
-  width: 16.6%;
+  width: 14.2%;
   text-align: center;
 }
 #album_cover, .album_cover {
-  width: 16.6%;
+  width: 14.2%;
+  text-align: center;
+}
+#audio, .audio {
+  width: 14.2%;
   text-align: center;
 }
 
@@ -59,6 +63,9 @@ img {
 }
 a, a.link {
   color: #a6a5a4;
+}
+audio {
+  width: 100px;
 }
 
 .track {
