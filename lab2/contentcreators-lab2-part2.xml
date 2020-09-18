@@ -19,4 +19,22 @@
     <genres>Alternative; Indie</genres>
   </song>
 
+  <song>
+    <track>"Trouble"</track>
+    <artist>Coldplay</artist>
+    <album>Parachutes</album>
+    <album_cover></album_cover>
+    <release_date>July 10, 2000</release_date>
+    <genres>Pop; Rock</genres>
+  </song>
+
+  <song>
+    <track>"One"</track>
+    <artist>Metallica</artist>
+    <album>...And Justice For All</album>
+    <album_cover></album_cover>
+    <release_date>September 8, 1988</release_date>
+    <genres>Pop; Rock</genres>
+  </song>
+
 </playlist_10_favorite_songs>
