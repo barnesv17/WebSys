@@ -37,4 +37,22 @@
     <genres>Pop; Rock</genres>
   </song>
 
+  <song>
+    <track>"BLEACH"</track>
+    <artist>BROCKHAMPTON</artist>
+    <allbum>SATURATION III</album>
+    <album_cover></album_cover>
+    <release_date>December 17, 2020</release_date>
+    <genres>Hip Hop; R&ampB</genres>
+  </song>
+
+  <song>
+    <track>"All I Need"</track>
+    <artist>Radiohead</artist>
+    <album>In Rainbows</album>
+    <album_cover></album_cover>
+    <release_date>October 10, 2007</release_date>
+    <genres>Alternative Rock</genres>
+  </song>
+
 </playlist_10_favorite_songs>
