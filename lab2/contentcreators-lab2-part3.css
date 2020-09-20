@@ -95,6 +95,15 @@ audio {
   text-align: center;
 }
 
-ul {
+.genres ul {
   list-style-type: none;
+  text-align: left;
+  margin-left: 30%;
+  margin-top: 0%;
+}
+
+.genres li:before {
+  content: '\2012';
+  position: absolute;
+  margin-left: -20px;
 }
