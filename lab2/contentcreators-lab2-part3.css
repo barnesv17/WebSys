@@ -94,3 +94,7 @@ audio {
   font-style: italic;
   text-align: center;
 }
+
+ul {
+  list-style-type: none;
+}
