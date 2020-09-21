@@ -41,19 +41,37 @@ h1 {
   text-align: center;
 }
 #release_date, .release_date {
-  width: 14.2%;
+  width: 12.2%;
   text-align: center;
 }
 #genres, .genres {
-  width: 14.2%;
+  width: 12.2%;
   text-align: center;
+
 }
+
+/* Flush unordered list items to left, 
+   get rid of the bullet points 
+*/
+.genres ul {
+  list-style-type: none;
+  text-align: left;
+  margin-left: 20%;
+  margin-top: 0%;
+}
+
+.genres li:before {
+  content: '\2013';
+  position: absolute;
+  margin-left: -20px;
+}
+
 #album_cover, .album_cover {
-  width: 14.2%;
+  width: 12.2%;
   text-align: center;
 }
 #audio, .audio {
-  width: 14.2%;
+  width: 18.2%;
   text-align: center;
 }
 
@@ -65,7 +83,7 @@ a, a.link {
   color: #a6a5a4;
 }
 audio {
-  width: 80%;
+  width: 95%;
 }
 
 .track {
@@ -93,17 +111,4 @@ audio {
   font-size: 75%;
   font-style: italic;
   text-align: center;
-}
-
-.genres ul {
-  list-style-type: none;
-  text-align: left;
-  margin-left: 30%;
-  margin-top: 0%;
-}
-
-.genres li:before {
-  content: '\2012';
-  position: absolute;
-  margin-left: -20px;
 }
