@@ -3,7 +3,7 @@ track, artist, album, album_cover, release_date, genres {
 }
 
 track {
-  font-size: 80%;
+  font-size: .8em;
 }
 artist {
   color: blue;
