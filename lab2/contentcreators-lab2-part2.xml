@@ -73,4 +73,22 @@
     <genres>Pop; Rock</genres>
   </song>
 
+  <song>
+    <track>"Narcissist"</track>
+    <artist>No Rome ft. the 1975</artist>
+    <album>RIP Indo Hisashi</album>
+    <album_cover></album_cover>
+    <release_date>August 28, 2018</release_date>
+    <genres>Alternative; Indie</genres>
+  </song>
+
+  <song>
+    <track>"Cautious"</track>
+    <artist>Emarosa</artist>
+    <album>Peach Club</album>
+    <album_cover></album_cover>
+    <release_date>January 28, 2019</release_date>
+    <genres>Rock</genres>
+  </song>
+
 </playlist_10_favorite_songs>
