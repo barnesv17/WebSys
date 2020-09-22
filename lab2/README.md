@@ -9,15 +9,10 @@ Part 1: Semantic HTML
   In this way, ten different songs are ordered with identical format and semantic tags, and HTML file is logically structured and understandable.
 
 Part 2: XML
-
-<<<<<<< HEAD
-
-=======
   After declaring XML root element, we chose <playlist_10_favorite_songs> tag to be the elementary level of XML hierarchy. Within this
-  level, each song entry is enclosed by <song> tags, and all parts of the song information are enclosed by <track>, <artist>, <album>, <release_date>, and <genres>, in parallel. 
+  level, each song entry is enclosed by <song> tags, and all parts of the song information are enclosed by <track>, <artist>, <album>, <release_date>, and <genres>, in parallel.
 
-  In this way, 
->>>>>>> fbc9ad36da6861b8c6101039eaf484084322f61d
+  In this way,
 
 Part 3: HTML & CSS
 
