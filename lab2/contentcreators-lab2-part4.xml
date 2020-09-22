@@ -127,7 +127,7 @@
       <image id="Moonrise"/>
     </song>
 
-    <!-- <song>
+    <song>
       <track>"Let it Happen"</track>
       <artist>
         <html:a href="https://official.tameimpala.com/">Tame Impala</html:a>
@@ -148,9 +148,8 @@
       <album_cover></album_cover>
       <release_date>June 29, 2018</release_date>
       <genres>Rap</genres>
-<<<<<<< HEAD
-      <image id="Good_Kid_M.A.A.D._City"/>
-    </song> -->
+      <image id="GKMC"/>
+    </song>
 
     <song>
       <track>"Narcissist"</track>
@@ -180,9 +179,6 @@
       <release_date>January 28, 2019</release_date>
       <genres>Rock</genres>
       <image id="Cautious"/>
-=======
-      <image id="GKMC"/>
->>>>>>> 9ae896d95ab83103ecda1246260c8cdb0b148367
     </song>
 
   </playlist_10_favorite_songs>
