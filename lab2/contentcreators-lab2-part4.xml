@@ -127,7 +127,7 @@
       <image id="Moonrise"/>
     </song>
 
-    <song>
+    <!-- <song>
       <track>"Let it Happen"</track>
       <artist>
         <html:a href="https://official.tameimpala.com/">Tame Impala</html:a>
@@ -149,7 +149,7 @@
       <release_date>Octorber 22, 2012</release_date>
       <genres>Rap</genres>
       <image id="GKMC"/>
-    </song>
+    </song> -->
 
     <song>
       <track>"Narcissist"</track>
