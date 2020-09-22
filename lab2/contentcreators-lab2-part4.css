@@ -13,7 +13,7 @@ track, artist, album, album_cover, release_date, genres, image {
 
 track {
   font-size: 1.05rem;
-  margin-top: 1.25rem;
+  margin-top: 1.4rem;
 }
 artist {
   color: blue;
@@ -36,4 +36,20 @@ image {
 
 #Weird {
   background-image: url("images/TooWeirdToLive.jpg");
+}
+
+#Parachutes {
+  background-image: url("images/Parachutes.jpg");
+}
+
+#Justice {
+  background-image: url("images/AndJusticeForAll.jpg");
+}
+
+#Rainbows {
+  background-image: url("images/A1MwaIeBpwL._AC_SL1500_.jpg");
+}
+
+#III { 
+  background-image: url("images/Brockhampton_-_Saturation_III.png");
 }
