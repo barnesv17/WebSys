@@ -1,13 +1,39 @@
-track, artist, album, album_cover, release_date, genres {
+song {
+  font-size: 1.25rem;
+}
+
+heading {
+  font-size: 1.7rem;
+}
+
+track, artist, album, album_cover, release_date, genres, image {
   display: block;
+  padding: .05rem; /*text was too close together*/
 }
 
 track {
-  font-size: .8em;
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
 }
 artist {
   color: blue;
 }
 album {
   font-style: italic;
+}
+
+image {
+  background-repeat: no-repeat;
+  height: 10rem;
+  width: 10rem;
+  background-size: cover;
+  background-position: center;
+}
+
+#Notes {
+  background-image: url("images/NotesOnAConditionalForm.jpg");
+}
+
+#Weird {
+  background-image: url("images/TooWeirdToLive.jpg");
 }

@@ -9,65 +9,73 @@
     <song>
       <track>"If You're Too Shy (Let Me Know)"</track>
       <artist>
-        <a href="https://the1975.com/">the 1975</a>
+        <html:a href="https://the1975.com/">the 1975</html:a>
       </artist>
       <album>Notes on a Conditional Form</album>
       <album_cover></album_cover>
       <release_date>May 22, 2020</release_date>
       <genres>Pop; Rock; Electronic Pop; Dance;</genres>
+      <image id="Notes"/>
     </song>
 
     <song>
       <track>"Collar Full"</track>
-      <artist>Panic! at the Disco</artist>
+      <artist>
+        <html:a href="http://panicatthedisco.com/">Panic! at the Disco</html:a>
+      </artist>
       <album>Too Weird to Live, Too Rare to Die!</album>
       <album_cover></album_cover>
       <release_date>October 8, 2013</release_date>
       <genres>Alternative; Indie</genres>
+      <image id="Weird"/>
     </song>
 
     <song>
       <track>"Trouble"</track>
       <artist>
-        <a href="https://coldplay.com/">Coldplay</a>
+        <html:a href="https://coldplay.com/">Coldplay</html:a>
       </artist>
       <album>Parachutes</album>
       <album_cover></album_cover>
       <release_date>July 10, 2000</release_date>
       <genres>Pop; Rock</genres>
+      <image id="Parachutes"/>
     </song>
 
     <song>
       <track>"One"</track>
       <artist>
-        <a href="https://metallica.com/">Metallica</a>
+        <html:a href="https://metallica.com/">Metallica</html:a>
       </artist>
       <album>...And Justice For All</album>
       <album_cover></album_cover>
       <release_date>September 8, 1988</release_date>
       <genres>Pop; Rock</genres>
+      <image id="Justice"/>
     </song>
 
     <song>
       <track>"All I Need"</track>
       <artist>
-        <a href="https://www.radiohead.com/">Radiohead</a>
+        <html:a href="https://www.radiohead.com/">Radiohead</html:a>
       </artist>
       <album>In Rainbows</album>
       <album_cover></album_cover>
       <release_date>October 10, 2007</release_date>
       <genres>Alternative Rock</genres>
+      <image id="Rainbows"/>
     </song>
 
     <song>
       <track>"BLEACH"</track>
       <artist>
-        <a href="http://brckhmptn.com/">BROCKHAMPTON</a>
+        <html:a href="http://brckhmptn.com/">BROCKHAMPTON</html:a>
       </artist>
       <album>SATURATION III</album>
       <album_cover></album_cover>
       <release_date>December 15, 2017</release_date>
       <genres>Hip Hop; R&amp;B</genres>
+      <image id="III"/>
     </song>
 
   </playlist_10_favorite_songs>
