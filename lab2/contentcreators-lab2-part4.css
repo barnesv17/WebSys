@@ -1,5 +1,7 @@
 song {
   font-size: 1.25rem;
+  display: block;
+  margin-top: 1.25rem;
 }
 
 heading {
@@ -7,13 +9,11 @@ heading {
 }
 
 track, artist, album, album_cover, release_date, genres, image {
-  display: block;
-  padding: .05rem; /*text was too close together*/
+  display: inline;
 }
 
 track {
   font-size: 1.05rem;
-  margin-top: 1.4rem;
 }
 artist {
   color: blue;
@@ -23,6 +23,7 @@ album {
 }
 
 image {
+  display: block;
   background-repeat: no-repeat;
   height: 10rem;
   width: 10rem;
@@ -66,6 +67,12 @@ image {
   background-image: url("images/Narcissist.jpg");
 }
 
+<<<<<<< HEAD
 #Cautious {
   background-image: url("images/Cautious.jpg");
 }
+=======
+#GKMC{
+  background-image: url("images/Good\ Kid\,\ M.A.A.D.\ City.jpg");
+}
+>>>>>>> 9ae896d95ab83103ecda1246260c8cdb0b148367
