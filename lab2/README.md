@@ -15,7 +15,7 @@ Part 2: XML
 
 Part 3: HTML & CSS
 
-  Following the logic from part 1, we chose to use <section> tag for each song entry, but within the section, we used logical division tags <div> with specified class names for each piece of song information. Names used for them correspond with tag names we used in XML, such as "track", "album", and etc. 
+  Following the logic from part 1, we chose to use <section> tag for each song entry, but within the section, we used logical division tags <div> with specified class names for each piece of song information. Names used for them correspond with tag names we used in XML, such as "track", "album", and etc. We assumed the instructions "the title of your favorite song should appear in green" meant every song title would appear in green because these are all our favorite songs.
 
 Part 4: XML & CSS
 
