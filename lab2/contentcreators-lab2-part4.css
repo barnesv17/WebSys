@@ -18,8 +18,16 @@ track {
 artist {
   color: blue;
 }
+artist a {
+  text-decoration: none;
+}
 album {
   font-style: italic;
+}
+
+album a {
+  text-decoration: none;
+  color: black;
 }
 
 image {
