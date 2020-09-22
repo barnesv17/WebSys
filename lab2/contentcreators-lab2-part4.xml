@@ -102,5 +102,29 @@
       <image id="Moonrise"/>
     </song>
 
+    <song>
+      <track>"Let it Happen"</track>
+      <artist>
+        <html:a href="https://official.tameimpala.com/">Tame Impala</html:a>
+      </artist>
+      <album>Currents</album>
+      <album_cover></album_cover>
+      <release_date>July 17, 2015</release_date>
+      <genres>Pop; Rock</genres>
+      <image id="Currents"/>
+    </song>
+
+    <song>
+      <track>"Sing About Me, I’m Dying Of Thirst"</track>
+      <artist>
+        <html:a href="http://www.kendricklamar.com/">Kendrick Lamar</html:a>
+      </artist>
+      <album>Good Kid, M.A.A.D. City</album>
+      <album_cover></album_cover>
+      <release_date>June 29, 2018</release_date>
+      <genres>Rap</genres>
+      <image id="Good_Kid_M.A.A.D._City"/>
+    </song>
+
   </playlist_10_favorite_songs>
 </root_element>
