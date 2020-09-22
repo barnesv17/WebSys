@@ -10,7 +10,10 @@ Part 1: Semantic HTML
 
 Part 2: XML
 
-  
+  After declaring XML root element, we chose <playlist_10_favorite_songs> tag to be the elementary level of XML hierarchy. Within this
+  level, each song entry is enclosed by <song> tags, and all parts of the song information are enclosed by <track>, <artist>, <album>, <release_date>, and <genres>, in parallel. 
+
+  In this way, 
 
 Part 3: HTML & CSS
 
