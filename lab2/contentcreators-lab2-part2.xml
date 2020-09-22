@@ -55,4 +55,22 @@
     <genres>Alternative Rock</genres>
   </song>
 
+  <song>
+    <track>"Talking To"</track>
+    <artist>Day6</artist>
+    <album>Shoot Me: Youth Part 1</album>
+    <album_cover></album_cover>
+    <release_date>June 29, 2018</release_date>
+    <genres>Pop; Rock</genres>
+  </song>
+
+  <song>
+    <track>"Better Better"</track>
+    <artist>Day6</artist>
+    <album>Moonrise</album>
+    <album_cover></album_cover>
+    <release_date>December 6, 2017</release_date>
+    <genres>Pop; Rock</genres>
+  </song>
+
 </playlist_10_favorite_songs>

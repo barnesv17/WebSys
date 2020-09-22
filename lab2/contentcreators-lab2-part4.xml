@@ -78,5 +78,29 @@
       <image id="III"/>
     </song>
 
+    <song>
+      <track>"Talking To"</track>
+      <artist>
+        <html:a href="https://day6.jype.com/">Day6</html:a>
+      </artist>
+      <album>Shoot Me: Youth Part 1</album>
+      <album_cover></album_cover>
+      <release_date>June 29, 2018</release_date>
+      <genres>Pop; Rock</genres>
+      <image id="ShootMe"/>
+    </song>
+
+    <song>
+      <track>"Better Better"</track>
+      <artist>
+        <html:a href="https://day6.jype.com/">Day6</html:a>
+      </artist>
+      <album>Moonrise</album>
+      <album_cover></album_cover>
+      <release_date>December 6, 2017</release_date>
+      <genres>Pop; Rock</genres>
+      <image id="Moonrise"/>
+    </song>
+
   </playlist_10_favorite_songs>
 </root_element>
