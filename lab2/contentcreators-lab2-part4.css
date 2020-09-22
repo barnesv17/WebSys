@@ -2,7 +2,7 @@ song {
   font-size: 1.25rem;
   display: block;
   margin-top: 1.25rem;
-  background-color: #ccc;
+  background-color: rgb(191, 204, 230);
   border-radius: 1rem;
   padding: .8rem;
 }
