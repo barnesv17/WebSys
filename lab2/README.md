@@ -19,3 +19,4 @@ Part 3: HTML & CSS
 Part 4: XML & CSS
 
   In the part4 XML file, we labeled all tags according to the information they held (i.e., <track> holds the track name, <song> holds all information about a particular song, etc.). In order to use hyperlinks and images in our XML file, our team added the html namespace at the beginning of the document. Our team also referenced an external CSS file at the beginning of the document, which enabled us to display the XML file neatly in our browser.
+  We assumed that the directions "Edit the stylesheet such that the information should be displayed with each item on a separate line" meant all information about a particular song is displayed on the same line, with each separate song having a separate line.
