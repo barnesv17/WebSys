@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/css" href="contentcreators-lab2-part4.css"?>
 
-<root_element xmlns:html="http://www.w3.org/1999/xhtml">
+<html xmlns:html="http://www.w3.org/1999/xhtml">
   <playlist_10_favorite_songs>
 
     <heading>Playlist of Ten Favorite Songs</heading>
@@ -79,4 +79,4 @@
     </song>
 
   </playlist_10_favorite_songs>
-</root_element>
+</html>
