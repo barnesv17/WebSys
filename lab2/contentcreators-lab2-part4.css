@@ -1,5 +1,10 @@
 song {
   font-size: 1.25rem;
+  display: block;
+  margin-top: 1.25rem;
+  background-color: rgb(201, 211, 231);
+  border-radius: 1rem;
+  padding: .8rem;
 }
 
 heading {
@@ -7,22 +12,30 @@ heading {
 }
 
 track, artist, album, album_cover, release_date, genres, image {
-  display: block;
-  padding: .05rem; /*text was too close together*/
+  display: inline;
 }
 
 track {
   font-size: 1.05rem;
-  margin-top: 1.4rem;
 }
 artist {
+  color: blue;
+}
+artist a {
+  text-decoration: none;
   color: blue;
 }
 album {
   font-style: italic;
 }
 
+album a {
+  text-decoration: none;
+  color: black;
+}
+
 image {
+  display: block;
   background-repeat: no-repeat;
   height: 10rem;
   width: 10rem;
@@ -50,6 +63,29 @@ image {
   background-image: url("images/A1MwaIeBpwL._AC_SL1500_.jpg");
 }
 
-#III { 
+#III {
   background-image: url("images/Brockhampton_-_Saturation_III.png");
+}
+
+#ShootMe {
+  background-image: url("images/Shootmeyouthpart1.jpg");
+}
+
+#Moonrise {
+  background-image: url("images/Moonrise_(Day6_album)-cover.jpg");
+}
+
+#Narcissist {
+  background-image: url("images/Narcissist.jpg");
+}
+
+#Cautious {
+  background-image: url("images/Cautious.jpg");
+}
+#GKMC{
+  background-image: url("images/Good\ Kid\,\ M.A.A.D.\ City.jpg");
+}
+
+#Currents {
+  background-image: url("images/Currents.jpg");
 }

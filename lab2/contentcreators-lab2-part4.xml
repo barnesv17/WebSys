@@ -11,7 +11,11 @@
       <artist>
         <html:a href="https://the1975.com/">the 1975</html:a>
       </artist>
-      <album>Notes on a Conditional Form</album>
+      <album>
+        <html:a href="https://www.allmusic.com/album/notes-on-a-conditional-form-mw0003328609">
+        Notes on a Conditional Form
+        </html:a>
+      </album>
       <album_cover></album_cover>
       <release_date>May 22, 2020</release_date>
       <genres>Pop; Rock; Electronic Pop; Dance;</genres>
@@ -23,8 +27,11 @@
       <artist>
         <html:a href="http://panicatthedisco.com/">Panic! at the Disco</html:a>
       </artist>
-      <album>Too Weird to Live, Too Rare to Die!</album>
-      <album_cover></album_cover>
+      <album>
+        <html:a href="https://www.allmusic.com/album/too-weird-to-live-too-rare-to-die%21-mw0002565550/releases">
+        Too Weird to Live, Too Rare to Die!
+        </html:a>
+      </album>
       <release_date>October 8, 2013</release_date>
       <genres>Alternative; Indie</genres>
       <image id="Weird"/>
@@ -35,8 +42,11 @@
       <artist>
         <html:a href="https://coldplay.com/">Coldplay</html:a>
       </artist>
-      <album>Parachutes</album>
-      <album_cover></album_cover>
+      <album>
+        <html:a href="https://www.allmusic.com/album/parachutes-mw0000101998">
+        Parachutes
+        </html:a>
+      </album>
       <release_date>July 10, 2000</release_date>
       <genres>Pop; Rock</genres>
       <image id="Parachutes"/>
@@ -47,8 +57,11 @@
       <artist>
         <html:a href="https://metallica.com/">Metallica</html:a>
       </artist>
-      <album>...And Justice For All</album>
-      <album_cover></album_cover>
+      <album>
+        <html:a href="https://www.allmusic.com/album/and-justice-for-all-mw0000196917">
+        ...And Justice For All
+        </html:a>
+      </album>
       <release_date>September 8, 1988</release_date>
       <genres>Pop; Rock</genres>
       <image id="Justice"/>
@@ -59,8 +72,11 @@
       <artist>
         <html:a href="https://www.radiohead.com/">Radiohead</html:a>
       </artist>
-      <album>In Rainbows</album>
-      <album_cover></album_cover>
+      <album>
+        <html:a href="https://www.allmusic.com/album/in-rainbows-mw0000496930">
+        In Rainbows
+        </html:a>
+      </album>
       <release_date>October 10, 2007</release_date>
       <genres>Alternative Rock</genres>
       <image id="Rainbows"/>
@@ -71,11 +87,98 @@
       <artist>
         <html:a href="http://brckhmptn.com/">BROCKHAMPTON</html:a>
       </artist>
-      <album>SATURATION III</album>
-      <album_cover></album_cover>
+      <album>
+        <html:a href="https://www.allmusic.com/album/saturation-iii-mw0003138632">
+        SATURATION III
+        </html:a>
+      </album>
       <release_date>December 15, 2017</release_date>
       <genres>Hip Hop; R&amp;B</genres>
       <image id="III"/>
+    </song>
+
+    <song>
+      <track>"Talking To"</track>
+      <artist>
+        <html:a href="https://day6.jype.com/">Day6</html:a>
+      </artist>
+      <album>
+        <html:a href="https://www.allmusic.com/album/shoot-me-youth-part-1-mw0003190789">
+        Shoot Me: Youth Part 1
+        </html:a>
+      </album>
+      <release_date>June 29, 2018</release_date>
+      <genres>Pop; Rock</genres>
+      <image id="ShootMe"/>
+    </song>
+
+    <song>
+      <track>"Better Better"</track>
+      <artist>
+        <html:a href="https://day6.jype.com/">Day6</html:a>
+      </artist>
+      <album>
+        <html:a href="https://www.allmusic.com/album/moonrise-mw0003134180">
+        Moonrise
+        </html:a>
+      </album>
+      <release_date>December 6, 2017</release_date>
+      <genres>Pop; Rock</genres>
+      <image id="Moonrise"/>
+    </song>
+
+    <!-- <song>
+      <track>"Let it Happen"</track>
+      <artist>
+        <html:a href="https://official.tameimpala.com/">Tame Impala</html:a>
+      </artist>
+      <album>Currents</album>
+      <album_cover></album_cover>
+      <release_date>July 17, 2015</release_date>
+      <genres>Pop; Rock</genres>
+      <image id="Currents"/>
+    </song>
+
+    <song>
+      <track>"Sing About Me, I’m Dying Of Thirst"</track>
+      <artist>
+        <html:a href="http://www.kendricklamar.com/">Kendrick Lamar</html:a>
+      </artist>
+      <album>Good Kid, M.A.A.D. City</album>
+      <album_cover></album_cover>
+      <release_date>Octorber 22, 2012</release_date>
+      <genres>Rap</genres>
+      <image id="GKMC"/>
+    </song> -->
+
+    <song>
+      <track>"Narcissist"</track>
+      <artist>
+        <html:a href="https://noromeworldwide.com/">No Rome ft. the 1975</html:a>
+      </artist>
+      <album>
+        <html:a href="https://www.allmusic.com/artist/no-rome-mn0003757661/biography">
+        RIP Indo Hisashi
+        </html:a>
+      </album>
+      <release_date>August 28, 2018</release_date>
+      <genres>Alternative; Indie</genres>
+      <image id="Narcissist"/>
+    </song>
+
+    <song>
+      <track>"Cautious"</track>
+      <artist>
+        <html:a href="https://www.facebook.com/emarosa/">Emarosa</html:a>
+      </artist>
+      <album>
+        <html:a href="https://www.allmusic.com/album/peach-club-mw0003233807">
+        Peach Club
+        </html:a>
+      </album>
+      <release_date>January 28, 2019</release_date>
+      <genres>Rock</genres>
+      <image id="Cautious"/>
     </song>
 
   </playlist_10_favorite_songs>

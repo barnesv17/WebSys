@@ -55,4 +55,40 @@
     <genres>Alternative Rock</genres>
   </song>
 
+  <song>
+    <track>"Talking To"</track>
+    <artist>Day6</artist>
+    <album>Shoot Me: Youth Part 1</album>
+    <album_cover></album_cover>
+    <release_date>June 29, 2018</release_date>
+    <genres>Pop; Rock</genres>
+  </song>
+
+  <song>
+    <track>"Better Better"</track>
+    <artist>Day6</artist>
+    <album>Moonrise</album>
+    <album_cover></album_cover>
+    <release_date>December 6, 2017</release_date>
+    <genres>Pop; Rock</genres>
+  </song>
+
+  <song>
+    <track>"Narcissist"</track>
+    <artist>No Rome ft. the 1975</artist>
+    <album>RIP Indo Hisashi</album>
+    <album_cover></album_cover>
+    <release_date>August 28, 2018</release_date>
+    <genres>Alternative; Indie</genres>
+  </song>
+
+  <song>
+    <track>"Cautious"</track>
+    <artist>Emarosa</artist>
+    <album>Peach Club</album>
+    <album_cover></album_cover>
+    <release_date>January 28, 2019</release_date>
+    <genres>Rock</genres>
+  </song>
+
 </playlist_10_favorite_songs>
