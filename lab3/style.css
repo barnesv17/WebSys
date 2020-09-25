@@ -2,7 +2,51 @@ html, body {
     height: 100%;
 }
 
-.contact-info {
+.name {
+    margin: 2rem 0 1rem 2rem;
+}
+
+.list-group-horizontal {
+    width: calc(100% - min(20vw, 40vh) - 6rem);
+    margin-left: 2rem;
+}
+
+.list-group-horizontal li {
+    border: 0;
+}
+
+.profilePhoto {
+    width: min(20vw, 40vh);
     position: absolute;
-    
+    top: 0;
+    right: 0;
+    margin: 2rem;
+}
+
+.Summary {
+    width: calc(100% - min(20vw, 40vh) - 6rem);
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.Education {
+    width: calc(100% - min(20vw, 40vh) - 6rem);
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.Education li {
+    font-size: medium;
+}
+
+.Education h3 {
+    font-size: large;
+}
+.Education h4 {
+    font-size: medium;
+    font-style: italic;
+}
+
+.Education i {
+    font-size: medium;
 }
