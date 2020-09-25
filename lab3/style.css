@@ -30,6 +30,12 @@ html, body {
     margin-right: 2rem;
 }
 
+.Skills {
+    width: calc(100% - min(20vw, 40vh) - 6rem);
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
 .Education {
     margin-left: 2rem;
 }
