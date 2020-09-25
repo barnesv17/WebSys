@@ -3,12 +3,13 @@ html, body {
 }
 
 .name {
-    margin: 2rem 0 1rem 2rem;
+    margin: 2rem 0 0 2rem;
 }
 
 .list-group-horizontal {
     width: calc(100% - min(20vw, 40vh) - 6rem);
     margin-left: 2rem;
+    font-style: italic;
 }
 
 .list-group-horizontal li {
@@ -30,9 +31,7 @@ html, body {
 }
 
 .Education {
-    width: calc(100% - min(20vw, 40vh) - 6rem);
     margin-left: 2rem;
-    margin-right: 2rem;
 }
 
 .Education li {
@@ -49,4 +48,32 @@ html, body {
 
 .Education i {
     font-size: medium;
+}
+
+.education-item {
+    margin-bottom: 1rem;
+}
+
+.Experience {
+    margin-left: 2rem;
+}
+
+.Experience li {
+    font-size: medium;
+}
+
+.Experience h3 {
+    font-size: large;
+}
+.Experience h4 {
+    font-size: medium;
+    font-style: italic;
+}
+
+.Experience i {
+    font-size: medium;
+}
+
+.experience-item {
+    margin-bottom: 1rem;
 }
