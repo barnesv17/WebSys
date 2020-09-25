@@ -1,5 +1,7 @@
 html, body {
     height: 100%;
+    background-color: #222629;
+    color: white;
 }
 
 .name {
@@ -82,4 +84,72 @@ html, body {
 
 .experience-item {
     margin-bottom: 1rem;
+}
+
+/* Homepage --------------------------------*/
+#homepage {
+  text-align: center;
+}
+
+.header h1 {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 70px;
+  margin-top: 300px;
+}
+.header p {
+  font-family: 'Cardo', serif;
+  font-size: 20px;
+  margin-top: -40px;
+}
+
+.topPhrase {
+  font-size: 20px;
+  font-family: 'Noto Sans', sans-serif;
+  margin-top: 200px;
+}
+.bottomPhrase {
+  font-size: 20px;
+  font-family: 'Cardo', serif;
+  margin-top: -20px;
+}
+
+.examples, .profiles {
+  display: flex;
+  justify-content: center;
+  vertical-align: top;
+}
+.examples h3, .profiles h3 {
+  font-family: 'Noto Sans', sans-serif;
+}
+.examples p, .profiles p {
+  font-family: 'Cardo', serif;
+}
+.examples img, .profiles img {
+  width: 85%;
+  height: 50%;
+}
+#example1, #example2, #example3, #profile1, #profile2, #profile3, #profile4, #profile5 {
+  display: inline-block;
+  text-align: center;
+  vertical-align: center;
+  background-color: #474B4F;
+  margin-bottom: 50px;
+  padding: 15px;
+}
+#example1, #example2, #example3 {
+  width: 30%;
+}
+#profile1, #profile2, #profile3, #profile4, #profile5 {
+  width: 17%;
+}
+
+#example2 {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+#profile1, #profile3 {
+  margin-right: 25px;
+}
+#profile5, #profile3 {
+  margin-left: 25px;
 }
