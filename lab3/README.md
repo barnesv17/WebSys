@@ -1,6 +1,7 @@
 # README.md LAB 3 WebSys
 
 ### Semantic Markup Explanation
+Preface: The explanation for the index.html page is how we intended to markup. Unfortunately, when changing div's to section or article, our CSS would mess up and we could not figure out how to fix this.
 The markup for the index.html page is semantically correct. We used a div tag, id'ed as "homepage" to encompass all markup in the HTML body. We did not use article or section here because later in the index.html file, article and section are used in a more consistent way. Using it at the beginning would make the meaning of article or section confusing.
 We also use div to label the "topPhrase" and "bottomPhrase". This is, again, because our group wanted to keep the use of article and section consistent and meaningful in the rest of the file.
 Our group used section to label the header (team name and phrase), the example works, and the team member profiles. Within the example works and team member profiles, each individual example or profile is labeled with section.
