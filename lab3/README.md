@@ -8,7 +8,6 @@ Our group used section to label the header (team name and phrase), the example w
 
 The markup for the resume pages is semantically correct. The tags h1-h4 were used for headings, and subheadings on the resume. A p tag was used for the summary, which is the only section with a complete paragraph. For the list items, ul and li tags were used. Other than those tags, a few div elements were used for styling purposes. They were only used to separate out different sections of the document for things like sizing purposes. For example, divs were used for separating out the two columns in the document, so they could be properly spaced and formatted using bootstrap.
 
-
 Derek:
 The hCard information added to the personal pages are useful for both humans and machines because the hCard clearly denotes each section of the contact information. Each tag represents a piece of contact information, which makes it easy for both humans and machines to attribute meaning to each part of the text. Address, name, organization, etc. are all clearly denoted.
 
@@ -19,7 +18,7 @@ Kyle:
 It enhances my resume because it presents all my contact info in one spot. The tags are semantically correct so it's easy for machines and humans to read.
 
 Virginia:
-input text here
+The hCard information added to my personal resume page is useful to both humans and machines trying to access my content because each bit of information about my address is labeled in a clear and consistent way. Machines and humans would both be able to quickly decipher which line is dedicated to which part of my address.
 
 Samuel:
 input text here
