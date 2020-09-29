@@ -15,18 +15,6 @@ html, body {
   margin: 0 0 2rem 2rem;
 }
 
-.list-group-horizontal {
-  width: calc(100% - min(20vw, 40vh) - 6rem);
-  margin-left: 2rem;
-  font-style: italic;
-}
-
-.list-group-horizontal li {
-  border: 0; 
-  background-color: #222629;
-  color: white;
-}
-
 .profilePhoto {
   width: min(20vw, 40vh);
   position: absolute;
