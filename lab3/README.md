@@ -2,8 +2,7 @@ How is your markup semantically correct?
 Are there any non-semantic elements that you needed for styling purposes? If you used divs and spans, this is where you would account for them. Explain why you used divs and spans as opposed to something else.
 In your own words, how is the hCard information you added to your personal résumé page useful to both humans and machines trying to access your content? (This means that everyone must answer this question individually in the README file.)
 
-
-
+The markup for the resume pages is semantically correct. The tags h1-h4 were used for headings, and subheadings on the resume. A p tag was used for the summary, which is the only section with a complete paragraph. For the list items, ul and li tags were used. Other than those tags, a few div elements were used for styling purposes. They were only used to separate out different sections of the document for things like sizing purposes. For example, separating out the two columns in the document, or adding spacing around the margins of the Summary part of the document. 
 
 
 
