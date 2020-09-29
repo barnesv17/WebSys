@@ -15,12 +15,13 @@ The hCard info on my resume page is easy to read for people, because all relevan
 
 Kyle:
 It enhances my resume because it presents all my contact info in one spot. The tags are semantically correct so it's easy for machines and humans to read.
+Besides the extra tag attributes, the div's and spapn's were used for styling purposes and shouldn' be too confusing for future maintenance.
 
 Virginia:
 The hCard information added to my personal resume page is useful to both humans and machines trying to access my content because each bit of information about my address is labeled in a clear and consistent way. Machines and humans would both be able to quickly decipher which line is dedicated to which part of my address.
 
 Samuel:
-input text here
+All my contact info were listed in a clear, organized manner. hCard provides readability for html content and is semantically correct even though non-semantic tags were used for styling.
 
 ### References
 Websites used for inspiration: https://www.werkstatt.fr/en/
