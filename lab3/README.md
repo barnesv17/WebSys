@@ -1,5 +1,23 @@
 # README.md LAB 3 WebSys
 
+### Work Log
+
+Virginia Barnes:
+Major structure for index.html, HTML/CSS validation, resume
+
+Gabriel Wild:
+Major structure for resume page and style.css, hCard.
+
+Zehao Qin:
+Project mock-up, hcard, minor resume page fix, html and css validation
+
+Derek Li:
+Project mock-up, hCard, Google font, resume page, index page fix.
+
+TJ Samuels:
+Resume page, hCard. Fixing minor Git technical blocker.
+
+
 ### Semantic Markup Explanation
 Preface: The explanation for the index.html page is how we intended to markup. Unfortunately, when changing div's to section or article, our CSS would mess up and we could not figure out how to fix this.
 The markup for the index.html page is semantically correct. We used a div tag, id'ed as "homepage" to encompass all markup in the HTML body. We did not use article or section here because later in the index.html file, article and section are used in a more consistent way. Using it at the beginning would make the meaning of article or section confusing.
