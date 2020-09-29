@@ -6,8 +6,6 @@ The markup for the index.html page is semantically correct. We used a div tag, i
 We also use div to label the "topPhrase" and "bottomPhrase". This is, again, because our group wanted to keep the use of article and section consistent and meaningful in the rest of the file.
 Our group used section to label the header (team name and phrase), the example works, and the team member profiles. Within the example works and team member profiles, each individual example or profile is labeled with section.
 
-The tags h1-h4 were used for headings, and subheadings on the resume. A p tag was used for the summary, which is the only section with a complete paragraph. For the list items, ul and li tags were used. Other than those tags, a few div elements were used for styling purposes. They were only used to separate out different sections of the document for things like sizing purposes. For example, divs were used for separating out the two columns in the document, so they could be properly spaced and formatted using bootstrap.
-
 The markup for the resume pages is semantically correct. The tags h1-h4 were used for headings, and subheadings on the resume. A p tag was used for the summary, which is the only section with a complete paragraph. For the list items, ul and li tags were used. Other than those tags, a few div elements were used for styling purposes. They were only used to separate out different sections of the document for things like sizing purposes. For example, divs were used for separating out the two columns in the document, so they could be properly spaced and formatted using bootstrap.
 
 
