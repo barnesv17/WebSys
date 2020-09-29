@@ -25,3 +25,6 @@ input text here
 ### References
 Websites used for inspiration: https://www.werkstatt.fr/en/
 Bootstrap documentation and w3schools used for reference
+
+### Extra Credit
+Our index.html page uses Web fonts and CSS to enhance the visual presentation of our document. Our markup references Noto Sans and Cardo from Google Fonts. These fonts are assigned in our style.css file. The fallback fonts we chose were sans-sarif and sarif respectively. To see the fallback fonts in action, we used Netsurf to display our webpages. Opening our webpage in Chrome or Firefox allowed for Google fonts to be used, but opening in Netsurf caused sans-sarif and sarif to be used instead.
