@@ -22,3 +22,5 @@ The hCard information added to my personal resume page is useful to both humans 
 
 Samuel:
 input text here
+
+Websites used for inspiration: https://www.werkstatt.fr/en/
