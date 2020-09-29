@@ -20,7 +20,9 @@ html, body {
 }
 
 .list-group-horizontal li {
-    border: 0;
+    border: 0; 
+    background-color: #222629;
+    color: white;
 }
 
 .profilePhoto {
