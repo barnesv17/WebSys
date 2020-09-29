@@ -11,7 +11,7 @@ Derek:
 The hCard information added to the personal pages are useful for both humans and machines because the hCard clearly denotes each section of the contact information. Each tag represents a piece of contact information, which makes it easy for both humans and machines to attribute meaning to each part of the text. Address, name, organization, etc. are all clearly denoted.
 
 Gabriel:
-For humans trying to read the information, the hCard neatly presents all the contact information in a neat package where each section is clear for anyone to read. Machines can take advantage of the order to systematically record the contact data.
+The hCard info on my resume page is easy to read for people, because all relevant data is grouped together and formatted logically. More importantly, because all the data on the html document itself has an appropriate tag and formatting, machines can quickly parse my contact information from the page. Which, given that this is a resume, is something I want to be easily parsed. 
 
 Kyle:
 It enhances my resume because it presents all my contact info in one spot. The tags are semantically correct so it's easy for machines and humans to read.
