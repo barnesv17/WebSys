@@ -14,7 +14,10 @@ Gabriel:
 For humans trying to read the information, the hCard neatly presents all the contact information in a neat package where each section is clear for anyone to read. Machines can take advantage of the order to systematically record the contact data.
 
 Kyle:
+It enhances my resume because it presents all my contact info in one spot. The tags are semantically correct so it's easy for machines and humans to read.
 
 Virginia:
+input text here
 
 Samuel:
+input text here
