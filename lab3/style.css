@@ -135,7 +135,7 @@ html, body {
 }
 .examples img, .profiles img {
   width: 85%;
-  height: 50%;
+  /* height: 50%; */
 }
 #example1, #example2, #example3, #profile1, #profile2, #profile3, #profile4, #profile5 {
   display: inline-block;
