@@ -73,6 +73,7 @@ html, body {
 
 .Experience {
   margin-left: 2rem;
+  margin-bottom: 3em;
 }
 
 .Experience li {
@@ -94,6 +95,28 @@ html, body {
 .experience-item {
   margin-bottom: 1rem;
 }
+
+.hcard {
+  width: calc(100% - min(20vw, 40vh) - 6rem);
+  margin-left: 2rem;
+  font-style: italic;
+  margin-bottom: 2rem;
+  border: 0;
+}
+
+.hcard img {
+  width: min(20vw, 40vh);
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 2rem;
+}
+
+.hcard .fn {
+  font-style: normal;
+  margin-top: 30pt;
+}
+
 
 /* Homepage --------------------------------*/
 #homepage {
