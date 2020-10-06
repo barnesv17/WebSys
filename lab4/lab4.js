@@ -1,14 +1,13 @@
-function getElementsRecursively(element, level) {
-    if (!element || !element[0] || !element.children) {
-        console.log(`${level} ${element[0]}`);
+function getElementsRecursively(element, level, ret) {
+    ret = `${level} ${element.tagName}\n`;
+    if (!element || !element.children) {
+        return ret;
     } else {
         var child = element.children;
-        console.log(element[0].tagName);
         for (var i = 0; i < child.length; i++) {
-            console.log(child[i].tagName);
-            getElementsRecursively(child[i], `${level}-`);
+            ret += getElementsRecursively(child[i], `${level}-`, ret);
         }
     }
+    return ret;
 }
-
-getElementsRecursively(document.getElementsByTagName("html"), "");
+document.getElementById("info").innerHTML = getElementsRecursively(document.getElementsByTagName("html")[0], "", "");
