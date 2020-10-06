@@ -1,3 +1,4 @@
+// Part1 A
 function getElementsRecursively(element, level, ret) {
     ret = `${level} ${element.tagName}\n`;
     if (!element || !element.children) {
@@ -10,4 +11,14 @@ function getElementsRecursively(element, level, ret) {
     }
     return ret;
 }
-document.getElementById("info").innerHTML = getElementsRecursively(document.getElementsByTagName("html")[0], "", "");
+
+
+// =================================== Main =========================================
+
+/* Call function getElementRecursively after window is loaded
+   to avoid NULL returned by getElementById("info").innerHTML.
+*/
+window.onload = function() {
+    document.getElementById("info").innerHTML = 
+        getElementsRecursively(document.getElementsByTagName("html")[0], "", "");
+}
