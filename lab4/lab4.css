@@ -1,0 +1,25 @@
+html, body {
+  height: auto;
+  width: auto;
+  font-family: 'Noto Sans', sans-serif;
+  color: #585458;
+}
+#info {
+  width: 10%;
+  margin: 3%;
+}
+#part0, #part1 {
+  width: 32%;
+  margin: 10pt 5% 5pt 10pt;
+  padding: 30px;
+  float: left;
+}
+#part2, #part3 {
+  width: 32%;
+  margin: 10pt 5% 5pt 10pt;
+  padding: 30px;
+  float: left;
+}
+body {
+  background-image: linear-gradient(45deg, #7A88FF,#A0D2EB, #98ffee, #7AFFAF);
+}

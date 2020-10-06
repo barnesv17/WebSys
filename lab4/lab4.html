@@ -8,13 +8,13 @@
 <body>
   <h1>Lab #4 - JavaScript and the Document Object Model</h1>
   <pre id="info">Lab #4 - JavaScript and the Document Object Model</pre>
-  <div class="quote">
+  <div class="quote" id="part0">
     <h2>Part 0: Setup</h2>
     <p>Create a new folder for lab4, and confirm that it is being served by Apache. You may choose to serve this lab from a new virtual host, though doing so is not required to receive credit.</p>
     <p>Ensure that you have a browser plugin capable of debugging JavaScript (you should be familiar with setting breakpoints and watch variables from your previous CS/IT courses). If you are stuck with this, review the help for <a href="https://developers.google.com/chrome-developer-tools/docs/javascript-debugging">Debugging JavaScript using Developer Tools for Chrome</a> as they are an excellent tool to learn with.</p>
     <p>For this lab, you will be using <a href="Lab 4 instructions.html">an existing HTML document</a>. Save the document as lab4.html in your lab4 folder.</p>
   </div>
-  <div class="quote">
+  <div class="quote" id="part1">
     <h2>Part 1: Iterating through the DOM</h2>
     <p>Create the file lab4.js and use a &lt;script&gt; tag to reference it from your document.</p>
     <p>Write a JavaScript function that iterates through the DOM of your document. For each <a href="http://www.w3schools.com/jsref/dom_obj_document.asp">Element node</a> starting with the &lt;html&gt; element, recursively print the name of each node in the tree in a text-based format, prefixing each item with a dash for each additional layer of depth. Newlines are escaped via \n.</p>
@@ -23,13 +23,13 @@
     <p>Finally, replace the innerHTML of the element with the id &quot;info&quot; with the return value of this function.</p>
     <p><strong>To receive credit for Part 1:</strong> Show that your code iterates through the DOM and replaces the contents of #info with the resulting tree.</p>
   </div>
-  <div class="quote">
+  <div class="quote" id="part2">
     <h2>Part 2: Event Listeners &amp; Event Bubbling</h2>
     <p>Modify your function in Part 1 to add an onclick event listener to each element in the body. The function bound to this event listener should display an alert box with the element's tag name.</p>
     <p>Note that there is a much more performant way of doing this; we will discuss how in another lecture.</p>
     <p><strong>To receive credit for Part 2:</strong> Show how the onclick event bubbles through the DOM.</p>
   </div>
-  <div class="quote">
+  <div class="quote" id="part3">
     <h2>Part 3: CSS Manipulation</h2>
     <p>First, once the page has finished loading, copy your favorite quote (or some other text) to the end of the body using the cloneNode() and appendChild() methods on the appropriate Element objects.</p>
     <p>Bind new onmouseover event listeners to each div (including the one you just copied), and in the function change the element's background color and move the element 10px to the right. For the onmouseout event for each element, change the background color back to white and reposition the element to its original location.</p>
