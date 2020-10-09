@@ -25,7 +25,7 @@ function styleManipulation() {
     var divs = document.getElementsByTagName("div");
     for (var i = 0; i < divs.length; i++) {
         divs[i].addEventListener("mouseover", function() {
-            this.style.backgroundImage = "linear-gradient(225deg, #7A88FF, #A0D2EB, #98ffee, #7AFFAF)"
+            this.style.backgroundImage = "linear-gradient(225deg, #7A88FF, #A0D2EB, #98FFEE, #FF5295)"
             this.style.paddingLeft = "40px";
         }, false);
         divs[i].addEventListener("mouseout", function() {
