@@ -1,12 +1,46 @@
 // Part1 A
+// function getElementsRecursively(element, level, ret) {
+//     ret = `${level} ${element.tagName}\n`;
+//     if (!element || !element.children) {
+//         return ret;
+//     } else {
+//         var child = element.children;
+//         for (var i = 0; i < child.length; i++) {
+//             ret += getElementsRecursively(child[i], `${level}-`, ret);
+//         }
+//     }
+//     return ret;
+// }
+
+// Part 2
 function getElementsRecursively(element, level, ret) {
     ret = `${level} ${element.tagName}\n`;
-    if (!element || !element.children) {
+    if (!element.children) {
         return ret;
     } else {
         var child = element.children;
         for (var i = 0; i < child.length; i++) {
-            ret += getElementsRecursively(child[i], `${level}-`, ret);
+            if (child[i].tagName == 'BODY') {
+                ret += getElementsRecursivelyBody(child[i], `${level}-`, ret);
+            } else {
+                ret += getElementsRecursively(child[i], `${level}-`, ret);
+            }
+        }
+    }
+    return ret;
+}
+
+function getElementsRecursivelyBody(element, level, ret) {
+    ret = `${level} ${element.tagName}\n`;
+    if (!element.children) {
+        return ret;
+    } else {
+        var child = element.children;
+        for (var i = 0; i < child.length; i++) {
+            child[i].onclick = function () {
+                alert(this.tagName);
+            }
+            ret += getElementsRecursivelyBody(child[i], `${level}-`, ret);
         }
     }
     return ret;
@@ -24,11 +58,11 @@ function addQuote() {
 function styleManipulation() {
     var divs = document.getElementsByTagName("div");
     for (var i = 0; i < divs.length; i++) {
-        divs[i].addEventListener("mouseover", function() {
+        divs[i].addEventListener("mouseover", function () {
             this.style.backgroundImage = "linear-gradient(225deg, #7A88FF, #A0D2EB, #98FFEE, #FF5295)"
             this.style.paddingLeft = "40px";
         }, false);
-        divs[i].addEventListener("mouseout", function() {
+        divs[i].addEventListener("mouseout", function () {
             this.style.backgroundImage = "";
             this.style.paddingLeft = "30px";
         }, false);
@@ -40,9 +74,9 @@ function styleManipulation() {
 /* Call function getElementRecursively after window is loaded
    to avoid NULL returned by getElementById("info").innerHTML.
 */
-window.onload = function() {
-    document.getElementById("info").innerHTML = 
-        getElementsRecursively(document.getElementsByTagName("html")[0], "", "");
-window.onload = addQuote();
-window.onload = styleManipulation();
+window.onload = function () {
+    document.getElementById("info").innerHTML =
+        getElementsRecursively(document.getElementsByTagName("html")[0], "", "", false);
+    window.onload = addQuote();
+    window.onload = styleManipulation();
 }
