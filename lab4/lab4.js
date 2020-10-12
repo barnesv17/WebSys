@@ -1,7 +1,7 @@
-// Part1 A
+// Part1 A commented out as is it has been modified in part 2
 // function getElementsRecursively(element, level, ret) {
 //     ret = `${level} ${element.tagName}\n`;
-//     if (!element || !element.children) {
+//     if (!element.children) {
 //         return ret;
 //     } else {
 //         var child = element.children;
