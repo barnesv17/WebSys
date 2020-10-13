@@ -34,6 +34,8 @@ By creating a clone of the third div element and finding its parent, I changed t
 By obtaining div elements as an array in the document, I looped through all div tags, for each, a "mouseover" and a "mouseout" event listener is added to change the style (reverse linear-gradient direction and one base color and increase padding on left by 10px) and to change back to default when mouse out is triggered.
 
 ### Worklog
+Derek:
+– Part 1a functionality
 Virginia:
 - Part 1b functionality
 - Part 1a README
