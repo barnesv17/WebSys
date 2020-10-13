@@ -35,3 +35,6 @@ Virginia:
 - Part 1b functionality
 - Part 1a README
 - Part 1b README
+Gabe
+- Part 2 functionality
+- Part 2 README
