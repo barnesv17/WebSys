@@ -1,0 +1,47 @@
+.bio {
+  width: 175px;
+  margin-left: 390px;
+}
+
+.pic {
+  width: 150px;
+  height: 150px;
+  margin-top: 50px;
+}
+
+.name {
+  width: 150px;
+  color: rgb(58,175,169);
+  font-weight: bold;
+}
+
+.changePic {
+  background: #222222;
+  width: 150px;
+  height: 40;
+  color: rgb(255,255,255);
+  margin-top: -15px;
+}
+
+.studioSection {
+  max-width: 995px;
+  margin-left: -275px;
+}
+
+#studioHeader {
+  color: rgb(34,34,34);
+  font-weight: bold;
+}
+
+.studio {
+  padding: -1px;
+  font-size: 25px;
+  margin-left: 80px;
+  width: 800px;
+  background: #3aafa9;
+  padding-left: 40px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: rgb(255,255,255);
+  font-weight: bold;
+}
