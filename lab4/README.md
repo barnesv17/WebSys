@@ -18,9 +18,7 @@ in the innerHTML of the `info` element.
 no children, then we have reached the last nested node in the DOM and can end the recursive call.
 If there are children, then the function recursively calls `getElementsRecursively` on each child.
 
-
-
-We want to use the DOM in our web development to implement interactive  operations. HTML is
+We want to use the DOM in our web development to implement interactive operations. HTML is
 mostly "set in stone" once loaded, but we can use the DOM and JavaScript to modify a page after
 the HTML is already loaded.
 
