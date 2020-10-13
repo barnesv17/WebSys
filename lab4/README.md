@@ -27,3 +27,7 @@ The return values of 1a and 1b are the same. Both return identical strings.
 
 ### Part 2
 After finding the body tag, we switch to another recursive function, given that once reaching the body, all other elements found recusively should be within the body. In the new function, we add an onclick function that calls an alert with its own element tag.
+
+### Part 2
+
+### Worklog
