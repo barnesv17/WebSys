@@ -4,10 +4,12 @@ html, body {
   font-family: 'Noto Sans', sans-serif;
   color: #585458;
 }
-#info {
-  width: 10%;
-  margin: 3%;
+#info, #part1b {
+  width: 40%;
+  margin: 5%;
+  float: left;
 }
+
 #part0, #part1 {
   width: 32%;
   margin: 10pt 5% 5pt 10pt;
