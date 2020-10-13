@@ -6,14 +6,19 @@ window.onload = function () {
         getElementsRecursively(document.getElementsByTagName("html")[0], "", "", false);
 ```
 This call replaces the innerHTML of the element id'ed as `info` with the return value of
-the function `getElementsRecursively` on Lab4 page load.
+the function `getElementsRecursively` after the Lab4 page loads. We call the recursive function 
+after the page loads so the each element that the function is trying to look for exists on the page.
+
 Taking a closer look at `getElementsRecursively`, we see it takes 3 arguments: element, level,
 ret. Element is the current node in the DOM that the function is at. Level is a string of dashes
 that represents the level the current node in the DOM is at. ret is a string that will display
 in the innerHTML of the `info` element.
+
 `getElementsRecursively` checks if the current node in the DOM has any children. If there are
-no children, then we have reached the last node in the DOM and can end the recursive call.
+no children, then we have reached the last nested node in the DOM and can end the recursive call.
 If there are children, then the function recursively calls `getElementsRecursively` on each child.
+
+
 
 We want to use the DOM in our web development to implement interactive  operations. HTML is
 mostly "set in stone" once loaded, but we can use the DOM and JavaScript to modify a page after
@@ -36,6 +41,7 @@ By obtaining div elements as an array in the document, I looped through all div 
 ### Worklog
 Derek:
 – Part 1a functionality
+- Part 1a README
 Virginia:
 - Part 1b functionality
 - Part 1a README
