@@ -1,7 +1,4 @@
 ### Part 1a
-Explain what all this does and why you might want to use the DOM in your
-development
-
 We begin part1a by calling
 ```
 window.onload = function () {
