@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html class="html">
 <head>
   <title>Lab 4</title>
   <link rel=stylesheet href="lab4.css"/>
@@ -8,6 +8,7 @@
 <body>
   <h1>Lab #4 - JavaScript and the Document Object Model</h1>
   <pre id="info">Lab #4 - JavaScript and the Document Object Model</pre>
+  <pre id="part1b">Part 1b</pre>
   <div class="quote" id="part0">
     <h2>Part 0: Setup</h2>
     <p>Create a new folder for lab4, and confirm that it is being served by Apache. You may choose to serve this lab from a new virtual host, though doing so is not required to receive credit.</p>
@@ -18,7 +19,7 @@
     <h2>Part 1: Iterating through the DOM</h2>
     <p>Create the file lab4.js and use a &lt;script&gt; tag to reference it from your document.</p>
     <p>Write a JavaScript function that iterates through the DOM of your document. For each <a href="http://www.w3schools.com/jsref/dom_obj_document.asp">Element node</a> starting with the &lt;html&gt; element, recursively print the name of each node in the tree in a text-based format, prefixing each item with a dash for each additional layer of depth. Newlines are escaped via \n.</p>
-    <p>The first few lines should look something like this:</p> 
+    <p>The first few lines should look something like this:</p>
     <p>html<br/>-head<br/>--title<br/>-body</p>
     <p>Finally, replace the innerHTML of the element with the id &quot;info&quot; with the return value of this function.</p>
     <p><strong>To receive credit for Part 1:</strong> Show that your code iterates through the DOM and replaces the contents of #info with the resulting tree.</p>

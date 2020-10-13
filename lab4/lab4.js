@@ -1,4 +1,4 @@
-// Part1 A commented out as is it has been modified in part 2
+// Part1A commented out as is it has been modified in part 2
 // function getElementsRecursively(element, level, ret) {
 //     ret = `${level} ${element.tagName}\n`;
 //     if (!element.children) {
@@ -11,6 +11,20 @@
 //     }
 //     return ret;
 // }
+
+// Part1B
+function getElementsRecursivelyPartB(element, level, ret) {
+    ret = `${level} ${element.tagName}\n`;
+    if (!element.children) {
+        return ret;
+    } else {
+        var child = element.children;
+        for (var i = 0; i < child.length; i++) {
+            ret += getElementsRecursivelyPartB(child[i], `${level}-`, ret);
+        }
+    }
+    return ret;
+}
 
 // Part 2
 function getElementsRecursively(element, level, ret) {
@@ -77,6 +91,8 @@ function styleManipulation() {
 window.onload = function () {
     document.getElementById("info").innerHTML =
         getElementsRecursively(document.getElementsByTagName("html")[0], "", "", false);
+    document.getElementById("part1b").innerHTML =
+        getElementsRecursivelyPartB(document.getElementsByClassName("html")[0], "", "", false);
     window.onload = addQuote();
     window.onload = styleManipulation();
 }
