@@ -15,10 +15,10 @@
 // Part1B
 function getElementsRecursivelyPartB(element, level, ret) {
     ret = `${level} ${element.tagName}\n`;
-    if (!element.children) {
+    if (!getElementsByClassName(`${level}-`)[0]) {
         return ret;
     } else {
-        var child = element.children;
+        var child = getElementsByClassName(`${level}-`)[0];
         for (var i = 0; i < child.length; i++) {
             ret += getElementsRecursivelyPartB(child[i], `${level}-`, ret);
         }
