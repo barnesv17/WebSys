@@ -1,0 +1,45 @@
+.navigation-clean-button {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.navigation-clean-button .navbar-brand {
+  font-weight: bold;
+  color: #f0f0f0;
+  font-size: 25px;
+}
+.navigation-clean-button .navbar-brand:hover {
+  color: #f0f0f0;
+}
+
+.navigation-clean-button.navbar .navbar-nav .nav-link {
+  padding-left: 18px;
+  padding-right: 18px;
+  color: #222222;
+}
+
+.navigation-clean-button.navbar-light .navbar-nav .nav-link:focus, .navigation-clean-button.navbar-light .navbar-nav .nav-link:hover {
+  color: #37434d !important;
+}
+
+.navigation-clean-button .actions .login {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: #222222;
+}
+.navigation-clean-button .actions .login:hover {
+  color: #37434d !important;
+}
+
+.navigation-clean-button .navbar-text .action-button, .navigation-clean-button .navbar-text .action-button:active {
+  border-radius: 20px;
+  color: #fff;
+  border: none;
+  padding: .5rem 1rem;
+  background: #222222;
+}
+
+.navigation-clean-button .navbar-text .action-button:hover {
+  color: #f0f0f0;
+  background: #37434d;
+}

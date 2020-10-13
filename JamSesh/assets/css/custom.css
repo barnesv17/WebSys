@@ -1,0 +1,85 @@
+.top {
+   height: 500px;
+}
+
+.description {
+  width: 500px;
+  padding-left: 180px;
+  padding-top: 30px;
+}
+
+#builtForMusicians {
+  color: #f0f0f0;
+  text-align: left;
+  width: 350px;
+  font-weight: bold;
+}
+
+#summary {
+  color: #222222;
+  width: 400px;
+}
+
+.form-container {
+  width: 450px;
+  margin-right: 410px;
+  margin-left: 120px;
+  background: #222222;
+  height: 350px;
+  padding-top: 20px;
+}
+
+#signupForm {
+  height: 200px;
+}
+
+#create {
+  color: #f0f0f0;
+  font-weight: bold;
+}
+
+#email, #password, #confirmPassword {
+  width: 350px;
+}
+
+#signup {
+  background: #3aafa9;
+  color: rgb(240,240,240);
+  border-style: none;
+}
+
+.already {
+  color: #f0f0f0;
+}
+
+.bottomIcons {
+  margin-top: 50px;
+}
+
+.fa-user {
+  font-size: 125px;
+  color: rgb(34,34,34);
+}
+
+.fa-microphone {
+  font-size: 125px;
+  margin-right: 250px;
+  margin-left: 250px;
+  color: rgb(34,34,34);
+}
+
+.fa-play-circle-o {
+  font-size: 125px;
+  color: rgb(34,34,34);
+}
+
+
+/* Figure out how to get the descriptions more centered with the icons  */
+#rightDesc, #middleDesc, #leftDesc {
+  width: 200px;
+}
+
+#middleDesc {
+  margin-right: 140px;
+  margin-left: 130px;
+}
