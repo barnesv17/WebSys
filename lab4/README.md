@@ -29,6 +29,9 @@ The return values of 1a and 1b are the same. Both return identical strings.
 After finding the body tag, we switch to another recursive function, given that once reaching the body, all other elements found recusively should be within the body. In the new function, we add an onclick function that calls an alert with its own element tag.
 
 ### Part 3
+By creating a clone of the third div element and finding its parent, I changed the innerHTML of the cloned "div" node to desired quote. Then by appending the cloned node with parent.appendChild(clonedNode), the clone is added as a new child.
+
+By obtaining div elements as an array in the document, I looped through all div tags, for each, a "mouseover" and a "mouseout" event listener is added to change the style (reverse linear-gradient direction and one base color and increase padding on left by 10px) and to change back to default when mouse out is triggered.
 
 ### Worklog
 Virginia:
@@ -38,3 +41,6 @@ Virginia:
 Gabe
 - Part 2 functionality
 - Part 2 README
+Kyle:
+- Part 3 functionality
+- Part 3 README
