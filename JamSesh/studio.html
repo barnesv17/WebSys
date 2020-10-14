@@ -4,10 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>UserProfilePage</title>
+    <title>JamSesh - Studio</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Homepage-Nav.css">
-    <link rel="stylesheet" href="assets/css/User-Profile.css">
     <link rel="stylesheet" href="assets/css/Studio.css">
 </head>
 
@@ -28,6 +27,7 @@
 
     <h1 id="studio-title" class="text-center">Username: Studio</h1>
 
+
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="composition-tab" data-toggle="tab" href="#composition" role="tab"
@@ -38,19 +38,68 @@
                 aria-selected="false">Mixes</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-                aria-selected="false">Contact</a>
+            <a class="nav-link" id="contributions-tab" data-toggle="tab" href="#contributions" role="tab"
+                aria-controls="contributions" aria-selected="false">Contributions</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings"
                 aria-selected="false">Settings</a>
         </li>
     </ul>
+
+    <!-- Modal for Uploading new file -->
+    <div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="uploadFileLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadFileLabel">Upload New File</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <button type="button" class="btn btn-primary">Choose File</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Submit Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="composition" role="tabpanel" aria-labelledby="composition-tab">...
+        <div class="tab-pane fade show active" id="composition" role="tabpanel" aria-labelledby="composition-tab">
+            <div id="studio-composition" class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <th scope="col">Instrument</th>
+                        <th scope="col">Composition</th>
+                    </thead>
+                    <tbody>
+                        <tr data-toggle="modal" data-target="#uploadFile">
+                            <th scope="row">Lead Guitar</th>
+                            <td><img src="assets/img/sheet-music.png" alt="sheet-music"></td>
+                        </tr>
+                        <tr data-toggle="modal" data-target="#uploadFile">
+                            <th scope="row">Bass Guitar</th>
+                            <td><img src="assets/img/sheet-music.png" alt="sheet-music"></td>
+                        </tr>
+                        <tr data-toggle="modal" data-target="#uploadFile">
+                            <th scope="row">Drums</th>
+                            <td><img src="assets/img/sheet-music.png" alt="sheet-music"></td>
+                        </tr>
+                        <tr data-toggle="modal" data-target="#uploadFile">
+                            <th scope="row">Rhythm Guitar</th>
+                            <td><img src="assets/img/sheet-music.png" alt="sheet-music"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="tab-pane fade" id="mixes" role="tabpanel" aria-labelledby="mixes-tab">...</div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+        <div class="tab-pane fade" id="contributions" role="tabpanel" aria-labelledby="contributions-tab">...</div>
         <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
     </div>
 

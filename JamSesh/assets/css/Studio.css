@@ -2,3 +2,7 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
+#studio-composition td img{
+    height: 8rem;
+}
