@@ -3,6 +3,14 @@
     margin-bottom: 1rem;
 }
 
+#studio-composition tr:hover {
+    cursor: pointer;
+}
+
 #studio-composition td img{
     height: 8rem;
+}
+
+#add-instrument {
+    margin-left: 2rem;
 }
