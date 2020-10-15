@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>JamSesh - Studio</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
   <link rel="stylesheet" href="assets/css/Homepage-Nav.css">
   <link rel="stylesheet" href="assets/css/Studio.css">
 </head>
@@ -31,7 +32,7 @@
     Favorite <span class="badge badge-light">4</span>
   </button> -->
 
-  <!-- Tab Navbar -->
+  <!-- Navbar Tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="composition-tab" data-toggle="tab" href="#composition" role="tab"
@@ -50,6 +51,62 @@
         aria-selected="false">Settings</a>
     </li>
   </ul>
+
+  <!-- Modal for Uploading new file -->
+  <div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="uploadFileLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="uploadFileLabel">Upload New File</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="choosefile1">Choose File</label>
+              <input type="file" class="form-control-file" id="choosefile1">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for adding instrument -->
+  <div class="modal fade" id="add-instrument" tabindex="-1" role="dialog" aria-labelledby="add-instrumentLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="add-instrumentLabel">Add New Instrument</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="instrumentInput1">Instrument Name</label>
+              <input type="text" class="form-control" id="instrumentInput1">
+              <label for="choosefile2">Choose File</label>
+              <input type="file" class="form-control-file" id="choosefile2">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- Navbar Tab Content -->
   <div class="tab-content" id="myTabContent">
@@ -86,67 +143,28 @@
     <div class="tab-pane fade" id="mixes" role="tabpanel" aria-labelledby="mixes-tab">...</div>
     <div class="tab-pane fade" id="contributions" role="tabpanel" aria-labelledby="contributions-tab">...</div>
     <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-      <form>
-        <div class="form-group">
-          <label for="studio-name-input">Studio Name</label>
-          <input type="text" class="form-control" id="studio-name-input" placeholder="Studio"> </input>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Modal for Uploading new file -->
-  <div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="uploadFileLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="uploadFileLabel">Upload New File</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="choosefile1">Choose File</label>
-              <input type="file" class="form-control-file" id="choosefile1">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Submit Changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal for adding instrument -->
-  <div class="modal fade" id="add-instrument" tabindex="-1" role="dialog" aria-labelledby="add-instrumentLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="add-instrumentLabel">Add New Instrument</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="instrumentInput1">Instrument Name</label>
-              <input type="text" class="form-control" id="instrumentInput1">
-              <label for="choosefile2">Choose File</label>
-              <input type="file" class="form-control-file" id="choosefile2">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Submit Changes</button>
-        </div>
+      <div id="studioSettings" class="container">
+        <form>
+          <div class="form-group">
+            <label for="studio-name-input">Studio Name</label>
+            <input type="text" class="form-control" id="studio-name-input" placeholder="Studio"> </input>
+          </div>
+          <div class="form-group">
+            <label for="studio-visibilty">Studio Visibility</label>
+            <select class="form-control" id="studio-visibilty">
+              <option>Public</option>
+              <option>Private</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="studio-permissions-fork">Allow Users to Fork Studio</label>
+            <select class="form-control" id="studio-permissions-fork">
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
       </div>
     </div>
   </div>
