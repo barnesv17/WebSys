@@ -60,3 +60,15 @@
 audio {
     width: 80%;
 }
+
+.genres {
+    margin: 5px;
+    /* background: #242424; */
+    /* width: 150px; */
+    /* height: 30; */
+    border: 1px solid grey;
+    flex-basis: auto;
+    color: rgba(0, 0, 0, 0.87);
+    border-radius: 8px;
+    padding: 10px;
+}
