@@ -117,3 +117,7 @@ hr {
 .studioGenres {
   padding: 10px;
 }
+
+.modal #firstLabel ~ label{
+  margin-top: .5rem;
+}

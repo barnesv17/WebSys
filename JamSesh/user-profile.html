@@ -2,17 +2,17 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>UserProfilePage</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Homepage-Nav.css">
-    <link rel="stylesheet" href="assets/css/User-Profile.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>UserProfilePage</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/Homepage-Nav.css">
+  <link rel="stylesheet" href="assets/css/User-Profile.css">
 </head>
 
 <body>
   <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
-    <div class="container"><a class="navbar-brand" href="#">JamSesh</a>
+    <div class="container"><a class="navbar-brand" href="homepage.html">JamSesh</a>
       <div class="collapse navbar-collapse" id="navcol-1">
         <ul class="nav navbar-nav mr-auto">
           <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
@@ -25,20 +25,62 @@
     </div>
   </nav>
 
+  <!-- Edit Profile Modal -->
+  <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editProfileLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProfileLabel">Edit Profile</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="editProfileForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label id="firstLabel" for="profilePic">Upload Profile Picture</label>
+              <input type="file" class="form-control" id="profilePicInput">
+              <label for="userBio">Edit Bio</label>
+              <textarea class="form-control" id="userBioInput" rows="3" maxlength="255"></textarea>
+              <label for="profileName">Change Profile Name</label>
+              <input type="text" class="form-control" id="profileNameInput" placeholder="Gabe Wild">
+              <label for="usernameInput">Change Username</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">@</div>
+                </div>
+                <input type="text" class="form-control" id="usernameInput" placeholder="wildg">
+              </div>
+              <label for="passwordInput">Change Password</label>
+              <input type="password" class="form-control" id="passwordInput">
+              <label for="passwordInput">Confirm Password</label>
+              <input type="password" class="form-control" id="passwordInput">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-info" data-dismiss="modal">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <section class="d-xl-flex flex-row pad">
     <div class="d-flex flex-column text-center bio">
       <img src="assets/img/blank-avatar.png" class="pic">
-      <p class="name">Username_1</p>
-      <p class="subName">@Username_1</p>
-      <a class="btn btn-light action-button changePic" role="button" href="#">Edit Profile</a>
+      <p class="name">Gabe Wild</p>
+      <p class="subName">@wildg</p>
+      <a data-toggle="modal" data-target="#editProfile" class="btn btn-light action-button changePic" role="button">
+        Edit
+        Profile</a>
       <hr />
       <div class="genreContainer d-flex flex-row">
-          <p class="btn btn-light action-button genres">Classical</p>
-          <p class="btn btn-light action-button genres">R&B</p>
-          <p class="btn btn-light action-button genres">Jazz</p>
-          <p class="btn btn-light action-button genres">Rock</p>
-          <p class="btn btn-light action-button genres">Pop</p>
-          <p class="btn btn-light action-button genres">Alternative</p>
+        <p class="btn btn-light action-button genres">Classical</p>
+        <p class="btn btn-light action-button genres">R&B</p>
+        <p class="btn btn-light action-button genres">Rock</p>
+        <p class="btn btn-light action-button genres">Pop</p>
       </div>
     </div>
     <div class="d-flex flex-column text-center studioSection">
@@ -49,21 +91,25 @@
       </div>
       <a class="studio" href="studio.html">
         <div class="studioTitle text-left">Studio 1</div>
-        <p class="studioDescription text-left">You can have a little paragraph here describing your project. It can be a blurb like blah blah blah or something. You can write your own description if you want.</p>
+        <p class="studioDescription text-left">You can have a little paragraph here describing your project. It can be a
+          blurb like blah blah blah or something. You can write your own description if you want.</p>
         <div class="studioGenres d-flex flex-row">
           <p class="btn btn-light action-button genres">R&B</p>
-          <p class="btn btn-light action-button genres">Pop</p>        </div>
+          <p class="btn btn-light action-button genres">Pop</p>
+        </div>
       </a>
       <a class="studio" href="studio.html">
         <div class="studioTitle text-left">Studio 2</div>
-        <p class="studioDescription text-left">You can have a little paragraph here describing your project. It can be a blurb like blah blah blah or something. You can write your own description if you want.</p>
+        <p class="studioDescription text-left">You can have a little paragraph here describing your project. It can be a
+          blurb like blah blah blah or something. You can write your own description if you want.</p>
         <div class="studioGenres d-flex flex-row">
           <p class="btn btn-light action-button genres">Classical</p>
         </div>
       </a>
       <a class="studio" href="studio.html">
         <div class="studioTitle text-left">Studio 3</div>
-        <p class="studioDescription text-left">You can have a little paragraph here describing your project. It can be a blurb like blah blah blah or something. You can write your own description if you want.</p>
+        <p class="studioDescription text-left">You can have a little paragraph here describing your project. It can be a
+          blurb like blah blah blah or something. You can write your own description if you want.</p>
         <div class="studioGenres d-flex flex-row">
           <p class="btn btn-light action-button genres">Rock</p>
           <p class="btn btn-light action-button genres">Pop</p>
