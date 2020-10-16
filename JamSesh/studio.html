@@ -142,7 +142,13 @@
       <button id="add-instrument-btn" type="button" class="btn btn-primary" data-toggle="modal"
         data-target="#add-instrument">Add Instrument</button>
     </div>
-    <div class="tab-pane fade" id="mixes" role="tabpanel" aria-labelledby="mixes-tab">...</div>
+    <div class="tab-pane fade" id="mixes" role="tabpanel" aria-labelledby="mixes-tab">
+      <audio controls>
+        <source src="horse.ogg" type="audio/ogg">
+        <source src="horse.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
     <div class="tab-pane fade" id="contributions" role="tabpanel" aria-labelledby="contributions-tab">
       <form id="approve-contributions-form">
         <div id="studio-contributions" class="table-reponsive">
@@ -170,7 +176,7 @@
                 <td><img src="assets/img/sheet-music.png" alt="sheet-music"></td>
               </tr>
               <tr>
-                <th scope="row">Bass Guitar</th>
+                <th scope="row">(NEW) Vocals</th>
                 <td>
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="check-yes2">
