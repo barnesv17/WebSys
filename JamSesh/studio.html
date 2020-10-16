@@ -122,19 +122,27 @@
           <tbody>
             <tr data-toggle="modal" data-target="#uploadFile">
               <th scope="row">Lead Guitar</th>
-              <td><img src="assets/img/sheet-music.png" alt="sheet-music"></td>
+              <td><audio controls>
+                  <source src="assets/audio/slurp.mp3">
+                </audio></td>
             </tr>
             <tr data-toggle="modal" data-target="#uploadFile">
               <th scope="row">Bass Guitar</th>
-              <td><img src="assets/img/sheet-music.png" alt="sheet-music"></td>
+              <td><audio controls>
+                  <source src="assets/audio/slurp.mp3">
+                </audio></td>
             </tr>
             <tr data-toggle="modal" data-target="#uploadFile">
               <th scope="row">Drums</th>
-              <td><img src="assets/img/sheet-music.png" alt="sheet-music"></td>
+              <td><audio controls>
+                  <source src="assets/audio/slurp.mp3">
+                </audio></td>
             </tr>
             <tr data-toggle="modal" data-target="#uploadFile">
               <th scope="row">Rhythm Guitar</th>
-              <td><img src="assets/img/sheet-music.png" alt="sheet-music"></td>
+              <td><audio controls>
+                  <source src="assets/audio/slurp.mp3">
+                </audio></td>
             </tr>
           </tbody>
         </table>
@@ -143,11 +151,48 @@
         data-target="#add-instrument">Add Instrument</button>
     </div>
     <div class="tab-pane fade" id="mixes" role="tabpanel" aria-labelledby="mixes-tab">
-      <audio controls>
-        <source src="horse.ogg" type="audio/ogg">
-        <source src="horse.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
+      <div id="studio-mixes">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">User</th>
+              <th scope="col">Mix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Gabe Wild</td>
+              <td><audio controls>
+                  <source src="assets/audio/slurp.mp3">
+                </audio></td>
+            </tr>
+            <tr>
+              <td>Virginia Barnes</td>
+              <td><audio controls>
+                  <source src="assets/audio/slurp.mp3">
+                </audio></td>
+            </tr>
+            <tr>
+              <td>Tyler Samuels</td>
+              <td><audio controls>
+                  <source src="assets/audio/slurp.mp3">
+                </audio></td>
+            </tr>
+            <tr>
+              <td>Kyle Qin</td>
+              <td><audio controls>
+                  <source src="assets/audio/slurp.mp3">
+                </audio></td>
+            </tr>
+            <tr>
+              <td>Derek Li</td>
+              <td><audio controls>
+                  <source src="assets/audio/slurp.mp3">
+                </audio></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="tab-pane fade" id="contributions" role="tabpanel" aria-labelledby="contributions-tab">
       <form id="approve-contributions-form">
@@ -173,7 +218,9 @@
                     <label class="form-check-label" for="check-no1">No</label>
                   </div>
                 </td>
-                <td><img src="assets/img/sheet-music.png" alt="sheet-music"></td>
+                <td><audio controls>
+                    <source src="assets/audio/slurp.mp3">
+                  </audio></td>
               </tr>
               <tr>
                 <th scope="row">(NEW) Vocals</th>
@@ -187,7 +234,9 @@
                     <label class="form-check-label" for="check-no2">No</label>
                   </div>
                 </td>
-                <td><img src="assets/img/sheet-music.png" alt="sheet-music"></td>
+                <td><audio controls>
+                    <source src="assets/audio/slurp.mp3">
+                  </audio></td>
               </tr>
             </tbody>
           </table>

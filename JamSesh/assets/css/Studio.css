@@ -26,3 +26,7 @@
 #studioSettings{
     margin-top: 2rem;
 }
+
+audio {
+    width: 80%;
+}
