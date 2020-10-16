@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>JamSesh - User</title>
+    <title>UserProfilePage</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Homepage-Nav.css">
     <link rel="stylesheet" href="assets/css/User-Profile.css">
@@ -19,24 +19,25 @@
           <li class="nav-item"><a class="nav-link" href="#">About</a></li>
         </ul>
         <span class="navbar-text actions">
-          <a class="btn btn-light action-button" role="button" href="homepage.html">Log Out</a>
+          <a class="btn btn-light action-button" role="button" href="#">Log Out</a>
         </span>
       </div>
     </div>
   </nav>
 
-  <section class="d-xl-flex align-items-xl-center">
-    <div class="container text-center bio">
+  <section class="d-xl-flex flex-row pad">
+    <div class="d-flex flex-column text-center bio">
       <!-- Find a way to remove style here -->
-      <img class="pic" style="background: url(&quot;assets/img/blank-avatar.png&quot;);background-size: contain;">
+      <img src="assets/img/blank-avatar.png" class="pic">
       <p class="name">Username_1</p>
-      <a class="btn btn-light action-button changePic" role="button" href="#">Change Image</a>
+      <p class="subName">@Username_1</p>
+      <a class="btn btn-light action-button changePic" role="button" href="#">Edit Profile</a>
     </div>
-    <div class="container text-center studioSection">
-      <!-- Find a way to not have this container move up whenever a stuido is added -->
+    <div class="d-flex flex-column text-center studioSection">
+      <!-- Find a way to not have this container move up whenever a studio is added -->
       <h2 id="studioHeader">Your Studios</h2>
-      <a href="studio.html"><p class="text-left studio">Studio_1</p></a>
-      <a href="studio.html"><p class="text-left studio">Studio_2</p></a>
+      <p class="text-left studio">Studio_1</p>
+      <p class="text-left studio" >Studio_2</p>
     </div>
   </section>
 

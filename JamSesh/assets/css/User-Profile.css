@@ -1,21 +1,33 @@
 .bio {
-  width: 175px;
-  margin-left: 390px;
+  flex: 1 1;
+  align-content: flex-start;
+  margin: 5px;
 }
 
 .pic {
-  width: 150px;
-  height: 150px;
-  margin-top: 50px;
+  align-self: center;
+  border-radius: 50%;
+  width: 260px;
+  height: 260px;
 }
 
 .name {
-  width: 150px;
+  align-self: left;
+  flex-basis: auto;
   color: rgb(58,175,169);
-  font-weight: bold;
+  /* font-weight: bold; */
+  font-size: x-large;
+}
+
+.subName {
+  align-self: left;
+  flex-basis: auto;
+  color: rgb(106, 107, 107);
+  font-size: large;
 }
 
 .changePic {
+  align-self: center;
   background: #222222;
   width: 150px;
   height: 40;
@@ -24,24 +36,27 @@
 }
 
 .studioSection {
-  max-width: 995px;
-  margin-left: -275px;
+  flex: 5 0;
+  align-items: stretch;
 }
 
 #studioHeader {
   color: rgb(34,34,34);
   font-weight: bold;
+  padding: 10px;
+}
+
+.pad {
+  padding: 20px;
+  justify-content: space-around;
 }
 
 .studio {
-  padding: -1px;
   font-size: 25px;
-  margin-left: 80px;
-  width: 800px;
+  padding: 10px;
+  flex: 1 0;
   background: #3aafa9;
-  padding-left: 40px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  border-radius: 8px;
   color: rgb(255,255,255);
   font-weight: bold;
 }
