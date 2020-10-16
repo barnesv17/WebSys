@@ -11,13 +11,13 @@
 #builtForMusicians {
   color: #f0f0f0;
   text-align: left;
-  width: 350px;
+  /* width: 350px; */
   font-weight: bold;
 }
 
 #summary {
   color: #222222;
-  width: 400px;
+  /* width: 400px; */
 }
 
 .form-container {
