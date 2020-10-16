@@ -1,7 +1,8 @@
 .bio {
   flex: 1 1;
-  align-content: flex-start;
-  margin: 5px;
+  /* align-content: flex-start; */
+  justify-content: left;
+  padding: 5px;
 }
 
 .pic {
@@ -12,15 +13,12 @@
 }
 
 .name {
-  align-self: left;
   flex-basis: auto;
   color: rgb(58,175,169);
-  /* font-weight: bold; */
   font-size: x-large;
 }
 
 .subName {
-  align-self: left;
   flex-basis: auto;
   color: rgb(106, 107, 107);
   font-size: large;
@@ -29,20 +27,41 @@
 .changePic {
   align-self: center;
   background: #222222;
-  width: 150px;
-  height: 40;
+  /* width: 150px; */
+  /* height: 30; */
+  flex-basis: auto;
+  border-radius: 8px;
   color: rgb(255,255,255);
-  margin-top: -15px;
+}
+
+hr {
+  border-top: 0.5px solid lightgrey;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  height: 0px;
+  padding: 10px;
 }
 
 .studioSection {
-  flex: 5 0;
+  flex: 3 0;
   align-items: stretch;
+  padding: 10px;
 }
 
-#studioHeader {
+.studioHeader {
   color: rgb(34,34,34);
   font-weight: bold;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.addStudio {
+  margin: 5px;
+  border: 1px solid #3aafa9;
+  flex-basis: auto;
+  color: #3aafa9;
+  border-radius: 8px;
   padding: 10px;
 }
 
@@ -52,11 +71,44 @@
 }
 
 .studio {
-  font-size: 25px;
-  padding: 10px;
+  justify-content: start;
+  margin-top: 10px;
+  margin-bottom: 10px;
   flex: 1 0;
   background: #3aafa9;
-  border-radius: 8px;
+  border-radius: 16px;
   color: rgb(255,255,255);
-  font-weight: bold;
+}
+
+.studioTitle {
+  font-size: 40px;
+  font-weight: 500;
+  padding-left: 15px;
+  padding-top: 10px;
+}
+
+.studioDescription {
+  padding-left: 15px;
+  color: black;
+}
+
+.genreContainer {
+  flex-wrap: wrap;
+  padding: 5px;
+}
+
+.genres {
+  margin: 5px;
+  /* background: #242424; */
+  /* width: 150px; */
+  /* height: 30; */
+  border: 1px solid black;
+  flex-basis: auto;
+  color: rgba(0, 0, 0, 0.87);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.studioGenres {
+  padding: 10px;
 }
