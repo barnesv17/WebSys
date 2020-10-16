@@ -42,10 +42,14 @@
   width: 350px;
 }
 
-#signup {
+#formButton {
   background: #3aafa9;
   color: rgb(240,240,240);
   border-style: none;
+}
+
+#formLink {
+  color: rgb(240,240,240);
 }
 
 .already {
