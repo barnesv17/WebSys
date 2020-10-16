@@ -11,7 +11,15 @@
     height: 8rem;
 }
 
-#add-instrument {
+#studio-contributions td img{
+    height: 8rem;
+}
+
+#add-instrument-btn {
+    margin-left: 2rem;
+}
+
+#approve-contributions-btn {
     margin-left: 2rem;
 }
 
