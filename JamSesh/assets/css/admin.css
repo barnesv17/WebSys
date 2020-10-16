@@ -61,6 +61,7 @@ body{
 .wrapper .main_content .header{
   padding: 10px;
   padding-right: 0;
+  padding-left: 5%;
   background: #3d3a3a;
   color: rgb(218, 218, 218);
   font-weight: bold;
@@ -72,7 +73,7 @@ body{
 div.wrapper div.main_content div.status #sub {
   padding-top: 10px;
   padding-bottom: 20px;
-  padding-left: 50px;
+  padding-left: 10%;
   border: 1px solid rgba(255,255,255,0.18);
   /* background-image: linear-gradient(90deg, #3d3a3a, #706d6d); */
   background-color: #ffffff;;
