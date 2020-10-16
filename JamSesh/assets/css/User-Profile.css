@@ -80,6 +80,11 @@ hr {
   color: rgb(255,255,255);
 }
 
+.studio:hover {
+  text-decoration: none;
+  color: rgb(255,255,255);
+}
+
 .studioTitle {
   font-size: 40px;
   font-weight: 500;
