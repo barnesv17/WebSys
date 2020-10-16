@@ -26,14 +26,26 @@
     </div>
   </nav>
 
-  <h1 id="studio-title" class="text-center">Username: Studio</h1>
-
-  <!-- <button type="button" class="btn btn-primary">
-    Favorite <span class="badge badge-light">4</span>
-  </button> -->
+  <div id="studio-title-card" class="container-fluid">
+    <div class="row align-items-center justify-content-between">
+      <h1 id="studio-title">Username: Studio</h1>
+      <div>
+        <div class="row justify-content-between">
+          <form id="favorite-form">
+            <button class="btn btn-secondary" type="submit">Favorite <span class="badge badge-light">4</span>
+            </button>
+          </form>
+          <form id="fork-form">
+            <button class="btn btn-secondary" type="submit">Fork <span class="badge badge-light">0</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Navbar Tabs -->
-  <ul class="nav nav-tabs" role="tablist">
+  <ul id="studio-navtabs" class="nav nav-tabs mb-3s" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="composition-tab" data-toggle="tab" href="#composition" role="tab"
         aria-controls="composition" aria-selected="true">Composition</a>
@@ -72,7 +84,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit Changes</button>
+            <button type="submit" class="btn btn-info" data-dismiss="modal">Submit Changes</button>
           </div>
         </form>
       </div>
@@ -101,7 +113,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit Changes</button>
+            <button type="submit" class="btn btn-info" data-dismiss="modal">Submit Changes</button>
           </div>
         </form>
       </div>
@@ -147,7 +159,7 @@
           </tbody>
         </table>
       </div>
-      <button id="add-instrument-btn" type="button" class="btn btn-primary" data-toggle="modal"
+      <button id="add-instrument-btn" type="button" class="btn btn-info" data-toggle="modal"
         data-target="#add-instrument">Add Instrument</button>
     </div>
     <div class="tab-pane fade" id="mixes" role="tabpanel" aria-labelledby="mixes-tab">
@@ -241,7 +253,7 @@
             </tbody>
           </table>
         </div>
-        <button id="approve-contributions-btn" type="submit" class="btn btn-primary">Save Changes</button>
+        <button id="approve-contributions-btn" type="submit" class="btn btn-info">Save Changes</button>
       </form>
     </div>
     <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
@@ -265,7 +277,7 @@
               <option>No</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary">Save Changes</button>
+          <button type="submit" class="btn btn-info">Save Changes</button>
         </form>
       </div>
     </div>

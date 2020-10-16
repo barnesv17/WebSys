@@ -3,6 +3,40 @@
     margin-bottom: 1rem;
 }
 
+#studio-title-card {
+    width: calc(100% - 6rem);
+}
+
+#fork-form {
+    margin-left: 1rem;
+}
+
+#studio-navtabs {
+    margin-left: 2rem;
+}
+
+.btn-info {
+    background-color: rgb(58,175,169);
+}
+
+.nav-tabs .nav-link {
+    border-color: #343a40 !important;
+    background-color: rgb(58,175,169);
+    color: black;
+    border: 1px solid transparent;
+    border-bottom: transparent !important;
+}
+
+.nav-tabs .nav-link:hover {
+    border: 1px solid;
+    border-bottom: transparent;
+}
+
+.nav-tabs .nav-item .active {
+    color: black;
+    border: 1px solid;
+}
+
 #studio-composition tr:hover {
     cursor: pointer;
 }
