@@ -3,45 +3,41 @@
 
 <head>
     <meta charset="utf-8">
-    <title>JamSesh - Home</title>
+    <title>JamSesh - Login</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/Homepage-Nav.css">
     <link rel="stylesheet" href="assets/css/Homepage.css">
+    <link rel="stylesheet" href="assets/css/Login.css">
 </head>
 
 <body>
   <!-- Try and remove the style from the line below -->
     <div class="top" data-bs-parallax-bg="true" style="background: url(&quot;assets/img/teal.png&quot;);">
       <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
-        <div class="container"><a class="navbar-brand" href="#">JamSesh</a>
+        <div class="container"><a class="navbar-brand" href="homepage.html">JamSesh</a>
           <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="nav navbar-nav mr-auto">
-              <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+              <li class="nav-item"><a class="nav-link active" href="homepage.html">Home</a></li>
               <li class="nav-item"><a class="nav-link" href="#">About</a></li>
             </ul>
             <span class="navbar-text actions">
-              <a class="login" href="login.html">Log In</a>
-              <a class="btn btn-light action-button" role="button" href="#">Sign Up</a>
+              <a class="login" href="#">Log In</a>
+              <a class="btn btn-light action-button" role="button" href="homepage.html">Sign Up</a>
             </span>
           </div>
         </div>
       </nav>
 
     <section class="d-flex">
-      <div class="container description">
-        <h2 id="builtForMusicians">Built for Musicians</h2>
-        <p id="summary">JamSesh provides an environment for remote musicians to compose music collaboratively. Share a Studio and begin composing today.</p>
-      </div>
       <div class="text-center d-xl-flex justify-content-xl-center form-container">
         <form id="signupForm" method="post">
-          <h2 class="text-center" id="create">Create an account.</h2>
+          <h2 class="text-center" id="create">Login</h2>
           <div class="form-group" id="email"><input class="form-control" type="email" name="email" placeholder="Email"></div>
           <div class="form-group" id="password"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-          <div class="form-group" id="confirmPassword"><input class="form-control" type="password" name="password-repeat" placeholder="Password (repeat)"></div>
-          <div class="form-group"><a class="btn btn-primary btn-block" id="formButton" type="submit" href="user-profile.html" href="user-profile.html">Sign Up</a></div>
-          <a class="already" href="login.html">You already have an account? Login here.</a></form>
-        </div>
+          <div class="form-group"><a class="btn btn-primary btn-block" id="formButton" type="submit" href="user-profile.html">Log In</a></div>
+        </form>
+      </div>
     </section>
   </div>
 
