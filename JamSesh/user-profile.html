@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
 
 <head>
   <meta charset="utf-8">
@@ -38,11 +38,11 @@
         <form id="editProfileForm">
           <div class="modal-body">
             <div class="form-group">
-              <label id="firstLabel" for="profilePic">Upload Profile Picture</label>
+              <label id="firstLabel" for="profilePicInput">Upload Profile Picture</label>
               <input type="file" class="form-control" id="profilePicInput">
-              <label for="userBio">Edit Bio</label>
+              <label for="userBioInput">Edit Bio</label>
               <textarea class="form-control" id="userBioInput" rows="3" maxlength="255"></textarea>
-              <label for="profileName">Change Profile Name</label>
+              <label for="profileNameInput">Change Profile Name</label>
               <input type="text" class="form-control" id="profileNameInput" placeholder="Gabe Wild">
               <label for="usernameInput">Change Username</label>
               <div class="input-group">
@@ -53,8 +53,8 @@
               </div>
               <label for="passwordInput">Change Password</label>
               <input type="password" class="form-control" id="passwordInput">
-              <label for="passwordInput">Confirm Password</label>
-              <input type="password" class="form-control" id="passwordInput">
+              <label for="passwordConfirmInput">Confirm Password</label>
+              <input type="password" class="form-control" id="passwordConfirmInput">
             </div>
           </div>
           <div class="modal-footer">
@@ -68,7 +68,7 @@
 
   <section class="d-xl-flex flex-row pad">
     <div class="d-flex flex-column text-center bio">
-      <img src="assets/img/blank-avatar.png" class="pic">
+      <img src="assets/img/blank-avatar.png" alt="profile picture" class="pic">
       <p class="name">Gabe Wild</p>
       <p class="subName">@wildg</p>
       <a data-toggle="modal" data-target="#editProfile" class="btn btn-light action-button changePic" role="button">
