@@ -11,30 +11,27 @@
     margin-left: 1rem;
 }
 
-#studio-navtabs {
-    margin-left: 2rem;
-}
 
 .btn-info {
     background-color: rgb(58,175,169);
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #343a40;
+}
+
+#first-tab {
+    margin-left: 2rem;
 }
 
 .nav-tabs .nav-link {
     border-color: #343a40 !important;
     background-color: rgb(58,175,169);
     color: black;
-    border: 1px solid transparent;
-    border-bottom: transparent !important;
-}
-
-.nav-tabs .nav-link:hover {
-    border: 1px solid;
-    border-bottom: transparent;
 }
 
 .nav-tabs .nav-item .active {
     color: black;
-    border: 1px solid;
 }
 
 #studio-composition tr:hover {
