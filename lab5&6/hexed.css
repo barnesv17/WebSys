@@ -1,0 +1,51 @@
+html, body {
+  height: auto;
+  margin: auto auto 5em auto;
+  width: 80%;
+  font-family: 'Noto Sans', sans-serif;
+  color: #585458;
+}
+
+#header {
+  margin-top: 2em;
+  text-align: center;
+}
+
+#navbar {
+  text-align: center;
+  list-style: none;
+  padding: 10px;
+  border-bottom: none;
+  position: relative;
+}
+
+#navbar li {
+  display: inline-block;
+
+}
+
+#navbar a {
+  text-decoration: none;
+  padding: 5px 20px;
+  color: #4e4b4e;
+}
+
+#navbar a:hover {
+  background-color: #c3e8f1;
+}
+
+.intro {
+  margin: 5% 10%;
+}
+
+.instructions {
+  margin: 5% 10%;
+}
+
+.instructions li {
+  padding-bottom: 5px;
+}
+
+.about {
+  margin: 10%;
+}
