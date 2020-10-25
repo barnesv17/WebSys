@@ -19,6 +19,10 @@ html, body {
   position: relative;
 }
 
+hr {
+  width: 85%;
+}
+
 #navbar li {
   display: inline-block;
 
@@ -26,26 +30,19 @@ html, body {
 
 #navbar a {
   text-decoration: none;
-  padding: 5px 20px;
+  padding: 5px 25px;
   color: #4e4b4e;
 }
 
 #navbar a:hover {
-  background-color: #c3e8f1;
+  background-color: #9eecff;
+  font-weight: 600;
 }
 
-.intro {
-  margin: 5% 10%;
-}
-
-.instructions {
+.intro, .instructions, .about {
   margin: 5% 10%;
 }
 
 .instructions li {
   padding-bottom: 5px;
-}
-
-.about {
-  margin: 10%;
 }
