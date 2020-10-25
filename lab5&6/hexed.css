@@ -14,8 +14,8 @@ html, body {
 #navbar {
   text-align: center;
   list-style: none;
-  padding: 10px;
-  border-bottom: none;
+  padding-left: 10px;
+  padding-right: 10px;
   position: relative;
 }
 
