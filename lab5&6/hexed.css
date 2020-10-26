@@ -46,3 +46,46 @@ hr {
 .instructions li {
   padding-bottom: 5px;
 }
+
+#box {
+  margin: auto;
+  margin-top: 50px;
+  width: 250px;
+  height: 250px;
+  border-style: solid;
+}
+#guesser {
+  margin: auto;
+}
+
+/* Display two columns */
+.sliders {
+  float: left;
+  width: 50%;
+}
+.textboxes {
+  float: left;
+  width: 50%;
+}
+.guesser:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Sliders css */
+.slidecontainer p, .slidecontainer input {
+  display: inline;
+}
+.slidecontainer {
+  text-align: right;
+  margin-top: 50px;
+  margin-right: 25px;
+}
+
+/* Textbox css */
+.textbox {
+  text-align: left;
+  margin-top: 50px;
+  margin-left: 25px;
+}

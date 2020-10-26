@@ -13,6 +13,44 @@
       <li><a href="hexed_game.html">Play</a></li>
       <li><a href="hexed_about.html">About</a></li>
     </ul>
-    <hr>
+  </hr>
+
+  <div id="box"></div>
+  <div id="guesser">
+    <div class="sliders">
+      <div class="slidecontainer">
+        <p>R</p>
+        <input type="range" min="0" max="255" value="0" class="slider" id="Rrange">
+        <p id="Rdemo"></p>
+      </div>
+      <div class="slidecontainer">
+        <p>G</p>
+        <input type="range" min="0" max="255" value="0" class="slider" id="Grange">
+        <p id="Gdemo"></p>
+      </div>
+      <div class="slidecontainer">
+        <p>B</p>
+        <input type="range" min="0" max="255" value="0" class="slider" id="Brange">
+        <p id="Bdemo"></p>
+      </div>
+    </div>
+    <div class="textboxes">
+      <div class="textbox">
+        <input type="text" placeholder="Input R Value" id="Rtext">
+      </div>
+      <div class="textbox">
+        <input type="text" placeholder="Input G Value" id="Gtext">
+      </div>
+      <div class="textbox">
+        <input type="text" placeholder="Input B Value" id="Btext">
+      </div>
+    </div>
+  </div>
+
+  </section>
+
+  <script src="hexed.js">
+  </script>
+
   </body>
 </html>
