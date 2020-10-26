@@ -10,7 +10,6 @@ html, body {
   margin-top: 2em;
   text-align: center;
 }
-
 #navbar {
   text-align: center;
   list-style: none;
@@ -18,22 +17,18 @@ html, body {
   padding-right: 10px;
   position: relative;
 }
-
 hr {
   width: 85%;
 }
-
 #navbar li {
   display: inline-block;
 
 }
-
 #navbar a {
   text-decoration: none;
   padding: 5px 25px;
   color: #4e4b4e;
 }
-
 #navbar a:hover {
   background-color: #9eecff;
   font-weight: 600;
@@ -58,7 +53,7 @@ hr {
   margin: auto;
 }
 
-/* Display two columns */
+/*----Display sliders and txt boxes in two columns----------------------------*/
 .sliders {
   float: left;
   width: 50%;
@@ -73,7 +68,7 @@ hr {
   clear: both;
 }
 
-/* Sliders css */
+/*----Slider css--------------------------------------------------------------*/
 .slidecontainer p, .slidecontainer input {
   display: inline;
 }
@@ -83,9 +78,20 @@ hr {
   margin-right: 25px;
 }
 
-/* Textbox css */
+/*----Textbox css-------------------------------------------------------------*/
 .textbox {
   text-align: left;
   margin-top: 50px;
   margin-left: 25px;
+}
+
+/*----Button css--------------------------------------------------------------*/
+button {
+  margin-top: 50px;
+  width: 100%;
+}
+
+/*----Percents css------------------------------------------------------------*/
+#percents p {
+  text-align: center;
 }
