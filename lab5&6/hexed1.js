@@ -65,7 +65,7 @@
       g: $( '<input type="text" placeholder="Input G Value" id="Gtext"/>' ),
       b: $( '<input type="text" placeholder="Input B Value" id="Btext"/>' )
     };
-    
+
     let guesser = $( '<div id="guesser"/>' );
     slidecontainers.r.append( labels.r ).append( sliders.r ).append( displayValues.r );
     slidecontainers.g.append( labels.g ).append( sliders.g ).append( displayValues.g );
@@ -82,7 +82,7 @@
     settingsDialog.append(usernameSettings).append(usernameTextArea);
     settingsDialog.append(numTurnsSliderTitle).append(numTurnsSlider);
     guesser.append( settingsDialog );
-    
+
 
     let guessButton = $( '<button id="guessButton"/>' ).text( 'Guess!' );
     let nextGameButton = $( '<button id="nextButton"/>' ).text( 'New Game' );
@@ -92,8 +92,8 @@
     $( '#game' ).append( timer ).append( bestscorep ).append( currentscorep );
     $( '#game' ).append( box ).append( guesscounter );
     $( '#game' ).append( box ).append( guesser );
-    $( '#game' ).append( guessButton ).append( percents ).append( nextGameButton );
-    $( '#game' ).append(settingsButton);
+    $( '#game' ).append( guessButton ).append( nextGameButton ).append(settingsButton);
+    $( '#game' ).append( percents );
     timer.hide();
     bestscorep.hide();
     currentscorep.hide();
@@ -120,9 +120,9 @@
       guesser.show();
       guesscounter.show();
       guessButton.show();
+      percents.hide();
       nextGameButton.hide();
-      $( '#nextButton' ).hide();
-      $('#settingsButton').show();
+      settingsButton.hide();
       timer.text( '0.00' );
       numTurns = 0;
       score = 0;
@@ -296,14 +296,9 @@
 
       // If the guess is correct or there are no more turns, end game
       if( (roff == 0 && goff == 0 && boff == 0) || numTurns == turns ) {
-        
-        // $( '#percents' ).hide("slow");
-        setTimeout(function() {
-          $('#percents').fadeOut();
-          $( '#guessButton' ).fadeOut();
-          $( '#settingsButton' ).fadeOut();
-          $( '#nextButton' ).show();
-        }, 1200);
+        $( '#guessButton' ).hide();
+        $( '#settingsButton' ).show();
+        $( '#nextButton' ).show();
       }
     });
     nextGameButton.on( 'click', start );
