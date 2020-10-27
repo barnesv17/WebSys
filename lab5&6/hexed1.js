@@ -19,7 +19,8 @@
     let settingsDialog = $( '<div id="settingsDialog"/>');
     let usernameSettings = $('<p id="usernameSettings"/>').text("User name");
     let usernameTextArea = $('<input type="text" placeholder="User Name" id="usernameText"/>');
-    let numTurnsSlider = $('<div id="turnsSlider"/>')
+    let numTurnsSlider = $('<div id="turnsSlider"/>');
+    let numTurnsSliderTitle = $('<p id="turnsTitle"><label for="amount">Number of Turns</label><input type="text" id="amount"></p>');
     let guesscounter = $( '<p id="numguesses"/>').text( 'Turns Remaining: ' + Number(turns).toString() );
     let timer = $( '<p id="timer"/>' );
     let bestscorep = $( '<p id="bestscore"/>' ).text( 'Top Score: 0' );
@@ -32,10 +33,15 @@
       g : $( '<div class="slidecontainer"/>' ),
       b : $( '<div class="slidecontainer"/>' )
     };
+    // let sliders = {
+    //   r: $( '<input type="range" min="0" max="255" value="0" class="slider" id="Rrange"/>' ),
+    //   g: $( '<input type="range" min="0" max="255" value="0" class="slider" id="Grange"/>' ),
+    //   b: $( '<input type="range" min="0" max="255" value="0" class="slider" id="Brange"/>' )
+    // };
     let sliders = {
-      r: $( '<input type="range" min="0" max="255" value="0" class="slider" id="Rrange"/>' ),
-      g: $( '<input type="range" min="0" max="255" value="0" class="slider" id="Grange"/>' ),
-      b: $( '<input type="range" min="0" max="255" value="0" class="slider" id="Brange"/>' )
+      r: $( '<span class="slider" id="Rrange"/>' ),
+      g: $( '<span class="slider" id="Grange"/>' ),
+      b: $( '<span class="slider" id="Brange"/>' )
     };
     let labels = {
       r : $( '<p/>' ).text( 'R' ),
@@ -59,7 +65,7 @@
       g: $( '<input type="text" placeholder="Input G Value" id="Gtext"/>' ),
       b: $( '<input type="text" placeholder="Input B Value" id="Btext"/>' )
     };
-
+    
     let guesser = $( '<div id="guesser"/>' );
     slidecontainers.r.append( labels.r ).append( sliders.r ).append( displayValues.r );
     slidecontainers.g.append( labels.g ).append( sliders.g ).append( displayValues.g );
@@ -73,8 +79,10 @@
     guesser.append( textboxesdiv );
 
     //-----Add to dialog---------------------------------------------------------
+    settingsDialog.append(usernameSettings).append(usernameTextArea);
+    settingsDialog.append(numTurnsSliderTitle).append(numTurnsSlider);
     guesser.append( settingsDialog );
-
+    
 
     let guessButton = $( '<button id="guessButton"/>' ).text( 'Guess!' );
     let nextGameButton = $( '<button id="nextButton"/>' ).text( 'New Game' );
@@ -146,10 +154,22 @@
     startButton.on( 'click', start );
 
     //----Settings Dialog-------------------------------------------------------
+      //-------add slider into dialog
+    $( "#turnsSlider" ).slider({
+      range: "min",
+      min: 1,
+      max: 5,
+      value: 3,
+      slide: function( event, ui ) {
+        $( "#amount" ).val( ui.value );
+      }
+    });
+    $( "#amount" ).val($( "#turnsSlider" ).slider( "value" ) );
     $( "#settingsDialog" ).dialog({
       autoOpen: false,
       buttons: {
-        Continue: function() {$(this).dialog("close");}
+        Continue: function() {$(this).dialog("close");},
+        Apply: function() {$(this).dialog("close");}
       },
       title: "Settings"
     });
@@ -159,6 +179,14 @@
 
     //----Slider handlers-------------------------------------------------------
     function sliderChange( color, dec ) {
+      // --------Initialize JUI sliders---------
+      $( ".slider" ).slider({
+        orientation: "horizontal",
+        range: "min",
+        max: 255,
+        value: 0,
+        min: 0
+      });
       hexString = "0x" + Number( dec ).toString(16).toUpperCase();
       if( color == 'r' ) {
         displayValues.r.html( hexString );
