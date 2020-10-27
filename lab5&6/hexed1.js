@@ -67,14 +67,13 @@
       g: null,
       b: null
     };
-    let goalrgb = "";
 
     //----getRandom()-----------------------------------------------------------
     function getRandom() {
       return Math.floor( Math.random() * 256 );
     };
 
-    //----start()---------------------------------------------------------------
+    //----Start handler---------------------------------------------------------
     function start() {
       $( '#startButton' ).remove();
       $( '#game' ).append( box ).append( guesser );
@@ -91,8 +90,6 @@
 
       box.css( 'background-color', goalrgb );
     };
-
-    //----Start handler---------------------------------------------------------
     $( '#game' ).append( startButton );
     startButton.on( 'click', start );
 
@@ -121,6 +118,7 @@
     sliders.b.on( 'input', function () {
       sliderChange( 'b', sliders.b.val() );
     });
+
     //----Textbox handlers------------------------------------------------------
     function textboxChange( e, color, hex ) {
       if( e.which == 13 ) {
@@ -153,6 +151,35 @@
     textboxes.b.on( 'keypress', function( e ) {
       textboxChange( e, 'b', textboxes.b.val() );
     });
+    
+    //----Guess handler---------------------------------------------------------
+    function percentOff( correct, guess ) {
+      return Math.round( Math.abs(( correct - guess )/255 ) * 100 );
+    };
+    guessButton.on( 'click', function() {
+      roff = percentOff( goal.r, sliders.r.val() );
+      goff = percentOff( goal.g, sliders.g.val() );
+      boff = percentOff( goal.b, sliders.b.val() );
+      var rstring = "<p>Red: ";
+      var gstring = "<p>Green: ";
+      var bstring = "<p>Blue: ";
+      var correctstring = "You got it! (0&#37; off)</p>";
+      var incorrectstring = "&#37; off</p>"
+
+      if ( roff == 0 ) { rstring += correctstring; }
+      else { rstring += roff + incorrectstring; }
+
+      if ( goff == 0 ) { gstring += correctstring; }
+      else { gstring += goff + incorrectstring; }
+
+      if ( boff == 0 ) { bstring += correctstring; }
+      else { bstring += boff + incorrectstring; }
+
+      var output = rstring + gstring + bstring;
+      percents.html( output );
+    });
+
+
 
   };
 })( jQuery );
