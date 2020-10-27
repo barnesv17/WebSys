@@ -25,9 +25,9 @@
       b : $( '<p/>' ).text( 'B' )
     };
     let displayValues = {
-      r : $( '<p/>' ),
-      g : $( '<p/>' ),
-      b : $( '<p/>' ),
+      r : $( '<p/>' ).text( '0x' + Number( sliders.r.val() ).toString(16).toUpperCase() ),
+      g : $( '<p/>' ).text( '0x' + Number( sliders.g.val() ).toString(16).toUpperCase() ),
+      b : $( '<p/>' ).text( '0x' + Number( sliders.b.val() ).toString(16).toUpperCase() )
     };
 
     let textboxesdiv = $( '<div class="textboxes"/>' );
@@ -92,64 +92,67 @@
       box.css( 'background-color', goalrgb );
     };
 
+    //----Start handler---------------------------------------------------------
     $( '#game' ).append( startButton );
     startButton.on( 'click', start );
 
-    //----Red Handlers----------------------------------------------------------
-    sliders.r.on( 'input', function() {
-      hexString = "0x" + Number(sliders.r.val()).toString(16).toUpperCase();
-      displayValues.r.html( hexString );
-      textboxes.r.val( hexString );
+    //----Slider handlers-------------------------------------------------------
+    function sliderChange( color, dec ) {
+      hexString = "0x" + Number( dec ).toString(16).toUpperCase();
+      if( color == 'r' ) {
+        displayValues.r.html( hexString );
+        textboxes.r.val( hexString );
+      }
+      if( color == 'g' ) {
+        displayValues.g.html( hexString );
+        textboxes.g.val( hexString );
+      }
+      if( color == 'b' ) {
+        displayValues.b.html( hexString );
+        textboxes.b.val( hexString );
+      }
+    };
+    sliders.r.on( 'input', function () {
+      sliderChange( 'r', sliders.r.val() );
     });
-    textboxes.r.on( 'keypress', function( e ) {
+    sliders.g.on( 'input', function () {
+      sliderChange( 'g', sliders.g.val() );
+    });
+    sliders.b.on( 'input', function () {
+      sliderChange( 'b', sliders.b.val() );
+    });
+    //----Textbox handlers------------------------------------------------------
+    function textboxChange( e, color, hex ) {
       if( e.which == 13 ) {
-        if( !re.test( textboxes.r.val() ) ) {
+        if( !re.test( hex ) ) {
           alert( "Please enter a valid hex value in the format '0x__'" );
         }
         else {
-          dec = parseInt( textboxes.r.val(), 16 );
-          sliders.r.val( dec );
-          displayValues.r.html( textboxes.r.val().toUpperCase() );
+          dec = parseInt( hex, 16 );
+          if( color == 'r' ) {
+            sliders.r.val( dec );
+            displayValues.r.html( hex.toUpperCase() );
+          }
+          if( color == 'g' ) {
+            sliders.g.val( dec );
+            displayValues.g.html( hex.toUpperCase() );
+          }
+          if( color == 'b' ) {
+            sliders.b.val( dec );
+            displayValues.b.html( hex.toUpperCase() );
+          }
         }
       }
-    });
-    //----Green Handlers----------------------------------------------------------
-    sliders.g.on( 'input', function() {
-      hexString = "0x" + Number(sliders.g.val()).toString(16).toUpperCase();
-      displayValues.g.html( hexString );
-      textboxes.g.val( hexString );
+    };
+    textboxes.r.on( 'keypress', function( e ) {
+      textboxChange( e, 'r', textboxes.r.val() );
     });
     textboxes.g.on( 'keypress', function( e ) {
-      if( e.which == 13 ) {
-        if( !re.test( textboxes.g.val() ) ) {
-          alert( "Please enter a valid hex value in the format '0x__'" );
-        }
-        else {
-          dec = parseInt( textboxes.g.val(), 16 );
-          sliders.g.val( dec );
-          displayValues.g.html( textboxes.r.val().toUpperCase() );
-        }
-      }
-    });
-    //----Blue Handlers----------------------------------------------------------
-    sliders.b.on( 'input', function() {
-      hexString = "0x" + Number(sliders.b.val()).toString(16).toUpperCase();
-      displayValues.b.html( hexString );
-      textboxes.b.val( hexString );
+      textboxChange( e, 'g', textboxes.g.val() );
     });
     textboxes.b.on( 'keypress', function( e ) {
-      if( e.which == 13 ) {
-        if( !re.test( textboxes.b.val() ) ) {
-          alert( "Please enter a valid hex value in the format '0x__'" );
-        }
-        else {
-          dec = parseInt( textboxes.b.val(), 16 );
-          sliders.b.val( dec );
-          displayValues.b.html( textboxes.r.val().toUpperCase() );
-        }
-      }
+      textboxChange( e, 'b', textboxes.b.val() );
     });
-
 
   };
 })( jQuery );
