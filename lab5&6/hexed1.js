@@ -205,7 +205,8 @@
           $(this).dialog("close");
         }
       },
-      title: "Settings"
+      title: "Settings",
+      modal: true
     });
     settingsButton.on('click', function () {
       $("#settingsDialog").dialog("open");
@@ -403,9 +404,8 @@
     $("#highscoresDialog").dialog({
       autoOpen: false,
       title: "High Scores",
-      draggable: false,
       width: 'auto',
-      resizable: false
+      modal: true
     });
     highscoresButton.on('click', function () {
       loadHighScores();
