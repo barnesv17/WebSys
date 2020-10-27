@@ -2,10 +2,21 @@
   // Plugin function
   $.fn.hexed = function({ username, turns }) {
 
+    //----Setup Global Variables----------------------------------------------
+    let re = new RegExp( '^0x[0-9A-Fa-f]{2}$' );
+    let numTurns = 0;
+    let score = null;
+    let topscore = 0;
+    let goal = {
+      r: null,
+      g: null,
+      b: null
+    };
+
     //----Setup Gameplay HTML---------------------------------------------------
-    let startButton = $( '<button id="startButton"/>' ).text( 'New Game' );
-    let settingsButton = $('<button id="settingsButton"/>').text('Settings');
-    let settingsDialog = $('<div id="settingsDialog/>"').text("Settings");
+    let startButton = $( '<button id="startButton"/>' ).text( 'Start Game' );
+
+    let guesscounter = $( '<p id="numguesses"/>').text( 'Turns Remaining: ' + Number(turns).toString() );
     let timer = $( '<p id="timer"/>' );
     let bestscorep = $( '<p id="bestscore"/>' ).text( 'Top Score: 0' );
     let currentscorep = $( '<p id="score"/>' ).text( 'Current Score: 0' );
@@ -64,6 +75,7 @@
 
     $( '#game' ).append( startButton );
     $( '#game' ).append( timer ).append( bestscorep ).append( currentscorep );
+    $( '#game' ).append( box ).append( guesscounter );
     $( '#game' ).append( box ).append( guesser );
     $( '#game' ).append( guessButton ).append( percents ).append( nextGameButton );
     $( '#game' ).append(settingsButton);
@@ -76,17 +88,6 @@
     percents.hide();
     nextGameButton.hide();
     settingsButton.hide();
-
-    //----Setup Global Variables----------------------------------------------
-    let re = new RegExp( '^0x[0-9A-Fa-f]{2}$' );
-    let numTurns = 0;
-    let score = null;
-    let topscore = 0;
-    let goal = {
-      r: null,
-      g: null,
-      b: null
-    };
 
     //----Start handler---------------------------------------------------------
     function getRandom() {
@@ -211,6 +212,9 @@
     };
     guessButton.on( 'click', function() {
       numTurns += 1;
+
+      guesscounter
+      guesscounter.text( 'Turns Remaining: ' + Number(turns - numTurns).toString() );
 
       roff = percentOff( goal.r, sliders.r.val() );
       goff = percentOff( goal.g, sliders.g.val() );
