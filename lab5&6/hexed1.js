@@ -16,7 +16,7 @@
     //----Setup Gameplay HTML---------------------------------------------------
     let startButton = $( '<button id="startButton"/>' ).text( 'Start Game' );
     let settingsButton = $( '<button id="settingsButton"/>' ).text( 'Settings' );
-    let settingsDialog = $( '<div id="settingsDialog" title = "Settings"/>').html();
+    let settingsDialog = $( '<div id="settingsDialog" title = "Settings"/>');
     let guesscounter = $( '<p id="numguesses"/>').text( 'Turns Remaining: ' + Number(turns).toString() );
     let timer = $( '<p id="timer"/>' );
     let bestscorep = $( '<p id="bestscore"/>' ).text( 'Top Score: 0' );
@@ -138,14 +138,13 @@
     startButton.on( 'click', start );
 
     //----Settings Dialog-------------------------------------------------------
-    
-    $("#settingsButton").click(function() {
-      $( "#settingsDialog" ).dialog({
-        autoOpen: false,
-        buttons: {
-          Continue: function() {$(this).dialog("close");}
-        }
-      });
+    $( "#settingsDialog" ).dialog({
+      autoOpen: false,
+      buttons: {
+        Continue: function() {$(this).dialog("close");}
+      }
+    });
+    settingsButton.on('click', function() {
       $( "#settingsDialog" ).dialog( "open" );
     });
 
