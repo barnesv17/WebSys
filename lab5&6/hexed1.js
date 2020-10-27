@@ -5,7 +5,7 @@
     //----Setup Gameplay HTML---------------------------------------------------
     let startButton = $( '<button id="startButton"/>' ).text( 'Start Game' );
 
-    let timer = $( '<div id="timer"/>' );
+    let timer = $( '<p id="timer"/>' );
     let box = $( '<div id="box"/>' );
 
     let slidersdiv = $( '<div class="sliders"/>' );
@@ -68,27 +68,33 @@
       b: null
     };
 
-    //----getRandom()-----------------------------------------------------------
+    //----Start handler---------------------------------------------------------
     function getRandom() {
       return Math.floor( Math.random() * 256 );
     };
-
-    //----Start handler---------------------------------------------------------
     function start() {
       $( '#startButton' ).remove();
-      $( '#game' ).append( box ).append( guesser );
+      $( '#game' ).append( timer ).append( box ).append( guesser );
       $( '#game' ).append( guessButton ).append( percents );
+      timer.text( '0.00' );
 
       numGuesses = 0;
       score = 0;
-
       goal.r = getRandom();
       goal.g = getRandom();
       goal.b = getRandom();
-
       goalrgb = 'rgb(' + goal.r + ',' + goal.g + ',' + goal.b + ')';
-
       box.css( 'background-color', goalrgb );
+
+      // gives milliseconds
+      startTime = Date.now();
+      setInterval( function() {
+        currentSecs = Math.floor( ( Date.now() - startTime ) / 1000 );
+        currentMil = ( Date.now() - startTime ) - ( currentSecs * 1000 );
+        output = '<p id="timer>' + currentSecs + '.' + currentMil + '</p>';
+        timer.text( currentSecs + '.' + currentMil );
+      }, 1);
+
     };
     $( '#game' ).append( startButton );
     startButton.on( 'click', start );
@@ -151,7 +157,7 @@
     textboxes.b.on( 'keypress', function( e ) {
       textboxChange( e, 'b', textboxes.b.val() );
     });
-    
+
     //----Guess handler---------------------------------------------------------
     function percentOff( correct, guess ) {
       return Math.round( Math.abs(( correct - guess )/255 ) * 100 );
