@@ -17,6 +17,7 @@
     let startButton = $( '<button id="startButton"/>' ).text( 'Start Game' );
     let settingsButton = $( '<button id="settingsButton"/>' ).text( 'Settings' );
     let settingsDialog = $( '<div id="settingsDialog"/>');
+    let highscoresDialog = $( '<div id="highscoresDialog"/>');
     let usernameSettings = $('<p id="usernameSettings"/>').text("Username");
     let usernameTextArea = $('<input type="text" id="usernameText"/>');
     usernameTextArea.attr( "placeholder", username );
@@ -106,11 +107,11 @@
     //-----Add to dialog---------------------------------------------------------
     settingsDialog.append(usernameSettings).append(usernameTextArea);
     settingsDialog.append(numTurnsSliderTitle).append(numTurnsSlider);
-    guesser.append( settingsDialog );
-
+    guesser.append( settingsDialog ).append( highscoresDialog );
 
     let guessButton = $( '<button id="guessButton"/>' ).text( 'Guess!' );
     let nextGameButton = $( '<button id="nextButton"/>' ).text( 'New Game' );
+    let highscoresButton = $( '<button id="highscoresButton"/>' ).text( 'High Scores' );
     let percents = $( '<div id="percents"/>' );
 
     $( '#game' ).append( startButton );
@@ -118,7 +119,7 @@
     $( '#game' ).append( box ).append( guesscounter );
     $( '#game' ).append( box ).append( guesser );
     $( '#game' ).append( guessButton ).append( nextGameButton ).append(settingsButton);
-    $( '#game' ).append( percents );
+    $( '#game' ).append( percents ).append( highscoresButton );
     timer.hide();
     bestscorep.hide();
     currentscorep.hide();
@@ -128,6 +129,7 @@
     guessButton.hide();
     percents.hide();
     nextGameButton.hide();
+    highscoresButton.hide();
 
     //----Start handler---------------------------------------------------------
     function getRandom() {
@@ -147,6 +149,7 @@
       guessButton.show();
       percents.hide();
       nextGameButton.hide();
+      highscoresButton.hide();
       settingsButton.hide();
       timer.text( '0.00' );
       numTurns = 0;
@@ -190,7 +193,6 @@
     $( "#settingsDialog" ).dialog({
       autoOpen: false,
       buttons: {
-        Continue: function() {$(this).dialog("close");},
         Apply: function() {
           settingsApply();
           $(this).dialog("close");
@@ -332,8 +334,20 @@
         $( '#guessButton' ).hide();
         $( '#settingsButton' ).show();
         $( '#nextButton' ).show();
+        $( '#highscoresButton' ).show();
       }
     });
     nextGameButton.on( 'click', start );
   };
+
+  //---- Extra Credit-----------------------------------------------------------
+  $( "#highscoresDialog" ).dialog({
+    autoOpen: false,
+    title: "High Scores"
+  });
+  highscoresButton.on('click', function() {
+    $( "#highscoresDialog" ).dialog( "open" );
+  });
+
+
 })( jQuery );
