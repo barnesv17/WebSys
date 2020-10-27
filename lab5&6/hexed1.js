@@ -54,14 +54,26 @@
     textboxesdiv.append( textboxcontainers.r ).append( textboxcontainers.g ).append( textboxcontainers.b )
     guesser.append( textboxesdiv );
 
-    let guessButton = $( '<button/>' ).text( 'Guess!' );
+    let guessButton = $( '<button id="guessButton"/>' ).text( 'Guess!' );
+    let nextGameButton = $( '<button id="nextButton"/>' ).text( 'New Game' );
     let percents = $( '<div id="percents"/>' );
 
-    //----Setup Gameplay Variables----------------------------------------------
+    $( '#game' ).append( startButton );
+    $( '#game' ).append( timer ).append( box ).append( guesser );
+    $( '#game' ).append( guessButton ).append( percents ).append( nextGameButton );
+    timer.hide();
+    box.hide();
+    guesser.hide();
+    guessButton.hide();
+    percents.hide();
+    nextGameButton.hide();
+
+    //----Setup Global Variables----------------------------------------------
     let re = new RegExp( '^0x[0-9A-Fa-f]{2}$' );
-    let numGuesses = 0;
+    let numTurns = 0;
     let score = null;
-    let time = null;
+    let currentSecs = null;
+    let currentMil = null;
     let goal = {
       r: null,
       g: null,
@@ -74,11 +86,17 @@
     };
     function start() {
       $( '#startButton' ).remove();
-      $( '#game' ).append( timer ).append( box ).append( guesser );
-      $( '#game' ).append( guessButton ).append( percents );
+      timer.show();
+      box.show();
+      guesser.show();
+      guessButton.show();
+      nextGameButton.hide();
+
+      // show buttons here
+      $( '#nextButton' ).hide();
       timer.text( '0.00' );
 
-      numGuesses = 0;
+      numTurns = 0;
       score = 0;
       goal.r = getRandom();
       goal.g = getRandom();
@@ -86,7 +104,7 @@
       goalrgb = 'rgb(' + goal.r + ',' + goal.g + ',' + goal.b + ')';
       box.css( 'background-color', goalrgb );
 
-      // gives milliseconds
+      // Timer Implementation
       startTime = Date.now();
       setInterval( function() {
         currentSecs = Math.floor( ( Date.now() - startTime ) / 1000 );
@@ -94,9 +112,7 @@
         output = '<p id="timer>' + currentSecs + '.' + currentMil + '</p>';
         timer.text( currentSecs + '.' + currentMil );
       }, 1);
-
     };
-    $( '#game' ).append( startButton );
     startButton.on( 'click', start );
 
     //----Slider handlers-------------------------------------------------------
@@ -163,6 +179,8 @@
       return Math.round( Math.abs(( correct - guess )/255 ) * 100 );
     };
     guessButton.on( 'click', function() {
+      numTurns += 1;
+
       roff = percentOff( goal.r, sliders.r.val() );
       goff = percentOff( goal.g, sliders.g.val() );
       boff = percentOff( goal.b, sliders.b.val() );
@@ -183,9 +201,15 @@
 
       var output = rstring + gstring + bstring;
       percents.html( output );
+      percents.show();
+
+      // If the guess is correct or there are no more turns, end game
+      if( (roff == 0 && goff == 0 && boff == 0) || numTurns == turns ) {
+        $( '#guessButton' ).hide();
+        $( '#percents' ).hide();
+        $( '#nextButton' ).show();
+      }
     });
-
-
-
+    nextGameButton.on( 'click', start );
   };
 })( jQuery );
