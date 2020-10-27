@@ -3,8 +3,9 @@
   $.fn.hexed = function({ username, turns }) {
 
     //----Setup Gameplay HTML---------------------------------------------------
-    let startButton = $( '<button id="startButton"/>' ).text( 'Start Game' );
-
+    let startButton = $( '<button id="startButton"/>' ).text( 'New Game' );
+    let settingsButton = $('<button id="settingsButton"/>').text('Settings');
+    let settingsDialog = $('<div id="settingsDialog/>"').text("Settings");
     let timer = $( '<p id="timer"/>' );
     let bestscorep = $( '<p id="bestscore"/>' ).text( 'Top Score: 0' );
     let currentscorep = $( '<p id="score"/>' ).text( 'Current Score: 0' );
@@ -40,8 +41,8 @@
     };
     let textboxes = {
       r: $( '<input type="text" placeholder="Input R Value" id="Rtext"/>' ),
-      g: $( '<input type="text" placeholder="Input R Value" id="Gtext"/>' ),
-      b: $( '<input type="text" placeholder="Input R Value" id="Btext"/>' )
+      g: $( '<input type="text" placeholder="Input G Value" id="Gtext"/>' ),
+      b: $( '<input type="text" placeholder="Input B Value" id="Btext"/>' )
     };
 
     let guesser = $( '<div id="guesser"/>' );
@@ -55,6 +56,7 @@
     textboxcontainers.b.append( textboxes.b );
     textboxesdiv.append( textboxcontainers.r ).append( textboxcontainers.g ).append( textboxcontainers.b )
     guesser.append( textboxesdiv );
+    guesser.append( settingsDialog );
 
     let guessButton = $( '<button id="guessButton"/>' ).text( 'Guess!' );
     let nextGameButton = $( '<button id="nextButton"/>' ).text( 'New Game' );
@@ -64,6 +66,7 @@
     $( '#game' ).append( timer ).append( bestscorep ).append( currentscorep );
     $( '#game' ).append( box ).append( guesser );
     $( '#game' ).append( guessButton ).append( percents ).append( nextGameButton );
+    $( '#game' ).append(settingsButton);
     timer.hide();
     bestscorep.hide();
     currentscorep.hide();
@@ -72,6 +75,7 @@
     guessButton.hide();
     percents.hide();
     nextGameButton.hide();
+    settingsButton.hide();
 
     //----Setup Global Variables----------------------------------------------
     let re = new RegExp( '^0x[0-9A-Fa-f]{2}$' );
@@ -100,7 +104,7 @@
       guessButton.show();
       nextGameButton.hide();
       $( '#nextButton' ).hide();
-
+      $('#settingsButton').show();
       timer.text( '0.00' );
       numTurns = 0;
       score = 0;
@@ -131,6 +135,13 @@
     };
     startButton.on( 'click', start );
 
+    //----Settings Dialog-------------------------------------------------------
+    $('#settingsDialog').dialog({
+      autoOpen: false,
+    });
+    settingsButton.click(function() {
+      $('#settingsDialog').dialog(open);
+    });
     //----Slider handlers-------------------------------------------------------
     function sliderChange( color, dec ) {
       hexString = "0x" + Number( dec ).toString(16).toUpperCase();
@@ -242,6 +253,7 @@
         $( '#guessButton' ).hide();
         $( '#percents' ).hide();
         $( '#nextButton' ).show();
+        $( '#settingsButton' ).hide();
       }
     });
     nextGameButton.on( 'click', start );
