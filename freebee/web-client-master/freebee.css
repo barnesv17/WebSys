@@ -1,0 +1,183 @@
+* {
+	background: #fbfcff;
+	color: #2d4654;
+	font-family: "Noto Sans", Calibri, sans-serif;
+}        
+
+body {
+	max-width: 650px;
+	margin: auto auto 3em auto;
+	font-size: 100%;
+}
+
+h1 {
+	margin-bottom: 0;
+}
+
+h1 > a {
+	text-decoration: none;
+	font-family: "Noto Sans", sans-serif;
+}
+
+.subtitle {
+	text-align: right;
+	margin: 0;
+	font-style: italic;
+}
+
+h2, h3, h4 {
+	color: #243b4a;
+}
+
+hr {
+	border-color: #805e73;
+}
+
+a, .subtitle {
+	color: #243b4a;
+}
+
+pre {
+	padding: .5em;
+	overflow: auto;
+}
+
+.navbar {
+	text-align: center;
+}
+
+.topbutton {
+	float: right;
+}
+
+#footer {
+	display: block;
+	text-align: right;
+	margin: 0;
+	font-style: italic;
+}
+
+#game {
+	width: 240px;
+	height: 300px;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.game-buttons {
+	text-align: center;
+}
+
+.game-forms {
+	text-align: center;
+}
+
+.messages {
+	float: center;
+	text-align: center;
+}
+
+.message {
+	display: none;
+	color: #ff6961;
+}
+
+#no-message.message {
+	display: inline;
+}
+
+#pangram.message {
+	display: none;
+	color: #0047ab;
+}
+
+.score {
+	width: 100%;
+	height: 100px;
+}
+
+.points {
+	width: 50%;
+	height: 100%;
+	float: left;
+	text-align: center;
+}
+
+.rank {
+	width: 50%;
+	height: 100%;
+	float: left;
+	text-align: center;
+}
+
+.wordlists {
+	width: 100%;
+	height: 200px;
+}
+
+.today-answers {
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+
+.yesterday-answers {
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+
+.update-answers {
+	height: 150px;
+	border: solid;
+	overflow: scroll;
+}
+
+.answers {
+	text-align: center;
+}
+
+#random-answers {
+	display: none;
+	text-align: center;
+}
+
+#update-random {
+	display: block;
+	width: 225px;
+	height: 150px;
+	border: solid;
+	float: right;
+	overflow: auto;
+}
+
+.restart {
+	width: 100%;
+}
+
+.restart-daily {
+	width: 50%;
+	float: left;
+	text-align: center;
+}
+
+.restart-random {
+	width: 50%;
+	float: left;
+	text-align: center;
+}
+
+img {
+	background: transparent;
+	position: absolute;
+	display: none;
+}
+
+img.bg {
+	display: block;
+}
+
+#dictionary {
+	text-align: right;
+}
