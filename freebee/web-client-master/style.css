@@ -171,6 +171,25 @@ pre {
     text-align: center;
 }
 
+#playfield-fg {
+  position: relative;
+}
+
+#play1, #play2, #play3, #play4, #play5, #play6, #play7 {
+  font-family: 'Courier Prime', monospace;
+  position: absolute;
+  font-size: 40px;
+}
+
+#play1, #play2, #play3, #play4, #play5, #play6 {
+  background-color: #E79600;
+  color: black;
+}
+#play7 {
+  background-color: black;
+  color: #E79600;
+}
+
 img {
     background: transparent;
     position: absolute;
