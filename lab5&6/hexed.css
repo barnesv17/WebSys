@@ -39,7 +39,7 @@ hr {
 }
 #navbar a.active {
   border-bottom: 2px solid black;
-  font-weight: 600;
+  font-weight: 700;
 }
 #navbar a:not(.active):before {
   content: "";
