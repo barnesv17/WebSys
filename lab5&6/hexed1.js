@@ -33,15 +33,10 @@
       g : $( '<div class="slidecontainer"/>' ),
       b : $( '<div class="slidecontainer"/>' )
     };
-    // let sliders = {
-    //   r: $( '<input type="range" min="0" max="255" value="0" class="slider" id="Rrange"/>' ),
-    //   g: $( '<input type="range" min="0" max="255" value="0" class="slider" id="Grange"/>' ),
-    //   b: $( '<input type="range" min="0" max="255" value="0" class="slider" id="Brange"/>' )
-    // };
     let sliders = {
-      r: $( '<span class="slider" id="Rrange"/>' ),
-      g: $( '<span class="slider" id="Grange"/>' ),
-      b: $( '<span class="slider" id="Brange"/>' )
+      r: $( '<div id="red"/>' ),
+      g: $( '<div id="green"/>' ),
+      b: $( '<div id="blue"/>' )
     };
     let labels = {
       r : $( '<p/>' ).text( 'R' ),
@@ -77,6 +72,26 @@
     textboxcontainers.b.append( textboxes.b );
     textboxesdiv.append( textboxcontainers.r ).append( textboxcontainers.g ).append( textboxcontainers.b )
     guesser.append( textboxesdiv );
+
+    $(function() {
+      $( "#red" ).slider({
+          orientation: "horizontal",
+          max: 255,
+          value: 0,
+        });
+
+        $( "#green" ).slider({
+            orientation: "horizontal",
+            max: 255,
+            value: 0,
+        });
+
+        $( "#blue" ).slider({
+            orientation: "horizontal",
+            max: 255,
+            value: 0,
+        });
+    });
 
     //-----Add to dialog---------------------------------------------------------
     settingsDialog.append(usernameSettings).append(usernameTextArea);
@@ -126,9 +141,9 @@
       timer.text( '0.00' );
       numTurns = 0;
       score = 0;
-      sliders.r.val( 0 );
-      sliders.g.val( 0 );
-      sliders.b.val( 0 );
+      $( "#red" ).slider( "value", 0 );
+      $( "#green" ).slider( "value", 0 );
+      $( "#blue" ).slider( "value", 0 );
       displayValues.r.html( "0x00" );
       displayValues.g.html( "0x00" );
       displayValues.b.html( "0x00" );
@@ -179,14 +194,6 @@
 
     //----Slider handlers-------------------------------------------------------
     function sliderChange( color, dec ) {
-      // --------Initialize JUI sliders---------
-      $( ".slider" ).slider({
-        orientation: "horizontal",
-        range: "min",
-        max: 255,
-        value: 0,
-        min: 0
-      });
       hexString = "0x" + Number( dec ).toString(16).toUpperCase();
       if( color == 'r' ) {
         displayValues.r.html( hexString );
@@ -201,14 +208,29 @@
         textboxes.b.val( hexString );
       }
     };
-    sliders.r.on( 'input', function () {
-      sliderChange( 'r', sliders.r.val() );
+    $("#red").on( "slidechange", function( event, ui ) {
+      rval = $( "#red" ).slider( "value" );
+      sliderChange( 'r', rval );
     });
-    sliders.g.on( 'input', function () {
-      sliderChange( 'g', sliders.g.val() );
+    $("#red").on( "slide", function( event, ui ) {
+      rval = $( "#red" ).slider( "value" );
+      sliderChange( 'r', rval );
     });
-    sliders.b.on( 'input', function () {
-      sliderChange( 'b', sliders.b.val() );
+    $("#green").on( "slidechange", function( event, ui ) {
+      gval = $( "#green" ).slider( "value" );
+      sliderChange( 'g', gval );
+    });
+    $("#green").on( "slide", function( event, ui ) {
+      gval = $( "#green" ).slider( "value" );
+      sliderChange( 'g', gval );
+    });
+    $("#blue").on( "slidechange", function( event, ui ) {
+      bval = $( "#blue" ).slider( "value" );
+      sliderChange( 'b', bval );
+    });
+    $("#blue").on( "slide", function( event, ui ) {
+      bval = $( "#blue" ).slider( "value" );
+      sliderChange( 'b', bval );
     });
 
     //----Textbox handlers------------------------------------------------------
@@ -220,15 +242,15 @@
         else {
           dec = parseInt( hex, 16 );
           if( color == 'r' ) {
-            sliders.r.val( dec );
+            $( "#red" ).slider( "value", dec );
             displayValues.r.html( hex.toUpperCase() );
           }
           if( color == 'g' ) {
-            sliders.g.val( dec );
+            $( "#green" ).slider( "value", dec );
             displayValues.g.html( hex.toUpperCase() );
           }
           if( color == 'b' ) {
-            sliders.b.val( dec );
+            $( "#blue" ).slider( "value", dec );
             displayValues.b.html( hex.toUpperCase() );
           }
         }
@@ -258,9 +280,9 @@
       guesscounter
       guesscounter.text( 'Turns Remaining: ' + Number(turns - numTurns).toString() );
 
-      roff = percentOff( goal.r, sliders.r.val() );
-      goff = percentOff( goal.g, sliders.g.val() );
-      boff = percentOff( goal.b, sliders.b.val() );
+      roff = percentOff( goal.r, $( "#red" ).slider( "value" ) );
+      goff = percentOff( goal.g, $( "#green" ).slider( "value" ) );
+      boff = percentOff( goal.b, $( "#blue" ).slider( "value" ) );
       var rstring = "<p>Red: ";
       var gstring = "<p>Green: ";
       var bstring = "<p>Blue: ";
