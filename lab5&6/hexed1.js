@@ -15,7 +15,8 @@
 
     //----Setup Gameplay HTML---------------------------------------------------
     let startButton = $( '<button id="startButton"/>' ).text( 'Start Game' );
-
+    let settingsButton = $( '<button id="settingsButton"/>' ).text( 'Settings' );
+    let settingsDialog = $( '<div id="settingsDialog" title = "Settings"/>').html();
     let guesscounter = $( '<p id="numguesses"/>').text( 'Turns Remaining: ' + Number(turns).toString() );
     let timer = $( '<p id="timer"/>' );
     let bestscorep = $( '<p id="bestscore"/>' ).text( 'Top Score: 0' );
@@ -137,12 +138,17 @@
     startButton.on( 'click', start );
 
     //----Settings Dialog-------------------------------------------------------
-    $('#settingsDialog').dialog({
-      autoOpen: false,
+    
+    $("#settingsButton").click(function() {
+      $( "#settingsDialog" ).dialog({
+        autoOpen: false,
+        buttons: {
+          Continue: function() {$(this).dialog("close");}
+        }
+      });
+      $( "#settingsDialog" ).dialog( "open" );
     });
-    settingsButton.click(function() {
-      $('#settingsDialog').dialog(open);
-    });
+
     //----Slider handlers-------------------------------------------------------
     function sliderChange( color, dec ) {
       hexString = "0x" + Number( dec ).toString(16).toUpperCase();
@@ -254,10 +260,14 @@
 
       // If the guess is correct or there are no more turns, end game
       if( (roff == 0 && goff == 0 && boff == 0) || numTurns == turns ) {
-        $( '#guessButton' ).hide();
-        $( '#percents' ).hide();
-        $( '#nextButton' ).show();
-        $( '#settingsButton' ).hide();
+        
+        // $( '#percents' ).hide("slow");
+        setTimeout(function() {
+          $('#percents').fadeOut();
+          $( '#guessButton' ).fadeOut();
+          $( '#settingsButton' ).fadeOut();
+          $( '#nextButton' ).show();
+        }, 1200);
       }
     });
     nextGameButton.on( 'click', start );
