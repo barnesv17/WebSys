@@ -4,6 +4,7 @@
 
     //----Setup Global Variables----------------------------------------------
     let re = new RegExp( '^0x[0-9A-Fa-f]{2}$' );
+    let timerInterval = null;
     let numTurns = 0;
     let score = null;
     let topscore = 0;
@@ -95,14 +96,7 @@
         });
     });
 
-    //----Timer Implementation--------------------------------------------------
-    startTime = Date.now();
-    var timerInterval = setInterval( function() {
-      currentSecs = Math.floor( ( Date.now() - startTime ) / 1000 );
-      currentMil = ( Date.now() - startTime ) - ( currentSecs * 1000 );
-      output = '<p id="timer>' + currentSecs + '.' + currentMil + '</p>';
-      timer.text( currentSecs + '.' + currentMil );
-    }, 1);
+
 
     //-----Add to dialog---------------------------------------------------------
     settingsDialog.append(usernameSettings).append(usernameTextArea);
@@ -151,7 +145,7 @@
       nextGameButton.hide();
       highscoresButton.hide();
       settingsButton.hide();
-      timer.text( '0.00' );
+      timer.text( '0.00secs' );
       numTurns = 0;
       guesscounter.text( "Turns Remaining: " + turns );
       score = 0;
@@ -170,6 +164,16 @@
       goal.b = getRandom();
       goalrgb = 'rgb(' + goal.r + ',' + goal.g + ',' + goal.b + ')';
       box.css( 'background-color', goalrgb );
+
+      //----Timer Implementation--------------------------------------------------
+      // FIX THIS TO START WHEN START BUTTON IS CLICKED
+      startTime = Date.now();
+      timerInterval = setInterval( function() {
+        currentSecs = Math.floor( ( Date.now() - startTime ) / 1000 );
+        currentMil = ( Date.now() - startTime ) - ( currentSecs * 1000 );
+        output = '<p id="timer>' + currentSecs + '.' + currentMil + 'secs</p>';
+        timer.text( currentSecs + '.' + currentMil );
+      }, 1);
     };
     startButton.on( 'click', start );
 
