@@ -106,6 +106,9 @@ hr {
   margin-top: 50px;
   margin-right: 25px;
 }
+#red .ui-slider-handle { border-color: red; }
+#green .ui-slider-handle { border-color: green; }
+#blue .ui-slider-handle { border-color: blue; }
 /*----Textbox css-------------------------------------------------------------*/
 .textbox {
   text-align: left;
