@@ -23,8 +23,8 @@
     let usernameTextArea = $('<input type="text" id="usernameText"/>');
     usernameTextArea.attr("placeholder", username);
     let numTurnsSlider = $('<div id="turnsSlider"/>');
-    let numTurnsSliderTitle = $('<p id="turnsTitle"><label for="amount">Number of Turns</label><input type="text" id="amount"></p>');
-    let guesscounter = $('<p id="numguesses"/>').text('Turns Remaining: ' + Number(turns).toString());
+    let numTurnsSliderTitle = $('<p id="turnsTitle"><label for="amount">Number of Guesses</label><input type="text" id="amount"></p>');
+    let guesscounter = $('<p id="numguesses"/>').text('Guesses Remaining: ' + Number(turns).toString());
     let timer = $('<p id="timer"/>');
     let bestscorep = $('<p id="bestscore"/>').text('Top Score: 0');
     let currentscorep = $('<p id="score"/>').text('Current Score: 0');
@@ -175,7 +175,7 @@
         currentSecs = Math.floor((Date.now() - startTime) / 1000);
         currentMil = (Date.now() - startTime) - (currentSecs * 1000);
         output = '<p id="timer>' + currentSecs + '.' + currentMil + 'secs</p>';
-        timer.text(currentSecs + '.' + currentMil);
+        timer.text(currentSecs + '.' + currentMil + ' seconds');
       }, 1);
     };
     startButton.on('click', start);

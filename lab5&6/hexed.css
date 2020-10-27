@@ -124,6 +124,9 @@ hr {
 button {
   margin-top: 40px;
   width: 100%;
+  height: 50px;
+  border: 1px solid grey;
+  border-radius: 8px;
 }
 
 /*----Percents css------------------------------------------------------------*/
