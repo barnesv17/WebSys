@@ -91,13 +91,21 @@
       guesser.show();
       guessButton.show();
       nextGameButton.hide();
-
-      // show buttons here
       $( '#nextButton' ).hide();
-      timer.text( '0.00' );
 
+      timer.text( '0.00' );
       numTurns = 0;
       score = 0;
+      sliders.r.val( 0 );
+      sliders.g.val( 0 );
+      sliders.b.val( 0 );
+      displayValues.r.html( "0x00" );
+      displayValues.g.html( "0x00" );
+      displayValues.b.html( "0x00" );
+      textboxes.r.val( "0x00" );
+      textboxes.g.val( "0x00" );
+      textboxes.b.val( "0x00" );
+
       goal.r = getRandom();
       goal.g = getRandom();
       goal.b = getRandom();
