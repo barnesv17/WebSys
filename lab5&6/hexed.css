@@ -106,10 +106,6 @@ hr {
   margin-top: 50px;
   margin-right: 25px;
 }
-.ui-slider-handle {
-  width: 5px;
-}
-
 /*----Textbox css-------------------------------------------------------------*/
 .textbox {
   text-align: left;
@@ -130,4 +126,31 @@ button {
 /*----Percents css------------------------------------------------------------*/
 #percents p {
   text-align: center;
+}
+
+/*----Timer css---------------------------------------------------------------*/
+#timer {
+  text-align: center;
+  font-size: 50px;
+  margin-top: -15px;
+}
+
+#numguesses {
+  text-align: center;
+  font-size: 30px;
+  margin-top: -20px;
+}
+
+/*----Red css---------------------------------------------------------------*/
+#rlabel {
+  font-weight: bold;
+  color: red;
+}
+#glabel {
+  font-weight: bold;
+  color: green;
+}
+#blabel {
+  font-weight: bold;
+  color: blue;
 }

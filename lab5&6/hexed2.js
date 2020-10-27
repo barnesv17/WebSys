@@ -1,3 +1,3 @@
 $(document).ready( function() {
-  $('#game').hexed({ username: 'bob', turns: 5 });
+  $('#game').hexed({ username: 'Player Name', turns: 3 });
 });

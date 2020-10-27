@@ -40,14 +40,14 @@
       b: $( '<div id="blue"/>' )
     };
     let labels = {
-      r : $( '<p/>' ).text( 'R' ),
-      g : $( '<p/>' ).text( 'G' ),
-      b : $( '<p/>' ).text( 'B' )
+      r : $( '<p id="rlabel"/>' ).text( 'R' ),
+      g : $( '<p id="glabel"/>' ).text( 'G' ),
+      b : $( '<p id="blabel"/>' ).text( 'B' )
     };
     let displayValues = {
-      r : $( '<p/>' ).text( '0x' + Number( sliders.r.val() ).toString(16).toUpperCase() ),
-      g : $( '<p/>' ).text( '0x' + Number( sliders.g.val() ).toString(16).toUpperCase() ),
-      b : $( '<p/>' ).text( '0x' + Number( sliders.b.val() ).toString(16).toUpperCase() )
+      r : $( '<p id="rdisplay"/>' ).text( '0x' + Number( sliders.r.val() ).toString(16).toUpperCase() ),
+      g : $( '<p id="gdisplay"/>' ).text( '0x' + Number( sliders.g.val() ).toString(16).toUpperCase() ),
+      b : $( '<p id="bdisplay"/>' ).text( '0x' + Number( sliders.b.val() ).toString(16).toUpperCase() )
     };
 
     let textboxesdiv = $( '<div class="textboxes"/>' );
@@ -94,6 +94,15 @@
         });
     });
 
+    //----Timer Implementation--------------------------------------------------
+    startTime = Date.now();
+    var timerInterval = setInterval( function() {
+      currentSecs = Math.floor( ( Date.now() - startTime ) / 1000 );
+      currentMil = ( Date.now() - startTime ) - ( currentSecs * 1000 );
+      output = '<p id="timer>' + currentSecs + '.' + currentMil + '</p>';
+      timer.text( currentSecs + '.' + currentMil );
+    }, 1);
+
     //-----Add to dialog---------------------------------------------------------
     settingsDialog.append(usernameSettings).append(usernameTextArea);
     settingsDialog.append(numTurnsSliderTitle).append(numTurnsSlider);
@@ -105,7 +114,7 @@
     let percents = $( '<div id="percents"/>' );
 
     $( '#game' ).append( startButton );
-    $( '#game' ).append( timer ).append( bestscorep ).append( currentscorep );
+    $( '#game' ).append( bestscorep ).append( currentscorep ).append( timer );
     $( '#game' ).append( box ).append( guesscounter );
     $( '#game' ).append( box ).append( guesser );
     $( '#game' ).append( guessButton ).append( nextGameButton ).append(settingsButton);
@@ -158,15 +167,6 @@
       goal.b = getRandom();
       goalrgb = 'rgb(' + goal.r + ',' + goal.g + ',' + goal.b + ')';
       box.css( 'background-color', goalrgb );
-
-      // Timer Implementation
-      startTime = Date.now();
-      setInterval( function() {
-        currentSecs = Math.floor( ( Date.now() - startTime ) / 1000 );
-        currentMil = ( Date.now() - startTime ) - ( currentSecs * 1000 );
-        output = '<p id="timer>' + currentSecs + '.' + currentMil + '</p>';
-        timer.text( currentSecs + '.' + currentMil );
-      }, 1);
     };
     startButton.on( 'click', start );
 
@@ -328,6 +328,7 @@
 
       // If the guess is correct or there are no more turns, end game
       if( (roff == 0 && goff == 0 && boff == 0) || numTurns == turns ) {
+        clearInterval(timerInterval);
         $( '#guessButton' ).hide();
         $( '#settingsButton' ).show();
         $( '#nextButton' ).show();
