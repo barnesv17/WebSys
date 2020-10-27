@@ -166,7 +166,6 @@
       box.css( 'background-color', goalrgb );
 
       //----Timer Implementation--------------------------------------------------
-      // FIX THIS TO START WHEN START BUTTON IS CLICKED
       startTime = Date.now();
       timerInterval = setInterval( function() {
         currentSecs = Math.floor( ( Date.now() - startTime ) / 1000 );
