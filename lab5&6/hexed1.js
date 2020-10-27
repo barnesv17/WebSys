@@ -90,6 +90,7 @@
     bestscorep.hide();
     currentscorep.hide();
     box.hide();
+    guesscounter.hide();
     guesser.hide();
     guessButton.hide();
     percents.hide();
@@ -109,6 +110,7 @@
       currentscorep.show();
       box.show();
       guesser.show();
+      guesscounter.show();
       guessButton.show();
       nextGameButton.hide();
       $( '#nextButton' ).hide();
