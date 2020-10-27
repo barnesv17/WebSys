@@ -6,6 +6,8 @@
     let startButton = $( '<button id="startButton"/>' ).text( 'Start Game' );
 
     let timer = $( '<p id="timer"/>' );
+    let bestscorep = $( '<p id="bestscore"/>' ).text( 'Top Score: 0' );
+    let currentscorep = $( '<p id="score"/>' ).text( 'Current Score: 0' );
     let box = $( '<div id="box"/>' );
 
     let slidersdiv = $( '<div class="sliders"/>' );
@@ -59,9 +61,12 @@
     let percents = $( '<div id="percents"/>' );
 
     $( '#game' ).append( startButton );
-    $( '#game' ).append( timer ).append( box ).append( guesser );
+    $( '#game' ).append( timer ).append( bestscorep ).append( currentscorep );
+    $( '#game' ).append( box ).append( guesser );
     $( '#game' ).append( guessButton ).append( percents ).append( nextGameButton );
     timer.hide();
+    bestscorep.hide();
+    currentscorep.hide();
     box.hide();
     guesser.hide();
     guessButton.hide();
@@ -72,8 +77,7 @@
     let re = new RegExp( '^0x[0-9A-Fa-f]{2}$' );
     let numTurns = 0;
     let score = null;
-    let currentSecs = null;
-    let currentMil = null;
+    let topscore = 0;
     let goal = {
       r: null,
       g: null,
@@ -87,6 +91,10 @@
     function start() {
       $( '#startButton' ).remove();
       timer.show();
+      bestscorep.show();
+      currentscorep.css( 'color', 'red' );
+      currentscorep.text( 'Current Score: 0' );
+      currentscorep.show();
       box.show();
       guesser.show();
       guessButton.show();
@@ -186,6 +194,10 @@
     function percentOff( correct, guess ) {
       return Math.round( Math.abs(( correct - guess )/255 ) * 100 );
     };
+    function calcScore( roff, goff, boff ) {
+      milTaken = Date.now() - startTime;
+      return (300 - (roff + goff + boff)) * (( 20000 - milTaken) < 0 ? 0 : (20000 - milTaken));
+    };
     guessButton.on( 'click', function() {
       numTurns += 1;
 
@@ -210,6 +222,20 @@
       var output = rstring + gstring + bstring;
       percents.html( output );
       percents.show();
+
+      // if this is a new top score, then replace the old one
+      score = calcScore( roff, goff, boff );
+      if( score > topscore ) {
+        topscore = score;
+        bestscorep.text( "Top Score: " + topscore );
+        currentscorep.css( 'color', 'black' );
+        currentscorep.text( "Current Score: " + topscore );
+      }
+      // if the score is equal to or worse than the best, display in diff color
+      else {
+        currentscorep.css( 'color', 'red' );
+        currentscorep.text( "Current Score: " + score );
+      }
 
       // If the guess is correct or there are no more turns, end game
       if( (roff == 0 && goff == 0 && boff == 0) || numTurns == turns ) {
