@@ -51,9 +51,9 @@
 
     let textboxesdiv = $( '<div class="textboxes"/>' );
     let textboxcontainers = {
-      r : $( '<div class="textbox"/>' ),
-      g : $( '<div class="textbox"/>' ),
-      b : $( '<div class="textbox"/>' )
+      r : $( '<div class="textbox" id="rtext"/>' ),
+      g : $( '<div class="textbox" id="gtext"/>' ),
+      b : $( '<div class="textbox" id="btext"/>' )
     };
     let textboxes = {
       r: $( '<input type="text" placeholder="Input R Value" id="Rtext"/>' ),

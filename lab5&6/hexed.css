@@ -106,12 +106,19 @@ hr {
   margin-top: 50px;
   margin-right: 25px;
 }
+.ui-slider-handle {
+  width: 5px;
+}
 
 /*----Textbox css-------------------------------------------------------------*/
 .textbox {
   text-align: left;
-  margin-top: 50px;
+  margin-top: 68px;
   margin-left: 25px;
+}
+
+#gtext, #btext {
+  margin-top: 81px;
 }
 
 /*----Button css--------------------------------------------------------------*/
