@@ -17,8 +17,9 @@
     let startButton = $( '<button id="startButton"/>' ).text( 'Start Game' );
     let settingsButton = $( '<button id="settingsButton"/>' ).text( 'Settings' );
     let settingsDialog = $( '<div id="settingsDialog"/>');
-    let usernameSettings = $('<p id="usernameSettings"/>').text("User name");
-    let usernameTextArea = $('<input type="text" placeholder="User Name" id="usernameText"/>');
+    let usernameSettings = $('<p id="usernameSettings"/>').text("Username");
+    let usernameTextArea = $('<input type="text" id="usernameText"/>');
+    usernameTextArea.attr( "placeholder", username );
     let numTurnsSlider = $('<div id="turnsSlider"/>');
     let numTurnsSliderTitle = $('<p id="turnsTitle"><label for="amount">Number of Turns</label><input type="text" id="amount"></p>');
     let guesscounter = $( '<p id="numguesses"/>').text( 'Turns Remaining: ' + Number(turns).toString() );
@@ -118,13 +119,13 @@
     guessButton.hide();
     percents.hide();
     nextGameButton.hide();
-    settingsButton.hide();
 
     //----Start handler---------------------------------------------------------
     function getRandom() {
       return Math.floor( Math.random() * 256 );
     };
     function start() {
+      $('#header').text( "Let's play Hexed, " + username + "!" );
       $( '#startButton' ).remove();
       timer.show();
       bestscorep.show();
@@ -140,6 +141,7 @@
       settingsButton.hide();
       timer.text( '0.00' );
       numTurns = 0;
+      guesscounter.text( "Turns Remaining: " + turns );
       score = 0;
       $( "#red" ).slider( "value", 0 );
       $( "#green" ).slider( "value", 0 );
@@ -169,12 +171,17 @@
     startButton.on( 'click', start );
 
     //----Settings Dialog-------------------------------------------------------
-      //-------add slider into dialog
+    function settingsApply() {
+      username = usernameTextArea.val();
+      turns = $( "#turnsSlider" ).slider( "value" );
+      $('#header').text( "Let's play Hexed, " + username + "!" );
+    };
+
     $( "#turnsSlider" ).slider({
       range: "min",
       min: 1,
       max: 5,
-      value: 3,
+      value: turns,
       slide: function( event, ui ) {
         $( "#amount" ).val( ui.value );
       }
@@ -184,7 +191,10 @@
       autoOpen: false,
       buttons: {
         Continue: function() {$(this).dialog("close");},
-        Apply: function() {$(this).dialog("close");}
+        Apply: function() {
+          settingsApply();
+          $(this).dialog("close");
+        }
       },
       title: "Settings"
     });
