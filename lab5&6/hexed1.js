@@ -16,7 +16,10 @@
     //----Setup Gameplay HTML---------------------------------------------------
     let startButton = $( '<button id="startButton"/>' ).text( 'Start Game' );
     let settingsButton = $( '<button id="settingsButton"/>' ).text( 'Settings' );
-    let settingsDialog = $( '<div id="settingsDialog" title = "Settings"/>');
+    let settingsDialog = $( '<div id="settingsDialog"/>');
+    let usernameSettings = $('<p id="usernameSettings"/>').text("User name");
+    let usernameTextArea = $('<input type="text" placeholder="User Name" id="usernameText"/>');
+    let numTurnsSlider = $('<div id="turnsSlider"/>')
     let guesscounter = $( '<p id="numguesses"/>').text( 'Turns Remaining: ' + Number(turns).toString() );
     let timer = $( '<p id="timer"/>' );
     let bestscorep = $( '<p id="bestscore"/>' ).text( 'Top Score: 0' );
@@ -68,7 +71,10 @@
     textboxcontainers.b.append( textboxes.b );
     textboxesdiv.append( textboxcontainers.r ).append( textboxcontainers.g ).append( textboxcontainers.b )
     guesser.append( textboxesdiv );
+
+    //-----Add to dialog---------------------------------------------------------
     guesser.append( settingsDialog );
+
 
     let guessButton = $( '<button id="guessButton"/>' ).text( 'Guess!' );
     let nextGameButton = $( '<button id="nextButton"/>' ).text( 'New Game' );
@@ -144,7 +150,8 @@
       autoOpen: false,
       buttons: {
         Continue: function() {$(this).dialog("close");}
-      }
+      },
+      title: "Settings"
     });
     settingsButton.on('click', function() {
       $( "#settingsDialog" ).dialog( "open" );
