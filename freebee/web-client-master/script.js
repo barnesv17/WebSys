@@ -20,10 +20,15 @@ function type(letter, combno) {
     document.getElementById("center-letter").style.display = "none";
     document.getElementById("too-short").style.display = "none";
     document.getElementById("not-in-list").style.display = "none";
-    document.getElementById("comb" + combno).style.height = "80px";
-    document.getElementById("comb" + combno).style.width = "80px";
-    document.getElementById("comb" + combno).style.left = parseInt(document.getElementById("comb" + combno).style.left) + 10 + "px";
-    document.getElementById("comb" + combno).style.top = parseInt(document.getElementById("comb" + combno).style.top) + 10 + "px";
+    $("#comb" + combno).css({
+        "height": "80px", "width": "80px",
+        "left": parseInt(document.getElementById("comb" + combno).style.left) + 10 + "px",
+        "top": parseInt(document.getElementById("comb" + combno).style.top) + 10 + "px"
+    });
+    // document.getElementById("comb" + combno).style.height = "80px";
+    // document.getElementById("comb" + combno).style.width = "80px";
+    // document.getElementById("comb" + combno).style.left = parseInt(document.getElementById("comb" + combno).style.left) + 10 + "px";
+    // document.getElementById("comb" + combno).style.top = parseInt(document.getElementById("comb" + combno).style.top) + 10 + "px";
     document.getElementById("guess").value = document.getElementById("guess").value + letter;
 }
 
