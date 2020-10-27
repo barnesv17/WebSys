@@ -144,7 +144,7 @@ button {
   margin-top: -20px;
 }
 
-/*----Red css---------------------------------------------------------------*/
+/*----Red css-----------------------------------------------------------------*/
 #rlabel {
   font-weight: bold;
   color: red;
@@ -156,4 +156,11 @@ button {
 #blabel {
   font-weight: bold;
   color: blue;
+}
+
+
+/*----High Scores Dialog css--------------------------------------------------*/
+#highscoresTable td{
+  font-size: large;
+  padding: .5rem;
 }
