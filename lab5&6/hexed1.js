@@ -108,6 +108,7 @@
     let guessButton = $('<button id="guessButton"/>').text('Guess!');
     let nextGameButton = $('<button id="nextButton"/>').text('New Game');
     let highscoresButton = $('<button id="highscoresButton"/>').text('High Scores');
+    let playpauseMusicButton = $('<button id="playpauseMusicButton"/>').text('Pause Music');
     let percents = $('<div id="percents"/>');
 
     $('#game').append(startButton);
@@ -116,6 +117,7 @@
     $('#game').append(box).append(guesser);
     $('#game').append(guessButton).append(nextGameButton).append(settingsButton);
     $('#game').append(percents).append(highscoresButton);
+    $('#game').append(playpauseMusicButton);
     timer.hide();
     bestscorep.hide();
     currentscorep.hide();
@@ -412,6 +414,29 @@
       $("#highscoresDialog").dialog("open");
     });
 
+    //-----Play/Pause music------------------------------------------------------------
+    var bgm = document.getElementById("backgroundmusic");
+    var musicPlaying = true;
+    function playMusic() {
+      bgm.play();
+    }
+
+    function pauseMusic() {
+      bgm.pause();
+    }
+
+    playpauseMusicButton.on('click', function() {
+      if (musicPlaying) {
+        pauseMusic();
+        playpauseMusicButton.text('Play Music')
+      } else {
+        playMusic();
+        playpauseMusicButton.text('Pause Music')
+      }
+      musicPlaying = !musicPlaying;
+    });
   };
+
+  
 
 })(jQuery);
