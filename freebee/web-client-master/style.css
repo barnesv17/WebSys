@@ -203,3 +203,83 @@ img.bg {
 #dictionary {
     text-align: right;
 }
+
+#playfield #bg {
+    height: 100px;
+    width: 100px;
+}
+
+#comb1 {
+    left: 1px;
+    top: 51px;
+}
+
+#comb2 {
+    left: 80px;
+    top: 1px;
+}
+
+#comb3 {
+    left: 159px;
+    top: 51px;
+}
+
+#comb4 {
+    left: 1px;
+    top: 149px;
+}
+
+#comb5 {
+    left: 80px;
+    top: 199px;
+}
+
+#comb6 {
+    left: 159px;
+    top: 149px;
+}
+
+#comb7 {
+    left: 80px;
+    top: 100px;
+}
+
+.clickedComb {
+    height: 80px;
+    width: 80px;
+}
+
+.clickedComb#comb1 {
+    left: 11px;
+    top: 61px;
+}
+
+.clickedComb#comb2 {
+    left: 90px;
+    top:11px;
+}
+
+.clickedComb#comb3 {
+    left: 169px;
+    top: 61px;
+}
+
+.clickedComb#comb4 {
+    left:11px;
+    top:159px;
+}
+
+.clickedComb#comb5 {
+    left: 90px;
+    top: 209px;
+}
+
+.clickedComb#comb6 {
+    left: 169px;
+    top: 159px;
+}
+
+.clickedComb#comb7 {
+    left: 90px;
+    top: 110px;
+}
