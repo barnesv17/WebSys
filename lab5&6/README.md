@@ -11,7 +11,7 @@ Gabriel Wild:
 Kyle Qin:
 - html pages
 - creativity with css
-- settings dialog box
+- settings jQery UI dialog box/unrefined sliders
 
 TJ Samuels:
 
