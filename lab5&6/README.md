@@ -2,6 +2,7 @@
 Derek Li:
 - display number of turns left
 - navigation bar css animations
+- game css layout
 - play/pause music button
 
 Gabriel Wild:

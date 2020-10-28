@@ -72,15 +72,25 @@ hr {
 }
 
 #box {
+  display: flex;
   margin: auto;
   margin-top: 50px;
   width: 250px;
   height: 250px;
   border-style: solid;
   border-radius: 20px;
+  padding: 40px;
 }
 #guesser {
-  margin: auto;
+  display: flex;
+  flex-grow: 2;
+  padding: 30px;
+}
+
+#game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #scoresDiv {
@@ -89,10 +99,17 @@ hr {
   float: left;
 }
 
-#timer, #numguesses {
-  /* margin-left: auto;
-  margin-right: 20%; */
-  margin: 10% 20% 20px 20%;
+#gameContentContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+#gameinfoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 /*----Display sliders and txt boxes in two columns----------------------------*/
 .sliders {

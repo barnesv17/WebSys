@@ -24,6 +24,10 @@
     usernameTextArea.attr("placeholder", username);
     let numTurnsSlider = $('<div id="turnsSlider"/>');
     let numTurnsSliderTitle = $('<p id="turnsTitle"><label for="amount">Number of Guesses</label><input type="text" id="amount"></p>');
+    
+    let gameinfoContainer = $('<div id="gameinfoContainer" />')
+    let gameContentContainer = $('<div id="gameContentContainer" />')
+
     let guesscounter = $('<p id="numguesses"/>').text('Guesses Remaining: ' + Number(turns).toString());
     let timer = $('<p id="timer"/>');
     let bestscorep = $('<p id="bestscore"/>').text('Top Score: 0');
@@ -114,16 +118,20 @@
     scores.append(bestscorep).append(currentscorep);
     $('#game').append(startButton);
     $('#game').append(scores);
-    $('#game').append(box).append(timer).append(guesscounter);
-    $('#game').append(box).append(guesser);
+    $('#game').append(gameinfoContainer);
+    $('#game').append(gameContentContainer)
     $('#game').append(guessButton).append(nextGameButton).append(settingsButton);
     $('#game').append(percents).append(highscoresButton);
     $('#game').append(playpauseMusicButton);
+    $('#gameinfoContainer').append(timer).append(guesscounter);
+    $('#gameContentContainer').append(box).append(guesser);
+
     timer.hide();
+    guesscounter.hide();
+    gameinfoContainer.hide();
     bestscorep.hide();
     currentscorep.hide();
     box.hide();
-    guesscounter.hide();
     guesser.hide();
     guessButton.hide();
     percents.hide();
@@ -143,6 +151,7 @@
       currentscorep.text('Current Score: 0');
       currentscorep.show();
       box.show();
+      gameinfoContainer.show();
       guesser.show();
       guesscounter.show();
       guessButton.show();
