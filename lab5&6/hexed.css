@@ -74,9 +74,9 @@ hr {
 #box {
   display: flex;
   margin: auto;
-  margin-top: 50px;
-  width: 250px;
-  height: 250px;
+  margin-top: 0px;
+  width: 150px;
+  height: 150px;
   border-style: solid;
   border-radius: 20px;
   padding: 40px;
@@ -111,6 +111,7 @@ hr {
   flex-direction: column;
   justify-content: center;
 }
+
 /*----Display sliders and txt boxes in two columns----------------------------*/
 .sliders {
   float: left;
@@ -132,7 +133,7 @@ hr {
 }
 .slidecontainer {
   text-align: right;
-  margin-top: 41.5px;
+  margin-top: 0px;
   margin-right: 25px;
 }
 
@@ -151,13 +152,14 @@ hr {
 /*----Textbox css-------------------------------------------------------------*/
 .textbox {
   text-align: left;
-  margin-top: 68px;
   margin-left: 25px;
   margin-right: 20%;
 }
-
+#rtext {
+  margin-top: 23px;
+}
 #gtext, #btext {
-  margin-top: 81px;
+  margin-top: 45px;
 }
 
 #Rtext {
@@ -214,16 +216,17 @@ button:hover {
 }
 
 /*----Timer css---------------------------------------------------------------*/
-#timer {
-  text-align: center;
-  font-size: 50px;
-  margin-top: -15px;
-}
-
 #numguesses {
   text-align: center;
   font-size: 30px;
-  margin-top: -20px;
+  margin: 0px;
+  float: right;
+}
+
+#timer {
+  text-align: right;
+  font-size: 40px;
+  margin: 0%;
 }
 
 /*----Red css-----------------------------------------------------------------*/
