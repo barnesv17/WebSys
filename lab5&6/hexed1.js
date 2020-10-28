@@ -110,10 +110,11 @@
     let highscoresButton = $('<button id="highscoresButton"/>').text('High Scores');
     let playpauseMusicButton = $('<button id="playpauseMusicButton"/>').text('Pause Music');
     let percents = $('<div id="percents"/>');
-
+    let scores = $('<div id="scoresDiv"/>');
+    scores.append(bestscorep).append(currentscorep);
     $('#game').append(startButton);
-    $('#game').append(bestscorep).append(currentscorep).append(timer);
-    $('#game').append(box).append(guesscounter);
+    $('#game').append(scores);
+    $('#game').append(box).append(timer).append(guesscounter);
     $('#game').append(box).append(guesser);
     $('#game').append(guessButton).append(nextGameButton).append(settingsButton);
     $('#game').append(percents).append(highscoresButton);

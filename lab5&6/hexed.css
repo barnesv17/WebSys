@@ -77,11 +77,23 @@ hr {
   width: 250px;
   height: 250px;
   border-style: solid;
+  border-radius: 20px;
 }
 #guesser {
   margin: auto;
 }
 
+#scoresDiv {
+  width: 20%;
+  margin: 0;
+  float: left;
+}
+
+#timer, #numguesses {
+  /* margin-left: auto;
+  margin-right: 20%; */
+  margin: 10% 20% 20px 20%;
+}
 /*----Display sliders and txt boxes in two columns----------------------------*/
 .sliders {
   float: left;
@@ -106,18 +118,53 @@ hr {
   margin-top: 50px;
   margin-right: 25px;
 }
-#red .ui-slider-handle { border-color: red; }
+
+#red {
+  background: #fd8a8a;
+}
+
+#red .ui-slider-handle { 
+  border-color: red; 
+}
+
 #green .ui-slider-handle { border-color: green; }
+#green {background: #a6ff90;}
 #blue .ui-slider-handle { border-color: blue; }
+#blue {background: #8dd5ff;}
 /*----Textbox css-------------------------------------------------------------*/
 .textbox {
   text-align: left;
   margin-top: 68px;
   margin-left: 25px;
+  margin-right: 20%;
 }
 
 #gtext, #btext {
   margin-top: 81px;
+}
+
+#Rtext {
+  border-color: #ff5959;
+  background-color: #fcacac;
+  border-radius: 5px;
+  color: #474747;
+  font-weight: 550;
+}
+
+#Gtext {
+  border-color: #63ff7d;
+  background-color: #b8faa7;
+  border-radius: 5px;
+  color: #474747;
+  font-weight: 550;
+}
+
+#Btext {
+  border-color: #37a4e4;
+  background-color: #bde7ff;
+  border-radius: 5px;
+  color: #474747;
+  font-weight: 550;
 }
 
 /*----Button css--------------------------------------------------------------*/
@@ -127,6 +174,14 @@ button {
   height: 50px;
   border: 1px solid grey;
   border-radius: 8px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #474747;
+}
+
+button:hover {
+  background-image: linear-gradient(90deg, rgb(238, 66, 66), rgb(238, 212, 66), rgb(89, 231, 89), rgb(0, 195, 255), rgb(159, 61, 240));
+  
 }
 
 /*----Percents css------------------------------------------------------------*/
@@ -166,4 +221,18 @@ button {
 #highscoresTable td{
   font-size: large;
   padding: .5rem;
+}
+
+/*----------------------------------------------------------------------------*/
+#Link {
+  text-decoration: none;
+  display: inline-block;
+  color: #303030;
+  background-image: linear-gradient(90deg, rgb(255, 92, 92),rgb(137, 255, 137), rgb(123, 224, 255));
+  border-radius: 5px;
+}
+
+#Link:hover {
+  color: #7c7979;
+  font-weight: 700;
 }
