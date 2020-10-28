@@ -2,7 +2,7 @@ html, body {
   height: auto;
   margin: auto auto 5em auto;
   width: 80%;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Sriracha', sans-serif;
   color: #585458;
 }
 
@@ -115,7 +115,7 @@ hr {
 }
 .slidecontainer {
   text-align: right;
-  margin-top: 50px;
+  margin-top: 41.5px;
   margin-right: 25px;
 }
 
@@ -170,13 +170,15 @@ hr {
 /*----Button css--------------------------------------------------------------*/
 button {
   margin-top: 40px;
-  width: 100%;
+  margin-left: 15%;
+  width: 70%;
   height: 50px;
   border: 1px solid grey;
   border-radius: 8px;
   font-size: 20px;
   font-weight: 600;
   color: #474747;
+  font-family: 'Sriracha', sans-serif;
 }
 
 button:hover {
