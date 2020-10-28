@@ -206,9 +206,9 @@ button:hover {
 }
 
 #timer {
-  text-align: center;
+  text-align: right;
   font-size: 40px;
-  margin-top: 1%;
+  margin: 0%;
 }
 
 /*----Red css-----------------------------------------------------------------*/
