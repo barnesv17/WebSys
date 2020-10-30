@@ -53,10 +53,10 @@ class Multiplication extends Operation {
 class Division extends Operation {
   public function operate() {
     if ($this->operand_2 == 0) {
-      return NULL;
+      return "UNDEFINED";
     }
 
-    return $this->operand_1 / $this->operand_2;
+    return (float)($this->operand_1) / (float)($this->operand_2);
   }
   public function getEquation() {
     return $this->operand_1 . ' / ' . $this->operand_2 . ' = ' . $this->operate();
