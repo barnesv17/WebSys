@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 abstract class Operation {
   protected $operand_1;
@@ -8,13 +8,13 @@ abstract class Operation {
     if (!is_numeric($o1) || !is_numeric($o2)) {
       throw new Exception('Non-numeric operand.');
     }
-    
+
     // Assign passed values to member variables
     $this->operand_1 = $o1;
     $this->operand_2 = $o2;
   }
   public abstract function operate();
-  public abstract function getEquation(); 
+  public abstract function getEquation();
 }
 
 // Addition subclass inherits from Operation
@@ -30,6 +30,15 @@ class Addition extends Operation {
 
 // Add subclasses for Subtraction, Multiplication and Division here
 
+// Subtraction subclass inherits from Operation
+class Subtraction extends Operation {
+  public function operate() {
+    return $this->operand_1 - $this->operand_2;
+  }
+  public function getEquation() {
+    return $this->operand_1 . ' - ' . $this->operand_2 . ' = ' . $this->operate();
+  }
+}
 
 // Some debugs - uncomment these to see what is happening...
 // echo '$_POST print_r=>',print_r($_POST);
@@ -38,7 +47,7 @@ class Addition extends Operation {
 // echo "<br/>---";
 
 
-// Check to make sure that POST was received 
+// Check to make sure that POST was received
 // upon initial load, the page will be sent back via the initial GET at which time
 // the $_POST array will not have values - trying to access it will give undefined message
 
@@ -50,10 +59,10 @@ class Addition extends Operation {
 
 
 // Instantiate an object for each operation based on the values returned on the form
-// For example, check to make sure that $_POST is set and then check its value and 
+// For example, check to make sure that $_POST is set and then check its value and
 // instantiate its object
-// 
-// The Add is done below.  Go ahead and finish the remiannig functions.  
+//
+// The Add is done below.  Go ahead and finish the remiannig functions.
 // Then tell me if there is a way to do this without the ifs
 // We might cover such a way on Tuesday...
 
@@ -79,19 +88,19 @@ class Addition extends Operation {
 </head>
 <body>
   <pre id="result">
-  <?php 
+  <?php
     if (isset($op)) {
       try {
         echo $op->getEquation();
       }
-      catch (Exception $e) { 
+      catch (Exception $e) {
         $err[] = $e->getMessage();
       }
     }
 
     foreach($err as $error) {
         echo $error . "\n";
-    } 
+    }
   ?>
   </pre>
   <form method="post" action="calculator.php">
@@ -99,11 +108,10 @@ class Addition extends Operation {
     <input type="text" name="op2" id="name" value="" />
     <br/>
     <!-- Only one of these will be set with their respective value at a time -->
-    <input type="submit" name="add" value="Add" />  
-    <input type="submit" name="sub" value="Subtract" />  
-    <input type="submit" name="mult" value="Multiply" />  
-    <input type="submit" name="divi" value="Divide" />  
+    <input type="submit" name="add" value="Add" />
+    <input type="submit" name="sub" value="Subtract" />
+    <input type="submit" name="mult" value="Multiply" />
+    <input type="submit" name="divi" value="Divide" />
   </form>
 </body>
 </html>
-
