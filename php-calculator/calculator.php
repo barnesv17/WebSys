@@ -43,7 +43,7 @@ class Subtraction extends Operation {
 // Division subclass inherits from Operation
 class Division extends Operation {
   public function operate() {
-    if ($this->operand_2 === 0) {
+    if ($this->operand_2 == 0) {
       return NULL;
     }
 
