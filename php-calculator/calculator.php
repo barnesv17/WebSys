@@ -53,6 +53,9 @@ class Multiplication extends Operation {
 class Division extends Operation {
   public function operate() {
     if ($this->operand_2 == 0) {
+      if ($this->operand_1 == 0) {
+        return 1;
+      }
       return "UNDEFINED";
     }
 
