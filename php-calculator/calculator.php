@@ -40,6 +40,15 @@ class Subtraction extends Operation {
   }
 }
 
+class Multiplication extends Operation {
+  public function operate() {
+    return $this->operand_1 * $this->operand_2;
+  }
+  public function getEquation() {
+    return $this->operand_1 . ' -  ' . $this->operand_2 . ' = ' .$this->operate();
+  }
+}
+
 // Division subclass inherits from Operation
 class Division extends Operation {
   public function operate() {
@@ -89,6 +98,10 @@ class Division extends Operation {
     // Put code for subtraction, multiplication, and division here
     if (isset($_POST['sub']) && $_POST['sub'] == 'Subtract') {
       $op = new Subtraction($o1, $o2);
+    }
+
+    if (isset($_POST['mult']) && $_POST['mult'] == 'Multiply') {
+      $op = new Multiplication($o1, $o2);
     }
 
     if (isset($_POST['divi']) && $_POST['divi'] == 'Divide') {
