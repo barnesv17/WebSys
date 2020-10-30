@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>PHP Calculator Instructions</title>
+    </head>
+    <body>
+        <div style="margin:15px" class="column" id="content">
+            <div class="section">
+                <h1 class="title" id="page-title">PHP Calculator Instructions</h1>
+                <div class="content clearfix">
+                    <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+                        <div class="field-items">
+                            <div class="field-item even">
+				<h4>Creating a calculator with PHP</h4>
+                                <p>Create a new folder in websys named calculator.websys, and confirm that it is being served by Apache. You will be using the calculator.php file as a template.</p>
+                                <p>With your group, develop a (very) basic calculator using PHP. The markup has been provided for you, along with some sample code to get you started.</p>
+                                <p>The sample code provided to you defines an <em>abstract class</em> called Operation. Abstract classes are not instantiated themselves, but are used to provide a basis for other subclassed implementations while still defining some of their default methods. An example implementation can be found in the Addition subclass, which implements the abstract methods defined in Operation::operate() and Operation::getEquation() to perform basic addition on the two operands passed into the constructor. We will cover this more on Tuesday, but for now it may be enough to just blindly copy and see if you can deduce what is going on.</p>
+                                <p>First, implement subclasses for Subtraction, Multiplication and Division in the same way as I did for addition.</p>
+				<h4>Make a form to process user input</h4>
+                                <p>As you will see, the same form may have multiple submit buttons: only the button pressed will submit its value via the request body in the resulting POST request. Therefore, we can test to see which has been sent, and perform different operations based on the result. To see what has been passed in via $_POST for debugging purposes, we can use var_dump($_POST);.</p>
+                                <p>Hint: You will want to check isset($var_name) to determine if a value exists before reading it. PHP will raise a warning if you attempt to read from a variable that has not yet been defined.</p>
+                                <p>For each button, instantiate a new object corresponding to the given operation and the two operands provided.  (i.e., "Multiply" should create a Multiply() instance from the two text fields when POSTed back to itself, and so on). Then, use your new object's getEquation() method to print the full equation inside pre#result.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
