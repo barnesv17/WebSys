@@ -40,6 +40,20 @@ class Subtraction extends Operation {
   }
 }
 
+// Division subclass inherits from Operation
+class Division extends Operation {
+  public function operate() {
+    if ($this->operand_2 === 0) {
+      return NULL;
+    }
+
+    return float($this->operand_1) / float($this->operand_2);
+  }
+  public function getEquation() {
+    return $this->operand_1 . ' / ' . $this->operand_2 . ' = ' . $this->operate();
+  }
+}
+
 // Some debugs - uncomment these to see what is happening...
 // echo '$_POST print_r=>',print_r($_POST);
 // echo "<br>",'$_POST vardump=>',var_dump($_POST);
