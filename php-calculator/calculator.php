@@ -55,8 +55,9 @@ class Division extends Operation {
     if ($this->operand_2 == 0) {
       if ($this->operand_1 == 0) {
         return 1;
+      } else {
+        return "UNDEFINED";
       }
-      return "UNDEFINED";
     }
 
     return (float)($this->operand_1) / (float)($this->operand_2);
