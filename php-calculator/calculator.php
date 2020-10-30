@@ -92,7 +92,7 @@ class Division extends Operation {
     }
 
     if (isset($_POST['divi']) && $_POST['divi'] == 'Divide') {
-      $op = new Subtraction($o1, $o2);
+      $op = new Division($o1, $o2);
     }
 
   }
