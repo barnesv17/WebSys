@@ -102,6 +102,51 @@ class NaturalLog extends Operation {
   }
 }
 
+class TenExponent extends Operation {
+  public function operate() {
+    return 10**($this->operand_1);
+  }
+  public function getEquation() {
+    return '10^(' . $this->operand_1 . ') = ' . $this->operate();
+  }
+}
+
+class EulerExponent extends Operation {
+  public function operate() {
+    return exp($this->operand_1);
+  }
+  public function getEquation() {
+    return 'e^(' . $this->operand_1 . ') = ' . $this->operate();
+  }
+}
+
+class Sine extends Operation {
+  public function operate() {
+    return sin($this->operand_1);
+  }
+  public function getEquation() {
+    return 'sin(' . $this->operand_1 . ') = ' . $this->operate();
+  }
+}
+
+class Cosine extends Operation {
+  public function operate() {
+    return cos($this->operand_1);
+  }
+  public function getEquation() {
+    return 'cos(' . $this->operand_1 . ') = ' . $this->operate();
+  }
+}
+
+class Tangent extends Operation {
+  public function operate() {
+    return tan($this->operand_1);
+  }
+  public function getEquation() {
+    return 'tan(' . $this->operand_1 . ') = ' . $this->operate();
+  }
+}
+
 // Some debugs - uncomment these to see what is happening...
 // echo '$_POST print_r=>',print_r($_POST);
 // echo "<br>",'$_POST vardump=>',var_dump($_POST);
