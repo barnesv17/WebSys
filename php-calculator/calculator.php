@@ -5,7 +5,7 @@ abstract class Operation {
   protected $operand_2;
   public function __construct($o1, $o2) {
     // Make sure we're working with numbers...
-    if (!is_numeric($o1) || !is_numeric($o2)) {
+    if ( !is_numeric($o1) || (!is_numeric($o2) && $o2 !== null) ) {
       throw new Exception('Non-numeric operand.');
     }
 
@@ -65,7 +65,7 @@ class Division extends Operation {
 
 class SquareRoot extends Operation {
   public function operate() {
-    if ($this->oeprand_1 < 0) {
+    if ($this->operand_1 < 0) {
       return "UNDEFINED";
     }
     return sqrt($this->operand_1);
@@ -173,7 +173,7 @@ $err = Array();
 // We might cover such a way on Tuesday...
 
 try {
-  if (isset($_POST['equals']) && $_POST['equals'] == 'Equals') {
+  if (isset($_POST['equals']) && $_POST['equals'] == '=') {
     $op1 = null;
     $op2 = null;
     $op = null;
@@ -205,6 +205,12 @@ try {
       $op1 = substr($input,0,$x-1);
       $op2 = substr($input,$x+2,-3);
       $op = new Division( $op1, $op2 );
+    }
+    $x = strpos( $input, 'sqrt(' );
+    $y = strpos( $input, ')' );
+    if( $x == 0 && $y == (strlen($input)-4) ) {
+      $op1 = substr($input,6,-5);
+      $op = new SquareRoot( $op1, $op2 );
     }
 
     // $op = new Operation($input);
@@ -244,7 +250,9 @@ catch (Exception $e) {
       <button type="button" id="subtract">-</button>
       <button type="button" id="mult">*</button>
       <button type="button" id="divi">/</button>
-      <input type="submit" id="equals" name="equals" value="Equals"/>
+      <button type="button" id="sqrt">sqrt(</button>
+      <button type="button" id="rp">)</button>
+      <input type="submit" id="equals" name="equals" value="="/>
     </form>
 
     <script>
@@ -264,6 +272,12 @@ catch (Exception $e) {
       });
       document.getElementById("divi").addEventListener( 'click', function() {
         appendOperator( " / " );
+      });
+      document.getElementById("sqrt").addEventListener( 'click', function() {
+        appendOperator( "sqrt( " );
+      });
+      document.getElementById("rp").addEventListener( 'click', function() {
+        appendOperator( " )" );
       });
       document.getElementById("equals").addEventListener( 'click', function() {
         appendOperator( " = " );
