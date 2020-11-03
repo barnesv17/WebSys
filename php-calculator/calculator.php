@@ -6,7 +6,7 @@ abstract class Operation {
   public function __construct($o1, $o2) {
     // Make sure we're working with numbers...
     if ( !is_numeric($o1) || (!is_numeric($o2) && $o2 !== null) ) {
-      throw new Exception('Non-numeric operand.');
+      throw new Exception('Please enter a valid 1-step equation');
     }
 
     // Assign passed values to member variables
@@ -89,7 +89,7 @@ class LogBase10 extends Operation {
     return log($this->operand_1, 10);
   }
   public function getEquation() {
-    return 'Log(10)(' . $this->operand_1 . ') = ' . $this->operate();
+    return 'Log10(' . $this->operand_1 . ') = ' . $this->operate();
   }
 }
 
@@ -181,39 +181,79 @@ try {
     echo "<br/>";
 
     // strpos() finds the position of the first occurrence of a substring in a string
-    $x = strpos( $input, '+' );
-    // If addition...
-    if( $x !== false ) {
+    //----ADDITION--------------------------------------------------------------
+    if( ($x = strpos( $input, '+' )) !== false ) {
       $op1 = substr($input,0,$x-1);
       $op2 = substr($input,$x+2,-3);
       $op = new Addition( $op1, $op2 );
     }
-    $x = strpos( $input, '-' );
-    if( $x !== false ) {
+    //----SUBTRACTION-----------------------------------------------------------
+    else if( ($x = strpos( $input, '-' )) !== false ) {
       $op1 = substr($input,0,$x-1);
       $op2 = substr($input,$x+2,-3);
       $op = new Subtraction( $op1, $op2 );
     }
-    $x = strpos( $input, '*' );
-    if( $x !== false ) {
+    //----MULTIPLICATION--------------------------------------------------------
+    else if( ($x = strpos( $input, '*' )) !== false ) {
       $op1 = substr($input,0,$x-1);
       $op2 = substr($input,$x+2,-3);
       $op = new Multiplication( $op1, $op2 );
     }
-    $x = strpos( $input, '/' );
-    if( $x !== false ) {
+    //----DIVISION--------------------------------------------------------------
+    else if( ($x = strpos( $input, '/' )) !== false ) {
       $op1 = substr($input,0,$x-1);
       $op2 = substr($input,$x+2,-3);
       $op = new Division( $op1, $op2 );
     }
-    $x = strpos( $input, 'sqrt(' );
-    $y = strpos( $input, ')' );
-    if( $x == 0 && $y == (strlen($input)-4) ) {
+    //----SQUARE ROOT-----------------------------------------------------------
+    else if( ($x = strpos( $input, 'sqrt(' )) !== false && ($x == 0) && ($y = strpos( $input, ')' )) == (strlen($input)-4) ) {
       $op1 = substr($input,6,-5);
       $op = new SquareRoot( $op1, $op2 );
     }
+    //----SQUARE----------------------------------------------------------------
+    else if( ($x = strpos( $input, '^2' )) !== false ) {
+      $op1 = substr($input,0,$x);
+      $op = new Square( $op1, $op2 );
+    }
+    //----LOG(10)---------------------------------------------------------------
+    else if( ($x = strpos( $input, 'Log10' )) !== false && ($x == 0) && ($y = strpos( $input, ')' )) == (strlen($input)-4) ) {
+      $op1 = substr($input,7,-5);
+      $op = new LogBase10( $op1, $op2 );
+    }
+    //----NATURAL LOG-----------------------------------------------------------
+    else if( ($x = strpos( $input, 'ln' )) !== false && ($x == 0) && ($y = strpos( $input, ')' )) == (strlen($input)-4) ) {
+      $op1 = substr($input,4,-5);
+      $op = new NaturalLog( $op1, $op2 );
+    }
+    //----10 EXPONENT-----------------------------------------------------------
+    else if( ($x = strpos( $input, '10^(' )) !== false && ($x == 0) && ($y = strpos( $input, ')' )) == (strlen($input)-4) ) {
+      $op1 = substr($input,5,-5);
+      $op = new TenExponent( $op1, $op2 );
+    }
+    //----EULER-----------------------------------------------------------------
+    else if( ($x = strpos( $input, 'e^(' )) !== false && ($x == 0) && ($y = strpos( $input, ')' )) == (strlen($input)-4) ) {
+      $op1 = substr($input,4,-5);
+      $op = new EulerExponent( $op1, $op2 );
+    }
+    //----SINE------------------------------------------------------------------
+    else if( ($x = strpos( $input, 'sin(' )) !== false && ($x == 0) && ($y = strpos( $input, ')' )) == (strlen($input)-4) ) {
+      $op1 = substr($input,5,-5);
+      $op = new Sine( $op1, $op2 );
+    }
+    //----COSINE----------------------------------------------------------------
+    else if( ($x = strpos( $input, 'cos(' )) !== false && ($x == 0) && ($y = strpos( $input, ')' )) == (strlen($input)-4) ) {
+      $op1 = substr($input,5,-5);
+      $op = new Cosine( $op1, $op2 );
+    }
+    //----TANGENT---------------------------------------------------------------
+    else if( ($x = strpos( $input, 'tan(' )) !== false && ($x == 0) && ($y = strpos( $input, ')' )) == (strlen($input)-4) ) {
+      $op1 = substr($input,5,-5);
+      $op = new Tangent( $op1, $op2 );
+    }
+    else {
+      throw new Exception('Please enter a valid 1-step equation');
+    }
 
-    // $op = new Operation($input);
   }
 }
 catch (Exception $e) {
@@ -251,6 +291,14 @@ catch (Exception $e) {
       <button type="button" id="mult">*</button>
       <button type="button" id="divi">/</button>
       <button type="button" id="sqrt">sqrt(</button>
+      <button type="button" id="square">^2</button>
+      <button type="button" id="log10">Log10(</button>
+      <button type="button" id="ln">ln(</button>
+      <button type="button" id="tenexp">10^(</button>
+      <button type="button" id="euler">e^(</button>
+      <button type="button" id="sine">sin(</button>
+      <button type="button" id="cosine">cos(</button>
+      <button type="button" id="tangent">tan(</button>
       <button type="button" id="rp">)</button>
       <input type="submit" id="equals" name="equals" value="="/>
     </form>
@@ -278,6 +326,30 @@ catch (Exception $e) {
       });
       document.getElementById("rp").addEventListener( 'click', function() {
         appendOperator( " )" );
+      });
+      document.getElementById("square").addEventListener( 'click', function() {
+        appendOperator( "^2" );
+      });
+      document.getElementById("log10").addEventListener( 'click', function() {
+        appendOperator( "Log10( " );
+      });
+      document.getElementById("ln").addEventListener( 'click', function() {
+        appendOperator( "ln( " );
+      });
+      document.getElementById("tenexp").addEventListener( 'click', function() {
+        appendOperator( "10^( " );
+      });
+      document.getElementById("euler").addEventListener( 'click', function() {
+        appendOperator( "e^( " );
+      });
+      document.getElementById("sine").addEventListener( 'click', function() {
+        appendOperator( "sin( " );
+      });
+      document.getElementById("cosine").addEventListener( 'click', function() {
+        appendOperator( "cos( " );
+      });
+      document.getElementById("tangent").addEventListener( 'click', function() {
+        appendOperator( "tan( " );
       });
       document.getElementById("equals").addEventListener( 'click', function() {
         appendOperator( " = " );
