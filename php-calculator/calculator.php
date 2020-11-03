@@ -84,7 +84,23 @@ class Square extends Operation {
   }
 }
 
+class LogBase10 extends Operation {
+  public function operate() {
+    return log($this->operand_1, 10);
+  }
+  public function getEquation() {
+    return 'Log(10)(' . $this->operand_1 . ') = ' . $this->operate();
+  }
+}
 
+class NaturalLog extends Operation {
+  public function operate() {
+    return log($this->operand_1);
+  }
+  public function getEquation() {
+    return 'Ln(' . $this->operand_1 . ') = ' . $this->operate();
+  }
+}
 
 // Some debugs - uncomment these to see what is happening...
 // echo '$_POST print_r=>',print_r($_POST);
