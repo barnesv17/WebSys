@@ -63,6 +63,29 @@ class Division extends Operation {
   }
 }
 
+class SquareRoot extends Operation {
+  public function operate() {
+    if ($this->oeprand_1 < 0) {
+      return "UNDEFINED";
+    }
+    return sqrt($this->operand_1);
+  }
+  public function getEquation() {
+    return 'sqrt(' . $this->operand_1 . ') = ' . $this->operate();
+  }
+}
+
+class Square extends Operation {
+  public function operate() {
+    return $this->operand_1 * $this->operand_1;
+  }
+  public function getEquation() {
+    return $this->operand_1 . '^2  = ' .$this->operate();
+  }
+}
+
+
+
 // Some debugs - uncomment these to see what is happening...
 // echo '$_POST print_r=>',print_r($_POST);
 // echo "<br>",'$_POST vardump=>',var_dump($_POST);
