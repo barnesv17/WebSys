@@ -158,11 +158,10 @@ class Tangent extends Operation {
 // upon initial load, the page will be sent back via the initial GET at which time
 // the $_POST array will not have values - trying to access it will give undefined message
 
-  if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $o1 = $_POST['op1'];
-    $o2 = $_POST['op2'];
-  }
-  $err = Array();
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $input = $_POST['input'];
+}
+$err = Array();
 
 
 // Instantiate an object for each operation based on the values returned on the form
@@ -173,62 +172,102 @@ class Tangent extends Operation {
 // Then tell me if there is a way to do this without the ifs
 // We might cover such a way on Tuesday...
 
-  try {
-    if (isset($_POST['add']) && $_POST['add'] == 'Add') {
-      $op = new Addition($o1, $o2);
+try {
+  if (isset($_POST['equals']) && $_POST['equals'] == 'Equals') {
+    $op1 = null;
+    $op2 = null;
+    $op = null;
+    echo $input;
+    echo "<br/>";
+
+    // strpos() finds the position of the first occurrence of a substring in a string
+    $x = strpos( $input, '+' );
+    // If addition...
+    if( $x !== false ) {
+      $op1 = substr($input,0,$x-1);
+      $op2 = substr($input,$x+2,-3);
+      $op = new Addition( $op1, $op2 );
+    }
+    $x = strpos( $input, '-' );
+    if( $x !== false ) {
+      $op1 = substr($input,0,$x-1);
+      $op2 = substr($input,$x+2,-3);
+      $op = new Subtraction( $op1, $op2 );
+    }
+    $x = strpos( $input, '*' );
+    if( $x !== false ) {
+      $op1 = substr($input,0,$x-1);
+      $op2 = substr($input,$x+2,-3);
+      $op = new Multiplication( $op1, $op2 );
+    }
+    $x = strpos( $input, '/' );
+    if( $x !== false ) {
+      $op1 = substr($input,0,$x-1);
+      $op2 = substr($input,$x+2,-3);
+      $op = new Division( $op1, $op2 );
     }
 
-
-    // Put code for subtraction, multiplication, and division here
-    if (isset($_POST['sub']) && $_POST['sub'] == 'Subtract') {
-      $op = new Subtraction($o1, $o2);
-    }
-
-    if (isset($_POST['mult']) && $_POST['mult'] == 'Multiply') {
-      $op = new Multiplication($o1, $o2);
-    }
-
-    if (isset($_POST['divi']) && $_POST['divi'] == 'Divide') {
-      $op = new Division($o1, $o2);
-    }
-
+    // $op = new Operation($input);
   }
-  catch (Exception $e) {
-    $err[] = $e->getMessage();
-  }
+}
+catch (Exception $e) {
+  $err[] = $e->getMessage();
+}
 ?>
 
 <!doctype html>
 <html>
-<head>
-<title>PHP Calculator</title>
-</head>
-<body>
-  <pre id="result">
-  <?php
-    if (isset($op)) {
-      try {
-        echo $op->getEquation();
-      }
-      catch (Exception $e) {
-        $err[] = $e->getMessage();
-      }
-    }
+  <head>
+    <title>PHP Calculator</title>
+  </head>
+  <body>
+    <pre id="result">
+      <?php
+        if (isset($op)) {
+          try {
+            echo $op->getEquation();
+          }
+          catch (Exception $e) {
+            $err[] = $e->getMessage();
+          }
+        }
 
-    foreach($err as $error) {
-        echo $error . "\n";
-    }
-  ?>
-  </pre>
-  <form method="post" action="calculator.php">
-    <input type="text" name="op1" id="name" value="" />
-    <input type="text" name="op2" id="name" value="" />
-    <br/>
-    <!-- Only one of these will be set with their respective value at a time -->
-    <input type="submit" name="add" value="Add" />
-    <input type="submit" name="sub" value="Subtract" />
-    <input type="submit" name="mult" value="Multiply" />
-    <input type="submit" name="divi" value="Divide" />
-  </form>
-</body>
+        foreach($err as $error) {
+            echo $error . "\n";
+        }
+      ?>
+    </pre>
+    <form method="post" action="calculator.php">
+      <input type="text" name="input" id="input" value="" />
+      <br/>
+      <button type="button" id="add">+</button>
+      <button type="button" id="subtract">-</button>
+      <button type="button" id="mult">*</button>
+      <button type="button" id="divi">/</button>
+      <input type="submit" id="equals" name="equals" value="Equals"/>
+    </form>
+
+    <script>
+      var input = document.getElementById("input");
+      function appendOperator( operator ) {
+        var input = document.getElementById("input");
+        input.value = input.value + operator;
+      }
+      document.getElementById("add").addEventListener( 'click', function() {
+        appendOperator( " + " );
+      });
+      document.getElementById("subtract").addEventListener( 'click', function() {
+        appendOperator( " - " );
+      });
+      document.getElementById("mult").addEventListener( 'click', function() {
+        appendOperator( " * " );
+      });
+      document.getElementById("divi").addEventListener( 'click', function() {
+        appendOperator( " / " );
+      });
+      document.getElementById("equals").addEventListener( 'click', function() {
+        appendOperator( " = " );
+      });
+    </script>
+  </body>
 </html>
