@@ -265,6 +265,11 @@ catch (Exception $e) {
 <html>
   <head>
     <title>PHP Calculator</title>
+    <link rel="stylesheet" href="lab8.css"/>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,700"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <pre id="result">
@@ -283,77 +288,47 @@ catch (Exception $e) {
         }
       ?>
     </pre>
-    <form method="post" action="calculator.php">
+    <form id="calcInterface" method="post" action="calculator.php">
       <input type="text" name="input" id="input" value="" />
-      <br/>
-      <button type="button" id="add">+</button>
-      <button type="button" id="subtract">-</button>
-      <button type="button" id="mult">*</button>
-      <button type="button" id="divi">/</button>
-      <button type="button" id="sqrt">sqrt(</button>
-      <button type="button" id="square">^2</button>
-      <button type="button" id="log10">Log10(</button>
-      <button type="button" id="ln">ln(</button>
-      <button type="button" id="tenexp">10^(</button>
-      <button type="button" id="euler">e^(</button>
-      <button type="button" id="sine">sin(</button>
-      <button type="button" id="cosine">cos(</button>
-      <button type="button" id="tangent">tan(</button>
-      <button type="button" id="rp">)</button>
+      <br>
+      <div id='operationPad'>
+        <button type="button" id="sqrt">&radic;</button>
+        <button type="button" id="square">X&sup2;</button>
+        <button type="button" id="log10">log<sub>10</sub>(</button>
+        <button type="button" id="ln">ln(</button>
+        
+        <button type="button" id="sine">sin(</button>
+        <button type="button" id="cosine">cos(</button>
+        <button type="button" id="tangent">tan(</button>
+        <button type="button" id="rp">)</button>
+
+        <button type="button" id="tenexp">10^(</button>
+        <button type="button" id="euler">e^(</button>
+        <button type="button" id="mod">%</button>
+        <button type="button" id="backspace">&larr;</button>
+
+        <button type="button" id="add">+</button>
+        <button type="button" id="subtract">-</button>
+        <button type="button" id="mult">&times;</button>
+        <button type="button" id="divi">&divide;</button>
+
+        <button type="button" id="seven">7</button>
+        <button type="button" id="eight">8</button>
+        <button type="button" id="nine">9</button>
+        <button type="button" id="ac">AC</button>
+
+        <button type="button" id="four">4</button>
+        <button type="button" id="five">5</button>
+        <button type="button" id="six">6</button>
+        <button type="button" id="dot">.</button>
+
+        <button type="button" id="one">1</button>
+        <button type="button" id="two">2</button>
+        <button type="button" id="three">3</button>
+        <button type="button" id="zero">0</button> 
+      </div>
       <input type="submit" id="equals" name="equals" value="="/>
     </form>
-
-    <script>
-      var input = document.getElementById("input");
-      function appendOperator( operator ) {
-        var input = document.getElementById("input");
-        input.value = input.value + operator;
-      }
-      document.getElementById("add").addEventListener( 'click', function() {
-        appendOperator( " + " );
-      });
-      document.getElementById("subtract").addEventListener( 'click', function() {
-        appendOperator( " - " );
-      });
-      document.getElementById("mult").addEventListener( 'click', function() {
-        appendOperator( " * " );
-      });
-      document.getElementById("divi").addEventListener( 'click', function() {
-        appendOperator( " / " );
-      });
-      document.getElementById("sqrt").addEventListener( 'click', function() {
-        appendOperator( "sqrt( " );
-      });
-      document.getElementById("rp").addEventListener( 'click', function() {
-        appendOperator( " )" );
-      });
-      document.getElementById("square").addEventListener( 'click', function() {
-        appendOperator( "^2" );
-      });
-      document.getElementById("log10").addEventListener( 'click', function() {
-        appendOperator( "Log10( " );
-      });
-      document.getElementById("ln").addEventListener( 'click', function() {
-        appendOperator( "ln( " );
-      });
-      document.getElementById("tenexp").addEventListener( 'click', function() {
-        appendOperator( "10^( " );
-      });
-      document.getElementById("euler").addEventListener( 'click', function() {
-        appendOperator( "e^( " );
-      });
-      document.getElementById("sine").addEventListener( 'click', function() {
-        appendOperator( "sin( " );
-      });
-      document.getElementById("cosine").addEventListener( 'click', function() {
-        appendOperator( "cos( " );
-      });
-      document.getElementById("tangent").addEventListener( 'click', function() {
-        appendOperator( "tan( " );
-      });
-      document.getElementById("equals").addEventListener( 'click', function() {
-        appendOperator( " = " );
-      });
-    </script>
+    <script src="calculator.js"></script>
   </body>
 </html>

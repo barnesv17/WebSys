@@ -1,0 +1,70 @@
+html {
+  font-size: 120%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: rgb(31, 31, 31);
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#result {
+  margin-top: 5%;
+}
+
+#calcInterface {
+  text-align: center;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+#input {
+  margin-top: 20px;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  width: 23.8rem;
+  padding: 0.75rem 1rem;
+  text-align: right;
+  font-size: 30px;
+  background-color: rgb(31, 31, 31);
+  color: #cfcfcf;
+  border: 2px solid rgb(238, 238, 238);
+}
+
+#input:hover {
+  border: 2px solid rgb(44, 211, 211);
+}
+
+#input:focus {
+  outline: none;
+  /* border: 3px solid rgb(44, 211, 211); */
+}
+
+#operationPad {
+  margin:auto;
+  text-align: justify;
+  width: 20rem;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+}
+#operationPad > button {
+  border: 0.5px solid  rgb(148, 148, 148);
+  border-radius: 0;
+  line-height: 1;
+  padding: 1em 2.03rem 1em 2.04rem;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+#equals {
+  border: 0.5px solid  rgb(148, 148, 148);
+  border-radius: 0;
+  line-height: 1;
+  padding: 1em 12.6rem 1em 12.6rem;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-size: 1.2em;
+  background-color: rgb(243, 107, 28);
+}
