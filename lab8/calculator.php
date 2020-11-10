@@ -45,7 +45,7 @@ class Multiplication extends Operation {
     return $this->operand_1 * $this->operand_2;
   }
   public function getEquation() {
-    return $this->operand_1 . ' * ' . $this->operand_2 . ' = ' .$this->operate();
+    return $this->operand_1 . ' &times ' . $this->operand_2 . ' = ' .$this->operate();
   }
 }
 
@@ -59,7 +59,7 @@ class Division extends Operation {
     return (float)($this->operand_1) / (float)($this->operand_2);
   }
   public function getEquation() {
-    return $this->operand_1 . ' / ' . $this->operand_2 . ' = ' . $this->operate();
+    return $this->operand_1 . ' &divide ' . $this->operand_2 . ' = ' . $this->operate();
   }
 }
 
@@ -80,7 +80,7 @@ class Square extends Operation {
     return $this->operand_1 * $this->operand_1;
   }
   public function getEquation() {
-    return $this->operand_1 . '^2  = ' .$this->operate();
+    return $this->operand_1 . '&sup2  = ' .$this->operate();
   }
 }
 
@@ -89,7 +89,7 @@ class LogBase10 extends Operation {
     return log($this->operand_1, 10);
   }
   public function getEquation() {
-    return 'Log10(' . $this->operand_1 . ') = ' . $this->operate();
+    return 'log<sub>10</sub>(' . $this->operand_1 . ') = ' . $this->operate();
   }
 }
 
@@ -147,6 +147,15 @@ class Tangent extends Operation {
   }
 }
 
+class mod extends Operation {
+  public function operate() {
+    return $this->operand_1 % $this->operand_2;
+  }
+  public function getEquation() {
+    return $this->operand_1 . ' mod ' . $this->operand_2 . ' = ' . $this->operate();
+  }
+}
+
 // Some debugs - uncomment these to see what is happening...
 // echo '$_POST print_r=>',print_r($_POST);
 // echo "<br>",'$_POST vardump=>',var_dump($_POST);
@@ -177,7 +186,7 @@ try {
     $op1 = null;
     $op2 = null;
     $op = null;
-    echo $input;
+    // echo "<div class='inputDisplay'>" . $input . "</div>";
     echo "<br/>";
 
     // strpos() finds the position of the first occurrence of a substring in a string
@@ -249,6 +258,11 @@ try {
     else if( ($x = strpos( $input, 'tan(' )) !== false && ($x == 0) && ($y = strpos( $input, ')' )) == (strlen($input)-4) ) {
       $op1 = substr($input,5,-5);
       $op = new Tangent( $op1, $op2 );
+    }
+    else if( ($x = strpos( $input, '%' )) !== false ) {
+      $op1 = substr($input,0,$x-1);
+      $op2 = substr($input,$x+2,-3);
+      $op = new Mod( $op1, $op2 );
     }
     else {
       throw new Exception('Please enter a valid 1-step equation');

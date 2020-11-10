@@ -39,7 +39,7 @@ window.onload = function () {
     input.focus();
   });
   document.getElementById("log10").addEventListener( 'click', function() {
-    appendOperator( "Log10( " );
+    appendOperator( "log10( " );
     input.focus();
   });
   document.getElementById("ln").addEventListener( 'click', function() {
@@ -73,6 +73,11 @@ window.onload = function () {
   
   document.getElementById("mod").addEventListener( 'click', function() {
     appendOperator( " % ");
+    input.focus();
+  });
+
+  document.getElementById("dot").addEventListener( 'click', function() {
+    appendOperator( ".");
     input.focus();
   });
 
