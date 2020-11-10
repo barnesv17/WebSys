@@ -3,7 +3,7 @@ Derek Li:
 - PHP calculator functions
 
 Gabriel Wild:
-- CSS
+- CSS fixes
 - PHP calculator functions
 
 Kyle Qin:
@@ -15,3 +15,6 @@ TJ Samuels:
 Virginia Barnes:
 - PHP calculator functions
 
+### Gabriel Wild
+- Fixed some alignments errors with the CSS. 
+- Wrote some of the subclasses for the new calculator functions. 
