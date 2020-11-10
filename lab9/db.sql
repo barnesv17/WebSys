@@ -18,6 +18,30 @@ create table students (
     phone int(10)
 );
 
+-- 1. Add address columns
+ALTER TABLE students
+	ADD street VARCHAR(50)
+    , ADD city VARCHAR(50)
+    , ADD state VARCHAR(2)
+    , ADD zip DECIMAL(5, 0)
+    ; 
+-- 2. Add year and section number to courses
+ALTER TABLE courses
+	ADD section DECIMAL(2, 0)
+    , ADD year DECIMAL(4, 0)
+    ; 
+-- 3 create grades table 
+CREATE TABLE grades (
+	id INT AUTO_INCREMENT
+    , crn INT(11)
+    , RIN INT(9) 
+    , grade INT(3) NOT NULL 
+    , PRIMARY KEY(id)
+    , FOREIGN KEY(crn) REFERENCES courses(crn)
+    , FOREIGN KEY(rin) REFERENCES students(rin)
+);
+
+
 -- 8. List all students RIN, name, and address if their grade in any course was higher than a 90
 -- 9. List out the average grade in each course
 -- 10. List out the number of students in each course
