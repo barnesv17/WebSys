@@ -29,6 +29,8 @@ while( $row=mysqli_fetch_array($courses)) {
   echo "</tr>";
 }
 echo "</table>";
+echo "<button type='button' id='cAddCol'>Add Column</button>";
+echo "<button type='button' id='cAddRow'>Add Row</button>";
 
 $students = mysqli_query( $conn, "SELECT * FROM students" );
 echo "<h2>Students</h2>";
@@ -52,6 +54,8 @@ while( $row=mysqli_fetch_array($students)) {
   echo "</tr>";
 }
 echo "</table>";
+echo "<button type='button' id='sAddCol'>Add Column</button>";
+echo "<button type='button' id='sAddRow'>Add Row</button>";
 
 mysqli_close( $conn );
 ?>
@@ -62,6 +66,9 @@ mysqli_close( $conn );
     <title>Lab 9 - Gradebook</title>
   </head>
   <body>
+
+    <script>
+    </script>
 
 
   </body>
