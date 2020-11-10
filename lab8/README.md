@@ -1,16 +1,14 @@
-### Dev Log
-Derek Li:
+## Dev Log
+
+### Derek Li:
 - PHP calculator functions
 
-Gabriel Wild:
-- CSS fixes
-- PHP calculator functions
+### Kyle Qin:
+- Front end display and operation pad layout
+- PHP modular operation subclass
+- JavaScript backspace and clear input functions, number pad event listeners
 
-Kyle Qin:
-- CSS Creativity
-- PHP calculator functions
-
-TJ Samuels:
+### TJ Samuels:
 
 Virginia Barnes:
 - PHP calculator functions
