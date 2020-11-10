@@ -18,6 +18,7 @@ create table students (
     phone int(10)
 );
 
+<<<<<<< HEAD
 -- 1. Add address columns
 ALTER TABLE students
 	ADD street VARCHAR(50)
@@ -41,6 +42,29 @@ CREATE TABLE grades (
     , FOREIGN KEY(rin) REFERENCES students(rin)
 );
 
+=======
+-- 6. ADD 10 grades into the grades table
+insert into grades 
+values 
+    (43694, 661960000, A),
+    (43694, 661960001, B),
+    (43694, 661960002, C),
+    (43694, 661960003, D),
+    (43694, 661960004, F),
+    (42149, 661960000, A),
+    (42149, 661960001, B),
+    (42149, 661960002, C),
+    (42149, 661960003, D),
+    (42149, 661960004, F);
+
+-- 7. List all students in the following sequences; in lexicographical order by RIN, last name, RCSID, and first name.
+    select * from students 
+    order by 
+        RIN ASC,
+        lastname ASC,
+        RCSID ASC,
+        firstname ASC;
+>>>>>>> 0c7d90a03470f9209758351b998939bfe665fa8d
 
 -- 8. List all students RIN, name, and address if their grade in any course was higher than a 90
 -- 9. List out the average grade in each course
