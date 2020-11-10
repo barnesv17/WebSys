@@ -1,7 +1,7 @@
 -- Create a table named courses. It should contain crn (int 11, primary key), prefix (varchar 4, not null), number (smallint 4, not null), and title (varchar 255, not null). Collate should be utf8_general_ci.
 
 create table courses (
-    crn int(11) primary key,
+    crn dec(11) primary key,
     prefix varchar(4) not null,
     number smallint(4) not null,
     title varchar(255) not null
@@ -10,15 +10,14 @@ create table courses (
 -- Create a table named students. It should contain RIN (int 9, primary key), RCSID (char 7), first name (varchar 100, not null), last name (varchar 100, not null), alias (varchar 100, not null), and phone (int 10). Collate should be utf8_general_ci.
 
 create table students (
-    RIN int(9) primary key,
+    RIN dec(9) primary key,
     RCSID char(7),
     firstname varchar(100) not null,
     lastname varchar(100) not null,
     alias varchar(100) not null,
-    phone int(10)
+    phone dec(10)
 );
 
-<<<<<<< HEAD
 -- 1. Add address columns
 ALTER TABLE students
 	ADD street VARCHAR(50)
@@ -34,15 +33,30 @@ ALTER TABLE courses
 -- 3 create grades table 
 CREATE TABLE grades (
 	id INT AUTO_INCREMENT
-    , crn INT(11)
-    , RIN INT(9) 
+    , crn DEC(11)
+    , RIN DEC(9) 
     , grade INT(3) NOT NULL 
     , PRIMARY KEY(id)
     , FOREIGN KEY(crn) REFERENCES courses(crn)
     , FOREIGN KEY(rin) REFERENCES students(rin)
 );
 
-=======
+-- 4. insert 4 courses into the courses table
+INSERT INTO courses VALUES 
+    (40327, 'CSCI', 4440, 'Software Design and Documentation', 02, 2021)
+    , (42678, 'CSCI', 4150, 'Intro to AI', 01, 2021)
+    , (42806, 'ITWS', 4500, 'Web Science Systems Development', 01, 2021)
+    , (43695, 'ITWS', 2210, 'Intro to HCI', 01, 2021)
+; 
+
+-- 5. insert 4 students into the students table
+INSERT INTO students VALUES
+    (661858455, 'wildg', 'Gabriel', 'Wild', 'Gabe', 3237089229, '519 Congress St.', 'Troy', 'NY', '12180')
+    , (661858456, 'wildg', 'Gabriel', 'Wild', 'Gabe Clone', 3237089229, '519 Congress St.', 'Troy', 'NY', '12180')
+    , (661858457, 'wildg', 'Gabriel', 'Wild', 'Gabe Clone #2', 3237089229, '519 Congress St.', 'Troy', 'NY', '12180')
+    , (661858458, 'wildg', 'Gabriel', 'Wild', 'Gabe Clone #3', 3237089229, '519 Congress St.', 'Troy', 'NY', '12180')
+;
+
 -- 6. ADD 10 grades into the grades table
 insert into grades 
 values 
@@ -64,7 +78,6 @@ values
         lastname ASC,
         RCSID ASC,
         firstname ASC;
->>>>>>> 0c7d90a03470f9209758351b998939bfe665fa8d
 
 -- 8. List all students RIN, name, and address if their grade in any course was higher than a 90
 -- 9. List out the average grade in each course
