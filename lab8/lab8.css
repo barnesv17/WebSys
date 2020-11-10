@@ -28,15 +28,16 @@ body {
 }
 
 #input {
+  padding-right: 10px;
   margin-top: 20px;
   font-family: "Roboto", Helvetica, Arial, sans-serif;
-  width: 25.95rem;
-  height: 3rem;
+  width: 26.2rem;
+  height: 6rem;
   text-align: right;
-  font-size: 30px;
+  font-size: 46px;
   background-color: rgb(31, 31, 31);
   color: #cfcfcf;
-  border: 2px solid rgb(238, 238, 238);
+  border: 1px solid rgb(238, 238, 238);
 }
 
 #input:hover {
@@ -76,4 +77,3 @@ body {
   background-color: rgb(243, 107, 28);
   width: calc(25.95rem + 6px);
 }
-
