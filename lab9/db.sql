@@ -89,6 +89,6 @@ values
 -- 9. List out the average grade in each course
 -- 10. List out the number of students in each course
 
-select s.RIN, s.firstname, s.lastname, s.address from students s, grades g where s.RIN = g.RIN and g.grade > 90;
-select avg(grade) from grades group by crn;
-select count(RIN) from grades group by crn;
+select s.RIN, s.firstname, s.lastname, s.street, s.city, s.state, s.zip from students s, grades g where s.RIN = g.RIN and g.grade > 90;
+select c.title, c.section, c.year, CAST(avg(g.grade) AS DECIMAL(5, 2)) as avg_grade from grades g, courses c where g.crn = c.crn group by g.crn;
+select c.title, c.section, c.year, (select count(g.RIN) from grades g where g.crn = c.crn) as num_students from courses c;
