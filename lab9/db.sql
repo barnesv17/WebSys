@@ -60,16 +60,16 @@ INSERT INTO students VALUES
 -- 6. ADD 10 grades into the grades table
 insert into grades 
 values 
-    (43694, 661960000, A),
-    (43694, 661960001, B),
-    (43694, 661960002, C),
-    (43694, 661960003, D),
-    (43694, 661960004, F),
-    (42149, 661960000, A),
-    (42149, 661960001, B),
-    (42149, 661960002, C),
-    (42149, 661960003, D),
-    (42149, 661960004, F);
+    (NULL, 40327, 661858455, 100),
+    (NULL, 42678, 661858455, 97),
+    (NULL, 40327, 661858456, 70),
+    (NULL, 42678, 661858456, 65),
+    (NULL, 40327, 661858457, 100),
+    (NULL, 42678, 661858457, 105),
+    (NULL, 42806, 661858457, 50),
+    (NULL, 40327, 661858458, 78),
+    (NULL, 42678, 661858458, 96),
+    (NULL, 42806, 661858458, 75);
 
 -- 7. List all students in the following sequences; in lexicographical order by RIN, last name, RCSID, and first name.
     select * from students 
