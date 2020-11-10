@@ -13,12 +13,17 @@ abstract class Operation {
     $this->operand_1 = $o1;
     $this->operand_2 = $o2;
   }
-  public abstract function operate();
-  public abstract function getEquation();
+  // public abstract function operate();
+  // public abstract function getEquation();
+}
+
+interface DoOperation {
+  public function operate();
+  public function getEquation();
 }
 
 // Addition subclass inherits from Operation
-class Addition extends Operation {
+class Addition extends Operation implements DoOperation {
   public function operate() {
     return $this->operand_1 + $this->operand_2;
   }
@@ -31,7 +36,7 @@ class Addition extends Operation {
 // Add subclasses for Subtraction, Multiplication and Division here
 
 // Subtraction subclass inherits from Operation
-class Subtraction extends Operation {
+class Subtraction extends Operation implements DoOperation {
   public function operate() {
     return $this->operand_1 - $this->operand_2;
   }
@@ -40,7 +45,7 @@ class Subtraction extends Operation {
   }
 }
 
-class Multiplication extends Operation {
+class Multiplication extends Operation implements DoOperation {
   public function operate() {
     return $this->operand_1 * $this->operand_2;
   }
@@ -50,7 +55,7 @@ class Multiplication extends Operation {
 }
 
 // Division subclass inherits from Operation
-class Division extends Operation {
+class Division extends Operation implements DoOperation {
   public function operate() {
     if ($this->operand_2 == 0) {
       return "UNDEFINED";
@@ -63,7 +68,7 @@ class Division extends Operation {
   }
 }
 
-class SquareRoot extends Operation {
+class SquareRoot extends Operation implements DoOperation {
   public function operate() {
     if ($this->operand_1 < 0) {
       return "UNDEFINED";
@@ -75,7 +80,7 @@ class SquareRoot extends Operation {
   }
 }
 
-class Square extends Operation {
+class Square extends Operation implements DoOperation {
   public function operate() {
     return $this->operand_1 * $this->operand_1;
   }
@@ -84,7 +89,7 @@ class Square extends Operation {
   }
 }
 
-class LogBase10 extends Operation {
+class LogBase10 extends Operation implements DoOperation {
   public function operate() {
     return log($this->operand_1, 10);
   }
@@ -93,7 +98,7 @@ class LogBase10 extends Operation {
   }
 }
 
-class NaturalLog extends Operation {
+class NaturalLog extends Operation implements DoOperation {
   public function operate() {
     return log($this->operand_1);
   }
@@ -102,7 +107,7 @@ class NaturalLog extends Operation {
   }
 }
 
-class TenExponent extends Operation {
+class TenExponent extends Operation implements DoOperation {
   public function operate() {
     return 10**($this->operand_1);
   }
@@ -111,7 +116,7 @@ class TenExponent extends Operation {
   }
 }
 
-class EulerExponent extends Operation {
+class EulerExponent extends Operation implements DoOperation {
   public function operate() {
     return exp($this->operand_1);
   }
@@ -120,7 +125,7 @@ class EulerExponent extends Operation {
   }
 }
 
-class Sine extends Operation {
+class Sine extends Operation implements DoOperation {
   public function operate() {
     return sin($this->operand_1);
   }
@@ -129,7 +134,7 @@ class Sine extends Operation {
   }
 }
 
-class Cosine extends Operation {
+class Cosine extends Operation implements DoOperation {
   public function operate() {
     return cos($this->operand_1);
   }
@@ -138,7 +143,7 @@ class Cosine extends Operation {
   }
 }
 
-class Tangent extends Operation {
+class Tangent extends Operation implements DoOperation {
   public function operate() {
     return tan($this->operand_1);
   }
@@ -147,7 +152,7 @@ class Tangent extends Operation {
   }
 }
 
-class mod extends Operation {
+class mod extends Operation implements DoOperation {
   public function operate() {
     return $this->operand_1 % $this->operand_2;
   }
@@ -310,7 +315,7 @@ catch (Exception $e) {
         <button type="button" id="square">X&sup2;</button>
         <button type="button" id="log10">log<sub>10</sub>(</button>
         <button type="button" id="ln">ln(</button>
-        
+
         <button type="button" id="sine">sin(</button>
         <button type="button" id="cosine">cos(</button>
         <button type="button" id="tangent">tan(</button>
@@ -339,7 +344,7 @@ catch (Exception $e) {
         <button type="button" id="one">1</button>
         <button type="button" id="two">2</button>
         <button type="button" id="three">3</button>
-        <button type="button" id="zero">0</button> 
+        <button type="button" id="zero">0</button>
       </div>
       <input type="submit" id="equals" name="equals" value="="/>
     </form>
