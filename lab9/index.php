@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 
 $courses = mysqli_query( $conn, "SELECT * FROM courses" );
 echo "<h2>Courses</h2>";
-echo "<table border='1'>";
+echo "<table border='3'>";
 echo "<tr>";
 echo "<th>CRN</th>";
 echo "<th>Prefix</th>";
@@ -28,13 +28,13 @@ while( $row=mysqli_fetch_array($courses)) {
   echo "<td>" . $row['title'] . "</td>";
   echo "</tr>";
 }
-echo "</table>";
+echo "</table><br>";
 echo "<button type='button' id='cAddCol'>Add Column</button>";
 echo "<button type='button' id='cAddRow'>Add Row</button>";
 
 $students = mysqli_query( $conn, "SELECT * FROM students" );
 echo "<h2>Students</h2>";
-echo "<table border='1'>";
+echo "<table border='3'>";
 echo "<tr>";
 echo "<th>RIN</th>";
 echo "<th>RCSID</th>";
@@ -53,7 +53,7 @@ while( $row=mysqli_fetch_array($students)) {
   echo "<td>" . $row['phone'] . "</td>";
   echo "</tr>";
 }
-echo "</table>";
+echo "</table><br>";
 echo "<button type='button' id='sAddCol'>Add Column</button>";
 echo "<button type='button' id='sAddRow'>Add Row</button>";
 
@@ -67,8 +67,11 @@ mysqli_close( $conn );
   </head>
   <body>
 
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
     <script>
-    </script>
+      var auto_refresh = setInterval(
+        function (){
+          $('#load_tweets').load('record_count.php').fadeIn("slow");}, 1000);
 
 
   </body>
