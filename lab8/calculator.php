@@ -230,7 +230,7 @@ try {
       $op = new Square( $op1, $op2 );
     }
     //----LOG(10)---------------------------------------------------------------
-    else if( ($x = strpos( $input, 'Log10' )) !== false && ($x == 0) && ($y = strpos( $input, ')' )) == (strlen($input)-4) ) {
+    else if( ($x = strpos( $input, 'log10' )) !== false && ($x == 0) && ($y = strpos( $input, ')' )) == (strlen($input)-4) ) {
       $op1 = substr($input,7,-5);
       $op = new LogBase10( $op1, $op2 );
     }
