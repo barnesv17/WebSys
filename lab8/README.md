@@ -1,17 +1,17 @@
 ### Dev Log
 Derek Li:
-- PHP functions
+- PHP calculator functions
 
 Gabriel Wild:
 - CSS
-- PHP functions
+- PHP calculator functions
 
 Kyle Qin:
 - CSS Creativity
-- PHP functions
+- PHP calculator functions
 
 TJ Samuels:
 
 Virginia Barnes:
-- PHP functions
+- PHP calculator functions
 
