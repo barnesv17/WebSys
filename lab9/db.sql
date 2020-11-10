@@ -74,9 +74,15 @@ values
 -- 7. List all students in the following sequences; in lexicographical order by RIN, last name, RCSID, and first name.
     select * from students 
     order by 
-        RIN ASC,
-        lastname ASC,
-        RCSID ASC,
+        RIN ASC;
+    select * from students 
+    order by 
+        lastname ASC;
+    select * from students 
+    order by 
+        RCSID ASC;
+    select * from students 
+    order by 
         firstname ASC;
 
 -- 8. List all students RIN, name, and address if their grade in any course was higher than a 90
