@@ -49,11 +49,12 @@ body {
 }
 
 #operationPad {
-  margin-left: 27.9%;
+  margin-left: auto;
+  margin-right: auto;
   text-align: justify;
-  width: 20rem;
   display: grid;
   grid-template-columns: repeat(4, auto);
+  width: calc(25.95rem + 6px);
 }
 #operationPad > button {
   border: 0.5px solid  rgb(148, 148, 148);
@@ -73,5 +74,6 @@ body {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-size: 1.2em;
   background-color: rgb(243, 107, 28);
+  width: calc(25.95rem + 6px);
 }
 
