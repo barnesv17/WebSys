@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS users (
-    user VARCHAR(100)
-    , pass VARCHAR(100)
+    user VARCHAR(100) NOT NULL
+    , pass VARCHAR(100) NOT NULL
     , PRIMARY KEY(user)
 );
 
