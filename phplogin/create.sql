@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS users (
     user VARCHAR(100)
     , pass VARCHAR(100)
-    , PRIMARY KEY(user, pass)
+    , PRIMARY KEY(user)
 );
 
 INSERT INTO users VALUES
