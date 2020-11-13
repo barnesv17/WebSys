@@ -17,10 +17,10 @@ function register()
     $pass = $_POST['pass'];
     $user = $_POST['user'];
 
-    $hash_default_salt = password_hash($pass, PASSWORD_DEFAULT); 
+    $hash_default_salt = password_hash($pass, PASSWORD_BCRYPT); 
 
     $sql = "INSERT INTO users VALUES
-                (" + $user + "," + $hash_default_salt + ")";
+                (" + $user + "," + $hash_default_salt + ");";
 
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";
