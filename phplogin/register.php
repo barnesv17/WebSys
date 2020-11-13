@@ -1,6 +1,6 @@
 <?php 
 
-function register() 
+if($_POST["user"] && $_POST["pass"])
 {
     $servername = "localhost";
     $username = "root";
@@ -19,8 +19,13 @@ function register()
 
     $hash_default_salt = password_hash($pass, PASSWORD_DEFAULT); 
 
+    echo $hash_default_salt;
+    echo $user;
+
     $sql = "INSERT INTO users VALUES
-                (" + $user + "," + $hash_default_salt + ")";
+                ('" . $user . "' , '" . $hash_default_salt . "');";
+
+    echo $sql;
 
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";
@@ -29,11 +34,6 @@ function register()
     }
     
     $conn->close();
-}
-
-if(isset($_POST['submit']))
-{
-    register();
 }
 
 ?>
@@ -45,12 +45,12 @@ if(isset($_POST['submit']))
   <title>Login</title>
 </head>
 <body>
-  <form method="post" action="register.php">
+  <form action="<?php $_PHP_SELF ?>" method="POST">
     <label for="user">Username</label>
-    <input id="user" type="text">
+    <input id="user" name="user" type="text">
     <label for="pass">Password</label>
-    <input id="pass" type="password">
-    <input id="submit" type="submit">
+    <input id="pass" name="pass" type="password">
+    <input type="submit">
   </form>
 </body>
 </html>
