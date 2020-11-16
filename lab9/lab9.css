@@ -1,0 +1,34 @@
+html {
+  font-size: 120%;
+  /* font-family: Arial, Helvetica, sans-serif; */
+}
+
+body {
+  background-color: rgb(31, 31, 31);
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: #ddd8d8;
+}
+
+.naviBtn {
+  height: 2.5em;
+  width: auto;
+  font-size: 18px;
+  color: #3d3d3d;
+  background-color: #ddd8d8;
+  border-radius: 0.3em;
+}
+
+.naviBtn:hover {
+  background-color: #ffcab1;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th, td {
+  text-align: left;
+}
