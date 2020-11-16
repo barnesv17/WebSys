@@ -24,6 +24,21 @@ body {
   background-color: #ffcab1;
 }
 
+.filterBtn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 2.5em;
+  width: auto;
+  font-size: 12px;
+  color: #3d3d3d;
+  background-color: #ddd8d8;
+  border-radius: 0.3em;
+}
+
+.filterBtn:hover {
+  background-color: #ffcab1;
+}
+
 table {
   margin-left: auto;
   margin-right: auto;
