@@ -304,6 +304,21 @@
                 echo "Error: " . $studentInsert . "<br>" . mysqli_error($conn);
               }
             }
+            else if ($_POST['dbOp'] == 'Add Grade') {
+              $grdCRN = $_POST['grdCRN'];
+              $grdRIN = $_POST['grdRIN'];
+              $grade = $_POST['grade'];
+              if (!mysqli_query($conn, $createGrades)) {
+                echo "Error: " . $createGrades . "<br>" . mysqli_error($conn);
+              }
+              $gradeInsert = "insert into grades values (NULL, {$grdCRN}, {$grdRIN}, {$grade});";
+              if (mysqli_query($conn, $gradeInsert)) {
+                echo "Added grade $grade successfully for $grdRIN";
+              } else {
+                echo "Error: " . $gradeInsert . "<br>" . mysqli_error($conn);
+              }
+              
+            }
             
 
           }

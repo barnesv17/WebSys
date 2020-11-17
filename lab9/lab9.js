@@ -80,8 +80,8 @@ let addGrade = $('<form method="post" action="lab9.php" id="addGrade"></form>');
 let gradeCrnLabel = $('<label for="grdCRN">CRN: </label>');
 let gradeCrnInput = $('<input type="text" name="grdCRN"/><br><br>');
 
-let gradeRcsLabel = $('<label for="grdRCS">RCS ID: </label>');
-let gradeRcsInput = $('<input type="text" name="grdRCS"/><br><br>');
+let gradeRcsLabel = $('<label for="grdRIN">RIN: </label>');
+let gradeRcsInput = $('<input type="text" name="grdRIN"/><br><br>');
 
 let gradeLabel = $('<label for="grade">Grade: </label>');
 let gradeInput = $('<input type="text" name="grade"/><br><br>');
@@ -105,14 +105,14 @@ addCourseAttr.hide();
 addGrade.hide();
 
 
-$(document).ready( function() {
-  
-  $("#studentsByOrder").on('click', function() {
+$(document).ready(function () {
+
+  $("#studentsByOrder").on('click', function () {
 
     $("#studentBtns").hide();
     $("#courseBtns").hide();
     $('#gradeBtns').hide();
-    
+
     $("#addStudentForm").hide();
     $("#addStudentAttr").hide();
     $("#addCourseForm").hide();
@@ -134,17 +134,17 @@ $(document).ready( function() {
     }
   });
 
-  $("#addStudent").on('click', function() {
+  $("#addStudent").on('click', function () {
     // $("#modifier").append(addStudentForm);
     $("#addStudentAttr").hide();
     if ($("#addStudentForm").is(":visible")) {
       $("#addStudentForm").hide();
     } else {
-       $("#addStudentForm").show();
+      $("#addStudentForm").show();
     }
   });
 
-  $("#addStudentCol").on('click', function() {
+  $("#addStudentCol").on('click', function () {
     // $("#modifier").append(addStudentAttr);
     $("#addStudentForm").hide();
     if ($("#addStudentAttr").is(":visible")) {
@@ -154,7 +154,7 @@ $(document).ready( function() {
     }
   });
 
-  $("#addCourse").on('click', function() {
+  $("#addCourse").on('click', function () {
     // $("#modifier").append(addCourseForm);
     $("#addCourseAttr").hide();
     if ($("#addCourseForm").is(":visible")) {
@@ -164,7 +164,7 @@ $(document).ready( function() {
     }
   });
 
-  $("#addCourseCol").on('click', function() {
+  $("#addCourseCol").on('click', function () {
     $("#addCourseForm").hide();
     if ($("#addCourseAttr").is(":visible")) {
       $("#addCourseAttr").hide();
@@ -173,7 +173,7 @@ $(document).ready( function() {
     }
   });
 
-  $("#addGrades").on('click', function() {
+  $("#addGrades").on('click', function () {
     if ($("#addGrade").is(":visible")) {
       $("#addGrade").hide();
     } else {
