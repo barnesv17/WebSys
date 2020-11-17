@@ -18,7 +18,7 @@
       <input type="submit" class="naviBtn" id="showEnroll" name="options" value="Courses Enrollment Status"/>
     </form>
     <div id="tables">
-    
+
       <?php include 'db_conn.php'; // include db connection info, and sql queries
         // Create connection
         $conn = new mysqli($servername, $username, $password, $db);
@@ -54,7 +54,7 @@
                   <button type='button' class='opBtns' id='addStudent'>Add Row</button>
                   <button type='button' class='opBtns' id='addStudentCol'>Add Attribute</button>
                 </div>";
-        } 
+        }
         try {
           if (isset($_POST['options'])) {
             switch($_POST['options']) {
@@ -117,9 +117,9 @@
               break;
 
               case 'All Grades':
-                $grades = mysqli_query( $conn, 
-                          "select s.RIN, s.firstname, s.lastname, c.prefix, c.title, g.grade from students s, grades g, courses c 
-                          where s.RIN = g.RIN and c.crn = g.crn 
+                $grades = mysqli_query( $conn,
+                          "select s.RIN, s.firstname, s.lastname, c.prefix, c.title, g.grade from students s, grades g, courses c
+                          where s.RIN = g.RIN and c.crn = g.crn
                           order by RIN asc, lastname ASC, firstname ASC, grade DESC" );
                 if (!$grades || mysqli_num_rows($grades) == 0) {
                   echo "<h2>There are no grades. Would you like to add some?</h2>";
@@ -157,7 +157,7 @@
               case 'By RIN':
                 echo "<h2>Students By RIN</h2>";
                 printStudents( $conn, $studentsByRin);
-                
+
               break;
 
               case 'By Last Name':
@@ -317,7 +317,8 @@
               } else {
                 echo "Error: " . $gradeInsert . "<br>" . mysqli_error($conn);
               }
-              
+            }
+
 
             if ($_POST['dbOp'] == 'Add Student Attribute') {
               $studentAttr = $_POST['stuAttr'];
@@ -341,18 +342,16 @@
                 echo "Error: " . $courseInsert . "<br>" . mysqli_error($conn);
               }
             }
-            
+
 
           }
         } catch(Exception $e) {
           echo $e->getMessage();
         }
-        
+
       ?>
     </div>
   </body>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script type="text/javascript" src="lab9.js"></script>
 </html>
-
-
