@@ -8,6 +8,7 @@
 -- Gabe Wild
 
 -- Derek Li
+- SQL queries 
 
 -- Kyle Qin
 
