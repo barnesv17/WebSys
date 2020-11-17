@@ -14,9 +14,9 @@ CREATE TABLE studios (
 );
 
 CREATE TABLE studioOwners (
-    studioID INT NOT NULL
-    , username VARCHAR(20) NOT NULL
-    , PRIMARY KEY(studioID, username)
+    username VARCHAR(20) NOT NULL
+    , studioID INT NOT NULL
+    , PRIMARY KEY(username, studioID)
     , FOREIGN KEY(studioID) REFERENCES studios(studioID)
     , FOREIGN KEY(username) REFERENCES users(username)
 );
@@ -27,3 +27,10 @@ CREATE TABLE genres (
     , PRIMARY KEY(studioID, genre)
     , FOREIGN KEY(studioID) REFERENCES studios(studioID)
 );
+
+CREATE TABLE studioAdmins (
+    username VARCHAR(20) NOT NULL
+    , studioID INT NOT NULL
+    , PRIMARY KEY(username, studioID)
+    , 
+)
