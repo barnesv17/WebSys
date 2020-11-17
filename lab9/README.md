@@ -6,11 +6,17 @@
 - display tables functionality
 
 -- Gabe Wild
+- SQL queries 
+- Grade adding handling and redirection when table is not populated
 
 -- Derek Li
 - SQL queries
 
 -- Kyle Qin
+- Front end and design and js
+- Output logic and adding to database event handling
+- Student, Course adding handling
+
 
 -- TJ Samuels
 
