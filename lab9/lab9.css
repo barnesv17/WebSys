@@ -12,6 +12,7 @@ body {
 }
 
 .naviBtn {
+  outline: none;
   height: 2.5em;
   width: auto;
   font-size: 18px;
@@ -25,18 +26,18 @@ body {
 }
 
 .filterBtn {
+  outline: none;
   margin-top: 10px;
   margin-bottom: 10px;
-  height: 2.5em;
+  height: 2em;
   width: auto;
-  font-size: 12px;
-  color: #3d3d3d;
-  background-color: #ddd8d8;
-  border-radius: 0.3em;
+  font-size: 14px;
+  color: #363636;
+  background-color: #f7f7f7;
 }
 
 .filterBtn:hover {
-  background-color: #ffcab1;
+  background-color: #b6f6ff;
 }
 
 table {
@@ -46,4 +47,30 @@ table {
 
 th, td {
   text-align: left;
+}
+
+#modifier {
+  margin: 5% 40vw auto auto;
+  
+  text-align: end;
+}
+.dbOp {
+  outline: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 2em;
+  width: auto;
+  font-size: 16px;
+  color: #292929;
+  background-color: #c5c5c5;
+  border-radius: 0.3em;
+}
+
+.dbOp:hover {
+  background-color: #ffd5d5;
+}
+
+.opBtns {
+  margin-top: 10px;
+  font-size: 14px;
 }

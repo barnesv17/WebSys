@@ -12,6 +12,7 @@
       <input type="submit" class="naviBtn" id="showStudentInfo" name="options" value="Students General Info"/>
       <input type="submit" class="naviBtn" id="showCourseInfo" name="options" value="Courses General Info"/>
       <button class="naviBtn" id="studentsByOrder">Students By Orders <i class="fa fa-caret-down"></i></button>
+      <input type="submit" class="naviBtn" id="showGrades" name="options" value="All Grades"/>
       <input type="submit" class="naviBtn" id="showAce" name="options" value="Ace Students"/>
       <input type="submit" class="naviBtn" id="showAvg" name="options" value="Courses Average"/>
       <input type="submit" class="naviBtn" id="showEnroll" name="options" value="Courses Enrollment Status"/>
@@ -28,12 +29,6 @@
         function printStudents($conn, $query) {
           $students = mysqli_query( $conn, $query );
           echo "<div class='table' id='studentInfo'>";
-          echo '<form id="filters" method="post" action="lab9.php">
-                  <input type="submit" class="filter" name="filter" value="By RIN"/>
-                  <input type="submit" class="filter" name="filter" value="By Last Name"/>
-                  <input type="submit" class="filter" name="filter" value="By RCS ID"/>
-                  <input type="submit" class="filter" name="filter" value="By First Name"/>
-                </form>';
           echo "<table border='3'>";
           echo "<tr>";
           echo "<th>RIN</th>";
@@ -55,6 +50,10 @@
           }
           echo "</table>";
           echo "</div>";
+          echo "<div id='studentBtns'>
+                  <button type='button' class='opBtns' id='addStudent'>Add Row</button>
+                  <button type='button' class='opBtns' id='addStudentCol'>Add Attribute</button>
+                </div>";
         } 
         try {
           if (isset($_POST['options'])) {
@@ -84,6 +83,10 @@
                 }
                 echo "</table>";
                 echo "</div>";
+                echo "<div id='studentBtns'>
+                        <button type='button' class='opBtns' id='addStudent'>Add Row</button>
+                        <button type='button' class='opBtns' id='addStudentCol'>Add Attribute</button>
+                      </div>";
               break;
 
               case 'Courses General Info':
@@ -106,13 +109,47 @@
                   echo "</tr>";
                 }
                 echo "</table>";
-                // echo "<button type='button' id='cAddCol'>Add Column</button>";
-                // echo "<button type='button' id='cAddRow'>Add Row</button>";
                 echo "</div>";
+                echo "<div id='courseBtns'>
+                        <button type='button' class='opBtns' id='addCourse'>Add Course</button>
+                        <button type='button' class='opBtns' id='addCourseCol'>Add Attribute</button>
+                      </div>";
               break;
 
+              case 'All Grades':
+                $grades = mysqli_query( $conn, 
+                          "select s.RIN, s.firstname, s.lastname, c.prefix, c.title, g.grade from students s, grades g, courses c 
+                          where s.RIN = g.RIN and c.crn = g.crn 
+                          order by RIN asc, lastname ASC, firstname ASC, grade DESC" );
+                echo "<h2>Grades Info</h2>";
+                echo "<div class='table' id='gradesInfo'>";
+                echo "<table border='3'>";
+                echo "<tr>";
+                echo "<th>RIN</th>";
+                echo "<th>First Name</th>";
+                echo "<th>Last Name</th>";
+                echo "<th>Prefix</th>";
+                echo "<th>Title</th>";
+                echo "<th>Grade</th>";
+                echo "</tr>";
+                while( $row=mysqli_fetch_array($grades)) {
+                  echo "<tr>";
+                  echo "<td>" . $row['RIN'] . "</td>";
+                  echo "<td>" . $row['firstname'] . "</td>";
+                  echo "<td>" . $row['lastname'] . "</td>";
+                  echo "<td>" . $row['prefix'] . "</td>";
+                  echo "<td>" . $row['title'] . "</td>";
+                  echo "<td>" . $row['grade'] . "</td>";
+                  echo "</tr>";
+                }
+                echo "</table>";
+                echo "</div>";
+                echo "<div id='gradeBtns'>
+                        <button type='button' class='opBtns' id='addGrades'>Add Grade</button>
+                      </div>";
+                break;
+
               case 'By RIN':
-                
                 echo "<h2>Students By RIN</h2>";
                 printStudents( $conn, $studentsByRin);
                 
@@ -217,6 +254,11 @@
         }
 
         mysqli_close($conn);
+      ?>
+    </div>
+    <div id="modifier">
+      <?php include 'db_conn.php';
+        // Include db operation handling here, so success msg returns under the form
       ?>
     </div>
   </body>
