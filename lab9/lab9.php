@@ -317,6 +317,7 @@
               } else {
                 echo "Error: " . $gradeInsert . "<br>" . mysqli_error($conn);
               }
+            }
               
 
             if ($_POST['dbOp'] == 'Add Student Attribute') {
@@ -334,17 +335,26 @@
               $prefix = $_POST['prefix'];
               $number = $_POST['number'];
               $title = $_POST['title'];
-              $courseInsert = "INSERT INTO courses (CRN, prefix, number, title) VALUES ({$crn}, '{$prefix}', {$number}, '{$title}');";
+              $courseInsert = "INSERT INTO courses (CRN, prefix, num, title) VALUES ({$crn}, '{$prefix}', {$number}, '{$title}');";
               if (mysqli_query($conn, $courseInsert)) {
                 echo "Added course $prefix-$number $title to table successfully";
               } else {
                 echo "Error: " . $courseInsert . "<br>" . mysqli_error($conn);
               }
             }
-            
+
+            if ($_POST['dbOp'] == 'Add Course Attribute') {
+              $courseAttr = $_POST['addCourseAttr'];
+              $courseAlter = "ALTER TABLE courses ADD {$studentAlter} varchar(100);";
+              if (mysqli_query($conn, $courseAlter)) {
+                echo "Added column $courseAttr to table successfully";
+              } else {
+                echo "Error: " . $courseAttr . "<br>" . mysqli_error($conn);
+              }
+            }
 
           }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
           echo $e->getMessage();
         }
         
