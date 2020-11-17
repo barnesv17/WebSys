@@ -259,6 +259,35 @@
     <div id="modifier">
       <?php include 'db_conn.php';
         // Include db operation handling here, so success msg returns under the form
+        $conn = new mysqli($servername, $username, $password, $db);
+        // Check connection
+        if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+        }
+        try {
+          if (isset($_POST['dbOp'])) {
+            if ($_POST['dbOp'] == 'Add Student') {
+              $rin = $_POST['RIN'];
+              $rcs = $_POST['RCS'];
+              $fn = $_POST['fn'];
+              $ln = $_POST['ln'];
+              $alias = $_POST['alias'];
+              $phone = $_POST['phone'];
+              $studentInsert = "INSERT INTO students (RIN, RCSID, firstname, lastname, alias, phone) VALUES ({$rin}, '{$rcs}', '{$fn}', '{$ln}', '{$alias}', {$phone});";
+              // var_dump($studentInsert);
+              if (mysqli_query($conn, $studentInsert)) {
+                echo "Added student $fn $ln successfully";
+              } else {
+                echo "Error: " . $studentInsert . "<br>" . mysqli_error($conn);
+              }
+            }
+            
+
+          }
+        } catch(Exception $e) {
+          echo $e->getMessage();
+        }
+        
       ?>
     </div>
   </body>
