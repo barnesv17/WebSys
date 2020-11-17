@@ -8,11 +8,11 @@
 -- Gabe Wild
 
 -- Derek Li
-- SQL queries 
+- SQL queries
 
 -- Kyle Qin
 
--- TJ Samules
+-- TJ Samuels
 
 ## SQL Queries
 
