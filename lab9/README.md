@@ -2,6 +2,8 @@
 ## Dev Log
 
 -- Virginia Barnes
+- connected mysql to php
+- display tables functionality
 
 -- Gabe Wild
 
@@ -39,30 +41,30 @@ ALTER TABLE students
     , ADD city VARCHAR(50)
     , ADD state VARCHAR(2)
     , ADD zip DECIMAL(5, 0)
-    ; 
+    ;
 #### Add year and section number to courses
 ALTER TABLE courses
 	ADD section DECIMAL(2, 0)
     , ADD year DECIMAL(4, 0)
-    ; 
-#### create grades table 
+    ;
+#### create grades table
 CREATE TABLE grades (
 	id INT AUTO_INCREMENT
     , crn DEC(11)
-    , RIN DEC(9) 
-    , grade INT(3) NOT NULL 
+    , RIN DEC(9)
+    , grade INT(3) NOT NULL
     , PRIMARY KEY(id)
     , FOREIGN KEY(crn) REFERENCES courses(crn)
     , FOREIGN KEY(rin) REFERENCES students(rin)
 );
 
 #### insert 4 courses into the courses table
-INSERT INTO courses VALUES 
+INSERT INTO courses VALUES
     (40327, 'CSCI', 4440, 'Software Design and Documentation', 02, 2021)
     , (42678, 'CSCI', 4150, 'Intro to AI', 01, 2021)
     , (42806, 'ITWS', 4500, 'Web Science Systems Development', 01, 2021)
     , (43695, 'ITWS', 2210, 'Intro to HCI', 01, 2021)
-; 
+;
 
 #### insert 4 students into the students table
 INSERT INTO students VALUES
@@ -73,8 +75,8 @@ INSERT INTO students VALUES
 ;
 
 #### ADD 10 grades into the grades table
-insert into grades 
-values 
+insert into grades
+values
     (NULL, 40327, 661858455, 100),
     (NULL, 42678, 661858455, 97),
     (NULL, 40327, 661858456, 70),
@@ -87,17 +89,17 @@ values
     (NULL, 42806, 661858458, 75);
 
 #### List all students in the following sequences; in lexicographical order by RIN, last name, RCSID, and first name.
-    select * from students 
-    order by 
+    select * from students
+    order by
         RIN ASC;
-    select * from students 
-    order by 
+    select * from students
+    order by
         lastname ASC;
-    select * from students 
-    order by 
+    select * from students
+    order by
         RCSID ASC;
-    select * from students 
-    order by 
+    select * from students
+    order by
         firstname ASC;
 
 #### List all students RIN, name, and address if their grade in any course was higher than a 90
