@@ -6,11 +6,17 @@
 - display tables functionality
 
 -- Gabe Wild
+- SQL queries
+- add rows and columns functionality
+- button functionality
 
 -- Derek Li
 - SQL queries
 
 -- Kyle Qin
+- SQL queries
+- add rows and columns functionality
+- button functionality
 
 -- TJ Samuels
 
