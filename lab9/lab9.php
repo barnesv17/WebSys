@@ -281,6 +281,29 @@
                 echo "Error: " . $studentInsert . "<br>" . mysqli_error($conn);
               }
             }
+
+            if ($_POST['dbOp'] == 'Add Student Attribute') {
+              $studentAttr = $_POST['stuAttr'];
+              $studentAlter = "ALTER TABLE students ADD {$studentAlter} varchar(100);";
+              if (mysqli_query($conn, $studentAlter)) {
+                echo "Added column $studentAttr to table successfully";
+              } else {
+                echo "Error: " . $studentAlter . "<br>" . mysqli_error($conn);
+              }
+            }
+
+            if ($_POST['dbOp'] == 'Add Course') {
+              $crn = $_POST['CRN'];
+              $prefix = $_POST['prefix'];
+              $number = $_POST['number'];
+              $title = $_POST['title'];
+              $courseInsert = "INSERT INTO courses (CRN, prefix, number, title) VALUES ({$crn}, '{$prefix}', {$number}, '{$title}');";
+              if (mysqli_query($conn, $courseInsert)) {
+                echo "Added course $prefix-$number $title to table successfully";
+              } else {
+                echo "Error: " . $courseInsert . "<br>" . mysqli_error($conn);
+              }
+            }
             
 
           }
