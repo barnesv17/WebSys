@@ -8,15 +8,21 @@
 -- Gabe Wild
 - SQL queries 
 - Grade adding handling and redirection when table is not populated
+- add rows and columns functionality
+- button functionality
 
 -- Derek Li
 - SQL queries
 
 -- Kyle Qin
+- SQL queries 
 - Front end and design and js
 - Output logic and adding to database event handling
 - Student, Course adding handling
 
+- SQL queries
+- add rows and columns functionality
+- button functionality
 
 -- TJ Samuels
 
