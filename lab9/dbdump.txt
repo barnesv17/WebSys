@@ -1,0 +1,155 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Nov 17, 2020 at 06:02 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `websyslab9`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `courses`
+--
+
+CREATE TABLE `courses` (
+  `crn` decimal(11,0) NOT NULL,
+  `prefix` varchar(4) NOT NULL,
+  `number` smallint(4) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `section` decimal(2,0) DEFAULT NULL,
+  `year` decimal(4,0) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`crn`, `prefix`, `number`, `title`, `section`, `year`) VALUES
+('40327', 'CSCI', 4440, 'Software Design and Documentation', '2', '2021'),
+('42678', 'CSCI', 4150, 'Intro to AI', '1', '2021'),
+('42806', 'ITWS', 4500, 'Web Science Systems Development', '1', '2021'),
+('43695', 'ITWS', 2210, 'Intro to HCI', '1', '2021');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `grades`
+--
+
+CREATE TABLE `grades` (
+  `id` int(11) NOT NULL,
+  `crn` decimal(11,0) DEFAULT NULL,
+  `RIN` decimal(9,0) DEFAULT NULL,
+  `grade` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `grades`
+--
+
+INSERT INTO `grades` (`id`, `crn`, `RIN`, `grade`) VALUES
+(1, '40327', '661858455', 100),
+(2, '42678', '661858455', 97),
+(3, '40327', '661858456', 70),
+(4, '42678', '661858456', 65),
+(5, '40327', '661858457', 100),
+(6, '42678', '661858457', 105),
+(7, '42806', '661858457', 50),
+(8, '40327', '661858458', 78),
+(9, '42678', '661858458', 96),
+(10, '42806', '661858458', 75);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `students`
+--
+
+CREATE TABLE `students` (
+  `RIN` decimal(9,0) NOT NULL,
+  `RCSID` char(7) DEFAULT NULL,
+  `firstname` varchar(100) NOT NULL,
+  `lastname` varchar(100) NOT NULL,
+  `alias` varchar(100) NOT NULL,
+  `phone` decimal(10,0) DEFAULT NULL,
+  `street` varchar(50) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `state` varchar(2) DEFAULT NULL,
+  `zip` decimal(5,0) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`RIN`, `RCSID`, `firstname`, `lastname`, `alias`, `phone`, `street`, `city`, `state`, `zip`) VALUES
+('661858455', 'wildg', 'Gabriel', 'Wild', 'Gabe', '3237089229', '519 Congress St.', 'Troy', 'NY', '12180'),
+('661858456', 'wildg', 'Gabriel', 'Wild', 'Gabe Clone', '3237089229', '519 Congress St.', 'Troy', 'NY', '12180'),
+('661858457', 'wildg', 'Gabriel', 'Wild', 'Gabe Clone #2', '3237089229', '519 Congress St.', 'Troy', 'NY', '12180'),
+('661858458', 'wildg', 'Gabriel', 'Wild', 'Gabe Clone #3', '3237089229', '519 Congress St.', 'Troy', 'NY', '12180');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`crn`);
+
+--
+-- Indexes for table `grades`
+--
+ALTER TABLE `grades`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `crn` (`crn`),
+  ADD KEY `RIN` (`RIN`);
+
+--
+-- Indexes for table `students`
+--
+ALTER TABLE `students`
+  ADD PRIMARY KEY (`RIN`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `grades`
+--
+ALTER TABLE `grades`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `grades`
+--
+ALTER TABLE `grades`
+  ADD CONSTRAINT `grades_ibfk_1` FOREIGN KEY (`crn`) REFERENCES `courses` (`crn`),
+  ADD CONSTRAINT `grades_ibfk_2` FOREIGN KEY (`RIN`) REFERENCES `students` (`RIN`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
