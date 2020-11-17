@@ -3,7 +3,7 @@
 create table courses (
     crn dec(11) primary key,
     prefix varchar(4) not null,
-    number smallint(4) not null,
+    num smallint(4) not null,
     title varchar(255) not null
 );
 
