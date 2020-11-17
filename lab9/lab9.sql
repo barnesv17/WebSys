@@ -31,7 +31,7 @@ ALTER TABLE courses
     , ADD year DECIMAL(4, 0)
     ; 
 -- 3 create grades table 
-CREATE TABLE grades (
+CREATE TABLE IF NOT EXISTS grades (
 	id INT AUTO_INCREMENT
     , crn DEC(11)
     , RIN DEC(9) 
