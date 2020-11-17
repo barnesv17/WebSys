@@ -121,26 +121,31 @@
                           "select s.RIN, s.firstname, s.lastname, c.prefix, c.title, g.grade from students s, grades g, courses c 
                           where s.RIN = g.RIN and c.crn = g.crn 
                           order by RIN asc, lastname ASC, firstname ASC, grade DESC" );
-                echo "<h2>Grades Info</h2>";
-                echo "<div class='table' id='gradesInfo'>";
-                echo "<table border='3'>";
-                echo "<tr>";
-                echo "<th>RIN</th>";
-                echo "<th>First Name</th>";
-                echo "<th>Last Name</th>";
-                echo "<th>Prefix</th>";
-                echo "<th>Title</th>";
-                echo "<th>Grade</th>";
-                echo "</tr>";
-                while( $row=mysqli_fetch_array($grades)) {
+                if (!$grades || mysqli_num_rows($grades) == 0) {
+                  echo "<h2>There are no grades. Would you like to add some?</h2>";
+                }
+                else {
+                  echo "<h2>Grades Info</h2>";
+                  echo "<div class='table' id='gradesInfo'>";
+                  echo "<table border='3'>";
                   echo "<tr>";
-                  echo "<td>" . $row['RIN'] . "</td>";
-                  echo "<td>" . $row['firstname'] . "</td>";
-                  echo "<td>" . $row['lastname'] . "</td>";
-                  echo "<td>" . $row['prefix'] . "</td>";
-                  echo "<td>" . $row['title'] . "</td>";
-                  echo "<td>" . $row['grade'] . "</td>";
+                  echo "<th>RIN</th>";
+                  echo "<th>First Name</th>";
+                  echo "<th>Last Name</th>";
+                  echo "<th>Prefix</th>";
+                  echo "<th>Title</th>";
+                  echo "<th>Grade</th>";
                   echo "</tr>";
+                  while( $row=mysqli_fetch_array($grades)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['RIN'] . "</td>";
+                    echo "<td>" . $row['firstname'] . "</td>";
+                    echo "<td>" . $row['lastname'] . "</td>";
+                    echo "<td>" . $row['prefix'] . "</td>";
+                    echo "<td>" . $row['title'] . "</td>";
+                    echo "<td>" . $row['grade'] . "</td>";
+                    echo "</tr>";
+                  }
                 }
                 echo "</table>";
                 echo "</div>";
@@ -172,28 +177,34 @@
 
               case 'Ace Students':
                 $students = mysqli_query( $conn, $studentsByGrade);
-                echo "<h2>Ace Students</h2>";
-                echo "<div class='table' id='studentInfo'>";
-                echo "<table border='3'>";
-                echo "<tr>";
-                echo "<th>RIN</th>";
-                echo "<th>First Name</th>";
-                echo "<th>Last Name</th>";
-                echo "<th>Street</th>";
-                echo "<th>City</th>";
-                echo "<th>State</th>";
-                echo "<th>Zip</th>";
-                echo "</tr>";
-                while( $row=mysqli_fetch_array($students)) {
+                if (!$students || mysqli_num_rows($students) == 0) {
+                  echo "<h2>There are no grades. Would you like to add some?</h2>";
+                  echo "<button type='button' class='opBtns' id='addGrades'>Add Grade</button>";
+                }
+                else {
+                  echo "<h2>Ace Students</h2>";
+                  echo "<div class='table' id='studentInfo'>";
+                  echo "<table border='3'>";
                   echo "<tr>";
-                  echo "<td>" . $row['RIN'] . "</td>";
-                  echo "<td>" . $row['firstname'] . "</td>";
-                  echo "<td>" . $row['lastname'] . "</td>";
-                  echo "<td>" . $row['street'] . "</td>";
-                  echo "<td>" . $row['city'] . "</td>";
-                  echo "<td>" . $row['state'] . "</td>";
-                  echo "<td>" . $row['zip'] . "</td>";
+                  echo "<th>RIN</th>";
+                  echo "<th>First Name</th>";
+                  echo "<th>Last Name</th>";
+                  echo "<th>Street</th>";
+                  echo "<th>City</th>";
+                  echo "<th>State</th>";
+                  echo "<th>Zip</th>";
                   echo "</tr>";
+                  while( $row=mysqli_fetch_array($students)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['RIN'] . "</td>";
+                    echo "<td>" . $row['firstname'] . "</td>";
+                    echo "<td>" . $row['lastname'] . "</td>";
+                    echo "<td>" . $row['street'] . "</td>";
+                    echo "<td>" . $row['city'] . "</td>";
+                    echo "<td>" . $row['state'] . "</td>";
+                    echo "<td>" . $row['zip'] . "</td>";
+                    echo "</tr>";
+                  }
                 }
                 echo "</table>";
                 echo "</div>";
@@ -201,22 +212,28 @@
 
               case 'Courses Average':
                 $students = mysqli_query( $conn, $coursesAvg);
-                echo "<h2>Course Averages</h2>";
-                echo "<div class='table' id='studentInfo'>";
-                echo "<table border='3'>";
-                echo "<tr>";
-                echo "<th>Course Title</th>";
-                echo "<th>Sections</th>";
-                echo "<th>Average Grade</th>";
-                echo "<th>Year</th>";
-                echo "</tr>";
-                while( $row=mysqli_fetch_array($students)) {
+                if (!$students || mysqli_num_rows($students) == 0) {
+                  echo "<h2>There are no grades. Would you like to add some?</h2>";
+                  echo "<button type='button' class='opBtns' id='addGrades'>Add Grade</button>";
+                }
+                else {
+                  echo "<h2>Course Averages</h2>";
+                  echo "<div class='table' id='studentInfo'>";
+                  echo "<table border='3'>";
                   echo "<tr>";
-                  echo "<td>" . $row['title'] . "</td>";
-                  echo "<td>" . $row['section'] . "</td>";
-                  echo "<td>" . $row['avg_grade'] . "</td>";
-                  echo "<td>" . $row['year'] . "</td>";
+                  echo "<th>Course Title</th>";
+                  echo "<th>Sections</th>";
+                  echo "<th>Average Grade</th>";
+                  echo "<th>Year</th>";
                   echo "</tr>";
+                  while( $row=mysqli_fetch_array($students)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['title'] . "</td>";
+                    echo "<td>" . $row['section'] . "</td>";
+                    echo "<td>" . $row['avg_grade'] . "</td>";
+                    echo "<td>" . $row['year'] . "</td>";
+                    echo "</tr>";
+                  }
                 }
                 echo "</table>";
                 echo "</div>";
@@ -224,22 +241,28 @@
 
               case 'Courses Enrollment Status':
                 $students = mysqli_query( $conn, $coursesEnrollment);
-                echo "<h2>Courses Enrollment Status</h2>";
-                echo "<div class='table' id='studentInfo'>";
-                echo "<table border='3'>";
-                echo "<tr>";
-                echo "<th>Course Title</th>";
-                echo "<th>Sections</th>";
-                echo "<th>Student Count</th>";
-                echo "<th>Year</th>";
-                echo "</tr>";
-                while( $row=mysqli_fetch_array($students)) {
+                if (!$students || mysqli_num_rows($students) == 0) {
+                  echo "<h2>There are no grades. Would you like to add some?</h2>";
+                  echo "<button type='button' class='opBtns' id='addGrades'>Add Grade</button>";
+                }
+                else {
+                  echo "<h2>Courses Enrollment Status</h2>";
+                  echo "<div class='table' id='studentInfo'>";
+                  echo "<table border='3'>";
                   echo "<tr>";
-                  echo "<td>" . $row['title'] . "</td>";
-                  echo "<td>" . $row['section'] . "</td>";
-                  echo "<td>" . $row['num_students'] . "</td>";
-                  echo "<td>" . $row['year'] . "</td>";
+                  echo "<th>Course Title</th>";
+                  echo "<th>Sections</th>";
+                  echo "<th>Student Count</th>";
+                  echo "<th>Year</th>";
                   echo "</tr>";
+                  while( $row=mysqli_fetch_array($students)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['title'] . "</td>";
+                    echo "<td>" . $row['section'] . "</td>";
+                    echo "<td>" . $row['num_students'] . "</td>";
+                    echo "<td>" . $row['year'] . "</td>";
+                    echo "</tr>";
+                  }
                 }
                 echo "</table>";
                 echo "</div>";
