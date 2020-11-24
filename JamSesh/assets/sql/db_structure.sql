@@ -42,7 +42,7 @@ CREATE TABLE contributions (
     , instrument VARCHAR(20) NOT NULL 
     , gitDiffPath VARCHAR(100) NOT NULL
     , timesubmitted DATETIME NOT NULL 
-    , PRIMARY KEY (username, studioID, instrument, timesubmitted)
+    , PRIMARY KEY (username, studioID, timesubmitted)
     , FOREIGN KEY (username) REFERENCES users(username)
     , FOREIGN KEY (studioID) REFERENCES studios(studioID)
 );
