@@ -32,5 +32,7 @@ CREATE TABLE studioAdmins (
     username VARCHAR(20) NOT NULL
     , studioID INT NOT NULL
     , PRIMARY KEY(username, studioID)
-    , 
-)
+    , FOREIGN KEY(username) REFERENCES users(username)
+    , FOREIGN KEY(studioID) REFERENCES studios(studioID)
+);
+
