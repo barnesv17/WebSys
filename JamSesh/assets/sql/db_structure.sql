@@ -6,7 +6,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE studios (
-    studioID INT NOT NULL
+    studioID INT AUTO_INCREMENT NOT NULL
     , studioName VARCHAR(50) NOT NULL
     , settings BIT NOT NULL-- include all settings later
     , gitPath VARCHAR(100) NOT NULL 
@@ -36,3 +36,19 @@ CREATE TABLE studioAdmins (
     , FOREIGN KEY(studioID) REFERENCES studios(studioID)
 );
 
+INSERT INTO users VALUES
+    ("wildg@rpi.edu", NULL, "wildg");
+    , ("gabewild37@gmail.com", NULL, NULL);
+
+INSERT INTO studios VALUES
+    (NULL, "My Studio", 1, "/repos/My-Studio");
+
+INSERT INTO studioOwners VALUES 
+    ("wildg@rpi.edu", 1);
+
+INSERT INTO genres VALUES 
+    (1, "Rock")
+    , (1, "Alternative");
+
+INSERT INTO studioAdmins VALUES
+    ("gabewild37@gmail.com", 1);
