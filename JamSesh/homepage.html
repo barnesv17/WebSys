@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
   <link rel="stylesheet" href="assets/css/Homepage-Nav.css">
   <link rel="stylesheet" href="assets/css/Homepage.css">
+  <meta name="google-signin-client_id"
+    content="765855440879-ejnmrbme7dlhr47deh7v8dmlugg7vgrt.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="assets/js/signin.js" defer></script>
 </head>
 
 <body>
@@ -20,8 +24,7 @@
             <!-- <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> -->
           </ul>
           <span class="navbar-text actions">
-            <a class="login" href="login.html">Log In</a>
-            <a class="btn btn-light action-button" role="button" href="#">Sign Up</a>
+            <div class="col g-signin2" data-onsuccess="onSignIn"></div>
           </span>
         </div>
       </div>
@@ -32,20 +35,6 @@
         <h2 id="builtForMusicians">Built for Musicians</h2>
         <p id="summary">JamSesh provides an environment for remote musicians to compose music collaboratively. Share a
           Studio and begin composing today.</p>
-      </div>
-      <div class="text-center d-xl-flex justify-content-xl-center form-container">
-        <form id="signupForm" method="post">
-          <h2 class="text-center" id="create">Create an account.</h2>
-          <div class="form-group" id="email"><input class="form-control" type="email" name="email" placeholder="Email">
-          </div>
-          <div class="form-group" id="password"><input class="form-control" type="password" name="password"
-              placeholder="Password"></div>
-          <div class="form-group" id="confirmPassword"><input class="form-control" type="password"
-              name="password-repeat" placeholder="Password (repeat)"></div>
-          <div class="form-group"><a class="btn btn-primary btn-block" id="formButton" type="submit"
-              href="user-profile.html" href="user-profile.html">Sign Up</a></div>
-          <a class="already" href="login.html">You already have an account? Login here.</a>
-        </form>
       </div>
     </section>
   </div>
