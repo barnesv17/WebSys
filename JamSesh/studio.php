@@ -107,6 +107,44 @@
     </div>
   </div>
 
+  <!-- php for adding instrument -->
+  <?php
+   if( isset($_POST['submit']) ) {
+      if( isset($_POST['name']) && $_POST['name'] != "" && isset($_FILES['fileToUpload']) ) {
+        // Check that the filename is not already in use
+        $studioID = 1; //TO DO: find the proper ID for the studio
+        $studioPath = "studios/".$studioID;
+        $mp3s = scandir( $studioPath );
+        array_shift( $mp3s ); array_shift( $mp3s ); // Remove the . and ..
+
+        $match = false;
+        foreach( $mp3s as $mp3 ) {
+          $name = substr( $mp3, 0, -4 );
+          if( $name == $_POST['name'] ) {
+            $match = true;
+          }
+        }
+        if( $match == false ) {
+          if( mime_content_type($_FILES["fileToUpload"]["tmp_name"]) == "audio/x-m4a" ) { // check for mp3
+            // If everything was inputted correctly, upload the file
+            $file_name = $_FILES['fileToUpload']['name'];
+            $target_file = $studioPath . "/" . $_POST['name'] . ".mp3";
+            move_uploaded_file( $_FILES["fileToUpload"]["tmp_name"], $target_file );
+          }
+          else { // If the file was not of type mp3
+            echo "<script>alert( 'Please upload a file of type: mp3' );</script>";
+          }
+        }
+        else { // If the file name is already in use
+          echo "<script>alert( 'Please choose a unique file name' );</script>";
+        }
+      }
+      else { // If name is the empty string
+        echo "<script>alert( 'Please name the file' );</script>";
+      }
+   }
+  ?>
+
   <!-- Modal for adding instrument -->
   <div class="modal fade" id="add-instrument" tabindex="-1" role="dialog" aria-labelledby="add-instrumentLabel"
     aria-hidden="true">
@@ -118,18 +156,18 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form id="add-instrument-form">
+        <form id="add-instrument-form" method="POST" action="studio.php" enctype="multipart/form-data">
           <div class="modal-body">
             <div class="form-group">
               <label for="instrumentInput1">Instrument Name</label>
-              <input type="text" class="form-control" id="instrumentInput1">
+              <input type="text" class="form-control" id="instrumentInput1" name="name">
               <label for="choosefile2">Choose File</label>
-              <input type="file" class="form-control-file" id="choosefile2">
+              <input type="file" class="form-control-file" id="choosefile2" name="fileToUpload">
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-info" data-dismiss="modal">Submit Changes</button>
+            <button type="submit" name="submit" value="Submit" class="btn btn-info">Submit Changes</button>
           </div>
         </form>
       </div>
