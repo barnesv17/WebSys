@@ -1,6 +1,15 @@
 <!-- Connect to database -->
 <?php
   include 'assets/php/db_conn.php';
+  // TO DO: Get settings from the database
+  $settings = [
+    "Username" => "username",
+    "Studio Name" => "Bad Guy",
+    "Studio Visibility" => "Public",
+    "Allow Users to Fork Studio" => "Yes",
+    "Studio Description" => "This is an example studio description",
+    "Genres" => [ "Alternative", "Indie" ],
+  ];
 ?>
 
 <!DOCTYPE html>
@@ -30,35 +39,38 @@
     </div>
   </nav>
 
-  <div id="studio-title-card" class="container-fluid">
-    <div class="row align-items-center justify-content-between">
-      <h1 id="studio-title">@wildg: Studio 1</h1>
-      <div>
-        <div class="row justify-content-between">
-          <form id="favorite-form">
-            <button class="btn btn-secondary" type="submit">Favorite <span class="badge badge-light">4</span>
-            </button>
-          </form>
-          <form id="fork-form">
-            <button class="btn btn-secondary" type="submit">Fork <span class="badge badge-light">0</span>
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <p class="btn btn-light action-button genres">R&B</p>
-      <p class="btn btn-light action-button genres">Pop</p>
-    </div>
-    <div class="row">
-      <div class="col-7">
-        <p>
-          You can have a little paragraph here describing your project. It can be a
-          blurb like blah blah blah or something. You can write your own description if you want.
-        </p>
-      </div>
-    </div>
-  </div>
+  <!-- Display studio info from settings -->
+  <?php
+    echo "<div id='studio-title-card' class='container-fluid'>";
+      echo "<div class='row align-items-center justify-content-between'>";
+        echo "<h1 id='studio-title'>@" . $settings["Username"] . ": " . $settings["Studio Name"] . "</h1>";
+        echo "<div class='row justify-content-between'>";
+          echo "<form id='favorite-form'>";
+            echo "<button class='btn btn-secondary' type='submit'>Favorite <span class='badge badge-light'>4</span>";
+            echo "</button>";
+          echo "</form>";
+          echo "<form id='fork-form'>";
+            echo "<button class='btn btn-secondary' type='submit'>Fork <span class='badge badge-light'>0</span>";
+            echo "</button>";
+          echo "</form>";
+        echo "</div>";
+      echo "</div>";
+
+      // Genres
+      echo "<div class='row'>";
+      foreach( $settings["Genres"] as $genre ) {
+        echo "<p class='btn btn-light action-button genres'>" . $genre . "</p>";
+      }
+      echo "</div>";
+
+      // Studio Description
+      echo "<div class='row'>";
+        echo "<div class='col-7'>";
+          echo "<p>" . $settings["Studio Description"] . "</p>";
+        echo "</div>";
+      echo "</div>";
+    echo "</div>";
+   ?>
 
   <!-- Navbar Tabs -->
   <ul id="studio-navtabs" class="nav nav-tabs mb-3s" role="tablist">
@@ -232,8 +244,9 @@
       </div>
       <button id="add-instrument-btn" type="button" class="btn btn-info" data-toggle="modal"
         data-target="#add-instrument">Add Instrument</button>
-      <button onclick="playAll()" id="play-all-btn" type="button" class="btn btn-info">Play All</button>
-      <button onclick="playAll()" id="pause-all-btn" type="button" class="btn btn-info">Pause All</button>
+      <button id="play-all-btn" type="button" class="btn btn-info">Play All</button>
+      <button id="pause-all-btn" type="button" class="btn btn-info">Pause All</button>
+      <button id="restart-all-btn" type="button" class="btn btn-info">Restart All</button>
     </div>
     <!-- <div class="tab-pane fade" id="mixes" role="tabpanel" aria-labelledby="mixes-tab">
       <div id="studio-mixes">
