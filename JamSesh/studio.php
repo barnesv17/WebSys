@@ -1,40 +1,9 @@
-<!-- Connect to database -->
 <?php
   include 'assets/php/db_conn.php';
+  include 'assets/php/studio/update_settings.php';
+  include 'assets/php/studio/add_instrument.php';
+  include 'assets/php/studio/delete_instrument.php';
 ?>
-
-<!-- Check if the settings have changed -->
-<?php
-  // TO DO: Get settings from the database
-  $settings = [
-    "Username" => "wildg",
-    "Studio Name" => "Bad Guy",
-    "Studio Visibility" => "Public",
-    "Allow Fork" => "Yes",
-    "Studio Description" => "This is an example studio description",
-    "Genres" => [ "Alternative", "Indie" ],
-  ];
-
-  if( isset( $_POST['update-settings'] ) ) {
-
-    // Studio Name
-    if( $_POST['studio-name'] == "" ) {
-      echo "<script>alert( 'Please enter a Studio Name' );</script>";
-    }
-    else {
-      $settings['Studio Name'] = $_POST['studio-name'];
-    }
-
-    // Studio Visibility, Allow Fork, and Studio Description
-    $settings['Studio Visibility'] = $_POST['studio-visibility'];
-    $settings['Allow Fork'] = $_POST['allow-fork'];
-    $settings['Studio Description'] = $_POST['studio-description'];
-
-    if( $_POST['add-genre'] != "" ) {
-      array_push( $settings['Genres'], $_POST['add-genre'] );
-    }
-  }
- ?>
 
 <!DOCTYPE html>
 <html lang="en-us">
@@ -49,6 +18,7 @@
   <link rel="stylesheet" href="assets/css/Studio.css">
 </head>
 
+<!-- Navigation Bar -->
 <body>
   <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
     <div class="container"><a class="navbar-brand" href="user-profile.html">JamSesh</a>
@@ -63,38 +33,10 @@
     </div>
   </nav>
 
-  <!-- Display studio info from settings -->
+  <!-- Display Studio Name and Description -->
   <?php
-    echo "<div id='studio-title-card' class='container-fluid'>";
-      echo "<div class='row align-items-center justify-content-between'>";
-        echo "<h1 id='studio-title'>@" . $settings["Username"] . ": " . $settings["Studio Name"] . "</h1>";
-        echo "<div class='row justify-content-between'>";
-          echo "<form id='favorite-form'>";
-            echo "<button class='btn btn-secondary' type='submit'>Favorite <span class='badge badge-light'>4</span>";
-            echo "</button>";
-          echo "</form>";
-          echo "<form id='fork-form'>";
-            echo "<button class='btn btn-secondary' type='submit'>Fork <span class='badge badge-light'>0</span>";
-            echo "</button>";
-          echo "</form>";
-        echo "</div>";
-      echo "</div>";
-
-      // Genres
-      echo "<div class='row'>";
-      foreach( $settings["Genres"] as $genre ) {
-        echo "<p class='btn btn-light action-button genres'>" . $genre . "</p>";
-      }
-      echo "</div>";
-
-      // Studio Description
-      echo "<div class='row'>";
-        echo "<div class='col-7'>";
-          echo "<p>" . $settings["Studio Description"] . "</p>";
-        echo "</div>";
-      echo "</div>";
-    echo "</div>";
-   ?>
+    include 'assets/php/studio/display_settings.php';
+  ?>
 
   <!-- Navbar Tabs -->
   <ul id="studio-navtabs" class="nav nav-tabs mb-3s" role="tablist">
@@ -102,14 +44,6 @@
       <a class="nav-link active" id="composition-tab" data-toggle="tab" href="#composition" role="tab"
         aria-controls="composition" aria-selected="true">Composition</a>
     </li>
-    <!-- <li class="nav-item">
-      <a class="nav-link" id="mixes-tab" data-toggle="tab" href="#mixes" role="tab" aria-controls="mixes"
-        aria-selected="false">Mixes</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="contributions-tab" data-toggle="tab" href="#contributions" role="tab"
-        aria-controls="contributions" aria-selected="false">Contributions</a>
-    </li> -->
     <li class="nav-item">
       <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings"
         aria-selected="false">Settings</a>
@@ -143,59 +77,6 @@
     </div>
   </div>
 
-  <!-- php for adding instrument -->
-  <?php
-   if( isset($_POST['submit']) ) {
-     //-Form Validation---------------------------------------------------------
-     if( isset($_POST['name']) == false || $_POST['name'] == "" ) { // If no name was given for the file
-       echo "<script>alert( 'Please name the file' );</script>";
-     }
-     else if( isset($_FILES['fileToUpload']) == false ||
-      @mime_content_type($_FILES["fileToUpload"]["tmp_name"]) != "audio/x-m4a" ) { // If no file was uplaoded or a file of the wrong type
-       echo "<script>alert( 'Please upload a file of type: mp3' );</script>";
-     }
-     else {
-       //-Check that the filename is not already in use-------------------------
-       $studioID = 1; //TO DO: find the proper ID for the studio
-       $studioPath = "studios/".$studioID;
-       $mp3s = scandir( $studioPath );
-       array_shift( $mp3s ); array_shift( $mp3s ); // Remove the . and ..
-       $match = false;
-       foreach( $mp3s as $mp3 ) {
-         $name = substr( $mp3, 0, -4 );
-         if( $name == $_POST['name'] ) {
-           $match = true;
-         }
-       }
-       if( $match == false ) {
-         // If everything was inputted correctly, upload the file
-         $file_name = $_FILES['fileToUpload']['name'];
-         $target_file = $studioPath . "/" . $_POST['name'] . ".mp3";
-         move_uploaded_file( $_FILES["fileToUpload"]["tmp_name"], $target_file );
-       }
-       else { // If the filename is not unique
-         echo "<script>alert( 'Please choose a unique file name' );</script>";
-       }
-     }
-     $_POST = array(); // Reset inputs to be blank
-   }
-  ?>
-  <!-- php for deleting an instrument -->
-  <?php
-    if( isset($_POST['trashcan']) ) {
-      $studioID = 1; //TO DO: find the proper ID for the studio
-      $studioPath = "studios/".$studioID;
-      $mp3s = scandir( $studioPath );
-      array_shift( $mp3s ); array_shift( $mp3s ); // Remove the . and ..
-      foreach( $mp3s as $mp3 ) {
-        $name = substr( $mp3, 0, -4 );
-        if( $name == $_POST['trashcan'] ) {
-          unlink( $studioPath . "/" . $mp3 );
-        }
-      }
-    }
-  ?>
-
   <!-- Modal for adding instrument -->
   <div class="modal fade" id="add-instrument" tabindex="-1" role="dialog" aria-labelledby="add-instrumentLabel"
     aria-hidden="true">
@@ -227,6 +108,7 @@
 
   <!-- Navbar Tab Content -->
   <div class="tab-content" id="myTabContent">
+    <!-- Composition -->
     <div class="tab-pane fade show active" id="composition" role="tabpanel" aria-labelledby="composition-tab">
       <div id="studio-composition" class="table-responsive">
         <table class="table table-hover">
@@ -237,32 +119,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php
-              $studioID = 1; //TO DO: find the proper ID for the studio
-              $studioPath = "studios/".$studioID;
-              $mp3s = scandir( $studioPath );
-              // Remove the . and ..
-              array_shift( $mp3s );
-              array_shift( $mp3s );
-              // Display each Instrument
-              foreach( $mp3s as $mp3 ) {
-                $name = substr( $mp3, 0, -4 );
-                // echo "<tr data-toggle='modal' data-target='#uploadFile'>";
-                echo "<tr>";
-                  echo "<th scope='row'>";
-                  echo $name;
-                  echo "<form action='studio.php' method='POST' enctype='multipart/form-data'>";
-                    echo "<button type='submit' name='trashcan' value='" . $name . "'>";
-                      echo "<img class='trashcan' src='assets/img/trashcan.png'/>";
-                    echo "</button>";
-                  echo "</form>";
-                  echo "</th>";
-                  echo "<td><audio class='mp3' controls>";
-                    echo "<source src='".$studioPath."/".$mp3."'>";
-                  echo "</audio></td>";
-                  echo "</tr>";
-              }
-             ?>
+            <?php include 'assets/php/studio/display_instruments.php'; ?>
           </tbody>
         </table>
       </div>
@@ -272,165 +129,10 @@
       <button id="pause-all-btn" type="button" class="btn btn-info">Pause All</button>
       <button id="restart-all-btn" type="button" class="btn btn-info">Restart All</button>
     </div>
-    <!-- <div class="tab-pane fade" id="mixes" role="tabpanel" aria-labelledby="mixes-tab">
-      <div id="studio-mixes">
-        <table class="table">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">User</th>
-              <th scope="col">Mix</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Gabe Wild</td>
-              <td><audio controls>
-                  <source src="assets/audio/slurp.mp3">
-                </audio></td>
-            </tr>
-            <tr>
-              <td>Virginia Barnes</td>
-              <td><audio controls>
-                  <source src="assets/audio/slurp.mp3">
-                </audio></td>
-            </tr>
-            <tr>
-              <td>Tyler Samuels</td>
-              <td><audio controls>
-                  <source src="assets/audio/slurp.mp3">
-                </audio></td>
-            </tr>
-            <tr>
-              <td>Kyle Qin</td>
-              <td><audio controls>
-                  <source src="assets/audio/slurp.mp3">
-                </audio></td>
-            </tr>
-            <tr>
-              <td>Derek Li</td>
-              <td><audio controls>
-                  <source src="assets/audio/slurp.mp3">
-                </audio></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div> -->
-    <!-- <div class="tab-pane fade" id="contributions" role="tabpanel" aria-labelledby="contributions-tab">
-      <form id="approve-contributions-form">
-        <div id="studio-contributions" class="table-reponsive">
-          <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Instrument</th>
-                <th scope="col">Approve Contribution</th>
-                <th scope="col">Composition</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Lead Guitar</th>
-                <td>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check-yes1">
-                    <label class="form-check-label" for="check-yes1">Yes</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check-no1">
-                    <label class="form-check-label" for="check-no1">No</label>
-                  </div>
-                </td>
-                <td><audio controls>
-                    <source src="assets/audio/slurp.mp3">
-                  </audio></td>
-              </tr>
-              <tr>
-                <th scope="row">(NEW) Vocals</th>
-                <td>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check-yes2">
-                    <label class="form-check-label" for="check-yes2">Yes</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check-no2">
-                    <label class="form-check-label" for="check-no2">No</label>
-                  </div>
-                </td>
-                <td><audio controls>
-                    <source src="assets/audio/slurp.mp3">
-                  </audio></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <button id="approve-contributions-btn" type="submit" class="btn btn-info">Save Changes</button>
-      </form>
-    </div> -->
 
+    <!-- Settings -->
+    <?php include 'assets/php/studio/display_settings_tab.php'; ?>
 
-    <?php
-      echo "<div class='tab-pane fade' id='settings' role='tabpanel' aria-labelledby='settings-tab'>";
-        echo "<div id='studioSettings' class='container'>";
-          echo "<form action='studio.php' method='POST'>";
-
-          // name='trashcan' value='" . $name . "'>"
-
-            // Studio Name
-            echo "<div class='form-group'>";
-              echo "<label for='studio-name-input'>Studio Name</label>";
-              echo "<input type='text' name='studio-name' value='" . $settings["Studio Name"] . "'class='form-control' id='studio-name-input'>";
-            echo "</div>";
-
-            // Studio Visibility
-            echo "<div class='form-group'>";
-              echo "<label for='studio-visibilty'>Studio Visibility</label>";
-              echo "<select name='studio-visibility' class='form-control' id='studio-visibilty'>";
-              if( $settings["Studio Visibility"] == "Public" ) {
-                echo "<option>Public</option>";
-                echo "<option>Private</option>";
-              }
-              else {
-                echo "<option>Private</option>";
-                echo "<option>Public</option>";
-              }
-              echo "</select>";
-            echo "</div>";
-
-            // Allow Fork
-            echo "<div class='form-group'>";
-              echo "<label for='studio-permissions-fork'>Allow Users to Fork Studio</label>";
-              echo "<select name='allow-fork' class='form-control' id='studio-permissions-fork'>";
-              if( $settings["Allow Fork"] == "Yes" ) {
-                echo "<option>Yes</option>";
-                echo "<option>No</option>";
-              }
-              else {
-                echo "<option>No</option>";
-                echo "<option>Yes</option>";
-              }
-              echo "</select>";
-            echo "</div>";
-
-            // Studio Description
-            echo "<div class='form-group'>";
-              echo "<label for='studio-description-input'>Edit Studio Description</label>";
-              echo "<textarea name='studio-description' class='form-control' id='studio-description-input' rows='3'maxlength='255'>";
-                echo $settings["Studio Description"];
-              echo "</textarea>";
-            echo "</div>";
-
-            // Add Genres
-            echo "<div class='form-group'>";
-              echo "<label for='studio-genres-input'>Add Genre to the Studio</label>";
-              echo "<input name='add-genre' type='text' class='form-control' id='studio-genres-input'>";
-            echo "</div>";
-
-            // Submit Button
-            echo "<button name='update-settings' type='submit' class='btn btn-info'>Save Changes</button>";
-          echo "</form>";
-        echo "</div>";
-      echo "</div>";
-     ?>
   </div>
 
   <script src="assets/js/jquery.min.js"></script>
