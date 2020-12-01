@@ -342,40 +342,69 @@
         <button id="approve-contributions-btn" type="submit" class="btn btn-info">Save Changes</button>
       </form>
     </div> -->
-    <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-      <div id="studioSettings" class="container">
-        <form>
-          <div class="form-group">
-            <label for="studio-name-input">Studio Name</label>
-            <input type="text" class="form-control" id="studio-name-input" placeholder="Studio">
-          </div>
-          <div class="form-group">
-            <label for="studio-visibilty">Studio Visibility</label>
-            <select class="form-control" id="studio-visibilty">
-              <option>Public</option>
-              <option>Private</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="studio-permissions-fork">Allow Users to Fork Studio</label>
-            <select class="form-control" id="studio-permissions-fork">
-              <option>Yes</option>
-              <option>No</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="studio-description-input">Edit Studio Description</label>
-            <textarea class="form-control" id="studio-description-input" rows="3"
-              maxlength="255">You can have a little paragraph here describing your project. It can be a blurb like blah blah blah or something. You can write your own description if you want.</textarea>
-          </div>
-          <div class="form-group">
-            <label for="studio-genres-input">Add Genres to the Studio</label>
-            <input type="text" class="form-control" id="studio-genres-input">
-          </div>
-          <button type="submit" class="btn btn-info">Save Changes</button>
-        </form>
-      </div>
-    </div>
+
+
+    <?php
+      echo "<div class='tab-pane fade' id='settings' role='tabpanel' aria-labelledby='settings-tab'>";
+        echo "<div id='studioSettings' class='container'>";
+          echo "<form>";
+
+            // Studio Name
+            echo "<div class='form-group'>";
+              echo "<label for='studio-name-input'>Studio Name</label>";
+              echo "<input type='text' class='form-control' id='studio-name-input' placeholder='" . $settings["Studio Name"] . "'>";
+            echo "</div>";
+
+            // Studio Visibility
+            echo "<div class='form-group'>";
+              echo "<label for='studio-visibilty'>Studio Visibility</label>";
+              echo "<select class='form-control' id='studio-visibilty'>";
+              if( $settings["Studio Visibility"] == "Public" ) {
+                echo "<option>Public</option>";
+                echo "<option>Private</option>";
+              }
+              else {
+                echo "<option>Private</option>";
+                echo "<option>Public</option>";
+              }
+              echo "</select>";
+            echo "</div>";
+
+            // Allow Fork
+            echo "<div class='form-group'>";
+              echo "<label for='studio-permissions-fork'>Allow Users to Fork Studio</label>";
+              echo "<select class='form-control' id='studio-permissions-fork'>";
+              if( $settings["Allow Users to Fork Studio"] == "Yes" ) {
+                echo "<option>Yes</option>";
+                echo "<option>No</option>";
+              }
+              else {
+                echo "<option>No</option>";
+                echo "<option>Yes</option>";
+              }
+              echo "</select>";
+            echo "</div>";
+
+            // Studio Description
+            echo "<div class='form-group'>";
+              echo "<label for='studio-description-input'>Edit Studio Description</label>";
+              echo "<textarea class='form-control' id='studio-description-input' rows='3'maxlength='255'>";
+                echo $settings["Studio Description"];
+              echo "</textarea>";
+            echo "</div>";
+
+            // Add Genres
+            echo "<div class='form-group'>";
+              echo "<label for='studio-genres-input'>Add Genres to the Studio</label>";
+              echo "<input type='text' class='form-control' id='studio-genres-input'>";
+            echo "</div>";
+
+            // Submit Button
+            echo "<button type='submit' class='btn btn-info'>Save Changes</button>";
+          echo "</form>";
+        echo "</div>";
+      echo "</div>";
+     ?>
   </div>
 
   <script src="assets/js/jquery.min.js"></script>
