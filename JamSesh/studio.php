@@ -142,6 +142,7 @@
       else { // If name is the empty string
         echo "<script>alert( 'Please name the file' );</script>";
       }
+      $_POST = array(); // Reset inputs to be blank
    }
   ?>
 
