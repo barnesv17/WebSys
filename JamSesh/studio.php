@@ -233,6 +233,7 @@
       <button id="add-instrument-btn" type="button" class="btn btn-info" data-toggle="modal"
         data-target="#add-instrument">Add Instrument</button>
       <button onclick="playAll()" id="play-all-btn" type="button" class="btn btn-info">Play All</button>
+      <button onclick="playAll()" id="pause-all-btn" type="button" class="btn btn-info">Pause All</button>
     </div>
     <!-- <div class="tab-pane fade" id="mixes" role="tabpanel" aria-labelledby="mixes-tab">
       <div id="studio-mixes">
