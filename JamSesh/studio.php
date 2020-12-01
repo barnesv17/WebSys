@@ -1,3 +1,8 @@
+<!-- Connect to database -->
+<?php
+  include 'assets/php/db_conn.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en-us">
 
@@ -143,30 +148,24 @@
             </tr>
           </thead>
           <tbody>
-            <tr data-toggle="modal" data-target="#uploadFile">
-              <th scope="row">Lead Guitar</th>
-              <td><audio controls>
-                  <source src="assets/audio/slurp.mp3">
-                </audio></td>
-            </tr>
-            <tr data-toggle="modal" data-target="#uploadFile">
-              <th scope="row">Bass Guitar</th>
-              <td><audio controls>
-                  <source src="assets/audio/slurp.mp3">
-                </audio></td>
-            </tr>
-            <tr data-toggle="modal" data-target="#uploadFile">
-              <th scope="row">Drums</th>
-              <td><audio controls>
-                  <source src="assets/audio/slurp.mp3">
-                </audio></td>
-            </tr>
-            <tr data-toggle="modal" data-target="#uploadFile">
-              <th scope="row">Rhythm Guitar</th>
-              <td><audio controls>
-                  <source src="assets/audio/slurp.mp3">
-                </audio></td>
-            </tr>
+            <?php
+              $studioID = 1; //TO DO: find the proper ID for the studio
+              $studioPath = "studios/".$studioID;
+              $mp3s = scandir( $studioPath );
+              // Remove the . and ..
+              array_shift( $mp3s );
+              array_shift( $mp3s );
+              // Display each Instrument
+              foreach( $mp3s as $mp3 ) {
+                $name = substr( $mp3, 0, -4 );
+                echo "<tr data-toggle='modal' data-target='#uploadFile'>";
+                  echo "<th scope='row'>".$name."</th>";
+                  echo "<td><audio controls>";
+                    echo "<source src='".$studioPath."/".$mp3."'>";
+                  echo "</audio></td>";
+                  echo "</tr>";
+              }
+             ?>
           </tbody>
         </table>
       </div>
