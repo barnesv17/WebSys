@@ -7,7 +7,7 @@
 <?php
   // TO DO: Get settings from the database
   $settings = [
-    "Username" => "username",
+    "Username" => "wildg",
     "Studio Name" => "Bad Guy",
     "Studio Visibility" => "Public",
     "Allow Fork" => "Yes",
@@ -16,11 +16,23 @@
   ];
 
   if( isset( $_POST['update-settings'] ) ) {
-    $settings['Studio Name'] = $_POST['studio-name'];
+
+    // Studio Name
+    if( $_POST['studio-name'] == "" ) {
+      echo "<script>alert( 'Please enter a Studio Name' );</script>";
+    }
+    else {
+      $settings['Studio Name'] = $_POST['studio-name'];
+    }
+
+    // Studio Visibility, Allow Fork, and Studio Description
     $settings['Studio Visibility'] = $_POST['studio-visibility'];
     $settings['Allow Fork'] = $_POST['allow-fork'];
     $settings['Studio Description'] = $_POST['studio-description'];
-    array_push( $settings['Genres'], $_POST['add-genre'] );
+
+    if( $_POST['add-genre'] != "" ) {
+      array_push( $settings['Genres'], $_POST['add-genre'] );
+    }
   }
  ?>
 
