@@ -160,7 +160,7 @@
                 $name = substr( $mp3, 0, -4 );
                 echo "<tr data-toggle='modal' data-target='#uploadFile'>";
                   echo "<th scope='row'>".$name."</th>";
-                  echo "<td><audio controls>";
+                  echo "<td><audio class='mp3' controls>";
                     echo "<source src='".$studioPath."/".$mp3."'>";
                   echo "</audio></td>";
                   echo "</tr>";
@@ -171,6 +171,7 @@
       </div>
       <button id="add-instrument-btn" type="button" class="btn btn-info" data-toggle="modal"
         data-target="#add-instrument">Add Instrument</button>
+      <button onclick="playAll()" id="play-all-btn" type="button" class="btn btn-info">Play All</button>
     </div>
     <div class="tab-pane fade" id="mixes" role="tabpanel" aria-labelledby="mixes-tab">
       <div id="studio-mixes">
@@ -304,6 +305,8 @@
 
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/playAll.js"></script>
+
 </body>
 
 </html>
