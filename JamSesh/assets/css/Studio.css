@@ -72,3 +72,8 @@ audio {
     border-radius: 8px;
     padding: 10px;
 }
+
+.trashcan {
+  width: 20px;
+  height: 20px;
+}
