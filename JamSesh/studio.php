@@ -1,16 +1,28 @@
 <!-- Connect to database -->
 <?php
   include 'assets/php/db_conn.php';
+?>
+
+<!-- Check if the settings have changed -->
+<?php
   // TO DO: Get settings from the database
   $settings = [
     "Username" => "username",
     "Studio Name" => "Bad Guy",
     "Studio Visibility" => "Public",
-    "Allow Users to Fork Studio" => "Yes",
+    "Allow Fork" => "Yes",
     "Studio Description" => "This is an example studio description",
     "Genres" => [ "Alternative", "Indie" ],
   ];
-?>
+
+  if( isset( $_POST['update-settings'] ) ) {
+    $settings['Studio Name'] = $_POST['studio-name'];
+    $settings['Studio Visibility'] = $_POST['studio-visibility'];
+    $settings['Allow Fork'] = $_POST['allow-fork'];
+    $settings['Studio Description'] = $_POST['studio-description'];
+    array_push( $settings['Genres'], $_POST['add-genre'] );
+  }
+ ?>
 
 <!DOCTYPE html>
 <html lang="en-us">
@@ -347,18 +359,20 @@
     <?php
       echo "<div class='tab-pane fade' id='settings' role='tabpanel' aria-labelledby='settings-tab'>";
         echo "<div id='studioSettings' class='container'>";
-          echo "<form>";
+          echo "<form action='studio.php' method='POST'>";
+
+          // name='trashcan' value='" . $name . "'>"
 
             // Studio Name
             echo "<div class='form-group'>";
               echo "<label for='studio-name-input'>Studio Name</label>";
-              echo "<input type='text' class='form-control' id='studio-name-input' placeholder='" . $settings["Studio Name"] . "'>";
+              echo "<input type='text' name='studio-name' value='" . $settings["Studio Name"] . "'class='form-control' id='studio-name-input'>";
             echo "</div>";
 
             // Studio Visibility
             echo "<div class='form-group'>";
               echo "<label for='studio-visibilty'>Studio Visibility</label>";
-              echo "<select class='form-control' id='studio-visibilty'>";
+              echo "<select name='studio-visibility' class='form-control' id='studio-visibilty'>";
               if( $settings["Studio Visibility"] == "Public" ) {
                 echo "<option>Public</option>";
                 echo "<option>Private</option>";
@@ -373,8 +387,8 @@
             // Allow Fork
             echo "<div class='form-group'>";
               echo "<label for='studio-permissions-fork'>Allow Users to Fork Studio</label>";
-              echo "<select class='form-control' id='studio-permissions-fork'>";
-              if( $settings["Allow Users to Fork Studio"] == "Yes" ) {
+              echo "<select name='allow-fork' class='form-control' id='studio-permissions-fork'>";
+              if( $settings["Allow Fork"] == "Yes" ) {
                 echo "<option>Yes</option>";
                 echo "<option>No</option>";
               }
@@ -388,19 +402,19 @@
             // Studio Description
             echo "<div class='form-group'>";
               echo "<label for='studio-description-input'>Edit Studio Description</label>";
-              echo "<textarea class='form-control' id='studio-description-input' rows='3'maxlength='255'>";
+              echo "<textarea name='studio-description' class='form-control' id='studio-description-input' rows='3'maxlength='255'>";
                 echo $settings["Studio Description"];
               echo "</textarea>";
             echo "</div>";
 
             // Add Genres
             echo "<div class='form-group'>";
-              echo "<label for='studio-genres-input'>Add Genres to the Studio</label>";
-              echo "<input type='text' class='form-control' id='studio-genres-input'>";
+              echo "<label for='studio-genres-input'>Add Genre to the Studio</label>";
+              echo "<input name='add-genre' type='text' class='form-control' id='studio-genres-input'>";
             echo "</div>";
 
             // Submit Button
-            echo "<button type='submit' class='btn btn-info'>Save Changes</button>";
+            echo "<button name='update-settings' type='submit' class='btn btn-info'>Save Changes</button>";
           echo "</form>";
         echo "</div>";
       echo "</div>";
