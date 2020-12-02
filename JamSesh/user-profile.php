@@ -10,15 +10,6 @@
 
   // Include config file
   include 'assets/php/db_conn.php';
-
-  // TO DO: Get user from the database
-  $user = [
-    "username" => "barnev",
-    "profilePic" => "assets/img/profile-pictures/profilepic1.jpg",
-    "displayName" => "Virginia Barnes",
-    "bio" => "this is an example bio",
-  ];
-
  ?>
 
 <!-- Check for edit profile updates -->
@@ -31,16 +22,12 @@
        @mime_content_type($_FILES["profile-pic"]["tmp_name"]) == "image/jpeg" ) { // check that it is an image
          $file_name = $_FILES['profile-pic']['name'];
          move_uploaded_file( $_FILES["profile-pic"]["tmp_name"], "assets/img/profile-pictures/".$file_name );
-         $user["profilePic"] = "assets/img/profile-pictures/".$file_name;
-
          $sql = "UPDATE users SET profilePic = ? WHERE id = ?";
          if($stmt = mysqli_prepare($link, $sql)){
            $param_profilePic = "assets/img/profile-pictures/".$file_name;
            $param_id = $_SESSION["id"];
-
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "si", $param_profilePic, $param_id);
-
             // Attempt to execute the prepared statement
             if( !mysqli_stmt_execute( $stmt ) ) {
               echo "Oops! Something went wrong. Please try again later.";
@@ -51,15 +38,47 @@
 
      //Bio
      if( $_POST['bio'] != "" ) {
-       $user["bio"] = $_POST['bio'];
+       $sql = "UPDATE users SET bio = ? WHERE id = ?";
+       if($stmt = mysqli_prepare($link, $sql)){
+         $param_bio = $_POST['bio'];
+         $param_id = $_SESSION["id"];
+          // Bind variables to the prepared statement as parameters
+          mysqli_stmt_bind_param($stmt, "si", $param_bio, $param_id);
+          // Attempt to execute the prepared statement
+          if( !mysqli_stmt_execute( $stmt ) ) {
+            echo "Oops! Something went wrong. Please try again later.";
+          }
+        }
      }
+
      // Display Name
      if( $_POST['display-name'] != "" ) {
-       $user["displayName"] = $_POST['display-name'];
+       $sql = "UPDATE users SET displayName = ? WHERE id = ?";
+       if($stmt = mysqli_prepare($link, $sql)){
+         $param_displayName = $_POST['display-name'];
+         $param_id = $_SESSION["id"];
+          // Bind variables to the prepared statement as parameters
+          mysqli_stmt_bind_param($stmt, "si", $param_displayName, $param_id);
+          // Attempt to execute the prepared statement
+          if( !mysqli_stmt_execute( $stmt ) ) {
+            echo "Oops! Something went wrong. Please try again later.";
+          }
+        }
      }
+
      // Username
      if( $_POST['username'] != "" ) {
-       $user["username"] = $_POST['username'];
+       $sql = "UPDATE users SET username = ? WHERE id = ?";
+       if($stmt = mysqli_prepare($link, $sql)){
+         $param_username = $_POST['username'];
+         $param_id = $_SESSION["id"];
+          // Bind variables to the prepared statement as parameters
+          mysqli_stmt_bind_param($stmt, "si", $param_username, $param_id);
+          // Attempt to execute the prepared statement
+          if( !mysqli_stmt_execute( $stmt ) ) {
+            echo "Oops! Something went wrong. Please try again later.";
+          }
+        }
      }
 
      $sql = "SELECT id, email, password, username, displayName, bio, profilePic FROM users WHERE email = ?";
@@ -86,7 +105,7 @@
              }
            }
          }
-   }
+       }
   ?>
 
 <!DOCTYPE html>
@@ -139,12 +158,12 @@
                 // Bio
                 echo "<label for='userBioInput'>Edit Bio</label>";
                 echo "<textarea name='bio' class='form-control' id='userBioInput' rows='3' maxlength='255'>";
-                echo $user["bio"];
+                echo $_SESSION["bio"];
                 echo "</textarea>";
 
                 // Display Name
                 echo "<label for='profileNameInput'>Change Profile Name</label>";
-                echo "<input type='text' name='display-name' class='form-control' id='profileNameInput' placeholder='" . $user["displayName"] . "'>";
+                echo "<input type='text' name='display-name' class='form-control' id='profileNameInput' placeholder='" . $_SESSION["displayName"] . "'>";
 
                 // Username
                 echo "<label for='usernameInput'>Change Username</label>";
@@ -152,7 +171,7 @@
                   echo "<div class='input-group-prepend'>";
                     echo "<div class='input-group-text'>@</div>";
                   echo "</div>";
-                  echo "<input type='text' name='username' class='form-control' id='usernameInput' placeholder='" . $user["username"] . "'>";
+                  echo "<input type='text' name='username' class='form-control' id='usernameInput' placeholder='" . $_SESSION["username"] . "'>";
                 echo "</div>";
                ?>
 
