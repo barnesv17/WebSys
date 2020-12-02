@@ -114,7 +114,7 @@
             <!-- <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> -->
           </ul>
           <span class="navbar-text actions">
-            <a class="login" href="login.html">Log In</a>
+            <a class="login" href="login.php">Log In</a>
             <a class="btn btn-light action-button" role="button" href="#">Sign Up</a>
           </span>
         </div>
@@ -142,7 +142,7 @@
           <div class="form-group">
             <input type="submit" class="btn btn-primary btn-block" id="formButton" value="Submit">Sign Up</a>
           </div>
-          <a class="already" href="login.html">You already have an account? Login here.</a>
+          <a class="already" href="login.php">You already have an account? Login here.</a>
         </form>
       </div>
     </section>
