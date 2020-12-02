@@ -10,6 +10,54 @@
 
   // Include config file
   include 'assets/php/db_conn.php';
+
+  // Fetch all of the users studios
+  // Prepare a select statement
+  $sql = "SELECT id, settings FROM studios WHERE owner = '" . $_SESSION["email"] . "'";
+  $result = $link->query( $sql );
+  if( $result->num_rows > 0 ) {
+
+    $studios = array();
+
+    while( $row = $result->fetch_assoc() ) {
+      // echo "id: " . $row["id"] . " - Settings: " . $row["settings"] . "<br>";
+      $settings = json_decode( $row["settings"] );
+      $title = $settings->{'title'};
+      $visibility = $settings->{'visibility'};
+      $allowFork = $settings->{'allowFork'};
+      $description = $settings->{'description'};
+      $genres = $settings->{'genres'};
+
+
+
+      array_push( $studios, [ "id" => $row["id"],
+                              "title" => $title,
+                              "visibility" => $visibility,
+                              "allowFork" => $allowFork,
+                              "description" => $description,
+                              "genres" => $genres ] );
+    }
+
+    echo $studios[0]["id"] . "<br>";
+    echo $studios[0]["title"] . "<br>";
+    echo $studios[0]["visibility"] . "<br>";
+    echo $studios[0]["allowFork"] . "<br>";
+    echo $studios[0]["description"] . "<br>";
+    echo $studios[0]["genres"][0] . "<br>";
+    echo $studios[0]["genres"][1] . "<br><br>";
+
+    echo $studios[1]["id"] . "<br>";
+    echo $studios[1]["title"] . "<br>";
+    echo $studios[1]["visibility"] . "<br>";
+    echo $studios[1]["allowFork"] . "<br>";
+    echo $studios[1]["description"] . "<br>";
+    echo $studios[1]["genres"][0] . "<br>";
+    echo $studios[1]["genres"][1] . "<br><br>";
+
+    $_SESSION["users_studios"] = $studios;
+
+  }
+
  ?>
 
 <!-- Check for edit profile updates -->
@@ -203,10 +251,18 @@
       </a>
       <hr />
       <div class="genreContainer d-flex flex-row">
-        <p class="btn btn-light action-button genres">Classical</p>
-        <p class="btn btn-light action-button genres">R&B</p>
-        <p class="btn btn-light action-button genres">Rock</p>
-        <p class="btn btn-light action-button genres">Pop</p>
+        <?php
+          $all_genres = array();
+          foreach( $_SESSION["users_studios"] as $s ) {
+            foreach( $s["genres"] as $g ) {
+              array_push( $all_genres, $g );
+            }
+          }
+          $all_genres = array_unique( $all_genres );
+          foreach( $all_genres as $g ) {
+            echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+          }
+         ?>
       </div>
     </div>
     <div class="d-flex flex-column text-center studioSection">
@@ -215,32 +271,22 @@
         <h2>Your Studios</h2>
         <p class="btn btn-light action-button addStudio">New Studio</p>
       </div>
-      <a class="studio" href="studio.php">
-        <div class="studioTitle text-left">Studio 1</div>
-        <p class="studioDescription text-left">You can have a little paragraph here describing your project. It can be a
-          blurb like blah blah blah or something. You can write your own description if you want.</p>
-        <div class="studioGenres d-flex flex-row">
-          <p class="btn btn-light action-button genres">R&B</p>
-          <p class="btn btn-light action-button genres">Pop</p>
-        </div>
-      </a>
-      <a class="studio" href="studio.php">
-        <div class="studioTitle text-left">Studio 2</div>
-        <p class="studioDescription text-left">You can have a little paragraph here describing your project. It can be a
-          blurb like blah blah blah or something. You can write your own description if you want.</p>
-        <div class="studioGenres d-flex flex-row">
-          <p class="btn btn-light action-button genres">Classical</p>
-        </div>
-      </a>
-      <a class="studio" href="studio.php">
-        <div class="studioTitle text-left">Studio 3</div>
-        <p class="studioDescription text-left">You can have a little paragraph here describing your project. It can be a
-          blurb like blah blah blah or something. You can write your own description if you want.</p>
-        <div class="studioGenres d-flex flex-row">
-          <p class="btn btn-light action-button genres">Rock</p>
-          <p class="btn btn-light action-button genres">Pop</p>
-        </div>
-      </a>
+
+      <?php
+        if( $result->num_rows > 0 ) {
+          foreach( $_SESSION["users_studios"] as $s ) {
+            echo "<a class='studio' href='studio.php'>";
+              echo "<div class='studioTitle text-left'>" . $s["title"] . "</div>";
+              echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
+              echo "<div class='studioGenres d-flex flex-row'>";
+                foreach( $s["genres"] as $g ) {
+                  echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+                }
+              echo "</div>";
+            echo "</a>";
+          }
+        }
+       ?>
     </div>
   </section>
 
