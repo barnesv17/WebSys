@@ -8,6 +8,9 @@
     exit;
   }
 
+  // Include config file
+  include 'assets/php/db_conn.php';
+
   // TO DO: Get user from the database
   $user = [
     "username" => "barnev",
@@ -29,8 +32,22 @@
          $file_name = $_FILES['profile-pic']['name'];
          move_uploaded_file( $_FILES["profile-pic"]["tmp_name"], "assets/img/profile-pictures/".$file_name );
          $user["profilePic"] = "assets/img/profile-pictures/".$file_name;
-       }
-     }
+
+         $sql = "UPDATE users SET profilePic = ? WHERE id = ?";
+         if($stmt = mysqli_prepare($link, $sql)){
+           $param_profilePic = "assets/img/profile-pictures/".$file_name;
+           $param_id = $_SESSION["id"];
+
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "si", $param_profilePic, $param_id);
+
+            // Attempt to execute the prepared statement
+            if( !mysqli_stmt_execute( $stmt ) ) {
+              echo "Oops! Something went wrong. Please try again later.";
+            }
+          }
+        }
+      }
 
      //Bio
      if( $_POST['bio'] != "" ) {
@@ -44,6 +61,31 @@
      if( $_POST['username'] != "" ) {
        $user["username"] = $_POST['username'];
      }
+
+     $sql = "SELECT id, email, password, username, displayName, bio, profilePic FROM users WHERE email = ?";
+     if($stmt = mysqli_prepare($link, $sql)){
+         // Bind variables to the prepared statement as parameters
+         mysqli_stmt_bind_param($stmt, "s", $param_email);
+         // Set parameters
+         $param_email = $_SESSION["email"];
+         // Attempt to execute the prepared statement
+         if(mysqli_stmt_execute($stmt)){
+             // Store result
+             mysqli_stmt_store_result($stmt);
+             // Bind result variables
+             mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password, $username, $displayName, $bio, $profilePic);
+             if(mysqli_stmt_fetch($stmt)){
+               // Store data in session variables
+               $_SESSION["loggedin"] = true;
+               $_SESSION["id"] = $id;
+               $_SESSION["email"] = $email;
+               $_SESSION["username"] = $username;
+               $_SESSION["displayName"] = $displayName;
+               $_SESSION["bio"] = $bio;
+               $_SESSION["profilePic"] = $profilePic;
+             }
+           }
+         }
    }
   ?>
 
