@@ -38,23 +38,23 @@
                               "genres" => $genres ] );
     }
 
-    echo $studios[0]["id"] . "<br>";
-    echo $studios[0]["title"] . "<br>";
-    echo $studios[0]["visibility"] . "<br>";
-    echo $studios[0]["allowFork"] . "<br>";
-    echo $studios[0]["description"] . "<br>";
-    echo $studios[0]["genres"][0] . "<br>";
-    echo $studios[0]["genres"][1] . "<br><br>";
-
-    echo $studios[1]["id"] . "<br>";
-    echo $studios[1]["title"] . "<br>";
-    echo $studios[1]["visibility"] . "<br>";
-    echo $studios[1]["allowFork"] . "<br>";
-    echo $studios[1]["description"] . "<br>";
-    echo $studios[1]["genres"][0] . "<br>";
-    echo $studios[1]["genres"][1] . "<br><br>";
-
-    $_SESSION["users_studios"] = $studios;
+    // echo $studios[0]["id"] . "<br>";
+    // echo $studios[0]["title"] . "<br>";
+    // echo $studios[0]["visibility"] . "<br>";
+    // echo $studios[0]["allowFork"] . "<br>";
+    // echo $studios[0]["description"] . "<br>";
+    // echo $studios[0]["genres"][0] . "<br>";
+    // echo $studios[0]["genres"][1] . "<br><br>";
+    //
+    // echo $studios[1]["id"] . "<br>";
+    // echo $studios[1]["title"] . "<br>";
+    // echo $studios[1]["visibility"] . "<br>";
+    // echo $studios[1]["allowFork"] . "<br>";
+    // echo $studios[1]["description"] . "<br>";
+    // echo $studios[1]["genres"][0] . "<br>";
+    // echo $studios[1]["genres"][1] . "<br><br>";
+    //
+    // $_SESSION["users_studios"] = $studios;
 
   }
 
