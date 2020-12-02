@@ -21,7 +21,7 @@
 <body>
   <!-- Navigation Bar -->
   <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
-    <div class="container"><a class="navbar-brand" href="user-profile.html">JamSesh</a>
+    <div class="container"><a class="navbar-brand" href="user-profile.php">JamSesh</a>
       <div class="collapse navbar-collapse" id="navcol-1">
         <ul class="nav navbar-nav mr-auto">
         </ul>
