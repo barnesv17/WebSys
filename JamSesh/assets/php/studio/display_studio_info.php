@@ -1,7 +1,7 @@
 <?php
   echo "<div id='studio-title-card' class='container-fluid'>";
     echo "<div class='row align-items-center justify-content-between'>";
-      echo "<h1 id='studio-title'>@" . $settings["Username"] . ": " . $settings["Studio Name"] . "</h1>";
+      echo "<h1 id='studio-title'>@" . $_SESSION["username"] . ": " . $settings["Studio Name"] . "</h1>";
       echo "<div class='row justify-content-between'>";
         echo "<form id='favorite-form'>";
           echo "<button class='btn btn-secondary' type='submit'>Favorite <span class='badge badge-light'>4</span>";

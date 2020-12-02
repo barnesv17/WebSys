@@ -1,4 +1,14 @@
 <?php
+
+  // Initialize the session
+  session_start();
+
+  // Check if the user is logged in, if not then redirect him to homepage
+  if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: hompage.php");
+    exit;
+  }
+
   include 'assets/php/db_conn.php';
   include 'assets/php/studio/update_settings.php';
   include 'assets/php/studio/add_instrument.php';
