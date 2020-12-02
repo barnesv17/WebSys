@@ -1,12 +1,41 @@
 <?php
-  // TO DO: Get settings from the database
+  // TO DO: Get user from the database
   $user = [
     "username" => "barnev",
-    "profilePic" => "assets/img/blank-avatar.png",
+    "profilePic" => "assets/img/profile-pictures/profilepic1.jpg",
     "displayName" => "Virginia Barnes",
     "bio" => "this is an example bio",
   ];
  ?>
+
+<!-- Check for edit profile updates -->
+ <?php
+   if( isset($_POST['save-changes'] ) ) {
+
+     // Profile Picture
+     if( isset( $_FILES['profile-pic'] ) ) {
+       if( @mime_content_type($_FILES["profile-pic"]["tmp_name"]) == "image/png" ||
+       @mime_content_type($_FILES["profile-pic"]["tmp_name"]) == "image/jpeg" ) { // check that it is an image
+         $file_name = $_FILES['profile-pic']['name'];
+         move_uploaded_file( $_FILES["profile-pic"]["tmp_name"], "assets/img/profile-pictures/".$file_name );
+         $user["profilePic"] = "assets/img/profile-pictures/".$file_name;
+       }
+     }
+
+     //Bio
+     if( $_POST['bio'] != "" ) {
+       $user["bio"] = $_POST['bio'];
+     }
+     // Display Name
+     if( $_POST['display-name'] != "" ) {
+       $user["displayName"] = $_POST['display-name'];
+     }
+     // Username
+     if( $_POST['username'] != "" ) {
+       $user["username"] = $_POST['username'];
+     }
+   }
+  ?>
 
 <!DOCTYPE html>
 <html lang="en-us">
@@ -46,7 +75,6 @@
           </button>
         </div>
 
-
         <form id="editProfileForm" method='POST' action='user-profile.php' enctype='multipart/form-data'>
           <div class="modal-body">
             <div class="form-group">
@@ -75,12 +103,12 @@
                   echo "<input type='text' name='username' class='form-control' id='usernameInput' placeholder='" . $user["username"] . "'>";
                 echo "</div>";
                ?>
-               
+
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-info" data-dismiss="modal">Save Changes</button>
+            <button type="submit" name='save-changes' value="Submit" class="btn btn-info">Save Changes</button>
           </div>
         </form>
 
@@ -91,12 +119,17 @@
 
   <section class="d-xl-flex flex-row pad">
     <div class="d-flex flex-column text-center bio">
-      <img src="assets/img/blank-avatar.png" alt="profile picture" class="pic">
-      <p class="name">Gabe Wild</p>
-      <p class="subName">@wildg</p>
+
+      <?php
+        echo "<img src='" . $user["profilePic"] . "' alt='profile picture' class='pic'>";
+        echo "<p class='subName'>@" . $user["username"] . "</p>";
+        echo "<p class='name'>" . $user["displayName"] . "</p>";
+        echo "<p class='subName'>" . $user["bio"] . "</p>";
+       ?>
+
       <a data-toggle="modal" data-target="#editProfile" class="btn btn-light action-button changePic" role="button">
-        Edit
-        Profile</a>
+        Edit Profile
+      </a>
       <hr />
       <div class="genreContainer d-flex flex-row">
         <p class="btn btn-light action-button genres">Classical</p>
