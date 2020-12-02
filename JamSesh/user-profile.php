@@ -57,7 +57,7 @@
         <ul class="nav navbar-nav mr-auto">
         </ul>
         <span class="navbar-text actions">
-          <a class="btn btn-light action-button" role="button" href="homepage.php">Log Out</a>
+          <a class="btn btn-light action-button" role="button" href="logout.php">Log Out</a>
         </span>
       </div>
     </div>
@@ -92,7 +92,7 @@
 
                 // Display Name
                 echo "<label for='profileNameInput'>Change Profile Name</label>";
-                echo "<input type='text' name='display-name' class='form-control' id='profileNameInput' placeholder='" . $user["displayName"] . "'>";
+                echo "<input type='text' name='display-name' class='form-control' id='profileNameInput' placeholder='" . $_SESSION["email"] . "'>";
 
                 // Username
                 echo "<label for='usernameInput'>Change Username</label>";
