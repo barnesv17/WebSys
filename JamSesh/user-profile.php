@@ -2,9 +2,9 @@
   // Initialize the session
   session_start();
 
-  // Check if the user is logged in, if not then redirect him to login page
+  // Check if the user is logged in, if not then redirect him to homepage
   if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
+    header("location: hompage.php");
     exit;
   }
 
@@ -131,10 +131,10 @@
     <div class="d-flex flex-column text-center bio">
 
       <?php
-        echo "<img src='" . $user["profilePic"] . "' alt='profile picture' class='pic'>";
-        echo "<p class='subName'>@" . $user["username"] . "</p>";
-        echo "<p class='name'>" . htmlspecialchars($_SESSION["email"]) . "</p>";
-        echo "<p class='subName'>" . $user["bio"] . "</p>";
+        echo "<img src='" . $_SESSION["profilePic"] . "' alt='profile picture' class='pic'>";
+        echo "<p class='subName'>@" . $_SESSION["username"] . "</p>";
+        echo "<p class='name'>" . $_SESSION["displayName"] . "</p>";
+        echo "<p class='subName'>" . $_SESSION["bio"] . "</p>";
        ?>
 
       <a data-toggle="modal" data-target="#editProfile" class="btn btn-light action-button changePic" role="button">
