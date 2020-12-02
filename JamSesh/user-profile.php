@@ -10,59 +10,12 @@
 
   // Include config file
   include 'assets/php/db_conn.php';
-
-  // Fetch all of the users studios
-  // Prepare a select statement
-  $sql = "SELECT id, settings FROM studios WHERE owner = '" . $_SESSION["email"] . "'";
-  $result = $link->query( $sql );
-  if( $result->num_rows > 0 ) {
-
-    $studios = array();
-
-    while( $row = $result->fetch_assoc() ) {
-      // echo "id: " . $row["id"] . " - Settings: " . $row["settings"] . "<br>";
-      $settings = json_decode( $row["settings"] );
-      $title = $settings->{'title'};
-      $visibility = $settings->{'visibility'};
-      $allowFork = $settings->{'allowFork'};
-      $description = $settings->{'description'};
-      $genres = $settings->{'genres'};
-
-
-
-      array_push( $studios, [ "id" => $row["id"],
-                              "title" => $title,
-                              "visibility" => $visibility,
-                              "allowFork" => $allowFork,
-                              "description" => $description,
-                              "genres" => $genres ] );
-    }
-
-    // echo $studios[0]["id"] . "<br>";
-    // echo $studios[0]["title"] . "<br>";
-    // echo $studios[0]["visibility"] . "<br>";
-    // echo $studios[0]["allowFork"] . "<br>";
-    // echo $studios[0]["description"] . "<br>";
-    // echo $studios[0]["genres"][0] . "<br>";
-    // echo $studios[0]["genres"][1] . "<br><br>";
-    //
-    // echo $studios[1]["id"] . "<br>";
-    // echo $studios[1]["title"] . "<br>";
-    // echo $studios[1]["visibility"] . "<br>";
-    // echo $studios[1]["allowFork"] . "<br>";
-    // echo $studios[1]["description"] . "<br>";
-    // echo $studios[1]["genres"][0] . "<br>";
-    // echo $studios[1]["genres"][1] . "<br><br>";
-    //
-    // $_SESSION["users_studios"] = $studios;
-
-  }
-
  ?>
 
 <!-- Check for edit profile updates -->
  <?php
    if( isset($_POST['save-changes'] ) ) {
+     echo "<script>alert( 'Edit Profile Button Clicked' );</script>";
 
      // Profile Picture
      if( isset( $_FILES['profile-pic'] ) ) {
@@ -154,6 +107,67 @@
            }
          }
        }
+
+       // Check if new studio was added
+       if( isset($_POST['create-new-studio'] ) ) {
+         if( empty($_POST["new-title"]) ) {
+           echo "<script>alert( 'Empty Title' );</script>";
+         }
+         else { // Add studio to the database
+           $new_settings = '{ "title" : "' . $_POST["new-title"] . '",
+                              "visibility" : "' . $_POST["new-visibility"] . '",
+                              "allowFork" : "' . $_POST["new-allowFork"] . '",
+                              "description" : "' . $_POST["new-description"] . '",
+                              "genres" : [] }';
+
+          $new_instruments = '{ "instruments": [ ] }';
+
+          $sql = "INSERT INTO studios (owner, instruments, settings) VALUES (?, ?, ?)";
+          if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "sss", $param_email, $param_instruments, $param_settings);
+
+            // Set parameters
+            $param_email = $_SESSION["email"];
+            $param_instruments = $new_instruments;
+            $param_settings = $new_settings;
+
+            // Attempt to execute the prepared statement
+            if(!mysqli_stmt_execute($stmt)){
+                echo "Something went wrong. Please try again later.";
+            }
+          }
+        }
+      }
+
+      // Fetch all of the users studios
+      // Prepare a select statement
+      $sql = "SELECT id, settings FROM studios WHERE owner = '" . $_SESSION["email"] . "'";
+      $result = $link->query( $sql );
+      if( $result->num_rows > 0 ) {
+
+        $studios = array();
+
+        while( $row = $result->fetch_assoc() ) {
+          // echo "id: " . $row["id"] . " - Settings: " . $row["settings"] . "<br>";
+          $settings = json_decode( $row["settings"] );
+          $title = $settings->{'title'};
+          $visibility = $settings->{'visibility'};
+          $allowFork = $settings->{'allowFork'};
+          $description = $settings->{'description'};
+          $genres = $settings->{'genres'};
+
+
+
+          array_push( $studios, [ "id" => $row["id"],
+                                  "title" => $title,
+                                  "visibility" => $visibility,
+                                  "allowFork" => $allowFork,
+                                  "description" => $description,
+                                  "genres" => $genres ] );
+        }
+        $_SESSION["users_studios"] = $studios;
+      }  
   ?>
 
 <!DOCTYPE html>
@@ -230,8 +244,6 @@
             <button type="submit" name='save-changes' value="Submit" class="btn btn-info">Save Changes</button>
           </div>
         </form>
-
-
       </div>
     </div>
   </div>
@@ -242,7 +254,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="editProfileLabel">New Studio</h5>
+          <h5 class="modal-title" id="newStudioLabel">New Studio</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -266,13 +278,13 @@
                 <option>No</option>
               </select><br>
 
-              <label for='descriptionInput'>Studio Bio</label>
+              <label for='descriptionInput'>Studio Description</label>
               <textarea name='new-description' class='form-control' id='new-input' rows='3' maxlength='255'>Description</textarea>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" name='create-new-studio' value="Submit" class="btn btn-info">Save Changes</button>
+            <button type="submit" name='create-new-studio' value="Submit" class="btn btn-info">Create Studio</button>
           </div>
         </form>
       </div>
