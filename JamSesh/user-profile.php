@@ -167,7 +167,7 @@
                                   "genres" => $genres ] );
         }
         $_SESSION["users_studios"] = $studios;
-      }  
+      }
   ?>
 
 <!DOCTYPE html>
@@ -331,15 +331,17 @@
       <?php
         if( $result->num_rows > 0 ) {
           foreach( $_SESSION["users_studios"] as $s ) {
-            echo "<a class='studio' href='studio.php'>";
-              echo "<div class='studioTitle text-left'>" . $s["title"] . "</div>";
-              echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
-              echo "<div class='studioGenres d-flex flex-row'>";
-                foreach( $s["genres"] as $g ) {
-                  echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
-                }
-              echo "</div>";
-            echo "</a>";
+            echo "<form method='POST' action='studio.php'>";
+              echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
+                echo "<div class='studioTitle text-left'>" . $s["title"] . "</div>";
+                echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
+                echo "<div class='studioGenres d-flex flex-row'>";
+                  foreach( $s["genres"] as $g ) {
+                    echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+                  }
+                echo "</div>";
+              echo "</button>";
+            echo "</form>";
           }
         }
        ?>

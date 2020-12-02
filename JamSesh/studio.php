@@ -13,6 +13,34 @@
   include 'assets/php/studio/update_settings.php';
   include 'assets/php/studio/add_instrument.php';
   include 'assets/php/studio/delete_instrument.php';
+
+  if( isset($_POST["studio-clicked"]) ) {
+    $sql = "SELECT instruments, settings FROM studios WHERE id = ?";
+    if($stmt = mysqli_prepare($link, $sql)){
+      // Bind variables to the prepared statement as parameters
+      mysqli_stmt_bind_param($stmt, "i", $param_id);
+      // Set parameters
+      $param_id = $_POST["studio-clicked"];
+      // Attempt to execute the prepared statement
+      if(mysqli_stmt_execute($stmt)){
+        // Store result
+        mysqli_stmt_store_result($stmt);
+        // Check if email exists, if yes then verify password
+        if(mysqli_stmt_num_rows($stmt) == 1){
+          // Bind result variables
+          mysqli_stmt_bind_result($stmt, $instruments, $s);
+          if(mysqli_stmt_fetch($stmt)){
+            $s = json_decode( $s );
+            $title = $s->{'title'};
+            $visibility = $s->{'visibility'};
+            $allowFork = $s->{'allowFork'};
+            $description = $s->{'description'};
+            $genres = $s->{'genres'};
+          }
+        }
+      }
+    }
+  }
 ?>
 
 <!DOCTYPE html>

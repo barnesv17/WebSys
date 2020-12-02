@@ -70,6 +70,11 @@ hr {
   justify-content: space-around;
 }
 
+.studio:hover {
+  text-decoration: none;
+  color: rgb(255,255,255);
+}
+
 .studio {
   justify-content: start;
   margin-top: 10px;
@@ -77,11 +82,6 @@ hr {
   flex: 1 0;
   background: #3aafa9;
   border-radius: 16px;
-  color: rgb(255,255,255);
-}
-
-.studio:hover {
-  text-decoration: none;
   color: rgb(255,255,255);
 }
 
