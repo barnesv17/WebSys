@@ -26,7 +26,7 @@
         <ul class="nav navbar-nav mr-auto">
         </ul>
         <span class="navbar-text actions">
-          <a class="btn btn-light action-button" role="button" href="homepage.html">Log Out</a>
+          <a class="btn btn-light action-button" role="button" href="homepage.php">Log Out</a>
         </span>
       </div>
     </div>
