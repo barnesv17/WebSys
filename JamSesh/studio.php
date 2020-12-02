@@ -18,13 +18,12 @@
   <link rel="stylesheet" href="assets/css/Studio.css">
 </head>
 
-<!-- Navigation Bar -->
 <body>
+  <!-- Navigation Bar -->
   <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
     <div class="container"><a class="navbar-brand" href="user-profile.html">JamSesh</a>
       <div class="collapse navbar-collapse" id="navcol-1">
         <ul class="nav navbar-nav mr-auto">
-          <!-- <li class="nav-item"><a class="nav-link active" href="user-profile.html">Home</a></li> -->
         </ul>
         <span class="navbar-text actions">
           <a class="btn btn-light action-button" role="button" href="homepage.html">Log Out</a>

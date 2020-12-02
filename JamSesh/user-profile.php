@@ -1,21 +1,31 @@
+<?php
+  // TO DO: Get settings from the database
+  $user = [
+    "username" => "barnev",
+    "profilePic" => "assets/img/blank-avatar.png",
+    "displayName" => "Virginia Barnes",
+    "bio" => "this is an example bio",
+  ];
+ ?>
+
 <!DOCTYPE html>
 <html lang="en-us">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>UserProfilePage</title>
+  <title>User Profile Page</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/Homepage-Nav.css">
   <link rel="stylesheet" href="assets/css/User-Profile.css">
 </head>
 
 <body>
+  <!-- Navigation Bar -->
   <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
     <div class="container"><a class="navbar-brand" href="#">JamSesh</a>
       <div class="collapse navbar-collapse" id="navcol-1">
         <ul class="nav navbar-nav mr-auto">
-          <!-- <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> -->
         </ul>
         <span class="navbar-text actions">
           <a class="btn btn-light action-button" role="button" href="homepage.html">Log Out</a>
@@ -35,26 +45,37 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form id="editProfileForm">
+
+
+        <form id="editProfileForm" method='POST' action='user-profile.php' enctype='multipart/form-data'>
           <div class="modal-body">
             <div class="form-group">
-              <label id="firstLabel" for="profilePicInput">Upload Profile Picture</label>
-              <input type="file" class="form-control" id="profilePicInput">
-              <label for="userBioInput">Edit Bio</label>
-              <textarea class="form-control" id="userBioInput" rows="3" maxlength="255"></textarea>
-              <label for="profileNameInput">Change Profile Name</label>
-              <input type="text" class="form-control" id="profileNameInput" placeholder="Gabe Wild">
-              <label for="usernameInput">Change Username</label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">@</div>
-                </div>
-                <input type="text" class="form-control" id="usernameInput" placeholder="wildg">
-              </div>
-              <label for="passwordInput">Change Password</label>
-              <input type="password" class="form-control" id="passwordInput">
-              <label for="passwordConfirmInput">Confirm Password</label>
-              <input type="password" class="form-control" id="passwordConfirmInput">
+
+              <?php
+                // Profile Picture
+                echo "<label id='firstLabel' for='profilePicInput'>Upload Profile Picture</label>";
+                echo "<input type='file' name='profile-pic' class='form-control' id='profilePicInput'>";
+
+                // Bio
+                echo "<label for='userBioInput'>Edit Bio</label>";
+                echo "<textarea name='bio' class='form-control' id='userBioInput' rows='3' maxlength='255'>";
+                echo $user["bio"];
+                echo "</textarea>";
+
+                // Display Name
+                echo "<label for='profileNameInput'>Change Profile Name</label>";
+                echo "<input type='text' name='display-name' class='form-control' id='profileNameInput' placeholder='" . $user["displayName"] . "'>";
+
+                // Username
+                echo "<label for='usernameInput'>Change Username</label>";
+                echo "<div class='input-group'>";
+                  echo "<div class='input-group-prepend'>";
+                    echo "<div class='input-group-text'>@</div>";
+                  echo "</div>";
+                  echo "<input type='text' name='username' class='form-control' id='usernameInput' placeholder='" . $user["username"] . "'>";
+                echo "</div>";
+               ?>
+               
             </div>
           </div>
           <div class="modal-footer">
@@ -62,6 +83,8 @@
             <button type="submit" class="btn btn-info" data-dismiss="modal">Save Changes</button>
           </div>
         </form>
+
+
       </div>
     </div>
   </div>
