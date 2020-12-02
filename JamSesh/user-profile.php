@@ -1,4 +1,13 @@
 <?php
+  // Initialize the session
+  session_start();
+
+  // Check if the user is logged in, if not then redirect him to login page
+  if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+  }
+
   // TO DO: Get user from the database
   $user = [
     "username" => "barnev",
@@ -6,6 +15,7 @@
     "displayName" => "Virginia Barnes",
     "bio" => "this is an example bio",
   ];
+
  ?>
 
 <!-- Check for edit profile updates -->
@@ -92,7 +102,7 @@
 
                 // Display Name
                 echo "<label for='profileNameInput'>Change Profile Name</label>";
-                echo "<input type='text' name='display-name' class='form-control' id='profileNameInput' placeholder='" . $_SESSION["email"] . "'>";
+                echo "<input type='text' name='display-name' class='form-control' id='profileNameInput' placeholder='" . $user["displayName"] . "'>";
 
                 // Username
                 echo "<label for='usernameInput'>Change Username</label>";
@@ -123,7 +133,7 @@
       <?php
         echo "<img src='" . $user["profilePic"] . "' alt='profile picture' class='pic'>";
         echo "<p class='subName'>@" . $user["username"] . "</p>";
-        echo "<p class='name'>" . $user["displayName"] . "</p>";
+        echo "<p class='name'>" . htmlspecialchars($_SESSION["email"]) . "</p>";
         echo "<p class='subName'>" . $user["bio"] . "</p>";
        ?>
 

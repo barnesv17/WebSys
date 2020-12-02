@@ -1,13 +1,4 @@
 <?php
-  // Initialize the session
-  session_start();
-
-  // Check if the user is logged in, if not then redirect him to login page
-  if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
-  }
-
   include 'assets/php/db_conn.php';
   include 'assets/php/studio/update_settings.php';
   include 'assets/php/studio/add_instrument.php';
@@ -35,7 +26,7 @@
         <ul class="nav navbar-nav mr-auto">
         </ul>
         <span class="navbar-text actions">
-          <a class="btn btn-light action-button" role="button" href="homepage.php">Log Out</a>
+          <a class="btn btn-light action-button" role="button" href="logout.php">Log Out</a>
         </span>
       </div>
     </div>
