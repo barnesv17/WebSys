@@ -236,6 +236,49 @@
     </div>
   </div>
 
+  <!-- New Studio Modal -->
+  <div class="modal fade" id="newStudio" tabindex="-1" role="dialog" aria-labelledby="editProfileLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProfileLabel">New Studio</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form id="newStudioForm" method='POST' action='user-profile.php' enctype='multipart/form-data'>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for='titleInput'>Sudio Name</label>
+              <input type='text' name='new-title' class='form-control' placeholder='Title'><br>
+
+              <label for='visibilityInput'>Studio Visibility</label>
+              <select name='new-visibility' class='form-control' id='new-visibilty'>
+                <option>Public</option>
+                <option>Private</option>
+              </select><br>
+
+              <label for='allowForkInput'>Allow Others to Fork</label>
+              <select name='new-allowFork' class='form-control' id='new-allowFork'>
+                <option>Yes</option>
+                <option>No</option>
+              </select><br>
+
+              <label for='descriptionInput'>Studio Bio</label>
+              <textarea name='new-description' class='form-control' id='new-input' rows='3' maxlength='255'>Description</textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" name='create-new-studio' value="Submit" class="btn btn-info">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <section class="d-xl-flex flex-row pad">
     <div class="d-flex flex-column text-center bio">
 
@@ -269,7 +312,8 @@
       <!-- Find a way to not have this container move up whenever a studio is added -->
       <div class="studioHeader d-flex flex-row">
         <h2>Your Studios</h2>
-        <p class="btn btn-light action-button addStudio">New Studio</p>
+        <!-- <p class="btn btn-light action-button addStudio">New Studio</p> -->
+        <a data-toggle="modal" data-target="#newStudio" class="btn btn-light action-button addStudio" role="button">New Studio</a>
       </div>
 
       <?php
