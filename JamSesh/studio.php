@@ -132,7 +132,6 @@
 
     <!-- Settings -->
     <?php include 'assets/php/studio/display_settings_tab.php'; ?>
-
   </div>
 
   <script src="assets/js/jquery.min.js"></script>
@@ -140,5 +139,4 @@
   <script src="assets/js/studio.js"></script>
 
 </body>
-
 </html>
