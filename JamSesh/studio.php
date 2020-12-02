@@ -35,7 +35,7 @@
 
   <!-- Display Studio Name and Description -->
   <?php
-    include 'assets/php/studio/display_settings.php';
+    include 'assets/php/studio/display_studio_info.php';
   ?>
 
   <!-- Navbar Tabs -->
