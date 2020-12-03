@@ -12,7 +12,7 @@
   include 'assets/php/db_conn.php';
  ?>
 
-<!-- Check for edit profile updates -->
+<!-- Check for edit profile updates ------------------------------------------>
  <?php
    if( isset($_POST['save-changes'] ) ) {
 
@@ -107,7 +107,7 @@
          }
        }
 
-       // Check if new studio was added
+       // Check if new studio was added-----------------------------------------
        if( isset($_POST['create-new-studio'] ) ) {
          if( empty($_POST["new-title"]) ) {
            echo "<script>alert( 'Empty Title' );</script>";
@@ -143,30 +143,26 @@
         }
       }
 
-      // Check if a specific studio was cliked
+      // Check if a specific studio was cliked----------------------------------
       if( isset($_POST["studio-clicked"]) ) {
         $_SESSION["studioID"] = $_POST["studio-clicked"];
         header("Location: studio.php");
       }
 
-      // Fetch all of the users studios
-      // Prepare a select statement
+      // Fetch all of the users studios-----------------------------------------
+      $studios = array();
+
+      // Prepare a select statement for studios where this user is the owner
       $sql = "SELECT id, settings FROM studios WHERE owner = '" . $_SESSION["email"] . "'";
       $result = $link->query( $sql );
       if( $result->num_rows > 0 ) {
-
-        $studios = array();
-
         while( $row = $result->fetch_assoc() ) {
-          // echo "id: " . $row["id"] . " - Settings: " . $row["settings"] . "<br>";
           $settings = json_decode( $row["settings"] );
           $title = $settings->{'title'};
           $visibility = $settings->{'visibility'};
           $allowFork = $settings->{'allowFork'};
           $description = $settings->{'description'};
           $genres = $settings->{'genres'};
-
-
 
           array_push( $studios, [ "id" => $row["id"],
                                   "title" => $title,
@@ -175,8 +171,36 @@
                                   "description" => $description,
                                   "genres" => $genres ] );
         }
-        $_SESSION["users_studios"] = $studios;
       }
+
+      // Prepare a select statement for studios where this user is a collaborator
+      $sql2 = "SELECT * FROM collaborators WHERE email = '" . $_SESSION["email"] . "'";
+      if( $result2 = $link->query( $sql2 ) ) {
+        if( $result2->num_rows > 0 ) {
+          while( $row2 = $result2->fetch_assoc() ) {
+            $sql3 = "SELECT id, settings FROM studios WHERE id = " . $row2["studioID"] . "";
+            $result3 = $link->query( $sql3 );
+            if( $result3->num_rows > 0 ) {
+              while( $row3 = $result3->fetch_assoc() ) {
+                $settings = json_decode( $row3["settings"] );
+                $title = $settings->{'title'};
+                $visibility = $settings->{'visibility'};
+                $allowFork = $settings->{'allowFork'};
+                $description = $settings->{'description'};
+                $genres = $settings->{'genres'};
+
+                array_push( $studios, [ "id" => intval($row3["id"]),
+                                        "title" => $title,
+                                        "visibility" => $visibility,
+                                        "allowFork" => $allowFork,
+                                        "description" => $description,
+                                        "genres" => $genres ] );
+              }
+            }
+          }
+        }
+      }
+      $_SESSION["users_studios"] = $studios;
   ?>
 
 <!DOCTYPE html>
@@ -340,7 +364,7 @@
       </div>
 
       <?php
-        if( $result->num_rows > 0 ) {
+        if( @$_SESSION["users_studios"] ) {
           foreach( $_SESSION["users_studios"] as $s ) {
             echo "<form method='POST' action='user-profile.php'>";
               echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";

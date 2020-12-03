@@ -178,7 +178,6 @@
     if( $_POST['add-collab'] != "" ) {
       // Check that the email is in the users DB
       $sql = "SELECT * FROM users WHERE email = '" . $_POST['add-collab'] . "'";
-      echo $sql;
       if( $result = $link->query( $sql ) ) {
         // If it is a registered user, add them to the database
         if( $result->num_rows == 1 ) {
@@ -200,7 +199,7 @@
           }
         }
         else {
-          echo "<script>alert( 'That user does not exist' );</script>";
+          echo "<script>alert( 'Collaborator does not exist' );</script>";
         }
       }
     }
@@ -241,6 +240,21 @@
       array_push( $collaborators, $row["email"] );
     }
   }
+
+  // Find owner of the studio
+  $sql = "SELECT owner FROM studios WHERE id = " . $_SESSION["studioID"] . "";
+  $result = $link->query( $sql );
+  if( $result->num_rows == 1 ) {
+    while( $row = $result->fetch_assoc() ) {
+      $sql2 = "SELECT username FROM users WHERE email = '" . $row["owner"] . "'";
+      $result2 = $link->query( $sql2 );
+      if( $result2->num_rows == 1 ) {
+        while( $row2 = $result2->fetch_assoc() ) {
+          $owner_username = $row2["username"];
+        }
+      }
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -279,7 +293,7 @@
   <?php
     echo "<div id='studio-title-card' class='container-fluid'>";
       echo "<div class='row align-items-center justify-content-between'>";
-        echo "<h1 id='studio-title'>@" . $_SESSION["username"] . ": " . $title . "</h1>";
+        echo "<h1 id='studio-title'>@" . $owner_username . ": " . $title . "</h1>";
         echo "<div class='row justify-content-between'>";
           echo "<form id='favorite-form'>";
             echo "<button class='btn btn-secondary' type='submit'>Favorite <span class='badge badge-light'>4</span>";
