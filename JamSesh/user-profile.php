@@ -151,6 +151,7 @@
 
       // Fetch all of the users studios-----------------------------------------
       $studios = array();
+      $collab_studios = array();
 
       // Prepare a select statement for studios where this user is the owner
       $sql = "SELECT id, settings FROM studios WHERE owner = '" . $_SESSION["email"] . "'";
@@ -178,7 +179,7 @@
       if( $result2 = $link->query( $sql2 ) ) {
         if( $result2->num_rows > 0 ) {
           while( $row2 = $result2->fetch_assoc() ) {
-            $sql3 = "SELECT id, settings FROM studios WHERE id = " . $row2["studioID"] . "";
+            $sql3 = "SELECT id, settings, owner FROM studios WHERE id = " . $row2["studioID"] . "";
             $result3 = $link->query( $sql3 );
             if( $result3->num_rows > 0 ) {
               while( $row3 = $result3->fetch_assoc() ) {
@@ -188,19 +189,29 @@
                 $allowFork = $settings->{'allowFork'};
                 $description = $settings->{'description'};
                 $genres = $settings->{'genres'};
-
-                array_push( $studios, [ "id" => intval($row3["id"]),
+                $owner_email = $row3["owner"];
+                // Find the owner's username
+                $sql4 = "SELECT username FROM users WHERE email = '" . $row3["owner"] . "'";
+                $result4 = $link->query( $sql4 );
+                if( $result4->num_rows == 1 ) {
+                  while( $row4 = $result4->fetch_assoc() ) {
+                    $owner_username = $row4["username"];
+                  }
+                }
+                array_push( $collab_studios, [ "id" => intval($row3["id"]),
                                         "title" => $title,
                                         "visibility" => $visibility,
                                         "allowFork" => $allowFork,
                                         "description" => $description,
-                                        "genres" => $genres ] );
+                                        "genres" => $genres,
+                                        "owner" => $owner_username ] );
               }
             }
           }
         }
       }
       $_SESSION["users_studios"] = $studios;
+      $_SESSION["users_collab_studios"] = $collab_studios;
   ?>
 
 <!DOCTYPE html>
@@ -364,6 +375,7 @@
       </div>
 
       <?php
+        // Display the studios the user owns
         if( @$_SESSION["users_studios"] ) {
           foreach( $_SESSION["users_studios"] as $s ) {
             echo "<form method='POST' action='user-profile.php'>";
@@ -379,6 +391,24 @@
             echo "</form>";
           }
         }
+
+        // Display the studios the user is a collaborator on
+        if( @$_SESSION["users_collab_studios"] ) {
+          foreach( $_SESSION["users_collab_studios"] as $s ) {
+            echo "<form method='POST' action='user-profile.php'>";
+              echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
+                echo "<div class='studioTitle text-left'>@" . $s["owner"] . "/" . $s["title"] . "</div>";
+                echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
+                echo "<div class='studioGenres d-flex flex-row'>";
+                  foreach( $s["genres"] as $g ) {
+                    echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+                  }
+                echo "</div>";
+              echo "</button>";
+            echo "</form>";
+          }
+        }
+
        ?>
     </div>
   </section>

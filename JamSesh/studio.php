@@ -37,15 +37,6 @@
       }
     }
   }
-  // Gather all of the collaborators of a studio
-  $sql = "SELECT email FROM collaborators WHERE studioID = " . $_SESSION["studioID"] . "";
-  $result = $link->query( $sql );
-  if( $result->num_rows > 0 ) {
-    $collaborators = array();
-    while( $row = $result->fetch_assoc() ) {
-      array_push( $collaborators, $row["email"] );
-    }
-  }
 
   // Add instrument-------------------------------------------------------------
   if( isset($_POST['submit']) ) {
@@ -231,7 +222,7 @@
       }
     }
   }
-  // Gather all of the collaborators of a studio
+  // Gather all of the collaborators of a studio--------------------------------
   $sql = "SELECT email FROM collaborators WHERE studioID = " . $_SESSION["studioID"] . "";
   $result = $link->query( $sql );
   if( $result->num_rows > 0 ) {
@@ -241,12 +232,13 @@
     }
   }
 
-  // Find owner of the studio
+  // Find owner of the studio---------------------------------------------------
   $sql = "SELECT owner FROM studios WHERE id = " . $_SESSION["studioID"] . "";
   $result = $link->query( $sql );
   if( $result->num_rows == 1 ) {
     while( $row = $result->fetch_assoc() ) {
       $sql2 = "SELECT username FROM users WHERE email = '" . $row["owner"] . "'";
+      $owner_email = $row["owner"];
       $result2 = $link->query( $sql2 );
       if( $result2->num_rows == 1 ) {
         while( $row2 = $result2->fetch_assoc() ) {
@@ -293,7 +285,7 @@
   <?php
     echo "<div id='studio-title-card' class='container-fluid'>";
       echo "<div class='row align-items-center justify-content-between'>";
-        echo "<h1 id='studio-title'>@" . $owner_username . ": " . $title . "</h1>";
+        echo "<h1 id='studio-title'>" . $title . "</h1>";
         echo "<div class='row justify-content-between'>";
           echo "<form id='favorite-form'>";
             echo "<button class='btn btn-secondary' type='submit'>Favorite <span class='badge badge-light'>4</span>";
@@ -306,13 +298,6 @@
         echo "</div>";
       echo "</div>";
 
-      // Genres
-      echo "<div class='row'>";
-      foreach( $genres as $g ) {
-        echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
-      }
-      echo "</div>";
-
       // Studio Description
       echo "<div class='row'>";
         echo "<div class='col-7'>";
@@ -320,9 +305,22 @@
         echo "</div>";
       echo "</div>";
 
+      // Genres
+      echo "<div class='row'>";
+      foreach( $genres as $g ) {
+        echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+      }
+      echo "</div>";
+
+      // Owner
+      echo "<br>";
+      echo "<div class='row'>";
+        echo "<p class='font-weight-bold'>Owner:&nbsp;</p><p>" . $owner_username . "</p>";
+      echo "</div>";
+
       if( @$collaborators ) {
         echo "<div class='row'>";
-          echo "<p>Collaborators: | ";
+          echo "<p class='font-weight-bold'>Collaborators:&nbsp;</p><p> |&nbsp;";
           foreach( $collaborators as $c ) {
             echo $c. " | ";
           }
@@ -339,10 +337,15 @@
       <a class="nav-link active" id="composition-tab" data-toggle="tab" href="#composition" role="tab"
         aria-controls="composition" aria-selected="true">Composition</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings"
-        aria-selected="false">Settings</a>
-    </li>
+    <?php
+      if( $_SESSION["email"] == $owner_email ) {
+        echo "<li class='nav-item'>";
+          echo "<a class='nav-link' id='settings-tab' data-toggle='tab' href='#settings' role='tab' aria-controls='settings' aria-selected='false'>";
+            echo "Settings";
+          echo "</a>";
+        echo "</li>";
+      }
+     ?>
   </ul>
 
   <!-- Modal for Uploading new file -->
@@ -447,91 +450,93 @@
 
     <!-- Settings -->
     <?php
-      echo "<div class='tab-pane fade' id='settings' role='tabpanel' aria-labelledby='settings-tab'>";
-        echo "<div id='studioSettings' class='container'>";
-          echo "<form action='studio.php' method='POST'>";
+    if( $_SESSION["email"] == $owner_email ) {
+        echo "<div class='tab-pane fade' id='settings' role='tabpanel' aria-labelledby='settings-tab'>";
+          echo "<div id='studioSettings' class='container'>";
+            echo "<form action='studio.php' method='POST'>";
 
-            // Studio Name
-            echo "<div class='form-group'>";
-              echo "<label for='studio-name-input'>Studio Name</label>";
-              echo "<input type='text' name='studio-name' value='" . $title . "'class='form-control' id='studio-name-input'>";
-            echo "</div>";
+              // Studio Name
+              echo "<div class='form-group'>";
+                echo "<label for='studio-name-input'>Studio Name</label>";
+                echo "<input type='text' name='studio-name' value='" . $title . "'class='form-control' id='studio-name-input'>";
+              echo "</div>";
 
-            // Studio Visibility
-            echo "<div class='form-group'>";
-              echo "<label for='studio-visibilty'>Studio Visibility</label>";
-              echo "<select name='studio-visibility' class='form-control' id='studio-visibilty'>";
-              if( $visibility == "Public" ) {
-                echo "<option>Public</option>";
-                echo "<option>Private</option>";
-              }
-              else {
-                echo "<option>Private</option>";
-                echo "<option>Public</option>";
-              }
-              echo "</select>";
-            echo "</div>";
+              // Studio Visibility
+              echo "<div class='form-group'>";
+                echo "<label for='studio-visibilty'>Studio Visibility</label>";
+                echo "<select name='studio-visibility' class='form-control' id='studio-visibilty'>";
+                if( $visibility == "Public" ) {
+                  echo "<option>Public</option>";
+                  echo "<option>Private</option>";
+                }
+                else {
+                  echo "<option>Private</option>";
+                  echo "<option>Public</option>";
+                }
+                echo "</select>";
+              echo "</div>";
 
-            // Allow Fork
-            echo "<div class='form-group'>";
-              echo "<label for='studio-permissions-fork'>Allow Users to Fork Studio</label>";
-              echo "<select name='allow-fork' class='form-control' id='studio-permissions-fork'>";
-              if( $allowFork == "Yes" ) {
-                echo "<option>Yes</option>";
-                echo "<option>No</option>";
-              }
-              else {
-                echo "<option>No</option>";
-                echo "<option>Yes</option>";
-              }
-              echo "</select>";
-            echo "</div>";
+              // Allow Fork
+              echo "<div class='form-group'>";
+                echo "<label for='studio-permissions-fork'>Allow Users to Fork Studio</label>";
+                echo "<select name='allow-fork' class='form-control' id='studio-permissions-fork'>";
+                if( $allowFork == "Yes" ) {
+                  echo "<option>Yes</option>";
+                  echo "<option>No</option>";
+                }
+                else {
+                  echo "<option>No</option>";
+                  echo "<option>Yes</option>";
+                }
+                echo "</select>";
+              echo "</div>";
 
-            // Studio Description
-            echo "<div class='form-group'>";
-              echo "<label for='studio-description-input'>Edit Studio Description</label>";
-              echo "<textarea name='studio-description' class='form-control' id='studio-description-input' rows='3'maxlength='255'>";
-                echo $description;
-              echo "</textarea>";
-            echo "</div>";
+              // Studio Description
+              echo "<div class='form-group'>";
+                echo "<label for='studio-description-input'>Edit Studio Description</label>";
+                echo "<textarea name='studio-description' class='form-control' id='studio-description-input' rows='3'maxlength='255'>";
+                  echo $description;
+                echo "</textarea>";
+              echo "</div>";
 
-            // Add Genres
-            echo "<div class='form-group'>";
-              echo "<label for='studio-genres-input'>Add Genres to the Studio</label>";
-              echo "<select name='add-genre' class='form-control' id='studio-genres-input' multiple>";
-                echo "<option>Avant-Garde</option>";
-                echo "<option>Blues</option>";
-                echo "<option>Children's</option>";
-                echo "<option>Comedy</option>";
-                echo "<option>Classical</option>";
-                echo "<option>Country</option>";
-                echo "<option>Comedy</option>";
-                echo "<option>Easy Listening</option>";
-                echo "<option>Electronic</option>";
-                echo "<option>Folk</option>";
-                echo "<option>Holiday</option>";
-                echo "<option>International</option>";
-                echo "<option>Jazz</option>";
-                echo "<option>R&B</option>";
-                echo "<option>Rap</option>";
-                echo "<option>Reggae</option>";
-                echo "<option>Religious</option>";
-                echo "<option>Stage & Screen</option>";
-                echo "<option>Vocal</option>";
-              echo "</select>";
-            echo "</div>";
+              // Add Genres
+              echo "<div class='form-group'>";
+                echo "<label for='studio-genres-input'>Add Genres to the Studio</label>";
+                echo "<select name='add-genre' class='form-control' id='studio-genres-input' multiple>";
+                  echo "<option>Avant-Garde</option>";
+                  echo "<option>Blues</option>";
+                  echo "<option>Children's</option>";
+                  echo "<option>Comedy</option>";
+                  echo "<option>Classical</option>";
+                  echo "<option>Country</option>";
+                  echo "<option>Comedy</option>";
+                  echo "<option>Easy Listening</option>";
+                  echo "<option>Electronic</option>";
+                  echo "<option>Folk</option>";
+                  echo "<option>Holiday</option>";
+                  echo "<option>International</option>";
+                  echo "<option>Jazz</option>";
+                  echo "<option>R&B</option>";
+                  echo "<option>Rap</option>";
+                  echo "<option>Reggae</option>";
+                  echo "<option>Religious</option>";
+                  echo "<option>Stage & Screen</option>";
+                  echo "<option>Vocal</option>";
+                echo "</select>";
+              echo "</div>";
 
-            // Add Collaborator
-            echo "<div class='form-group'>";
-              echo "<label for='studio-collabs-input'>Add Collaborator to the Studio by Email</label>";
-              echo "<input name='add-collab' type='text' class='form-control' id='studio-collab-input'>";
-            echo "</div>";
+              // Add Collaborator
+              echo "<div class='form-group'>";
+                echo "<label for='studio-collabs-input'>Add Collaborator to the Studio by Email</label>";
+                echo "<input name='add-collab' type='text' class='form-control' id='studio-collab-input'>";
+              echo "</div>";
 
-            // Submit Button
-            echo "<button name='update-settings' type='submit' class='btn btn-info'>Save Changes</button>";
-          echo "</form>";
+              // Submit Button
+              echo "<button name='update-settings' type='submit' class='btn btn-info'>Save Changes</button>";
+            echo "</form>";
+          echo "</div>";
         echo "</div>";
-      echo "</div>";
+      }
     ?>
   </div>
 
