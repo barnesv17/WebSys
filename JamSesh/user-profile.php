@@ -15,7 +15,6 @@
 <!-- Check for edit profile updates -->
  <?php
    if( isset($_POST['save-changes'] ) ) {
-     echo "<script>alert( 'Edit Profile Button Clicked' );</script>";
 
      // Profile Picture
      if( isset( $_FILES['profile-pic'] ) ) {
