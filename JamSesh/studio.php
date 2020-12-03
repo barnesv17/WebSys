@@ -25,14 +25,14 @@
       // Check if email exists, if yes then verify password
       if(mysqli_stmt_num_rows($stmt) == 1){
         // Bind result variables
-        mysqli_stmt_bind_result($stmt, $instruments, $s);
+        mysqli_stmt_bind_result($stmt, $instruments, $settings);
         if(mysqli_stmt_fetch($stmt)){
-          $s = json_decode( $s );
-          $title = $s->{'title'};
-          $visibility = $s->{'visibility'};
-          $allowFork = $s->{'allowFork'};
-          $description = $s->{'description'};
-          $genres = $s->{'genres'};
+          $json_settings = json_decode( $settings );
+          $title = $json_settings->{'title'};
+          $visibility = $json_settings->{'visibility'};
+          $allowFork = $json_settings->{'allowFork'};
+          $description = $json_settings->{'description'};
+          $genres = $json_settings->{'genres'};
         }
       }
     }
@@ -98,12 +98,72 @@
      }
     }
     // Remove from DB
-    $updated_instruments = json_encode($json_instruments);
+    $updated_instruments = json_encode( $json_instruments);
     $sql = "UPDATE studios SET instruments='" . $updated_instruments . "' WHERE id=" . $_SESSION["studioID"];
     if ($link->query($sql) === TRUE) {
       // echo "Record updated successfully";
     } else {
       // echo "Error updating record: " . $link->error;
+    }
+  }
+
+  // Update Settings------------------------------------------------------------
+  if( isset( $_POST['update-settings'] ) ) {
+
+    // Studio Name
+    if( $_POST['studio-name'] == "" ) {
+      echo "<script>alert( 'Please enter a Studio Name' );</script>";
+    }
+    else { // update studio name in the database
+      $json_settings->{'title'} = $_POST['studio-name'];
+      $updated_settings = json_encode( $json_settings );
+      $sql = "UPDATE studios SET settings='" . $updated_settings . "' WHERE id=" . $_SESSION["studioID"];
+      if ($link->query($sql) === TRUE) {
+        // echo "Record updated successfully";
+      } else {
+        // echo "Error updating record: " . $link->error;
+      }
+    }
+
+    // Studio Visibility
+    $json_settings->{'visibility'} = $_POST['studio-visibility'];
+    $updated_settings = json_encode( $json_settings );
+    $sql = "UPDATE studios SET settings='" . $updated_settings . "' WHERE id=" . $_SESSION["studioID"];
+    if ($link->query($sql) === TRUE) {
+      // echo "Record updated successfully";
+    } else {
+      // echo "Error updating record: " . $link->error;
+    }
+
+    // Allow Fork
+    $json_settings->{'allowFork'} = $_POST['allow-fork'];
+    $updated_settings = json_encode( $json_settings );
+    $sql = "UPDATE studios SET settings='" . $updated_settings . "' WHERE id=" . $_SESSION["studioID"];
+    if ($link->query($sql) === TRUE) {
+      // echo "Record updated successfully";
+    } else {
+      // echo "Error updating record: " . $link->error;
+    }
+
+    //Studio Description
+    $json_settings->{'description'} = $_POST['studio-description'];
+    $updated_settings = json_encode( $json_settings );
+    $sql = "UPDATE studios SET settings='" . $updated_settings . "' WHERE id=" . $_SESSION["studioID"];
+    if ($link->query($sql) === TRUE) {
+      // echo "Record updated successfully";
+    } else {
+      // echo "Error updating record: " . $link->error;
+    }
+
+    if( $_POST['add-genre'] != "" ) {
+      array_push($json_settings->{'genres'}, $_POST['add-genre'] );
+      $updated_settings = json_encode( $json_settings );
+      $sql = "UPDATE studios SET settings='" . $updated_settings . "' WHERE id=" . $_SESSION["studioID"];
+      if ($link->query($sql) === TRUE) {
+        // echo "Record updated successfully";
+      } else {
+        // echo "Error updating record: " . $link->error;
+      }
     }
   }
 
@@ -121,20 +181,18 @@
       // Check if email exists, if yes then verify password
       if(mysqli_stmt_num_rows($stmt) == 1){
         // Bind result variables
-        mysqli_stmt_bind_result($stmt, $instruments, $s);
+        mysqli_stmt_bind_result($stmt, $instruments, $settings);
         if(mysqli_stmt_fetch($stmt)){
-          $s = json_decode( $s );
-          $title = $s->{'title'};
-          $visibility = $s->{'visibility'};
-          $allowFork = $s->{'allowFork'};
-          $description = $s->{'description'};
-          $genres = $s->{'genres'};
+          $json_settings = json_decode( $settings );
+          $title = $json_settings->{'title'};
+          $visibility = $json_settings->{'visibility'};
+          $allowFork = $json_settings->{'allowFork'};
+          $description = $json_settings->{'description'};
+          $genres = $json_settings->{'genres'};
         }
       }
     }
   }
-
-  include 'assets/php/studio/update_settings.php';
 ?>
 
 <!DOCTYPE html>
@@ -310,7 +368,67 @@
     </div>
 
     <!-- Settings -->
-    <?php include 'assets/php/studio/display_settings_tab.php'; ?>
+    <?php
+      echo "<div class='tab-pane fade' id='settings' role='tabpanel' aria-labelledby='settings-tab'>";
+        echo "<div id='studioSettings' class='container'>";
+          echo "<form action='studio.php' method='POST'>";
+
+            // Studio Name
+            echo "<div class='form-group'>";
+              echo "<label for='studio-name-input'>Studio Name</label>";
+              echo "<input type='text' name='studio-name' value='" . $title . "'class='form-control' id='studio-name-input'>";
+            echo "</div>";
+
+            // Studio Visibility
+            echo "<div class='form-group'>";
+              echo "<label for='studio-visibilty'>Studio Visibility</label>";
+              echo "<select name='studio-visibility' class='form-control' id='studio-visibilty'>";
+              if( $visibility == "Public" ) {
+                echo "<option>Public</option>";
+                echo "<option>Private</option>";
+              }
+              else {
+                echo "<option>Private</option>";
+                echo "<option>Public</option>";
+              }
+              echo "</select>";
+            echo "</div>";
+
+            // Allow Fork
+            echo "<div class='form-group'>";
+              echo "<label for='studio-permissions-fork'>Allow Users to Fork Studio</label>";
+              echo "<select name='allow-fork' class='form-control' id='studio-permissions-fork'>";
+              if( $allowFork == "Yes" ) {
+                echo "<option>Yes</option>";
+                echo "<option>No</option>";
+              }
+              else {
+                echo "<option>No</option>";
+                echo "<option>Yes</option>";
+              }
+              echo "</select>";
+            echo "</div>";
+
+            // Studio Description
+            echo "<div class='form-group'>";
+              echo "<label for='studio-description-input'>Edit Studio Description</label>";
+              echo "<textarea name='studio-description' class='form-control' id='studio-description-input' rows='3'maxlength='255'>";
+                echo $description;
+              echo "</textarea>";
+            echo "</div>";
+
+            // Add Genres
+            echo "<div class='form-group'>";
+              echo "<label for='studio-genres-input'>Add Genre to the Studio</label>";
+              echo "<input name='add-genre' type='text' class='form-control' id='studio-genres-input'>";
+            echo "</div>";
+
+            // Submit Button
+            echo "<button name='update-settings' type='submit' class='btn btn-info'>Save Changes</button>";
+          echo "</form>";
+        echo "</div>";
+      echo "</div>";
+    ?>
   </div>
 
   <script src="assets/js/jquery.min.js"></script>
