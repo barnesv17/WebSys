@@ -73,8 +73,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             header("location: user-profile.php");
                         } else{
                             // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
-                            echo "<script>alert( 'The password you entered was not valid.' );</script>";
+                            $password_err = "The username and/or password you entered is incorrect.";
+                            echo "<script>alert( 'The username and/or password you entered is incorrect' );</script>";
                         }
                     }
                 } else{

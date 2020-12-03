@@ -37,6 +37,33 @@
       }
     }
   }
+  // Gather all of the collaborators of a studio
+  $sql = "SELECT email FROM collaborators WHERE studioID = '" . $_SESSION["studioID"] . "'";
+  // $result = $link->query( $sql );
+  // if( $result->num_rows > 0 ) {
+  //
+  //   $studios = array();
+  //
+  //   while( $row = $result->fetch_assoc() ) {
+  //     // echo "id: " . $row["id"] . " - Settings: " . $row["settings"] . "<br>";
+  //     $settings = json_decode( $row["settings"] );
+  //     $title = $settings->{'title'};
+  //     $visibility = $settings->{'visibility'};
+  //     $allowFork = $settings->{'allowFork'};
+  //     $description = $settings->{'description'};
+  //     $genres = $settings->{'genres'};
+  //
+  //
+  //
+  //     array_push( $studios, [ "id" => $row["id"],
+  //                             "title" => $title,
+  //                             "visibility" => $visibility,
+  //                             "allowFork" => $allowFork,
+  //                             "description" => $description,
+  //                             "genres" => $genres ] );
+  //   }
+  //   $_SESSION["users_studios"] = $studios;
+  // }
 
   // Add instrument-------------------------------------------------------------
   if( isset($_POST['submit']) ) {
