@@ -438,7 +438,6 @@
         else {
           echo "<p>You have not favorited any studios</p>";
         }
-
        ?>
     </div>
   </section>
