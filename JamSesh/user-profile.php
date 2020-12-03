@@ -436,7 +436,7 @@
           }
         }
         else {
-          echo "<p>No favorited studios found</p>";
+          echo "<p>You have not favorited any studios</p>";
         }
 
        ?>
