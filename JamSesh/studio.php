@@ -372,9 +372,16 @@
             }
           echo "</form>";
           echo "<form action='studio.php' method='POST' id='fork-form'>";
-            echo "<button class='btn btn-secondary' name='fork' type='submit'>Fork&nbsp;";
-            echo "<span class='badge badge-light'>" . $forks . "</span>";
-            echo "</button>";
+            if( $allowFork == "No" ) {
+              echo "<button class='btn btn-secondary invisible' name='fork' type='submit'>Fork&nbsp;";
+              echo "<span class='badge badge-light'>" . $forks . "</span>";
+              echo "</button>";
+            }
+            else {
+              echo "<button class='btn btn-secondary' name='fork' type='submit'>Fork&nbsp;";
+              echo "<span class='badge badge-light'>" . $forks . "</span>";
+              echo "</button>";
+            }
           echo "</form>";
         echo "</div>";
       echo "</div>";
