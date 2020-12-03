@@ -220,19 +220,6 @@
     </div>
   </div>
 
-
-    <!-- <div class="container text-center bottomIcons flex-row">
-      <i class="fa fa-user"></i>
-      <i class="fa fa-microphone"></i>
-      <i class="fa fa-play-circle-o"></i>
-    </div> -->
-    <!-- <div class="container flex-row text-center d-xl-flex justify-content-xl-center align-items-xl-center">
-      <p id="leftDesc">Create a personalized account alongside millions of other developers</p>
-      <p id="middleDesc">Upload audio recordings for each instrument's part to your Studio</p>
-      <p id="rightDesc">Play your recordings individually or together to test a piece's sound</p>
-    </div>
-  </div> -->
-
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="assets/js/bs-init.js"></script>
