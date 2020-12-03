@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="assets/css/Admin.css">
   <script defer src="assets/js/jquery.min.js"></script>
   <script defer src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script defer src="assets/bootstrap/js/admin.js"></script>
 </head>
 
 <body>
@@ -106,38 +107,37 @@
   </nav>
 
   <main>
-      <div class="sub">
-        <h3>User Management</h3>
-        <p>
-          Navigate to Users on the left panel.
-          For each user, information listed in the row include username, displayed name, email, number of studios, and an option to delete user.
-        </p>
-      </div>
-      <div class="sub">
-        <h3>Studios Management</h3>
-        <p>
-          Navigate to Studios on the left panel.
-          For each studio, information listed in the row include studio title, visibility, fork allowance status, and an option to delete studio.
-          Click to inspect more information about instruments, genres, and description.
-        </p>
-      </div>
-      <div class="sub">
-        <h3>Genres Management</h3>
-        <p>
-          Navigate to Genres on the left panel.
-          Studio titles will be listed under each genre column, click in for detailed information for specific studio.
-        </p>
-      </div>
-      <div class="sub">
-        <h3>System Info</h3>
-        <p>
-          Navigate to System on the left panel.
-          Information about database and server provider, version, and etc.
-        </p>
-      </div>
+    <div class="sub">
+      <h3>User Management</h3>
+      <p>
+        Navigate to Users on the left panel.
+        For each user, information listed in the row include username, displayed name, email, number of studios, and an option to delete user.
+      </p>
+    </div>
+    <div class="sub">
+      <h3>Studios Management</h3>
+      <p>
+        Navigate to Studios on the left panel.
+        For each studio, information listed in the row include studio title, visibility, fork allowance status, and an option to delete studio.
+        Click to inspect more information about instruments, genres, and description.
+      </p>
+    </div>
+    <div class="sub">
+      <h3>Genres Management</h3>
+      <p>
+        Navigate to Genres on the left panel.
+        Studio titles will be listed under each genre column, click in for detailed information for specific studio.
+      </p>
+    </div>
+    <div class="sub">
+      <h3>System Info</h3>
+      <p>
+        Navigate to System on the left panel.
+        Information about database and server provider, version, and etc.
+      </p>
+    </div>
 
-    </main>
-  </div>
+  </main>
 
   
 </body>
