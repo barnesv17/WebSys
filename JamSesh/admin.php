@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/Homepage-Nav.css">
   <link rel="stylesheet" href="assets/css/User-Profile.css">
-  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/Admin.css">
   <script defer src="assets/js/jquery.min.js"></script>
   <script defer src="assets/bootstrap/js/bootstrap.min.js"></script>
 </head>
