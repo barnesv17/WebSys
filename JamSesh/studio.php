@@ -11,6 +11,54 @@
 
   include 'assets/php/db_conn.php';
 
+  // Fork Button Functionality--------------------------------------------------
+  if( isset($_POST['fork']) ) {
+    // Get all of the attributes for the current studio
+    $sql = "SELECT * FROM studios WHERE id = " . $_SESSION["studioID"] . "";
+    $result = $link->query( $sql );
+    if( $result->num_rows == 1 ) {
+      while( $row = $result->fetch_assoc() ) {
+        $old_instruments = $row["instruments"];
+        $old_settings = $row["settings"];
+      }
+      // Insert a copy of this studio with the current session's email as the owner
+      $sql = "INSERT INTO studios (owner, instruments, settings) VALUES (?, ?, ?)";
+      if($stmt = mysqli_prepare($link, $sql)){
+        // Bind variables to the prepared statement as parameters
+        mysqli_stmt_bind_param($stmt, "sss", $param_email, $param_instruments, $param_settings);
+        // Set parameters
+        $param_email = $_SESSION["email"];
+        $param_instruments = $old_instruments;
+        $param_settings = $old_settings;
+        // Attempt to execute the prepared statement
+        if(!mysqli_stmt_execute($stmt)){
+            echo "Something went wrong. Please try again later.";
+        }
+        else {
+          $last_id = $link->insert_id;
+          // Add one to the number of forks of the current studio
+          $sql = "SELECT forks FROM studios WHERE id = " . $_SESSION["studioID"] . "";
+          $result = $link->query( $sql );
+          if( $result->num_rows == 1 ) {
+            while( $row = $result->fetch_assoc() ) {
+              $old_forks = $row["forks"];
+            }
+          }
+          $sql = "UPDATE studios SET forks = " . ($old_forks+1) . " WHERE id = " . $_SESSION["studioID"] . "";
+          if($stmt = mysqli_prepare($link, $sql)){
+             // Attempt to execute the prepared statement
+             if( !mysqli_stmt_execute( $stmt ) ) {
+               echo "Oops! Something went wrong. Please try again later.";
+             }
+           }
+          // Direct to the new forked studio page
+          $_SESSION["studioID"] = $last_id;
+          header("Location: studio.php");
+        }
+      }
+    }
+  }
+
   // Collect information on the studio from the DB------------------------------
   $sql = "SELECT instruments, settings FROM studios WHERE id = ?";
   if($stmt = mysqli_prepare($link, $sql)){
@@ -197,7 +245,7 @@
   }
 
   // Collect information on the studio from the DB------------------------------
-  $sql = "SELECT instruments, settings FROM studios WHERE id = ?";
+  $sql = "SELECT instruments, settings, forks FROM studios WHERE id = ?";
   if($stmt = mysqli_prepare($link, $sql)){
     // Bind variables to the prepared statement as parameters
     mysqli_stmt_bind_param($stmt, "i", $param_id);
@@ -210,7 +258,7 @@
       // Check if email exists, if yes then verify password
       if(mysqli_stmt_num_rows($stmt) == 1){
         // Bind result variables
-        mysqli_stmt_bind_result($stmt, $instruments, $settings);
+        mysqli_stmt_bind_result($stmt, $instruments, $settings, $forks);
         if(mysqli_stmt_fetch($stmt)){
           $json_settings = json_decode( $settings );
           $title = $json_settings->{'title'};
@@ -223,6 +271,7 @@
     }
   }
   // Gather all of the collaborators of a studio--------------------------------
+  // echo "HERE:" . $_SESSION["studioID"];
   $sql = "SELECT email FROM collaborators WHERE studioID = " . $_SESSION["studioID"] . "";
   $result = $link->query( $sql );
   if( $result->num_rows > 0 ) {
@@ -286,13 +335,24 @@
     echo "<div id='studio-title-card' class='container-fluid'>";
       echo "<div class='row align-items-center justify-content-between'>";
         echo "<h1 id='studio-title'>" . $title . "</h1>";
+
         echo "<div class='row justify-content-between'>";
-          echo "<form id='favorite-form'>";
-            echo "<button class='btn btn-secondary' type='submit'>Favorite <span class='badge badge-light'>4</span>";
-            echo "</button>";
+          echo "<form action='studio.php' method='POST' id='favorite-form'>";
+            // Only display favorite and fork if you are not an owner
+            if( $_SESSION["email"] == $owner_email ) {
+              echo "<button class='btn btn-secondary invisible' name='favorite' type='submit'>Favorite&nbsp;";
+              echo "<span class='badge badge-light'>4</span>";
+              echo "</button>";
+            }
+            else {
+              echo "<button class='btn btn-secondary' name='favorite' type='submit'>Favorite&nbsp;";
+              echo "<span class='badge badge-light'>4</span>";
+              echo "</button>";
+            }
           echo "</form>";
-          echo "<form id='fork-form'>";
-            echo "<button class='btn btn-secondary' type='submit'>Fork <span class='badge badge-light'>0</span>";
+          echo "<form action='studio.php' method='POST' id='fork-form'>";
+            echo "<button class='btn btn-secondary' name='fork' type='submit'>Fork&nbsp;";
+            echo "<span class='badge badge-light'>" . $forks . "</span>";
             echo "</button>";
           echo "</form>";
         echo "</div>";
@@ -315,14 +375,14 @@
       // Owner
       echo "<br>";
       echo "<div class='row'>";
-        echo "<p class='font-weight-bold'>Owner:&nbsp;</p><p>" . $owner_username . "</p>";
+        echo "<p class='font-weight-bold'>Owner:&nbsp;</p><p>@" . $owner_username . "</p>";
       echo "</div>";
 
       if( @$collaborators ) {
         echo "<div class='row'>";
           echo "<p class='font-weight-bold'>Collaborators:&nbsp;</p><p> |&nbsp;";
           foreach( $collaborators as $c ) {
-            echo $c. " | ";
+            echo "@" . $c. " | ";
           }
           echo "</p>";
         echo "</div>";
