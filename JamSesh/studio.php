@@ -70,9 +70,9 @@
         $updated_instruments = json_encode($json_instruments);
         $sql = "UPDATE studios SET instruments='" . $updated_instruments . "' WHERE id=" . $_SESSION["studioID"];
         if ($link->query($sql) === TRUE) {
-          echo "Record updated successfully";
+          // echo "Record updated successfully";
         } else {
-          echo "Error updating record: " . $link->error;
+          // echo "Error updating record: " . $link->error;
         }
       }
       else { // If the filename is not unique
@@ -101,9 +101,9 @@
     $updated_instruments = json_encode($json_instruments);
     $sql = "UPDATE studios SET instruments='" . $updated_instruments . "' WHERE id=" . $_SESSION["studioID"];
     if ($link->query($sql) === TRUE) {
-      echo "Record updated successfully";
+      // echo "Record updated successfully";
     } else {
-      echo "Error updating record: " . $link->error;
+      // echo "Error updating record: " . $link->error;
     }
   }
 

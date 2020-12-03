@@ -113,7 +113,7 @@
          if( empty($_POST["new-title"]) ) {
            echo "<script>alert( 'Empty Title' );</script>";
          }
-         else { // Add studio to the database
+         else { // Add studio directory and to the database
            $new_settings = '{ "title" : "' . $_POST["new-title"] . '",
                               "visibility" : "' . $_POST["new-visibility"] . '",
                               "allowFork" : "' . $_POST["new-allowFork"] . '",
@@ -135,6 +135,10 @@
             // Attempt to execute the prepared statement
             if(!mysqli_stmt_execute($stmt)){
                 echo "Something went wrong. Please try again later.";
+            }
+            else {
+              $last_id = $link->insert_id;
+              mkdir( "studios/" . $last_id );
             }
           }
         }
