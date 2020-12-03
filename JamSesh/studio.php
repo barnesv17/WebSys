@@ -203,6 +203,7 @@
       // echo "Error updating record: " . $link->error;
     }
 
+    // Add genre
     if( $_POST['add-genre'] != "" ) {
       array_push($json_settings->{'genres'}, $_POST['add-genre'] );
       $updated_settings = json_encode( $json_settings );
@@ -214,6 +215,7 @@
       }
     }
 
+    // Add collab
     if( $_POST['add-collab'] != "" ) {
       // Check that the email is in the users DB
       $sql = "SELECT * FROM users WHERE email = '" . $_POST['add-collab'] . "'";
@@ -239,6 +241,18 @@
         }
         else {
           echo "<script>alert( 'Collaborator does not exist' );</script>";
+        }
+      }
+    }
+
+    // Remove collab
+    if( $_POST["remove-collab"] != "n/a" ) {
+      // find and remove the studio and email in the collaborators table
+      $sql = "DELETE FROM collaborators WHERE studioID = " . $_SESSION["studioID"] . " AND email = '" . $_POST["remove-collab"] . "'";
+      if($stmt = mysqli_prepare($link, $sql)){
+        // Attempt to execute the prepared statement
+        if(!mysqli_stmt_execute($stmt)){
+            echo "Something went wrong. Please try again later.";
         }
       }
     }
@@ -271,13 +285,20 @@
     }
   }
   // Gather all of the collaborators of a studio--------------------------------
-  // echo "HERE:" . $_SESSION["studioID"];
   $sql = "SELECT email FROM collaborators WHERE studioID = " . $_SESSION["studioID"] . "";
   $result = $link->query( $sql );
   if( $result->num_rows > 0 ) {
-    $collaborators = array();
+    $collaborators_emails = array();
+    $collaborators_usernames = array();
     while( $row = $result->fetch_assoc() ) {
-      array_push( $collaborators, $row["email"] );
+      array_push( $collaborators_emails, $row["email"] );
+      $sql2 = "SELECT username FROM users WHERE email = '" . $row["email"] . "'";
+      $result2 = $link->query( $sql2 );
+      if( $result2->num_rows > 0 ) {
+        while( $row2 = $result2->fetch_assoc() ) {
+          array_push( $collaborators_usernames, $row2["username"] );
+        }
+      }
     }
   }
 
@@ -378,10 +399,10 @@
         echo "<p class='font-weight-bold'>Owner:&nbsp;</p><p>@" . $owner_username . "</p>";
       echo "</div>";
 
-      if( @$collaborators ) {
+      if( @$collaborators_usernames ) {
         echo "<div class='row'>";
           echo "<p class='font-weight-bold'>Collaborators:&nbsp;</p><p> |&nbsp;";
-          foreach( $collaborators as $c ) {
+          foreach( $collaborators_usernames as $c ) {
             echo "@" . $c. " | ";
           }
           echo "</p>";
@@ -589,6 +610,18 @@
               echo "<div class='form-group'>";
                 echo "<label for='studio-collabs-input'>Add Collaborator to the Studio by Email</label>";
                 echo "<input name='add-collab' type='text' class='form-control' id='studio-collab-input'>";
+              echo "</div>";
+
+              // Remove Collaborator
+              echo "<div class='form-group'>";
+                echo "<label for='remove-collab'>Remove Collaborator</label>";
+                echo "<select name='remove-collab' class='form-control' id='remove-collab'>";
+                  echo "<option>n/a</option>";
+                // Display all emails of collaborators
+                foreach( $collaborators_emails as $e ) {
+                  echo "<option>" . $e . "</option>";
+                }
+                echo "</select>";
               echo "</div>";
 
               // Submit Button
