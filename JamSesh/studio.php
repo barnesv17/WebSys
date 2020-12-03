@@ -10,37 +10,106 @@
   }
 
   include 'assets/php/db_conn.php';
-  include 'assets/php/studio/update_settings.php';
-  include 'assets/php/studio/add_instrument.php';
-  include 'assets/php/studio/delete_instrument.php';
 
-  if( isset($_POST["studio-clicked"]) ) {
-    $sql = "SELECT instruments, settings FROM studios WHERE id = ?";
-    if($stmt = mysqli_prepare($link, $sql)){
-      // Bind variables to the prepared statement as parameters
-      mysqli_stmt_bind_param($stmt, "i", $param_id);
-      // Set parameters
-      $param_id = $_POST["studio-clicked"];
-      // Attempt to execute the prepared statement
-      if(mysqli_stmt_execute($stmt)){
-        // Store result
-        mysqli_stmt_store_result($stmt);
-        // Check if email exists, if yes then verify password
-        if(mysqli_stmt_num_rows($stmt) == 1){
-          // Bind result variables
-          mysqli_stmt_bind_result($stmt, $instruments, $s);
-          if(mysqli_stmt_fetch($stmt)){
-            $s = json_decode( $s );
-            $title = $s->{'title'};
-            $visibility = $s->{'visibility'};
-            $allowFork = $s->{'allowFork'};
-            $description = $s->{'description'};
-            $genres = $s->{'genres'};
-          }
+  // Collect information on the studio from the DB------------------------------
+  $sql = "SELECT instruments, settings FROM studios WHERE id = ?";
+  if($stmt = mysqli_prepare($link, $sql)){
+    // Bind variables to the prepared statement as parameters
+    mysqli_stmt_bind_param($stmt, "i", $param_id);
+    // Set parameters
+    $param_id = $_SESSION["studioID"];
+    // Attempt to execute the prepared statement
+    if(mysqli_stmt_execute($stmt)){
+      // Store result
+      mysqli_stmt_store_result($stmt);
+      // Check if email exists, if yes then verify password
+      if(mysqli_stmt_num_rows($stmt) == 1){
+        // Bind result variables
+        mysqli_stmt_bind_result($stmt, $instruments, $s);
+        if(mysqli_stmt_fetch($stmt)){
+          $s = json_decode( $s );
+          $title = $s->{'title'};
+          $visibility = $s->{'visibility'};
+          $allowFork = $s->{'allowFork'};
+          $description = $s->{'description'};
+          $genres = $s->{'genres'};
         }
       }
     }
   }
+
+  // Add instrument-------------------------------------------------------------
+  if( isset($_POST['submit']) ) {
+    //-Form Validation---------------------------------------------------------
+    if( isset($_POST['newFileName']) == false || $_POST['newFileName'] == "" ) { // If no name was given for the file
+      echo "<script>alert( 'Please name the file' );</script>";
+    }
+    else if( isset($_FILES['fileToUpload']) == false ||
+     @mime_content_type($_FILES["fileToUpload"]["tmp_name"]) != "audio/x-m4a" ) { // If no file was uplaoded or a file of the wrong type
+      echo "<script>alert( 'Please upload a file of type: mp3' );</script>";
+    }
+    else {
+      //-Check that the filename is not already in use-------------------------
+      $json_instruments = json_decode( $instruments );
+      $in_names = $json_instruments->{'names'};
+      $in_files = $json_instruments->{'files'};
+      $match = false;
+      for( $i=0; $i < count($in_names); $i++ ) {
+       if( $_POST['newFileName'] == $in_names[$i] ) {
+         $match = true;
+       }
+      }
+      if( $match == false ) {
+        // If everything was inputted correctly, upload the file
+        $file_name = $_FILES['fileToUpload']['name'];
+        $target_file = "studios/" . $_SESSION["studioID"] . "/" . $_POST['newFileName'] . ".mp3";
+        move_uploaded_file( $_FILES["fileToUpload"]["tmp_name"], $target_file );
+        // update the db
+        array_push($json_instruments->{'names'}, $_POST['newFileName']);
+        array_push($json_instruments->{'files'}, $target_file);
+        $updated_instruments = json_encode($json_instruments);
+        $sql = "UPDATE studios SET instruments='" . $updated_instruments . "' WHERE id=" . $_SESSION["studioID"];
+        if ($link->query($sql) === TRUE) {
+          echo "Record updated successfully";
+        } else {
+          echo "Error updating record: " . $link->error;
+        }
+      }
+      else { // If the filename is not unique
+        echo "<script>alert( 'Please choose a unique file name' );</script>";
+      }
+    }
+  }
+
+  // Collect information on the studio from the DB------------------------------
+  $sql = "SELECT instruments, settings FROM studios WHERE id = ?";
+  if($stmt = mysqli_prepare($link, $sql)){
+    // Bind variables to the prepared statement as parameters
+    mysqli_stmt_bind_param($stmt, "i", $param_id);
+    // Set parameters
+    $param_id = $_SESSION["studioID"];
+    // Attempt to execute the prepared statement
+    if(mysqli_stmt_execute($stmt)){
+      // Store result
+      mysqli_stmt_store_result($stmt);
+      // Check if email exists, if yes then verify password
+      if(mysqli_stmt_num_rows($stmt) == 1){
+        // Bind result variables
+        mysqli_stmt_bind_result($stmt, $instruments, $s);
+        if(mysqli_stmt_fetch($stmt)){
+          $s = json_decode( $s );
+          $title = $s->{'title'};
+          $visibility = $s->{'visibility'};
+          $allowFork = $s->{'allowFork'};
+          $description = $s->{'description'};
+          $genres = $s->{'genres'};
+        }
+      }
+    }
+  }
+
+  include 'assets/php/studio/update_settings.php';
+  include 'assets/php/studio/delete_instrument.php';
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +141,35 @@
 
   <!-- Display Studio Name and Description -->
   <?php
-    include 'assets/php/studio/display_studio_info.php';
+    echo "<div id='studio-title-card' class='container-fluid'>";
+      echo "<div class='row align-items-center justify-content-between'>";
+        echo "<h1 id='studio-title'>@" . $_SESSION["username"] . ": " . $title . "</h1>";
+        echo "<div class='row justify-content-between'>";
+          echo "<form id='favorite-form'>";
+            echo "<button class='btn btn-secondary' type='submit'>Favorite <span class='badge badge-light'>4</span>";
+            echo "</button>";
+          echo "</form>";
+          echo "<form id='fork-form'>";
+            echo "<button class='btn btn-secondary' type='submit'>Fork <span class='badge badge-light'>0</span>";
+            echo "</button>";
+          echo "</form>";
+        echo "</div>";
+      echo "</div>";
+
+      // Genres
+      echo "<div class='row'>";
+      foreach( $genres as $g ) {
+        echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+      }
+      echo "</div>";
+
+      // Studio Description
+      echo "<div class='row'>";
+        echo "<div class='col-7'>";
+          echo "<p>" . $description . "</p>";
+        echo "</div>";
+      echo "</div>";
+    echo "</div>";
   ?>
 
   <!-- Navbar Tabs -->
@@ -129,7 +226,7 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="instrumentInput1">Instrument Name</label>
-              <input type="text" class="form-control" id="instrumentInput1" name="name">
+              <input type="text" class="form-control" id="instrumentInput1" name="newFileName">
               <label for="choosefile2">Choose File</label>
               <input type="file" class="form-control-file" id="choosefile2" name="fileToUpload">
             </div>
@@ -156,7 +253,27 @@
             </tr>
           </thead>
           <tbody>
-            <?php include 'assets/php/studio/display_instruments.php'; ?>
+            <?php
+              $json_instruments = json_decode( $instruments );
+              $in_names = $json_instruments->{'names'};
+              $in_files = $json_instruments->{'files'};
+
+              for( $i=0; $i < count($in_names); $i++ ) {
+                echo "<tr>";
+                  echo "<th scope='row'>";
+                  echo $in_names[$i];
+                  echo "<form action='studio.php' method='POST' enctype='multipart/form-data'>";
+                    echo "<button type='submit' name='trashcan' value='" . $in_names[$i] . "'>";
+                      echo "<img class='trashcan' src='assets/img/trashcan.png'/>";
+                    echo "</button>";
+                  echo "</form>";
+                  echo "</th>";
+                  echo "<td><audio class='mp3' controls>";
+                    echo "<source src='". $in_files[$i] ."'>";
+                  echo "</audio></td>";
+                  echo "</tr>";
+              }
+             ?>
           </tbody>
         </table>
       </div>

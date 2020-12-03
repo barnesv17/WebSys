@@ -140,6 +140,12 @@
         }
       }
 
+      // Check if a specific studio was cliked
+      if( isset($_POST["studio-clicked"]) ) {
+        $_SESSION["studioID"] = $_POST["studio-clicked"];
+        header("Location: studio.php");
+      }
+
       // Fetch all of the users studios
       // Prepare a select statement
       $sql = "SELECT id, settings FROM studios WHERE owner = '" . $_SESSION["email"] . "'";
@@ -331,7 +337,7 @@
       <?php
         if( $result->num_rows > 0 ) {
           foreach( $_SESSION["users_studios"] as $s ) {
-            echo "<form method='POST' action='studio.php'>";
+            echo "<form method='POST' action='user-profile.php'>";
               echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
                 echo "<div class='studioTitle text-left'>" . $s["title"] . "</div>";
                 echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";

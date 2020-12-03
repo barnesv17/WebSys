@@ -1,25 +1,20 @@
 <?php
-  $studioID = 1; //TO DO: find the proper ID for the studio
-  $studioPath = "studios/".$studioID;
-  $mp3s = scandir( $studioPath );
-  // Remove the . and ..
-  array_shift( $mp3s );
-  array_shift( $mp3s );
-  // Display each Instrument
-  foreach( $mp3s as $mp3 ) {
-    $name = substr( $mp3, 0, -4 );
-    // echo "<tr data-toggle='modal' data-target='#uploadFile'>";
+  $instruments = json_decode( $instruments );
+  $in_names = $instruments->{'names'};
+  $in_files = $instruments->{'files'};
+
+  for( $i=0; $i < count($in_names); $i++ ) {
     echo "<tr>";
       echo "<th scope='row'>";
-      echo $name;
+      echo $in_names[$i];
       echo "<form action='studio.php' method='POST' enctype='multipart/form-data'>";
-        echo "<button type='submit' name='trashcan' value='" . $name . "'>";
+        echo "<button type='submit' name='trashcan' value='" . $in_names[$i] . "'>";
           echo "<img class='trashcan' src='assets/img/trashcan.png'/>";
         echo "</button>";
       echo "</form>";
       echo "</th>";
       echo "<td><audio class='mp3' controls>";
-        echo "<source src='".$studioPath."/".$mp3."'>";
+        echo "<source src='". $in_files[$i] ."'>";
       echo "</audio></td>";
       echo "</tr>";
   }

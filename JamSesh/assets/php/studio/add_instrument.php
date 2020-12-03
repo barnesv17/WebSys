@@ -1,7 +1,7 @@
 <?php
  if( isset($_POST['submit']) ) {
    //-Form Validation---------------------------------------------------------
-   if( isset($_POST['name']) == false || $_POST['name'] == "" ) { // If no name was given for the file
+   if( isset($_POST['newFileName']) == false || $_POST['newFileName'] == "" ) { // If no name was given for the file
      echo "<script>alert( 'Please name the file' );</script>";
    }
    else if( isset($_FILES['fileToUpload']) == false ||
@@ -10,27 +10,30 @@
    }
    else {
      //-Check that the filename is not already in use-------------------------
-     $studioID = 1; //TO DO: find the proper ID for the studio
-     $studioPath = "studios/".$studioID;
-     $mp3s = scandir( $studioPath );
-     array_shift( $mp3s ); array_shift( $mp3s ); // Remove the . and ..
+     $instruments = json_decode( $instruments );
+     $in_names = $instruments->{'names'};
+     $in_files = $instruments->{'files'};
      $match = false;
-     foreach( $mp3s as $mp3 ) {
-       $name = substr( $mp3, 0, -4 );
-       if( $name == $_POST['name'] ) {
-         $match = true;
-       }
+     for( $i=0; $i < count($in_names); $i++ ) {
+      if( $_POST['newFileName'] == $in_names[i] ) {
+        $match = true;
+      }
      }
      if( $match == false ) {
        // If everything was inputted correctly, upload the file
        $file_name = $_FILES['fileToUpload']['name'];
-       $target_file = $studioPath . "/" . $_POST['name'] . ".mp3";
+       $target_file = "studios/" . $_POST["studio-clicked"] . "/" . $_POST['newFileName'] . ".mp3";
        move_uploaded_file( $_FILES["fileToUpload"]["tmp_name"], $target_file );
+       // update the db
+       array_push($in_names, $_POST['newFileName']);
+       array_push($in_files, $target_file);
+       var_dump($in_names); echo "<br>"; var_dump($in_files);
+
+
      }
      else { // If the filename is not unique
        echo "<script>alert( 'Please choose a unique file name' );</script>";
      }
    }
-   $_POST = array(); // Reset inputs to be blank
  }
  ?>
