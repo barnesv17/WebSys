@@ -318,14 +318,16 @@
       <div class="genreContainer d-flex flex-row">
         <?php
           $all_genres = array();
-          foreach( $_SESSION["users_studios"] as $s ) {
-            foreach( $s["genres"] as $g ) {
-              array_push( $all_genres, $g );
+          if( @$_SESSION["users_studios"] ) {
+            foreach( $_SESSION["users_studios"] as $s ) {
+              foreach( $s["genres"] as $g ) {
+                array_push( $all_genres, $g );
+              }
             }
-          }
-          $all_genres = array_unique( $all_genres );
-          foreach( $all_genres as $g ) {
-            echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+            $all_genres = array_unique( $all_genres );
+            foreach( $all_genres as $g ) {
+              echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+            }
           }
          ?>
       </div>
