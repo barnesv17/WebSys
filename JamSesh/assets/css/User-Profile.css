@@ -83,6 +83,7 @@ hr {
   background: #3aafa9;
   border-radius: 16px;
   color: rgb(255,255,255);
+  width: 100%;
 }
 
 .studioTitle {

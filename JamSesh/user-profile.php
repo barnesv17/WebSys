@@ -367,15 +367,13 @@
       </div>
     </div>
     <div class="d-flex flex-column text-center studioSection">
-      <!-- Find a way to not have this container move up whenever a studio is added -->
+
+      <!-- Display the studios the user owns -->
       <div class="studioHeader d-flex flex-row">
         <h2>Your Studios</h2>
-        <!-- <p class="btn btn-light action-button addStudio">New Studio</p> -->
         <a data-toggle="modal" data-target="#newStudio" class="btn btn-light action-button addStudio" role="button">New Studio</a>
       </div>
-
       <?php
-        // Display the studios the user owns
         if( @$_SESSION["users_studios"] ) {
           foreach( $_SESSION["users_studios"] as $s ) {
             echo "<form method='POST' action='user-profile.php'>";
@@ -391,8 +389,14 @@
             echo "</form>";
           }
         }
+        else {
+          echo "<p>No Studios Yet</p>";
+        }
 
         // Display the studios the user is a collaborator on
+        echo "<div class='studioHeader d-flex flex-row'>";
+          echo "<h2>Collaborator Studios</h2>";
+        echo "</div>";
         if( @$_SESSION["users_collab_studios"] ) {
           foreach( $_SESSION["users_collab_studios"] as $s ) {
             echo "<form method='POST' action='user-profile.php'>";
@@ -407,6 +411,32 @@
               echo "</button>";
             echo "</form>";
           }
+        }
+        else {
+          echo "<p>You are not a collaborator on any studios</p>";
+        }
+
+        // Display the studios the user has favorited
+        echo "<div class='studioHeader d-flex flex-row'>";
+          echo "<h2>Favorited Studios</h2>";
+        echo "</div>";
+        if( @$_SESSION["favorited-studios"] ) {
+          foreach( $_SESSION["users_collab_studios"] as $s ) {
+            echo "<form method='POST' action='user-profile.php'>";
+              echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
+                echo "<div class='studioTitle text-left'>@" . $s["owner"] . "/" . $s["title"] . "</div>";
+                echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
+                echo "<div class='studioGenres d-flex flex-row'>";
+                  foreach( $s["genres"] as $g ) {
+                    echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+                  }
+                echo "</div>";
+              echo "</button>";
+            echo "</form>";
+          }
+        }
+        else {
+          echo "<p>No favorited studios found</p>";
         }
 
        ?>
