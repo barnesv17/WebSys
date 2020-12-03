@@ -2,7 +2,7 @@
   include 'assets/php/db_conn.php';
 
   // Define variables and initialize with empty values
-  $email = $password = $confirm_password = "";
+  $email = $password = $confirm_password = $username ="";
   $email_err = $password_err = $confirm_password_err = "";
 
   if( $_SERVER["REQUEST_METHOD"] == "POST" ) {
@@ -40,6 +40,15 @@
       }
     }
 
+    // Validate username
+    if(empty(trim($_POST["username"]))) {
+      $username_err = "Please enter a username";
+      echo "<script>alert( 'Please enter a username' );</script>";
+    }
+    else {
+      $username = trim($_POST["username"]);
+    }
+
     // Validate password
     if(empty(trim($_POST["password"]))){
         $password_err = "Please enter a password.";
@@ -64,16 +73,17 @@
     }
 
     // Check input errors before inserting in database
-    if(empty($email_err) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($email_err) && empty($password_err) && empty($username_err) && empty($confirm_password_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO users (email, password) VALUES (?, ?)";
+        $sql = "INSERT INTO users (email, password, username) VALUES (?, ?, ?)";
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_email, $param_password);
+            mysqli_stmt_bind_param($stmt, "sss", $param_email, $param_password, $param_username);
 
             // Set parameters
             $param_email = $email;
             $param_password = password_hash( $password, PASSWORD_DEFAULT );
+            $param_username = $username;
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -166,6 +176,9 @@
           <h2 class="text-center" id="create">Create an account.</h2>
           <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>" id="email">
             <input class="form-control" type="email" name="email" placeholder="Email" value="<?php echo $email; ?>">
+          </div>
+          <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>" id="username">
+            <input class="form-control" type="username" name="username" placeholder="Username" value="<?php echo $username; ?>">
           </div>
           <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>" id="password">
             <input class="form-control" type="password" name="password" placeholder="Password" value="<?php echo $password; ?>">
