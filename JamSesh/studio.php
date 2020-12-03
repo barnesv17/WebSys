@@ -174,6 +174,36 @@
         // echo "Error updating record: " . $link->error;
       }
     }
+
+    if( $_POST['add-collab'] != "" ) {
+      // Check that the email is in the users DB
+      $sql = "SELECT * FROM users WHERE email = '" . $_POST['add-collab'] . "'";
+      echo $sql;
+      if( $result = $link->query( $sql ) ) {
+        // If it is a registered user, add them to the database
+        if( $result->num_rows == 1 ) {
+          $sql = "INSERT INTO collaborators VALUES (?, ?)";
+          if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "is", $param_studioID, $param_collab_email);
+            // Set parameters
+            $param_studioID = $_SESSION["studioID"];
+            $param_collab_email = $_POST['add-collab'];
+
+            // Attempt to execute the prepared statement
+            if(!mysqli_stmt_execute($stmt)){
+                echo "Something went wrong. Please try again later.";
+            }
+            else {
+              echo "It worked";
+            }
+          }
+        }
+        else {
+          echo "<script>alert( 'That user does not exist' );</script>";
+        }
+      }
+    }
   }
 
   // Collect information on the studio from the DB------------------------------
@@ -200,6 +230,15 @@
           $genres = $json_settings->{'genres'};
         }
       }
+    }
+  }
+  // Gather all of the collaborators of a studio
+  $sql = "SELECT email FROM collaborators WHERE studioID = " . $_SESSION["studioID"] . "";
+  $result = $link->query( $sql );
+  if( $result->num_rows > 0 ) {
+    $collaborators = array();
+    while( $row = $result->fetch_assoc() ) {
+      array_push( $collaborators, $row["email"] );
     }
   }
 ?>
@@ -441,6 +480,12 @@
             echo "<div class='form-group'>";
               echo "<label for='studio-genres-input'>Add Genre to the Studio</label>";
               echo "<input name='add-genre' type='text' class='form-control' id='studio-genres-input'>";
+            echo "</div>";
+
+            // Add Collaborator
+            echo "<div class='form-group'>";
+              echo "<label for='studio-collabs-input'>Add Collaborator to the Studio by Email</label>";
+              echo "<input name='add-collab' type='text' class='form-control' id='studio-collab-input'>";
             echo "</div>";
 
             // Submit Button
