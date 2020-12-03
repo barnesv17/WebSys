@@ -1,0 +1,24 @@
+.mainBodyContainer {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    padding: 10px;
+}
+
+.searchBarContainer {
+    display: flex;
+    align-self: center;
+    padding: 10px;
+}
+
+.searchBar { 
+    text-indent: 30px; 
+    border-radius: 16px;
+}
+
+.fa-search { 
+    padding-top: 5px;
+    padding-left: 13px;
+    position: absolute;
+    border-radius: 16px;
+}
