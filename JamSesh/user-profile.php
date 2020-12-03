@@ -120,7 +120,7 @@
                               "description" : "' . $_POST["new-description"] . '",
                               "genres" : [] }';
 
-          $new_instruments = '{ "instruments": [ ] }';
+          $new_instruments = '{ "names" : [], "files" : [] }';
 
           $sql = "INSERT INTO studios (owner, instruments, settings) VALUES (?, ?, ?)";
           if($stmt = mysqli_prepare($link, $sql)){
