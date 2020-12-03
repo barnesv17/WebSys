@@ -252,8 +252,13 @@
   <title>JamSesh - Studio</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/chosen/chosen.min.css">
   <link rel="stylesheet" href="assets/css/Homepage-Nav.css">
   <link rel="stylesheet" href="assets/css/Studio.css">
+  <script src="assets/js/jquery.min.js" defer></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js" defer></script>
+  <script src="assets/js/studio.js" defer></script>
+  <script src="assets/chosen/chosen.jquery.min.js" defer></script>
 </head>
 
 <body>
@@ -478,8 +483,28 @@
 
             // Add Genres
             echo "<div class='form-group'>";
-              echo "<label for='studio-genres-input'>Add Genre to the Studio</label>";
-              echo "<input name='add-genre' type='text' class='form-control' id='studio-genres-input'>";
+              echo "<label for='studio-genres-input'>Add Genres to the Studio</label>";
+              echo "<select name='add-genre' class='form-control' id='studio-genres-input' multiple>";
+                echo "<option>Avant-Garde</option>";
+                echo "<option>Blues</option>";
+                echo "<option>Children's</option>";
+                echo "<option>Comedy</option>";
+                echo "<option>Classical</option>";
+                echo "<option>Country</option>";
+                echo "<option>Comedy</option>";
+                echo "<option>Easy Listening</option>";
+                echo "<option>Electronic</option>";
+                echo "<option>Folk</option>";
+                echo "<option>Holiday</option>";
+                echo "<option>International</option>";
+                echo "<option>Jazz</option>";
+                echo "<option>R&B</option>";
+                echo "<option>Rap</option>";
+                echo "<option>Reggae</option>";
+                echo "<option>Religious</option>";
+                echo "<option>Stage & Screen</option>";
+                echo "<option>Vocal</option>";
+              echo "</select>";
             echo "</div>";
 
             // Add Collaborator
@@ -495,10 +520,6 @@
       echo "</div>";
     ?>
   </div>
-
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/studio.js"></script>
 
 </body>
 </html>
