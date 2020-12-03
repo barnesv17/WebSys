@@ -81,6 +81,32 @@
     }
   }
 
+  // Delete Instrument----------------------------------------------------------
+  if( isset($_POST['trashcan']) ) {
+    $json_instruments = json_decode( $instruments );
+    $in_names = $json_instruments->{'names'};
+    $in_files = $json_instruments->{'files'};
+    $json_instruments->{'names'} = array();
+    $json_instruments->{'files'} = array();
+    for( $i=0; $i < count($in_names); $i++ ) {
+     if( $_POST['trashcan'] != $in_names[$i] ) {
+       array_push( $json_instruments->{'names'}, $in_names[$i] );
+       array_push( $json_instruments->{'files'}, $in_files[$i] );
+     }
+     else {
+       unlink( "studios/" . $_SESSION["studioID"] . "/" . $_POST['trashcan'] . ".mp3" );
+     }
+    }
+    // Remove from DB
+    $updated_instruments = json_encode($json_instruments);
+    $sql = "UPDATE studios SET instruments='" . $updated_instruments . "' WHERE id=" . $_SESSION["studioID"];
+    if ($link->query($sql) === TRUE) {
+      echo "Record updated successfully";
+    } else {
+      echo "Error updating record: " . $link->error;
+    }
+  }
+
   // Collect information on the studio from the DB------------------------------
   $sql = "SELECT instruments, settings FROM studios WHERE id = ?";
   if($stmt = mysqli_prepare($link, $sql)){
@@ -109,7 +135,6 @@
   }
 
   include 'assets/php/studio/update_settings.php';
-  include 'assets/php/studio/delete_instrument.php';
 ?>
 
 <!DOCTYPE html>
