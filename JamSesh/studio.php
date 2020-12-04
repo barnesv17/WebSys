@@ -80,9 +80,17 @@
           $visibility = $json_settings->{'visibility'};
           $allowFork = $json_settings->{'allowFork'};
           $description = $json_settings->{'description'};
-          $genres = $json_settings->{'genres'};
         }
       }
+    }
+  }
+  $sql = "SELECT genre FROM genres WHERE studioID = " . $_SESSION["studioID"] . ";";
+  $result = $link->query($sql);
+  $genres = [];
+  mysqli_fetch_all($result, MYSQLI_NUM);
+  foreach ($result as $res) {
+    foreach ($res as $r) {
+      array_push($genres, $r);
     }
   }
 
@@ -205,13 +213,19 @@
 
     // Add genre
     if( $_POST['add-genre'] != "" ) {
-      array_push($json_settings->{'genres'}, $_POST['add-genre'] );
-      $updated_settings = json_encode( $json_settings );
-      $sql = "UPDATE studios SET settings='" . $updated_settings . "' WHERE id=" . $_SESSION["studioID"];
+      $sql = "DELETE FROM genres WHERE " . $_SESSION["studioID"] . " = studioID"; 
       if ($link->query($sql) === TRUE) {
         // echo "Record updated successfully";
       } else {
         // echo "Error updating record: " . $link->error;
+      }
+      foreach ($_POST['add-genre'] as $genre) {
+        $sql = "INSERT IGNORE INTO genres VALUES (" . $_SESSION["studioID"] . ", '" . mysqli_real_escape_string($link, $genre) . "')";
+        if ($link->query($sql) === TRUE) {
+          // echo "Record updated successfully";
+        } else {
+          // echo "Error updating record: " . $link->error;
+        }
       }
     }
 
@@ -279,9 +293,17 @@
           $visibility = $json_settings->{'visibility'};
           $allowFork = $json_settings->{'allowFork'};
           $description = $json_settings->{'description'};
-          $genres = $json_settings->{'genres'};
         }
       }
+    }
+  }
+  $sql = "SELECT genre FROM genres WHERE studioID = " . $_SESSION["studioID"] . ";";
+  $result = $link->query($sql);
+  $genres = [];
+  mysqli_fetch_all($result, MYSQLI_NUM);
+  foreach ($result as $res) {
+    foreach ($res as $r) {
+      array_push($genres, $r);
     }
   }
   // Gather all of the collaborators of a studio--------------------------------
@@ -589,27 +611,26 @@
 
               // Add Genres
               echo "<div class='form-group'>";
-                echo "<label for='studio-genres-input'>Add Genres to the Studio</label>";
-                echo "<select name='add-genre' class='form-control' id='studio-genres-input' multiple>";
-                  echo "<option>Avant-Garde</option>";
-                  echo "<option>Blues</option>";
-                  echo "<option>Children's</option>";
-                  echo "<option>Comedy</option>";
-                  echo "<option>Classical</option>";
-                  echo "<option>Country</option>";
-                  echo "<option>Comedy</option>";
-                  echo "<option>Easy Listening</option>";
-                  echo "<option>Electronic</option>";
-                  echo "<option>Folk</option>";
-                  echo "<option>Holiday</option>";
-                  echo "<option>International</option>";
-                  echo "<option>Jazz</option>";
-                  echo "<option>R&B</option>";
-                  echo "<option>Rap</option>";
-                  echo "<option>Reggae</option>";
-                  echo "<option>Religious</option>";
-                  echo "<option>Stage & Screen</option>";
-                  echo "<option>Vocal</option>";
+                echo "<label for='studio-genres-input'>Pick Genres for the Studio</label>";
+                echo "<select name='add-genre[]' class='form-control' id='studio-genres-input' multiple>";
+                  echo "<option id='Avant-Garde'>Avant-Garde</option>";
+                  echo "<option id='Blues'>Blues</option>";
+                  echo "<option id='Children'>Children's</option>";
+                  echo "<option id='Classical'>Classical</option>";
+                  echo "<option id='Comedy'>Comedy</option>";
+                  echo "<option id='Country'>Country</option>";
+                  echo "<option id='Easy-Listening'>Easy Listening</option>";
+                  echo "<option id='Electronic'>Electronic</option>";
+                  echo "<option id='Folk'>Folk</option>";
+                  echo "<option id='Holiday'>Holiday</option>";
+                  echo "<option id='International'>International</option>";
+                  echo "<option id='Jazz'>Jazz</option>";
+                  echo "<option id='R&B'>R&B</option>";
+                  echo "<option id='Rap'>Rap</option>";
+                  echo "<option id='Reggae'>Reggae</option>";
+                  echo "<option id='Religious'>Religious</option>";
+                  echo "<option id='Score'>Score</option>";
+                  echo "<option id='Vocal'>Vocal</option>";
                 echo "</select>";
               echo "</div>";
 

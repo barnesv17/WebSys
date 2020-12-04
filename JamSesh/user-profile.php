@@ -137,6 +137,8 @@
             }
             else {
               $last_id = $link->insert_id;
+              echo "HERE";
+              echo "<script>console.log(HERE);</script>";
               mkdir( "studios/" . $last_id );
             }
           }
