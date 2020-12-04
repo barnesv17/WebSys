@@ -2,22 +2,16 @@
 :root {
   font-size: 16px;
   font-family: 'Open Sans';
-  --text-primary: #b6b6b6;
-  --text-secondary: #ececec;
-  --bg-primary: #23232e;
-  --bg-secondary: #141418;
-  --transition-speed: 600ms;
 }
 
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #cecece;
 }
 
 body::-webkit-scrollbar {
-  width: 0.25rem;
+  width: 0.35rem;
 }
 
 body::-webkit-scrollbar-track {
@@ -25,31 +19,42 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background: #6649b8;
+  background: rgb(6, 245, 233);
 }
 
-/* main {
-  margin-left: 5rem;
-} */
+#main {
+  position: relative;
+}
 
 .sub {
-  padding-top: 10px;
-  padding-bottom: 12vh;
+  padding-top: 20px;
+  padding-bottom: 6vh;
   border: 1px solid rgba(255,255,255,0.18);
   background-color: #ffffff;
   padding-left: 15%;
   padding-right: 30%;
 }
 
-.sub h3 {
-  font-weight: bold;
-  color: rgb(60, 201, 194);
+.tb {
+  padding-top: 50px;
+  padding-bottom: 6vh;
+  border: 1px solid rgba(255,255,255,0.18);
+  background-color: #ffffff;
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
+.sub h3, .tb h3 {
+  font-weight: bold;
+  color: rgb(63, 63, 63);
+}
+
+
+
 .sidebar {
-  position: fixed;
-  background-color: #3d3a3a;
+  background-color: #585858;
   height: 100vh;
+  position: absolute;
 }
 
 .nav {
@@ -59,24 +64,20 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
 }
 
 .nav-item, .ins {
   width: 100%;
 }
 
-.ins {
-  margin-top: 30vh;
-}
 
 .link {
   display: flex;
   align-items: center;
-  height: 5rem;
   filter: grayscale(100%) opacity(0.7);
+  height: 8rem;
+  font-size: 1.1rem;
   
-  font-size: 1.2rem;
 }
 
 .link:hover {
@@ -86,20 +87,30 @@ body::-webkit-scrollbar-thumb {
 
 .link-text {
   display: none;
-  margin-left: 0.5rem;
-  color: rgb(60, 201, 194)
+  margin-left: 0.2rem;
+  color: rgb(60, 201, 194);
+  /* Adding destyling for buttons */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.link-text:focus {
+  outline: none;
 }
 
 .link svg {
-  width: 2.3rem;
+  width: 2.0rem;
   min-width: 2rem;
   margin: 0 1.5rem;
 }
 
 .sidebar:hover {
-  width: 16rem;
+  width: 13rem;
 }
 
 .sidebar:hover .link-text {
   display: inline;
 }
+
