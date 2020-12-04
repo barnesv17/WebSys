@@ -44,3 +44,7 @@
   color: #f0f0f0;
   background: #37434d;
 }
+
+.navbar .container {
+  max-width: 100%;
+}
