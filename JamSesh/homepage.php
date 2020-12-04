@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Check if email exists, if yes then verify password
         if (mysqli_stmt_num_rows($stmt) == 1) {
           // Bind result variables
-          mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password, $username, $displayName, $bio, $profilePic);
+          mysqli_stmt_bind_result($stmt, $email, $hashed_password, $username, $displayName, $bio, $profilePic);
           if (mysqli_stmt_fetch($stmt)) {
             session_start();
 
