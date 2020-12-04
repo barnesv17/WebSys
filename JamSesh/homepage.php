@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // Direct to the user-profile page
     // Prepare a select statement
-    $sql = "SELECT id, email, password, username, displayName, bio, profilePic FROM users WHERE email = ?";
+    $sql = "SELECT email, password, username, displayName, bio, profilePic FROM users WHERE email = ?";
     if ($stmt = mysqli_prepare($link, $sql)) {
       // Bind variables to the prepared statement as parameters
       mysqli_stmt_bind_param($stmt, "s", $param_email);
@@ -116,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Store data in session variables
             $_SESSION["loggedin"] = true;
-            $_SESSION["id"] = $id;
+            // $_SESSION["id"] = $id;
             $_SESSION["email"] = $email;
             $_SESSION["username"] = $username;
             $_SESSION["displayName"] = $displayName;
