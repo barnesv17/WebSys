@@ -33,7 +33,7 @@ include 'assets/php/db_conn.php';
 
 <body>
   <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
-    <div class="container"><a class="navbar-brand" href="homepage.php">JamSesh</a>
+    <div class="container"><a class="navbar-brand" href="user-profile.php">JamSesh</a>
       <div class="collapse navbar-collapse" id="navcol-1">
         <ul class="nav navbar-nav mr-auto">
           <!-- <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> -->
