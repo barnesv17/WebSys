@@ -22,6 +22,8 @@ try {
     header("location: /JamSesh/admin.php");
     exit;
   }
+
+  $conn->close();
 }  catch(Exception $e) {
   echo $e->getMessage();
 }

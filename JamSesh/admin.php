@@ -71,7 +71,7 @@
           <form action="admin.php" method="post"><input type='submit' class="link-text" name='options' value='Studios'/></form>
         </div>
       </li>
-      <li class='nav-item'>
+      <!-- <li class='nav-item'>
         <div class="link">
           <svg 
             aria-hidden="true"
@@ -82,13 +82,13 @@
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 512 512"
             class="svg-inline--fa fa-book-open fa-w-14 fa-5x"
-          >
+          > -->
             <!-- Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->
-            <path d="M542.22 32.05c-54.8 3.11-163.72 14.43-230.96 55.59-4.64 2.84-7.27 7.89-7.27 13.17v363.87c0 11.55 12.63 18.85 23.28 13.49 69.18-34.82 169.23-44.32 218.7-46.92 16.89-.89 30.02-14.43 30.02-30.66V62.75c.01-17.71-15.35-31.74-33.77-30.7zM264.73 87.64C197.5 46.48 88.58 35.17 33.78 32.05 15.36 31.01 0 45.04 0 62.75V400.6c0 16.24 13.13 29.78 30.02 30.66 49.49 2.6 149.59 12.11 218.77 46.95 10.62 5.35 23.21-1.94 23.21-13.46V100.63c0-5.29-2.62-10.14-7.27-12.99z"/>
+            <!-- <path d="M542.22 32.05c-54.8 3.11-163.72 14.43-230.96 55.59-4.64 2.84-7.27 7.89-7.27 13.17v363.87c0 11.55 12.63 18.85 23.28 13.49 69.18-34.82 169.23-44.32 218.7-46.92 16.89-.89 30.02-14.43 30.02-30.66V62.75c.01-17.71-15.35-31.74-33.77-30.7zM264.73 87.64C197.5 46.48 88.58 35.17 33.78 32.05 15.36 31.01 0 45.04 0 62.75V400.6c0 16.24 13.13 29.78 30.02 30.66 49.49 2.6 149.59 12.11 218.77 46.95 10.62 5.35 23.21-1.94 23.21-13.46V100.63c0-5.29-2.62-10.14-7.27-12.99z"/>
           </svg>
           <input type='submit' class="link-text" name='options' value='Genres'/>
         </div>
-      </li>
+      </li> -->
       <li class='nav-item'>
         <div class='link' id='system'>
           <svg 
@@ -144,13 +144,13 @@
         Click to inspect more information about instruments, genres, and description.
       </p>
     </div>
-    <div class="sub">
+    <!-- <div class="sub">
       <h3>Genres Management</h3>
       <p>
         Navigate to Genres on the left panel.
         Studio titles will be listed under each genre column, click in for detailed information for specific studio.
       </p>
-    </div>
+    </div> -->
     <div class="sub" id='lastSub'>
       <h3>System Info</h3>
       <p>
@@ -197,7 +197,7 @@
 
       echo "<div class='tb' id='studioinfo'>";
         echo "<h3> Studios</h3>";
-        echo "<table class='table' border='1'>";
+        echo "<table class='table'>";
         echo "<thead class='thead-dark'>";
         echo "<tr>";
         echo "<th colspan='2'>Owner</th>";
@@ -218,7 +218,7 @@
         echo "<td>" . $settings->{'title'} . "</td>";
         echo "<td>" . $settings->{'visibility'} . "</td>";
         echo "<td>" . $settings->{'allowFork'} . "</td>";
-        echo "<td><a href='./assets/php/delete.php?dstudio=". $row['id'] ."'>Delete</a></td>";
+        echo "<td><a class='del' href='./assets/php/delete.php?dstudio={$row['id']}'>Delete</a></td>";
         echo "</tr>";
       }
       echo "</table>";
@@ -267,13 +267,7 @@
     }  catch(Exception $e) {
       echo $e->getMessage();
     }
+    $conn->close();
   ?>
-  <script>
-    window.onload = function () {
-        function delrow (id){
-            document.getElementbyId(id).remove();
-        }
-    }
-  </script>
 </body>
 </html>

@@ -44,6 +44,10 @@ body::-webkit-scrollbar-thumb {
   padding-right: 15%;
 }
 
+.del {
+  color: #c52222;
+}
+
 .sub h3, .tb h3 {
   font-weight: bold;
   color: rgb(63, 63, 63);
