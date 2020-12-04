@@ -59,6 +59,29 @@ include 'assets/php/db_conn.php';
         <div>
           <form action="search.php" method="POST">
             <input class="form-control my-0 py-1 searchBar" type="text" placeholder="Search" name="searchBar" value='<?php echo isset($_POST['searchBar']) ? $_POST['searchBar'] : ''; ?>' aria-label="Search">
+            <?php
+              // Pick genres bar
+              echo "<select name='add-genre[]' class='form-control' id='studio-genres-input' multiple>";
+              echo "<option id='Avant-Garde'>Avant-Garde</option>";
+              echo "<option id='Blues'>Blues</option>";
+              echo "<option id='Children'>Children's</option>";
+              echo "<option id='Classical'>Classical</option>";
+              echo "<option id='Comedy'>Comedy</option>";
+              echo "<option id='Country'>Country</option>";
+              echo "<option id='Easy-Listening'>Easy Listening</option>";
+              echo "<option id='Electronic'>Electronic</option>";
+              echo "<option id='Folk'>Folk</option>";
+              echo "<option id='Holiday'>Holiday</option>";
+              echo "<option id='International'>International</option>";
+              echo "<option id='Jazz'>Jazz</option>";
+              echo "<option id='R&B'>R&B</option>";
+              echo "<option id='Rap'>Rap</option>";
+              echo "<option id='Reggae'>Reggae</option>";
+              echo "<option id='Religious'>Religious</option>";
+              echo "<option id='Score'>Score</option>";
+              echo "<option id='Vocal'>Vocal</option>";
+              echo "</select>";
+             ?>
           </form>
           <?php
           $stmt = "SELECT * from studios s left join genres g on s.id = g.studioID where s.settings not like '%Private%';";
