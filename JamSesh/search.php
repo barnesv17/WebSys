@@ -1,3 +1,21 @@
+<?php
+// Initialize the session
+session_start();
+
+// Check if the user is logged in, if not then redirect him to homepage
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+  header("location: hompage.php");
+  exit;
+}
+
+// Include config file
+include 'assets/php/db_conn.php';
+?>
+
+
+<!-- get all studios and their genres into a list excluding privated -->
+<!-- select * from studios s left join genres g on s.id = g.studioID where s.settings not like '%Private%'; -->
+
 <!DOCTYPE html>
 <html>
 
@@ -38,10 +56,87 @@
           </svg>
         </div>
         <div>
-          <input class="form-control my-0 py-1 searchBar" type="text" placeholder="Search" aria-label="Search">
+          <form action="search.php" method="POST">
+            <input class="form-control my-0 py-1 searchBar" type="text" placeholder="Search" name="searchBar" value='<?php echo isset($_POST['searchBar']) ? $_POST['searchBar'] : ''; ?>' aria-label="Search">
+          </form>
+          <?php
+          $stmt = "SELECT * from studios s left join genres g on s.id = g.studioID where s.settings not like '%Private%';";
+          $filtered = array();
+          if ($result = mysqli_query($link, $stmt)) {
+            while ($row = mysqli_fetch_array($result)) {
+              array_push($filtered, $row);
+            }
+          }
+
+          if (isset($_POST['searchBar']) && $_POST['searchBar'] != '') {
+            $term = $_POST['searchBar'];
+            $_SESSION["search_query"] = $term;
+
+            trim($term, " ");
+            $term = strtolower($term);
+            // Construct the final studio results
+            $finalResults = array();
+            foreach ($filtered as $e) {
+              $settings = json_decode($e["settings"]);
+              $title = $settings->{'title'};
+              $visibility = $settings->{'visibility'};
+              $allowFork = $settings->{'allowFork'};
+              $description = $settings->{'description'};
+              $genres = $settings->{'genres'};
+
+
+              if (strpos(strtolower($e['genre']), $term) !== false) {
+                array_push($finalResults, [
+                  "id" => $e["id"],
+                  "title" => $title,
+                  "visibility" => $visibility,
+                  "allowFork" => $allowFork,
+                  "description" => $description,
+                  "genres" => $genres
+                ]);
+              } else if (strpos(strtolower($e['settings']), $term) !== false) {
+                array_push($finalResults, [
+                  "id" => $e["id"],
+                  "title" => $title,
+                  "visibility" => $visibility,
+                  "allowFork" => $allowFork,
+                  "description" => $description,
+                  "genres" => $genres
+                ]);
+              }
+            }
+            $_SESSION["search_studios"] = $finalResults;
+          }
+          ?>
         </div>
       </div>
     </div>
+    <div class="studioHeader d-flex flex-row">
+      <?php
+      $searchTerm = $_SESSION["search_query"];
+      echo "<h2>Results for " . $searchTerm . "</h2>";
+      ?>
+    </div>
+    <?php
+    if (@$_SESSION["search_studios"]) {
+      foreach ($_SESSION["search_studios"] as $s) {
+        echo "<form method='POST' action='user-profile.php'>";
+        echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
+        echo "<div class='studioTitle text-left'>" . $s["title"] . "</div>";
+        echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
+        echo "<div class='studioGenres d-flex flex-row'>";
+        foreach ($s["genres"] as $g) {
+          echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+        }
+        echo "</div>";
+        echo "</button>";
+        echo "</form>";
+      }
+    } else {
+      echo "<p>No Studios Yet</p>";
+    }
+    ?>
+  </div>
   </div>
 
 </body>
