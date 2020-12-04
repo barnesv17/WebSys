@@ -16,13 +16,13 @@
 
 <body>
   <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
-    <div class="container"><a class="navbar-brand" href="user-profile.php">JamSesh</a>
+    <div class="container"><a class="navbar-brand" href="#">JamSesh</a>
       <div class="collapse navbar-collapse" id="navcol-1">
         <ul class="nav navbar-nav mr-auto">
           <!-- <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> -->
         </ul>
         <span class="navbar-text actions" style="float: right;">
-          <a class="btn btn-light action-button" role="button" href="#">Log Out</a>
+          <a class="btn btn-light action-button" role="button" href="logout.php">Log Out</a>
         </span>
       </div>
     </div>
@@ -33,16 +33,16 @@
   <nav class="sidebar">
     <ul class='nav'>
       <li class='nav-item'>
-      
+
         <!-- <a href='./assets/php/users.php?q=users' class="link" id="users"> -->
         <div class='link' id='users'>
-          <svg 
+          <svg
             aria-hidden="true"
             focusable="false"
             data-prefix="fad"
             data-icon="angle-double-right"
             role="img"
-            xmlns="http://www.w3.org/2000/svg" 
+            xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 640 512"
             class="svg-inline--fa fa-users fa-w-14 fa-5x"
           >
@@ -55,13 +55,13 @@
       </li>
       <li class='nav-item'>
         <div class="link" id='studios'>
-          <svg 
+          <svg
             aria-hidden="true"
             focusable="false"
             data-prefix="fad"
             data-icon="angle-double-right"
             role="img"
-            xmlns="http://www.w3.org/2000/svg" 
+            xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
             class="svg-inline--fa fa-microphone-alt fa-w-14 fa-5x"
           >
@@ -73,13 +73,13 @@
       </li>
       <!-- <li class='nav-item'>
         <div class="link">
-          <svg 
+          <svg
             aria-hidden="true"
             focusable="false"
             data-prefix="fad"
             data-icon="angle-double-right"
             role="img"
-            xmlns="http://www.w3.org/2000/svg" 
+            xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
             class="svg-inline--fa fa-book-open fa-w-14 fa-5x"
           > -->
@@ -91,13 +91,13 @@
       </li> -->
       <li class='nav-item'>
         <div class='link' id='system'>
-          <svg 
+          <svg
             aria-hidden="true"
             focusable="false"
             data-prefix="fad"
             data-icon="angle-double-right"
             role="img"
-            xmlns="http://www.w3.org/2000/svg" 
+            xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
             class="svg-inline--fa fa-server fa-w-14 fa-5x"
           >
@@ -109,13 +109,13 @@
       </li>
       <li class='ins'>
         <div class="link">
-          <svg 
+          <svg
             aria-hidden="true"
             focusable="false"
             data-prefix="fad"
             data-icon="angle-double-right"
             role="img"
-            xmlns="http://www.w3.org/2000/svg" 
+            xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
             class="svg-inline--fa fa-tasks fa-w-14 fa-5x"
           >
@@ -223,7 +223,7 @@
       }
       echo "</table>";
       echo "</div>";
-    } 
+    }
 
     // function showGenres($conn, $query_genre) {
 
