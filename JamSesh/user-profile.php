@@ -24,12 +24,10 @@ if (isset($_POST['save-changes'])) {
     ) { // check that it is an image
       $file_name = $_FILES['profile-pic']['name'];
       move_uploaded_file($_FILES["profile-pic"]["tmp_name"], "assets/img/profile-pictures/" . $file_name);
-      $sql = "UPDATE users SET profilePic = ? WHERE email = ?";
+      $param_profilePic = "assets/img/profile-pictures/" . $file_name;
+      $param_id = $_SESSION["email"];
+      $sql = "UPDATE users SET profilePic = '" . $param_profilePic . "' WHERE email = '" . $param_id . "'";
       if ($stmt = mysqli_prepare($link, $sql)) {
-        $param_profilePic = "assets/img/profile-pictures/" . $file_name;
-        $param_id = $_SESSION["email"];
-        // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "si", $param_profilePic, $param_id);
         // Attempt to execute the prepared statement
         if (!mysqli_stmt_execute($stmt)) {
           echo "profpic";
@@ -41,12 +39,10 @@ if (isset($_POST['save-changes'])) {
 
   //Bio
   if ($_POST['bio'] != "") {
-    $sql = "UPDATE users SET bio = ? WHERE email = ?";
+    $param_bio = $_POST['bio'];
+    $param_id = $_SESSION["email"];
+    $sql = "UPDATE users SET bio = '" . $param_bio . "' WHERE email = '" . $param_id . "'";
     if ($stmt = mysqli_prepare($link, $sql)) {
-      $param_bio = $_POST['bio'];
-      $param_id = $_SESSION["email"];
-      // Bind variables to the prepared statement as parameters
-      mysqli_stmt_bind_param($stmt, "si", $param_bio, $param_id);
       // Attempt to execute the prepared statement
       if (!mysqli_stmt_execute($stmt)) {
         echo "bio";
@@ -57,12 +53,10 @@ if (isset($_POST['save-changes'])) {
 
   // Display Name
   if ($_POST['display-name'] != "") {
-    $sql = "UPDATE users SET displayName = ? WHERE email = ?";
+    $param_displayName = $_POST['display-name'];
+    $param_id = $_SESSION["email"];
+    $sql = "UPDATE users SET displayName = '" . $param_displayName . "' WHERE email = '" . $param_id . "'";
     if ($stmt = mysqli_prepare($link, $sql)) {
-      $param_displayName = $_POST['display-name'];
-      $param_id = $_SESSION["email"];
-      // Bind variables to the prepared statement as parameters
-      mysqli_stmt_bind_param($stmt, "si", $param_displayName, $param_id);
       // Attempt to execute the prepared statement
       if (!mysqli_stmt_execute($stmt)) {
         echo "displayname";
@@ -73,12 +67,10 @@ if (isset($_POST['save-changes'])) {
 
   // Username
   if ($_POST['username'] != "") {
-    $sql = "UPDATE users SET username = ? WHERE email = ?";
+    $param_username = $_POST['username'];
+    $param_id = $_SESSION["email"];
+    $sql = "UPDATE users SET username = '" . $param_username . "'WHERE email = '" . $param_id . "'";
     if ($stmt = mysqli_prepare($link, $sql)) {
-      $param_username = $_POST['username'];
-      $param_id = $_SESSION["email"];
-      // Bind variables to the prepared statement as parameters
-      mysqli_stmt_bind_param($stmt, "si", $param_username, $param_id);
       // Attempt to execute the prepared statement
       if (!mysqli_stmt_execute($stmt)) {
         echo "username";
@@ -87,12 +79,9 @@ if (isset($_POST['save-changes'])) {
     }
   }
 
-  $sql = "SELECT email, password, username, displayName, bio, profilePic FROM users WHERE email = ?";
+  $param_id = $_SESSION["email"];
+  $sql = "SELECT email, password, username, displayName, bio, profilePic FROM users WHERE email = '" . $param_id . "'";
   if ($stmt = mysqli_prepare($link, $sql)) {
-    // Bind variables to the prepared statement as parameters
-    mysqli_stmt_bind_param($stmt, "s", $param_email);
-    // Set parameters
-    $param_email = $_SESSION["email"];
     // Attempt to execute the prepared statement
     if (mysqli_stmt_execute($stmt)) {
       // Store result
