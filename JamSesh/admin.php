@@ -184,8 +184,8 @@
         echo "<td>" . $row['email'] . "</td>";
         echo "<td>" . $row['displayName'] . "</td>";
         echo "<td>" . $row['username'] . "</td>";
-        echo "<td>" . "3" . "</td>";
-        echo "<td><a href='./assets/php/delete.php?duser=". $row['email'] ."'>Delete</a></td>";
+        echo "<td>" . $row['num_studio'] . "</td>";
+        echo "<td><a class='del' href='./assets/php/delete.php?duser=". $row['email'] ."'>Delete</a></td>";
         echo "</tr>";
       }
       echo "</table>";
@@ -232,7 +232,7 @@
       if (isset($_POST['options'])) {
         switch( $_POST['options'] ) {
           case 'Users':
-            $query = "SELECT * FROM Users order by email asc, displayName asc;";
+            $query = "SELECT user.*, (SELECT count(studio.owner) from studios studio where studio.owner = user.email) as num_studio FROM Users user order by email asc, displayName asc;";
             showUsers($conn, $query);
           break;
 
