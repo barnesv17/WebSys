@@ -130,8 +130,8 @@ if (isset($_POST['create-new-studio'])) {
         echo "Something went wrong. Please try again later.";
       } else {
         $last_id = $link->insert_id;
-        echo "HERE";
-        echo "<script>console.log(HERE);</script>";
+        // echo "HERE";
+        // echo "<script>console.log(HERE);</script>";
         mkdir("studios/" . $last_id);
       }
     }
