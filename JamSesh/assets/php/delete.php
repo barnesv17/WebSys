@@ -11,7 +11,7 @@ try {
     $sql = "DELETE FROM users where email = '{$delete_email}';";
     $result = mysqli_query($conn, $sql);
     echo "<br/><br/><span>deleted {$delete_email} successfully...!!</span>";
-    header("location: /JamSesh/admin.php");
+    header("location: ../../admin.php");
     exit;
   }
   if(isset($_GET['dstudio'])) {
@@ -19,7 +19,7 @@ try {
     $sql = "DELETE FROM studios where id = {$delete_email} ;";
     $result = mysqli_query($conn, $sql);
     echo "<br/><br/><span>deleted successfully...!!</span>";
-    header("location: /JamSesh/admin.php");
+    header("location: ../../admin.php");
     exit;
   }
 
