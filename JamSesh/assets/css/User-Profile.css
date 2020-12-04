@@ -52,6 +52,7 @@ hr {
 .studioHeader {
   color: rgb(34,34,34);
   font-weight: bold;
+  margin-top: 10px;
   padding: 10px;
   justify-content: space-between;
 }

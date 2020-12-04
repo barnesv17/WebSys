@@ -24,14 +24,15 @@ if (isset($_POST['save-changes'])) {
     ) { // check that it is an image
       $file_name = $_FILES['profile-pic']['name'];
       move_uploaded_file($_FILES["profile-pic"]["tmp_name"], "assets/img/profile-pictures/" . $file_name);
-      $sql = "UPDATE users SET profilePic = ? WHERE id = ?";
+      $sql = "UPDATE users SET profilePic = ? WHERE email = ?";
       if ($stmt = mysqli_prepare($link, $sql)) {
         $param_profilePic = "assets/img/profile-pictures/" . $file_name;
-        $param_id = $_SESSION["id"];
+        $param_id = $_SESSION["email"];
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "si", $param_profilePic, $param_id);
         // Attempt to execute the prepared statement
         if (!mysqli_stmt_execute($stmt)) {
+          echo "profpic";
           echo "Oops! Something went wrong. Please try again later.";
         }
       }
@@ -40,14 +41,15 @@ if (isset($_POST['save-changes'])) {
 
   //Bio
   if ($_POST['bio'] != "") {
-    $sql = "UPDATE users SET bio = ? WHERE id = ?";
+    $sql = "UPDATE users SET bio = ? WHERE email = ?";
     if ($stmt = mysqli_prepare($link, $sql)) {
       $param_bio = $_POST['bio'];
-      $param_id = $_SESSION["id"];
+      $param_id = $_SESSION["email"];
       // Bind variables to the prepared statement as parameters
       mysqli_stmt_bind_param($stmt, "si", $param_bio, $param_id);
       // Attempt to execute the prepared statement
       if (!mysqli_stmt_execute($stmt)) {
+        echo "bio";
         echo "Oops! Something went wrong. Please try again later.";
       }
     }
@@ -55,14 +57,15 @@ if (isset($_POST['save-changes'])) {
 
   // Display Name
   if ($_POST['display-name'] != "") {
-    $sql = "UPDATE users SET displayName = ? WHERE id = ?";
+    $sql = "UPDATE users SET displayName = ? WHERE email = ?";
     if ($stmt = mysqli_prepare($link, $sql)) {
       $param_displayName = $_POST['display-name'];
-      $param_id = $_SESSION["id"];
+      $param_id = $_SESSION["email"];
       // Bind variables to the prepared statement as parameters
       mysqli_stmt_bind_param($stmt, "si", $param_displayName, $param_id);
       // Attempt to execute the prepared statement
       if (!mysqli_stmt_execute($stmt)) {
+        echo "displayname";
         echo "Oops! Something went wrong. Please try again later.";
       }
     }
@@ -70,20 +73,21 @@ if (isset($_POST['save-changes'])) {
 
   // Username
   if ($_POST['username'] != "") {
-    $sql = "UPDATE users SET username = ? WHERE id = ?";
+    $sql = "UPDATE users SET username = ? WHERE email = ?";
     if ($stmt = mysqli_prepare($link, $sql)) {
       $param_username = $_POST['username'];
-      $param_id = $_SESSION["id"];
+      $param_id = $_SESSION["email"];
       // Bind variables to the prepared statement as parameters
       mysqli_stmt_bind_param($stmt, "si", $param_username, $param_id);
       // Attempt to execute the prepared statement
       if (!mysqli_stmt_execute($stmt)) {
+        echo "username";
         echo "Oops! Something went wrong. Please try again later.";
       }
     }
   }
 
-  $sql = "SELECT id, email, password, username, displayName, bio, profilePic FROM users WHERE email = ?";
+  $sql = "SELECT email, password, username, displayName, bio, profilePic FROM users WHERE email = ?";
   if ($stmt = mysqli_prepare($link, $sql)) {
     // Bind variables to the prepared statement as parameters
     mysqli_stmt_bind_param($stmt, "s", $param_email);
@@ -94,11 +98,11 @@ if (isset($_POST['save-changes'])) {
       // Store result
       mysqli_stmt_store_result($stmt);
       // Bind result variables
-      mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password, $username, $displayName, $bio, $profilePic);
+      mysqli_stmt_bind_result($stmt, $email, $hashed_password, $username, $displayName, $bio, $profilePic);
       if (mysqli_stmt_fetch($stmt)) {
         // Store data in session variables
         $_SESSION["loggedin"] = true;
-        $_SESSION["id"] = $id;
+        // $_SESSION["id"] = $id;
         $_SESSION["email"] = $email;
         $_SESSION["username"] = $username;
         $_SESSION["displayName"] = $displayName;
