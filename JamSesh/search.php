@@ -39,8 +39,8 @@ include 'assets/php/db_conn.php';
           <!-- <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> -->
         </ul>
         <span class="navbar-text actions" style="float: right;">
-          <a class="btn btn-link" role="button" href="search.php">Search</a>
-          <a class="btn btn-light action-button" role="button" href="#">Log Out</a>
+          <a class="btn btn-link" role="button" href="search_button.php">Search</a>
+          <a class="btn btn-light action-button" role="button" href="logout.php">Log Out</a>
         </span>
       </div>
     </div>
@@ -114,31 +114,35 @@ include 'assets/php/db_conn.php';
     </div>
     <div class="studioHeader d-flex flex-row">
       <?php
-      if (count($_SESSION["search_studios"]) > 0) {
-        $searchTerm = $_SESSION["search_query"];
-        echo "<h2>Results for " . $searchTerm . "</h2>";
+      if( $_SESSION["search_studios"] ) {
+        if (count($_SESSION["search_studios"]) > 0) {
+          $searchTerm = $_SESSION["search_query"];
+          echo "<h2>Results for " . $searchTerm . "</h2>";
+        }
       }
       ?>
 
     </div>
     <?php
-    if (@$_SESSION["search_studios"]) {
-      foreach ($_SESSION["search_studios"] as $s) {
-        echo "<form method='POST' action='user-profile.php'>";
-        echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
-        echo "<div class='studioTitle text-left'>" . $s["title"] . "</div>";
-        echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
-        echo "<div class='studioGenres d-flex flex-row'>";
-        foreach ($s["genres"] as $g) {
-          echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+    if( $_SESSION["search_studios"] ) {
+      if (@$_SESSION["search_studios"]) {
+        foreach ($_SESSION["search_studios"] as $s) {
+          echo "<form method='POST' action='user-profile.php'>";
+          echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
+          echo "<div class='studioTitle text-left'>" . $s["title"] . "</div>";
+          echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
+          echo "<div class='studioGenres d-flex flex-row'>";
+          foreach ($s["genres"] as $g) {
+            echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+          }
+          echo "</div>";
+          echo "</button>";
+          echo "</form>";
         }
-        echo "</div>";
-        echo "</button>";
-        echo "</form>";
-      }
-    } else {
-      if (count($_SESSION["search_studios"]) == 0) {
-        echo "<p>No Studios Yet</p>";
+      } else {
+        if (count($_SESSION["search_studios"]) == 0) {
+          echo "<p>No Studios Yet</p>";
+        }
       }
     }
     ?>

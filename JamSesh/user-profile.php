@@ -244,7 +244,7 @@ $_SESSION["users_collab_studios"] = $collab_studios;
         <ul class="nav navbar-nav mr-auto">
         </ul>
         <span class="navbar-text actions">
-          <a class="btn btn-link" role="button" href="search.php">Search</a>
+          <a class="btn btn-link" role="button" href="search_button.php">Search</a>
           <a class="btn btn-light action-button" role="button" href="logout.php">Log Out</a>
         </span>
       </div>
