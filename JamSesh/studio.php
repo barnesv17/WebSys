@@ -208,7 +208,7 @@ if (isset($_POST['update-settings'])) {
   }
 
   // Add genre
-  if ($_POST['add-genre'] != "") {
+  if (@$_POST['add-genre'] != "") {
     $sql = "DELETE FROM genres WHERE " . $_SESSION["studioID"] . " = studioID";
     if ($link->query($sql) === TRUE) {
       // echo "Record updated successfully";
@@ -244,7 +244,7 @@ if (isset($_POST['update-settings'])) {
           if (!mysqli_stmt_execute($stmt)) {
             echo "Something went wrong. Please try again later.";
           } else {
-            echo "It worked";
+            // echo "It worked";
           }
         }
       } else {
@@ -379,11 +379,11 @@ if ($result->num_rows == 1) {
   // Only display favorite and fork if you are not an owner
   if ($_SESSION["email"] == $owner_email) {
     echo "<button class='btn btn-secondary invisible' name='favorite' type='submit'>Favorite&nbsp;";
-    echo "<span class='badge badge-light'>4</span>";
+    echo "<span class='badge badge-light'>0</span>";
     echo "</button>";
   } else {
     echo "<button class='btn btn-secondary' name='favorite' type='submit'>Favorite&nbsp;";
-    echo "<span class='badge badge-light'>4</span>";
+    echo "<span class='badge badge-light'>0</span>";
     echo "</button>";
   }
   echo "</form>";
@@ -541,7 +541,20 @@ if ($result->num_rows == 1) {
           </tbody>
         </table>
       </div>
-      <button id="add-instrument-btn" type="button" class="btn btn-info" data-toggle="modal" data-target="#add-instrument">Add Instrument</button>
+
+      <?php
+      $is_collaborator = false;
+      if( @$collaborators_emails ) {
+        foreach( $collaborators_emails as $ce ) {
+          if( $ce == $_SESSION["email"] ) {
+            $is_collaborator = true;
+          }
+        }
+      }
+      if( $_SESSION["email"] == $owner_email || $is_collaborator == true ) {
+        echo "<button id='add-instrument-btn' type='button' class='btn btn-info' data-toggle='modal' data-target='#add-instrument'>Add Instrument</button>";
+      }
+       ?>
       <button id="play-all-btn" type="button" class="btn btn-info">Play All</button>
       <button id="pause-all-btn" type="button" class="btn btn-info">Pause All</button>
       <button id="restart-all-btn" type="button" class="btn btn-info">Restart All</button>
