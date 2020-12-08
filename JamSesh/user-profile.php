@@ -228,6 +228,8 @@ checkNewStudio( $link );
 checkStudioClicked();
 $_SESSION["users_studios"] = fetchOwnedStudios( $link );
 $_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
+
+mysqli_close($link);
 ?>
 
 <!DOCTYPE html>

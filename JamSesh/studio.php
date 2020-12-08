@@ -281,6 +281,8 @@ addInstrument( $link );
 deleteInstrument( $link );
 updateSettings( $link );
 getStudio( $link );
+
+mysqli_close($link);
 ?>
 
 <!DOCTYPE html>

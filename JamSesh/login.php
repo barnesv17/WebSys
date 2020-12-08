@@ -1,14 +1,9 @@
 <?php
-// Initialize the session
+// Initialize the session-------------------------------------------------------
 session_start();
-
-// Check if the user is already logged in, if yes then redirect him to user-profile page
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: user-profile.php");
-    exit;
-}
-
-// Include config file
+// Check if the user is logged in, if not then redirect him to homepage---------
+include 'assets/php/login_check.php';
+// Include db config file-------------------------------------------------------
 include 'assets/php/db_conn.php';
 
 // Define variables and initialize with empty values
