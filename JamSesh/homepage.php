@@ -147,7 +147,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div class="container"><a class="navbar-brand" href="homepage.php">JamSesh</a>
         <div class="collapse navbar-collapse" id="navcol-1">
           <ul class="nav navbar-nav mr-auto">
-            <!-- <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> -->
           </ul>
           <span class="navbar-text actions">
             <a class="login" href="login.php">Log In</a>

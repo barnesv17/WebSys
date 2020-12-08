@@ -1,9 +1,14 @@
 <?php
-// Initialize the session-------------------------------------------------------
+// Initialize the session
 session_start();
-// Check if the user is logged in, if not then redirect him to homepage---------
-include 'assets/php/login_check.php';
-// Include db config file-------------------------------------------------------
+
+// Check if the user is already logged in, if yes then redirect him to user-profile page
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    header("location: user-profile.php");
+    exit;
+}
+
+// Include config file
 include 'assets/php/db_conn.php';
 
 // Define variables and initialize with empty values
@@ -111,7 +116,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <div class="container"><a class="navbar-brand" href="homepage.php">JamSesh</a>
         <div class="collapse navbar-collapse" id="navcol-1">
           <ul class="nav navbar-nav mr-auto">
-            <!-- <li class="nav-item"><a class="nav-link active" href="homepage.html">Home</a></li> -->
           </ul>
           <span class="navbar-text actions">
             <a class="login" href="#">Log In</a>
