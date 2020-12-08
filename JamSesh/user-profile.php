@@ -400,7 +400,6 @@ $_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
             echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
           }
           echo "</div>";
-          echo "</div>";
           echo "</button>";
           echo "</form>";
         }
