@@ -34,7 +34,14 @@ include 'assets/php/db_conn.php';
         </ul>
         <span class="navbar-text actions" style="float: right;">
           <a class="btn btn-link" role="button" href="search_button.php">Search</a>
-          <a class="btn btn-light action-button" role="button" href="logout.php">Log Out</a>
+          <?php 
+            if (isset($_SESSION["email"])) {
+              echo '<a class="btn btn-light action-button" role="button" href="logout.php">Log Out</a>';
+            } else {
+              echo '<a class="btn btn-light action-button" href="login.php">Log In</a>';
+            }
+
+          ?>
         </span>
       </div>
     </div>
