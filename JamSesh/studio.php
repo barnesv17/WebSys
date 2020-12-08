@@ -2,12 +2,13 @@
 // Initialize the session-------------------------------------------------------
 session_start();
 // Check if the user is logged in, if not then redirect him to homepage---------
-include 'assets/php/login_check.php';
+// include 'assets/php/login_check.php';
 // Include db config file-------------------------------------------------------
 include 'assets/php/db_conn.php';
 
 // Updates all properties of the studio from the database-----------------------
-function getStudio( $link ) {
+function getStudio($link)
+{
   $sql = "SELECT * FROM studios WHERE id = " . $_SESSION["studioID"] . "";
   $result = $link->query($sql);
   if ($result->num_rows == 1) {
@@ -58,10 +59,11 @@ function getStudio( $link ) {
 }
 
 // Checks if the fork button was clicked----------------------------------------
-function checkFork( $link ) {
+function checkFork($link)
+{
   if (isset($_POST['fork'])) {
     // Update all of the attributes for the current studio
-    getStudio( $link );
+    getStudio($link);
     // Insert a copy of this studio with the current session's email as the owner
     $sql = "INSERT INTO studios (owner, instruments, title, visibility, allowFork, description) VALUES (?, ?, ?, ?, ?, ?)";
     if ($stmt = mysqli_prepare($link, $sql)) {
@@ -75,7 +77,7 @@ function checkFork( $link ) {
       if (mysqli_stmt_execute($stmt)) {
         $last_id = $link->insert_id;
         // Add one to the number of forks of the current studio
-        $sql = "UPDATE studios SET forks = " . ($_SESSION["forks"]+1) . " WHERE id = " . $_SESSION["studioID"] . "";
+        $sql = "UPDATE studios SET forks = " . ($_SESSION["forks"] + 1) . " WHERE id = " . $_SESSION["studioID"] . "";
         if ($stmt = mysqli_prepare($link, $sql)) {
           if (!mysqli_stmt_execute($stmt)) {
             echo "Oops! Something went wrong. Please try again later.";
@@ -84,7 +86,7 @@ function checkFork( $link ) {
         }
         // Direct the user to the new forked studio page
         $_SESSION["studioID"] = $last_id;
-        getStudio( $link );
+        getStudio($link);
         header("Location: studio.php");
       } else {
         echo "Something went wrong. Please try again later.";
@@ -96,14 +98,15 @@ function checkFork( $link ) {
 }
 
 // Checks if an instrument was added--------------------------------------------
-function addInstrument( $link ) {
+function addInstrument($link)
+{
   if (isset($_POST['submit'])) {
     // Update all of the attributes for the current studio
-    getStudio( $link );
+    getStudio($link);
     // If no name was given for the file, alert the user
     if (isset($_POST['newFileName']) == false || $_POST['newFileName'] == "") {
       echo "<script>alert( 'Please name the file' );</script>";
-    // If no file was uplaoded or a file of the wrong type, alert the user
+      // If no file was uplaoded or a file of the wrong type, alert the user
     } else if (
       isset($_FILES['fileToUpload']) == false ||
       @mime_content_type($_FILES["fileToUpload"]["tmp_name"]) != "audio/x-m4a"
@@ -134,7 +137,7 @@ function addInstrument( $link ) {
         if (!$link->query($sql)) {
           echo "Error updating record: " . $link->error;
         }
-      // If the filename is not unique, alert the user
+        // If the filename is not unique, alert the user
       } else {
         echo "<script>alert( 'Please choose a unique file name' );</script>";
       }
@@ -143,10 +146,11 @@ function addInstrument( $link ) {
 }
 
 // Checks if an instrument was deleted------------------------------------------
-function deleteInstrument( $link ) {
+function deleteInstrument($link)
+{
   if (isset($_POST['trashcan'])) {
     // Update all of the attributes for the current studio
-    getStudio( $link );
+    getStudio($link);
     // Deconstruct the current instrument array
     $json_instruments = json_decode($_SESSION["instruments"]);
     $in_names = $json_instruments->{'names'};
@@ -173,7 +177,8 @@ function deleteInstrument( $link ) {
 }
 
 // Checks if Studio Name was updated--------------------------------------------
-function updateStudioName( $link ) {
+function updateStudioName($link)
+{
   // Validate that the studio name is not an empty string
   if (trim($_POST['studio-name']) == "") {
     echo "<script>alert( 'Please enter a Studio Name' );</script>";
@@ -186,7 +191,8 @@ function updateStudioName( $link ) {
 }
 
 // Checks if Visibility was updated---------------------------------------------
-function updateVisibility( $link ) {
+function updateVisibility($link)
+{
   $sql = "UPDATE studios SET visibility='" . $_POST['studio-visibility'] . "' WHERE id=" . $_SESSION["studioID"];
   if (!$link->query($sql)) {
     echo "Error updating record: " . $link->error;
@@ -194,7 +200,8 @@ function updateVisibility( $link ) {
 }
 
 // Checks if AllowFork was updated----------------------------------------------
-function updateAllowFork( $link ) {
+function updateAllowFork($link)
+{
   $sql = "UPDATE studios SET allowFork='" . $_POST['allow-fork'] . "' WHERE id=" . $_SESSION["studioID"];
   if (!$link->query($sql)) {
     echo "Error updating record: " . $link->error;
@@ -202,7 +209,8 @@ function updateAllowFork( $link ) {
 }
 
 // Checks if Description was updated--------------------------------------------
-function updateDescription( $link ) {
+function updateDescription($link)
+{
   $sql = "UPDATE studios SET description='" . $_POST['studio-description'] . "' WHERE id=" . $_SESSION["studioID"];
   if (!$link->query($sql)) {
     echo "Error updating record: " . $link->error;
@@ -210,7 +218,8 @@ function updateDescription( $link ) {
 }
 
 // Updates Genres of studio-----------------------------------------------------
-function updateGenres( $link ) {
+function updateGenres($link)
+{
   if (@$_POST['add-genre'] != "") {
     $sql = "DELETE FROM genres WHERE " . $_SESSION["studioID"] . " = studioID";
     if (!$link->query($sql)) {
@@ -226,7 +235,8 @@ function updateGenres( $link ) {
 }
 
 // Adds collaborator to studio--------------------------------------------------
-function addCollaborator( $link ) {
+function addCollaborator($link)
+{
   if ($_POST['add-collab'] != "") {
     // Check that the email is in the users DB
     $sql = "SELECT * FROM users WHERE email = '" . $_POST['add-collab'] . "'";
@@ -250,7 +260,8 @@ function addCollaborator( $link ) {
 }
 
 // Adds collaborator to studio--------------------------------------------------
-function removeCollaborator( $link ) {
+function removeCollaborator($link)
+{
   if ($_POST["remove-collab"] != "n/a") {
     // Find and remove the studio and email in the collaborators table
     $sql = "DELETE FROM collaborators WHERE studioID = " . $_SESSION["studioID"] . " AND email = '" . $_POST["remove-collab"] . "'";
@@ -263,26 +274,25 @@ function removeCollaborator( $link ) {
 }
 
 // Checks if settings were updated----------------------------------------------
-function updateSettings( $link ) {
+function updateSettings($link)
+{
   if (isset($_POST['update-settings'])) {
-    updateStudioName( $link );
-    updateVisibility( $link );
-    updateAllowFork( $link );
-    updateDescription( $link );
-    updateGenres( $link );
-    addCollaborator( $link );
-    removeCollaborator( $link );
+    updateStudioName($link);
+    updateVisibility($link);
+    updateAllowFork($link);
+    updateDescription($link);
+    updateGenres($link);
+    addCollaborator($link);
+    removeCollaborator($link);
   }
 }
 
-getStudio( $link );
-checkFork( $link );
-addInstrument( $link );
-deleteInstrument( $link );
-updateSettings( $link );
-getStudio( $link );
-
-mysqli_close($link);
+getStudio($link);
+checkFork($link);
+addInstrument($link);
+deleteInstrument($link);
+updateSettings($link);
+getStudio($link);
 ?>
 
 <!DOCTYPE html>
@@ -325,29 +335,34 @@ mysqli_close($link);
   echo "<h1 id='studio-title'>" . $_SESSION["title"] . "</h1>";
 
   echo "<div class='row justify-content-between'>";
-  echo "<form action='studio.php' method='POST' id='favorite-form'>";
-  // Only display favorite and fork if you are not an owner
-  if ($_SESSION["email"] == $_SESSION["ownerEmail"]) {
-    echo "<button class='btn btn-secondary invisible' name='favorite' type='submit'>Favorite&nbsp;";
-    echo "<span class='badge badge-light'>0</span>";
-    echo "</button>";
-  } else {
-    echo "<button class='btn btn-secondary' name='favorite' type='submit'>Favorite&nbsp;";
-    echo "<span class='badge badge-light'>0</span>";
-    echo "</button>";
+  // Only display favorite and fork if you are not an owner and only if logged in
+  if (isset($_SESSION["email"])) {
+    echo "<form action='studio.php' method='POST' id='favorite-form'>";
+    if ($_SESSION["email"] == $_SESSION["ownerEmail"]) {
+      echo "<button class='btn btn-secondary invisible' name='favorite' type='submit'>Favorite&nbsp;";
+      echo "<span class='badge badge-light'>0</span>";
+      echo "</button>";
+    } else {
+      echo "<button class='btn btn-secondary' name='favorite' type='submit'>Favorite&nbsp;";
+      echo "<span class='badge badge-light'>0</span>";
+      echo "</button>";
+    }
+
+
+    echo "</form>";
+
+    echo "<form action='studio.php' method='POST' id='fork-form'>";
+    if ($_SESSION["allowFork"] == "No") {
+      echo "<button class='btn btn-secondary invisible' name='fork' type='submit'>Fork&nbsp;";
+      echo "<span class='badge badge-light'>" . $_SESSION["forks"] . "</span>";
+      echo "</button>";
+    } else {
+      echo "<button class='btn btn-secondary' name='fork' type='submit'>Fork&nbsp;";
+      echo "<span class='badge badge-light'>" . $_SESSION["forks"] . "</span>";
+      echo "</button>";
+    }
+    echo "</form>";
   }
-  echo "</form>";
-  echo "<form action='studio.php' method='POST' id='fork-form'>";
-  if ($_SESSION["allowFork"] == "No") {
-    echo "<button class='btn btn-secondary invisible' name='fork' type='submit'>Fork&nbsp;";
-    echo "<span class='badge badge-light'>" . $_SESSION["forks"] . "</span>";
-    echo "</button>";
-  } else {
-    echo "<button class='btn btn-secondary' name='fork' type='submit'>Fork&nbsp;";
-    echo "<span class='badge badge-light'>" . $_SESSION["forks"] . "</span>";
-    echo "</button>";
-  }
-  echo "</form>";
   echo "</div>";
   echo "</div>";
 
@@ -390,7 +405,7 @@ mysqli_close($link);
       <a class="nav-link active" id="composition-tab" data-toggle="tab" href="#composition" role="tab" aria-controls="composition" aria-selected="true">Composition</a>
     </li>
     <?php
-    if ($_SESSION["email"] == $_SESSION["ownerEmail"]) {
+    if (isset($_SESSION["email"]) && $_SESSION["email"] == $_SESSION["ownerEmail"]) {
       echo "<li class='nav-item'>";
       echo "<a class='nav-link' id='settings-tab' data-toggle='tab' href='#settings' role='tab' aria-controls='settings' aria-selected='false'>";
       echo "Settings";
@@ -476,11 +491,13 @@ mysqli_close($link);
               echo "<tr>";
               echo "<th scope='row'>";
               echo $in_names[$i];
-              echo "<form action='studio.php' method='POST' enctype='multipart/form-data'>";
-              echo "<button type='submit' name='trashcan' value='" . $in_names[$i] . "'>";
-              echo "<img class='trashcan' src='assets/img/trashcan.png'/>";
-              echo "</button>";
-              echo "</form>";
+              if (isset($_SESSION["email"])) {
+                echo "<form action='studio.php' method='POST' enctype='multipart/form-data'>";
+                echo "<button type='submit' name='trashcan' value='" . $in_names[$i] . "'>";
+                echo "<img class='trashcan' src='assets/img/trashcan.png'/>";
+                echo "</button>";
+                echo "</form>";
+              }
               echo "</th>";
               echo "<td><audio class='mp3' controls>";
               echo "<source src='" . $in_files[$i] . "'>";
@@ -494,17 +511,17 @@ mysqli_close($link);
 
       <?php
       $is_collaborator = false;
-      if( @$_SESSION["collaborators_emails"] ) {
-        foreach( $_SESSION["collaborators_emails"] as $ce ) {
-          if( $ce == $_SESSION["email"] ) {
+      if (@$_SESSION["collaborators_emails"]) {
+        foreach ($_SESSION["collaborators_emails"] as $ce) {
+          if (isset($_SESSION["email"]) && $ce == $_SESSION["email"]) {
             $is_collaborator = true;
           }
         }
       }
-      if( $_SESSION["email"] == $_SESSION["ownerEmail"] || $is_collaborator == true ) {
+      if (isset($_SESSION["email"]) && ($_SESSION["email"] == $_SESSION["ownerEmail"] || $is_collaborator == true)) {
         echo "<button id='add-instrument-btn' type='button' class='btn btn-info' data-toggle='modal' data-target='#add-instrument'>Add Instrument</button>";
       }
-       ?>
+      ?>
       <button id="play-all-btn" type="button" class="btn btn-info">Play All</button>
       <button id="pause-all-btn" type="button" class="btn btn-info">Pause All</button>
       <button id="restart-all-btn" type="button" class="btn btn-info">Restart All</button>
@@ -512,7 +529,7 @@ mysqli_close($link);
 
     <!-- Settings -->
     <?php
-    if ($_SESSION["email"] == $_SESSION["ownerEmail"]) {
+    if (isset($_SESSION["email"]) && $_SESSION["email"] == $_SESSION["ownerEmail"]) {
       echo "<div class='tab-pane fade' id='settings' role='tabpanel' aria-labelledby='settings-tab'>";
       echo "<div id='studioSettings' class='container'>";
       echo "<form action='studio.php' method='POST'>";

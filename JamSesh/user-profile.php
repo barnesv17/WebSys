@@ -2,7 +2,7 @@
 // Initialize the session-------------------------------------------------------
 session_start();
 // Check if the user is logged in, if not then redirect him to homepage---------
-include 'assets/php/login_check.php';
+// include 'assets/php/login_check.php';
 // Include db config file-------------------------------------------------------
 include 'assets/php/db_conn.php';
 
@@ -154,22 +154,11 @@ function fetchOwnedStudios( $link ) {
   $result = $link->query($sql);
   if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-
-      // Fetch the genres of the studio
-      $genres = array();
-      $sql2 = "SELECT genre FROM genres WHERE studioID = '" . $row['id'] . "'";
-      $result2 = $link->query($sql2);
-      if ($result2->num_rows > 0) {
-        while ($row2 = $result2->fetch_assoc()) {
-          array_push( $genres, $row2['genre'] );
-        }
-      }
       array_push( $owned_studios, [ 'id' => $row['id'],
                                     'title' => $row['title'],
                                     'visibility' => $row['visibility'],
                                     'allowFork' => $row['allowFork'],
-                                    'description' => $row['description'],
-                                    'genres' => $genres ] );
+                                    'description' => $row['description'] ] );
     }
   }
   return $owned_studios;
@@ -199,21 +188,11 @@ function fetchCollabStudios( $link ) {
                 $owner_username = $row3["username"];
               }
             }
-            // Find the genres of the studio
-            $genres = array();
-            $sql3 = "SELECT genre FROM genres WHERE studioID = '" . $row2["id"] . "'";
-            $result3 = $link->query($sql3);
-            if ($result3->num_rows > 0) {
-              while ($row3 = $result3->fetch_assoc()) {
-                array_push( $genres, $row3['genre'] );
-              }
-            }
             array_push( $collab_studios, [ 'id' => $row2['id'],
                                           'title' => $row2['title'],
                                           'visibility' => $row2['visibility'],
                                           'allowFork' => $row2['allowFork'],
                                           'description' => $row2['description'],
-                                          'genres' => $genres,
                                           'owner' => $owner_username ] );
           }
         }
@@ -228,8 +207,6 @@ checkNewStudio( $link );
 checkStudioClicked();
 $_SESSION["users_studios"] = fetchOwnedStudios( $link );
 $_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
-
-mysqli_close($link);
 ?>
 
 <!DOCTYPE html>
@@ -367,7 +344,7 @@ mysqli_close($link);
       </a>
       <hr />
       <div class="genreContainer d-flex flex-row">
-        <?php
+        <!-- <?php
         $all_genres = array();
         if (@$_SESSION["users_studios"]) {
           foreach ($_SESSION["users_studios"] as $s) {
@@ -380,7 +357,7 @@ mysqli_close($link);
             echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
           }
         }
-        ?>
+        ?> -->
       </div>
     </div>
     <div class="d-flex flex-column text-center studioSection">
@@ -397,11 +374,8 @@ mysqli_close($link);
           echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
           echo "<div class='studioTitle text-left'>" . $s["title"] . "</div>";
           echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
-          echo "<div class='studioGenres d-flex flex-row'>";
-          foreach ($s["genres"] as $g) {
-            echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
-          }
-          echo "</div>";
+          // echo "<div class='studioGenres d-flex flex-row'>";
+          // echo "</div>";
           echo "</button>";
           echo "</form>";
         }
@@ -419,11 +393,11 @@ mysqli_close($link);
           echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
           echo "<div class='studioTitle text-left'>@" . $s["owner"] . "/" . $s["title"] . "</div>";
           echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
-          echo "<div class='studioGenres d-flex flex-row'>";
-          foreach ($s["genres"] as $g) {
-            echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
-          }
-          echo "</div>";
+          // echo "<div class='studioGenres d-flex flex-row'>";
+          // foreach ($s["genres"] as $g) {
+          //   echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+          // }
+          // echo "</div>";
           echo "</button>";
           echo "</form>";
         }
@@ -441,11 +415,11 @@ mysqli_close($link);
           echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
           echo "<div class='studioTitle text-left'>@" . $s["owner"] . "/" . $s["title"] . "</div>";
           echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
-          echo "<div class='studioGenres d-flex flex-row'>";
-          foreach ($s["genres"] as $g) {
-            echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
-          }
-          echo "</div>";
+          // echo "<div class='studioGenres d-flex flex-row'>";
+          // foreach ($s["genres"] as $g) {
+          //   echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+          // }
+          // echo "</div>";
           echo "</button>";
           echo "</form>";
         }

@@ -2,12 +2,6 @@
 // Initialize the session
 session_start();
 
-// Check if the user is logged in, if not then redirect him to homepage
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-  header("location: homepage.php");
-  exit;
-}
-
 // Include config file
 include 'assets/php/db_conn.php';
 ?>
@@ -36,6 +30,7 @@ include 'assets/php/db_conn.php';
     <div class="container"><a class="navbar-brand" href="user-profile.php">JamSesh</a>
       <div class="collapse navbar-collapse" id="navcol-1">
         <ul class="nav navbar-nav mr-auto">
+          <!-- <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> -->
         </ul>
         <span class="navbar-text actions" style="float: right;">
           <a class="btn btn-link" role="button" href="search_button.php">Search</a>
@@ -114,7 +109,7 @@ include 'assets/php/db_conn.php';
     if( $_SESSION["search_studios"] ) {
       if (@$_SESSION["search_studios"]) {
         foreach ($_SESSION["search_studios"] as $s) {
-          echo "<form method='POST' action='user-profile.php'>";
+          echo "<form method='POST' action='studio.php'>";
           echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
           echo "<div class='studioTitle text-left'>" . $s["title"] . "</div>";
           echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
