@@ -61,7 +61,7 @@ include 'assets/php/db_conn.php';
             <input class="form-control my-0 py-1 searchBar" type="text" placeholder="Search" name="searchBar" value='<?php echo isset($_POST['searchBar']) ? $_POST['searchBar'] : ''; ?>' aria-label="Search">
           </form>
           <?php
-          $stmt = "SELECT * from studios s left join genres g on s.id = g.studioID where s.settings not like '%Private%';";
+          $stmt = "SELECT * from studios s left join genres g on s.id = g.studioID where s.visibility = 'Public';";
           $filtered = array();
           if ($result = mysqli_query($link, $stmt)) {
             while ($row = mysqli_fetch_array($result)) {
@@ -78,31 +78,19 @@ include 'assets/php/db_conn.php';
             // Construct the final studio results
             $finalResults = array();
             foreach ($filtered as $e) {
-              $settings = json_decode($e["settings"]);
-              $title = $settings->{'title'};
-              $visibility = $settings->{'visibility'};
-              $allowFork = $settings->{'allowFork'};
-              $description = $settings->{'description'};
-              $genres = $settings->{'genres'};
+              $title = $e["title"];
+              $visibility = $e["visibility"];
+              $allowFork = $e['allowFork'];
+              $description = $e['description'];
 
 
-              if (strpos(strtolower($e['genre']), $term) !== false) {
+             if ((strpos(strtolower($e['genre']), $term) !== false) || (strpos(strtolower($e['instruments']), $term) !== false) || (strpos(strtolower($e['description']), $term) !== false) || strpos(strtolower($e['title']), $term) !== false) {
                 array_push($finalResults, [
                   "id" => $e["id"],
                   "title" => $title,
                   "visibility" => $visibility,
                   "allowFork" => $allowFork,
-                  "description" => $description,
-                  "genres" => $genres
-                ]);
-              } else if (strpos(strtolower($e['settings']), $term) !== false) {
-                array_push($finalResults, [
-                  "id" => $e["id"],
-                  "title" => $title,
-                  "visibility" => $visibility,
-                  "allowFork" => $allowFork,
-                  "description" => $description,
-                  "genres" => $genres
+                  "description" => $description
                 ]);
               }
             }
@@ -131,11 +119,11 @@ include 'assets/php/db_conn.php';
           echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
           echo "<div class='studioTitle text-left'>" . $s["title"] . "</div>";
           echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
-          echo "<div class='studioGenres d-flex flex-row'>";
-          foreach ($s["genres"] as $g) {
-            echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
-          }
-          echo "</div>";
+          // echo "<div class='studioGenres d-flex flex-row'>";
+          // foreach ($s["genres"] as $g) {
+          //   echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+          // }
+          // echo "</div>";
           echo "</button>";
           echo "</form>";
         }
