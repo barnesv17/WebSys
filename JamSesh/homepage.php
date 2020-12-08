@@ -165,7 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </nav>
 
-    <section class="d-flex">
+    <section class="content-container">
       <div class="container description">
         <h2 id="builtForMusicians">Built for Musicians</h2>
         <p id="summary">JamSesh provides an environment for remote musicians to compose music collaboratively. Share a

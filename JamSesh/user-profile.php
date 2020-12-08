@@ -363,7 +363,7 @@ $_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
 
       <!-- Display the studios the user owns -->
       <div class="studioHeader d-flex flex-row">
-        <h2>Your Studios</h2>
+        <h1>Your Studios</h1>
         <a data-toggle="modal" data-target="#newStudio" class="btn btn-light action-button addStudio" role="button">New Studio</a>
       </div>
       <?php
@@ -384,7 +384,7 @@ $_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
 
       // Display the studios the user is a collaborator on
       echo "<div class='studioHeader d-flex flex-row'>";
-      echo "<h2>Collaborator Studios</h2>";
+      echo "<h1>Collaborator Studios</h1>";
       echo "</div>";
       if (@$_SESSION["users_collab_studios"]) {
         foreach ($_SESSION["users_collab_studios"] as $s) {
@@ -405,7 +405,7 @@ $_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
       }
       // Display the studios the user has favorited
       echo "<div class='studioHeader d-flex flex-row'>";
-      echo "<h2>Favorited Studios</h2>";
+      echo "<h1>Favorited Studios</h1>";
       echo "</div>";
       if (@$_SESSION["favorited-studios"]) {
         foreach ($_SESSION["users_collab_studios"] as $s) {

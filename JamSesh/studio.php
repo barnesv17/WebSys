@@ -404,7 +404,6 @@ getStudio($link);
 
 
   ?>
-
   <!-- Navbar Tabs -->
   <ul id="studio-navtabs" class="nav nav-tabs mb-3s" role="tablist">
     <li id="first-tab" class="nav-item">

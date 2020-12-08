@@ -128,8 +128,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </nav>
 
-    <section class="d-flex">
-      <div class="text-center d-xl-flex justify-content-xl-center form-container">
+    <section class="content-container">
+      <div class="text-center d-xl-flex justify-content-xl-center form-container" style="flex: 0 0;">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" id="signupForm" method="post">
           <h2 class="text-center" id="create">Login</h2>
           <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>" id="email">
