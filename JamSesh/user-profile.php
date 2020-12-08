@@ -172,7 +172,7 @@ function fetchCollabStudios( $link ) {
   if ($result = $link->query($sql)) {
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
-        $sql2 = "SELECT id, title, visibility, allowFork, description, owner FROM studios WHERE id = " . $row["studioID"] . "";
+        $sql2 = "SELECT * FROM studios WHERE id = " . $row["studioID"] . "";
         $result2 = $link->query($sql2);
         if ($result2->num_rows > 0) {
           while ($row2 = $result2->fetch_assoc()) {
@@ -188,17 +188,18 @@ function fetchCollabStudios( $link ) {
                 $owner_username = $row3["username"];
               }
             }
-            array_push( $collab_studios, [ 'id' => $row['id'],
-                                          'title' => $row['title'],
-                                          'visibility' => $row['visibility'],
-                                          'allowFork' => $row['allowFork'],
-                                          'description' => $row['description'],
+            array_push( $collab_studios, [ 'id' => $row2['id'],
+                                          'title' => $row2['title'],
+                                          'visibility' => $row2['visibility'],
+                                          'allowFork' => $row2['allowFork'],
+                                          'description' => $row2['description'],
                                           'owner' => $owner_username ] );
           }
         }
       }
     }
   }
+  return $collab_studios;
 }
 
 checkEditProfile( $link );
