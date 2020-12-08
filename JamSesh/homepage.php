@@ -158,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </ul>
           <span class="navbar-text actions">
             <a class="btn btn-link" role="button" href="search_button.php">Search</a>
-            <a class="login" href="login.php">Log In</a>
+            <a class="login btn btn-link" href="login.php">Log In</a>
             <a class="btn btn-light action-button" role="button" href="#">Sign Up</a>
           </span>
         </div>

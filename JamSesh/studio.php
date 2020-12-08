@@ -322,7 +322,13 @@ getStudio($link);
         </ul>
         <span class="navbar-text actions">
           <a class="btn btn-link" role="button" href="search_button.php">Search</a>
-          <a class="btn btn-light action-button" role="button" href="logout.php">Log Out</a>
+          <?php
+          if (isset($_SESSION["email"])) {
+            echo '<a class="btn btn-light action-button" role="button" href="logout.php">Log Out</a>';
+          } else {
+            echo '<a class="btn btn-light action-button" href="login.php">Log In</a>';
+          }
+          ?>
         </span>
       </div>
     </div>
@@ -339,11 +345,11 @@ getStudio($link);
   if (isset($_SESSION["email"])) {
     echo "<form action='studio.php' method='POST' id='favorite-form'>";
     if ($_SESSION["email"] == $_SESSION["ownerEmail"]) {
-      echo "<button class='btn btn-secondary invisible' name='favorite' type='submit'>Favorite&nbsp;";
+      echo "<button class='btn btn-secondary invisible fork-button' name='favorite' type='submit'>Favorite&nbsp;";
       echo "<span class='badge badge-light'>0</span>";
       echo "</button>";
     } else {
-      echo "<button class='btn btn-secondary' name='favorite' type='submit'>Favorite&nbsp;";
+      echo "<button class='btn btn-secondary fork-button' name='favorite' type='submit'>Favorite&nbsp;";
       echo "<span class='badge badge-light'>0</span>";
       echo "</button>";
     }
@@ -353,11 +359,11 @@ getStudio($link);
 
     echo "<form action='studio.php' method='POST' id='fork-form'>";
     if ($_SESSION["allowFork"] == "No") {
-      echo "<button class='btn btn-secondary invisible' name='fork' type='submit'>Fork&nbsp;";
+      echo "<button class='btn btn-secondary invisible fork-button' name='fork' type='submit'>Fork&nbsp;";
       echo "<span class='badge badge-light'>" . $_SESSION["forks"] . "</span>";
       echo "</button>";
     } else {
-      echo "<button class='btn btn-secondary' name='fork' type='submit'>Fork&nbsp;";
+      echo "<button class='btn btn-secondary fork-button' name='fork' type='submit'>Fork&nbsp;";
       echo "<span class='badge badge-light'>" . $_SESSION["forks"] . "</span>";
       echo "</button>";
     }
@@ -371,13 +377,6 @@ getStudio($link);
   echo "<div class='col-7'>";
   echo "<p>" . $_SESSION["description"] . "</p>";
   echo "</div>";
-  echo "</div>";
-
-  // Genres
-  echo "<div class='row'>";
-  foreach ($_SESSION["genres"] as $g) {
-    echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
-  }
   echo "</div>";
 
   // Owner
@@ -395,19 +394,26 @@ getStudio($link);
     echo "</p>";
     echo "</div>";
   }
-
+  // Genres
+  echo "<div class='row'>";
+  foreach ($_SESSION["genres"] as $g) {
+    echo "<p class='genres'>" . $g . "</p>";
+  }
   echo "</div>";
+  echo "</div>";
+
+
   ?>
 
   <!-- Navbar Tabs -->
   <ul id="studio-navtabs" class="nav nav-tabs mb-3s" role="tablist">
     <li id="first-tab" class="nav-item">
-      <a class="nav-link active" id="composition-tab" data-toggle="tab" href="#composition" role="tab" aria-controls="composition" aria-selected="true">Composition</a>
+      <a class="nav-link active tabs" id="composition-tab" data-toggle="tab" href="#composition" role="tab" aria-controls="composition" aria-selected="true">Composition</a>
     </li>
     <?php
     if (isset($_SESSION["email"]) && $_SESSION["email"] == $_SESSION["ownerEmail"]) {
       echo "<li class='nav-item'>";
-      echo "<a class='nav-link' id='settings-tab' data-toggle='tab' href='#settings' role='tab' aria-controls='settings' aria-selected='false'>";
+      echo "<a class='nav-link tabs' id='settings-tab' data-toggle='tab' href='#settings' role='tab' aria-controls='settings' aria-selected='false'>";
       echo "Settings";
       echo "</a>";
       echo "</li>";
@@ -475,10 +481,10 @@ getStudio($link);
     <div class="tab-pane fade show active" id="composition" role="tabpanel" aria-labelledby="composition-tab">
       <div id="studio-composition" class="table-responsive">
         <table class="table table-hover">
-          <thead class="thead-dark">
+          <thead>
             <tr>
-              <th scope="col">Instrument</th>
-              <th scope="col">Composition</th>
+              <th class="table-headers" scope="col">Instrument</th>
+              <th class="table-headers" scope="col">Composition</th>
             </tr>
           </thead>
           <tbody>
@@ -487,11 +493,20 @@ getStudio($link);
             $in_names = $json_instruments->{'names'};
             $in_files = $json_instruments->{'files'};
 
+            $is_collaborator = false;
+            if (@$_SESSION["collaborators_emails"]) {
+              foreach ($_SESSION["collaborators_emails"] as $ce) {
+                if (isset($_SESSION["email"]) && $ce == $_SESSION["email"]) {
+                  $is_collaborator = true;
+                }
+              }
+            }
+
             for ($i = 0; $i < count($in_names); $i++) {
               echo "<tr>";
               echo "<th scope='row'>";
               echo $in_names[$i];
-              if (isset($_SESSION["email"])) {
+              if (isset($_SESSION["email"]) && $is_collaborator) {
                 echo "<form action='studio.php' method='POST' enctype='multipart/form-data'>";
                 echo "<button type='submit' name='trashcan' value='" . $in_names[$i] . "'>";
                 echo "<img class='trashcan' src='assets/img/trashcan.png'/>";

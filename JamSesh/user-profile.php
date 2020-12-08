@@ -334,15 +334,14 @@ $_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
 
       <?php
       echo "<img src='" . $_SESSION["profilePic"] . "' alt='profile picture' class='pic'>";
-      echo "<p class='subName'>@" . $_SESSION["username"] . "</p>";
       echo "<p class='name'>" . $_SESSION["displayName"] . "</p>";
+      echo "<p class='subName'>@" . $_SESSION["username"] . "</p>";
       echo "<p class='subName'>" . $_SESSION["bio"] . "</p>";
       ?>
 
       <a data-toggle="modal" data-target="#editProfile" class="btn btn-light action-button changePic" role="button">
         Edit Profile
       </a>
-      <hr />
       <div class="genreContainer d-flex flex-row">
         <!-- <?php
         $all_genres = array();
@@ -404,7 +403,6 @@ $_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
       } else {
         echo "<p>You are not a collaborator on any studios</p>";
       }
-
       // Display the studios the user has favorited
       echo "<div class='studioHeader d-flex flex-row'>";
       echo "<h2>Favorited Studios</h2>";

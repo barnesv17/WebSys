@@ -4,6 +4,16 @@ session_start();
 
 // Include config file
 include 'assets/php/db_conn.php';
+
+// Checks if a studio was clicked on--------------------------------------------
+function checkStudioClicked() {
+  if (isset($_POST["studio-clicked"])) {
+    $_SESSION["studioID"] = $_POST["studio-clicked"];
+    header("Location: studio.php");
+  }
+}
+
+checkStudioClicked();
 ?>
 
 
@@ -34,13 +44,12 @@ include 'assets/php/db_conn.php';
         </ul>
         <span class="navbar-text actions" style="float: right;">
           <a class="btn btn-link" role="button" href="search_button.php">Search</a>
-          <?php 
-            if (isset($_SESSION["email"])) {
-              echo '<a class="btn btn-light action-button" role="button" href="logout.php">Log Out</a>';
-            } else {
-              echo '<a class="btn btn-light action-button" href="login.php">Log In</a>';
-            }
-
+          <?php
+          if (isset($_SESSION["email"])) {
+            echo '<a class="btn btn-light action-button" role="button" href="logout.php">Log Out</a>';
+          } else {
+            echo '<a class="btn btn-light action-button" href="login.php">Log In</a>';
+          }
           ?>
         </span>
       </div>
@@ -85,7 +94,7 @@ include 'assets/php/db_conn.php';
               $description = $e['description'];
 
 
-             if ((strpos(strtolower($e['genre']), $term) !== false) || (strpos(strtolower($e['instruments']), $term) !== false) || (strpos(strtolower($e['description']), $term) !== false) || strpos(strtolower($e['title']), $term) !== false) {
+              if ((strpos(strtolower($e['genre']), $term) !== false) || (strpos(strtolower($e['instruments']), $term) !== false) || (strpos(strtolower($e['description']), $term) !== false) || strpos(strtolower($e['title']), $term) !== false) {
                 array_push($finalResults, [
                   "id" => $e["id"],
                   "title" => $title,
@@ -101,24 +110,25 @@ include 'assets/php/db_conn.php';
         </div>
       </div>
     </div>
-    <div class="studioHeader d-flex flex-row">
+    <div class="studioHeader d-flex">
       <?php
-      if( $_SESSION["search_studios"] ) {
+      if ($_SESSION["search_studios"]) {
         if (count($_SESSION["search_studios"]) > 0) {
           $searchTerm = $_SESSION["search_query"];
-          echo "<h2>Results for " . $searchTerm . "</h2>";
+          echo "<h1>Results for \"" . $searchTerm . "\"</h1>";
+          echo "<p>Showing " . count($_SESSION["search_studios"]) . " results</p>";
         }
       }
       ?>
-
     </div>
     <?php
-    if( $_SESSION["search_studios"] ) {
+    if ($_SESSION["search_studios"]) {
       if (@$_SESSION["search_studios"]) {
         foreach ($_SESSION["search_studios"] as $s) {
-          echo "<form method='POST' action='studio.php'>";
+          echo "<form method='POST' action='search.php'>";
           echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
           echo "<div class='studioTitle text-left'>" . $s["title"] . "</div>";
+          echo "<hr />";
           echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
           // echo "<div class='studioGenres d-flex flex-row'>";
           // foreach ($s["genres"] as $g) {
