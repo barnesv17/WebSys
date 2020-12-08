@@ -28,6 +28,7 @@
 }
 
 th {
+    padding: 20px !important;
     border-top: none !important;
     padding-left: 2em !important;
 }
