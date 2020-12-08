@@ -1,216 +1,211 @@
 <?php
-// Initialize the session
+// Initialize the session-------------------------------------------------------
 session_start();
-
-// Check if the user is logged in, if not then redirect him to homepage
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-  header("location: homepage.php");
-  exit;
-}
-
-// Include config file
+// Check if the user is logged in, if not then redirect him to homepage---------
+include 'assets/php/login_check.php';
+// Include db config file-------------------------------------------------------
 include 'assets/php/db_conn.php';
-?>
 
-<!-- Check for edit profile updates ------------------------------------------>
-<?php
-if (isset($_POST['save-changes'])) {
-
-  // Profile Picture
+// Updates the user's Profile Picture-------------------------------------------
+function checkProfilePic( $link ) {
   if (isset($_FILES['profile-pic'])) {
+    // Validate the file is an image
     if (
       @mime_content_type($_FILES["profile-pic"]["tmp_name"]) == "image/png" ||
       @mime_content_type($_FILES["profile-pic"]["tmp_name"]) == "image/jpeg"
-    ) { // check that it is an image
+    ) {
       $file_name = $_FILES['profile-pic']['name'];
+      // Upload the file to local directory
       move_uploaded_file($_FILES["profile-pic"]["tmp_name"], "assets/img/profile-pictures/" . $file_name);
       $param_profilePic = "assets/img/profile-pictures/" . $file_name;
       $param_id = $_SESSION["email"];
+      // Update the profile picture file in the database
       $sql = "UPDATE users SET profilePic = '" . $param_profilePic . "' WHERE email = '" . $param_id . "'";
       if ($stmt = mysqli_prepare($link, $sql)) {
-        // Attempt to execute the prepared statement
         if (!mysqli_stmt_execute($stmt)) {
-          echo "profpic";
           echo "Oops! Something went wrong. Please try again later.";
         }
       }
     }
   }
+}
 
-  //Bio
-  if ($_POST['bio'] != "") {
-    $param_bio = $_POST['bio'];
-    $param_id = $_SESSION["email"];
-    $sql = "UPDATE users SET bio = '" . $param_bio . "' WHERE email = '" . $param_id . "'";
-    if ($stmt = mysqli_prepare($link, $sql)) {
-      // Attempt to execute the prepared statement
-      if (!mysqli_stmt_execute($stmt)) {
-        echo "bio";
-        echo "Oops! Something went wrong. Please try again later.";
-      }
+// Updates the user's bio-------------------------------------------------------
+function checkBio( $link ) {
+  $param_bio = $_POST['bio'];
+  $param_id = $_SESSION["email"];
+  // Update bio in the database
+  $sql = "UPDATE users SET bio = '" . $param_bio . "' WHERE email = '" . $param_id . "'";
+  if ($stmt = mysqli_prepare($link, $sql)) {
+    if (!mysqli_stmt_execute($stmt)) {
+      echo "Oops! Something went wrong. Please try again later.";
     }
   }
+}
 
-  // Display Name
-  if ($_POST['display-name'] != "") {
+// Updates the user's display name----------------------------------------------
+function checkDisplayName( $link ) {
+  // Validate that the user's name is not an empty string
+  if( trim($_POST['display-name']) != "" ) {
     $param_displayName = $_POST['display-name'];
     $param_id = $_SESSION["email"];
+    // Update displayName in the database
     $sql = "UPDATE users SET displayName = '" . $param_displayName . "' WHERE email = '" . $param_id . "'";
     if ($stmt = mysqli_prepare($link, $sql)) {
-      // Attempt to execute the prepared statement
       if (!mysqli_stmt_execute($stmt)) {
-        echo "displayname";
         echo "Oops! Something went wrong. Please try again later.";
       }
     }
+  } else { // If the user's name is an empty string, alert the user
+    echo "<script>alert( 'Please enter a Profile Name' );</script>";
   }
+}
 
-  // Username
-  if ($_POST['username'] != "") {
+// Updates the user's username--------------------------------------------------
+function checkUsername( $link ) {
+  // Validate that the user's username is not an empty string
+  if ( trim($_POST['username']) != "") {
     $param_username = $_POST['username'];
     $param_id = $_SESSION["email"];
+    // Update the username in the database
     $sql = "UPDATE users SET username = '" . $param_username . "'WHERE email = '" . $param_id . "'";
     if ($stmt = mysqli_prepare($link, $sql)) {
-      // Attempt to execute the prepared statement
       if (!mysqli_stmt_execute($stmt)) {
-        echo "username";
         echo "Oops! Something went wrong. Please try again later.";
       }
     }
-  }
-
-  $param_id = $_SESSION["email"];
-  $sql = "SELECT email, password, username, displayName, bio, profilePic FROM users WHERE email = '" . $param_id . "'";
-  if ($stmt = mysqli_prepare($link, $sql)) {
-    // Attempt to execute the prepared statement
-    if (mysqli_stmt_execute($stmt)) {
-      // Store result
-      mysqli_stmt_store_result($stmt);
-      // Bind result variables
-      mysqli_stmt_bind_result($stmt, $email, $hashed_password, $username, $displayName, $bio, $profilePic);
-      if (mysqli_stmt_fetch($stmt)) {
-        // Store data in session variables
-        $_SESSION["loggedin"] = true;
-        // $_SESSION["id"] = $id;
-        $_SESSION["email"] = $email;
-        $_SESSION["username"] = $username;
-        $_SESSION["displayName"] = $displayName;
-        $_SESSION["bio"] = $bio;
-        $_SESSION["profilePic"] = $profilePic;
-      }
-    }
+  } else { // If the username is an empty string, alert the user
+    echo "<script>alert( 'Please enter a username' );</script>";
   }
 }
 
-// Check if new studio was added-----------------------------------------
-if (isset($_POST['create-new-studio'])) {
-  if (empty($_POST["new-title"])) {
-    echo "<script>alert( 'Empty Title' );</script>";
-  } else { // Add studio directory and to the database
-    $new_settings = '{ "title" : "' . $_POST["new-title"] . '",
-                              "visibility" : "' . $_POST["new-visibility"] . '",
-                              "allowFork" : "' . $_POST["new-allowFork"] . '",
-                              "description" : "' . $_POST["new-description"] . '",
-                              "genres" : [] }';
+// Checks if changes have been made in the "Edit Profile" block
+function checkEditProfile( $link ) {
+  // If the save-changes button was clicked
+  if (isset($_POST['save-changes'])) {
+    // Update all properties in the database
+    checkProfilePic( $link );
+    checkBio( $link );
+    checkDisplayName( $link );
+    checkUsername( $link );
 
-    $new_instruments = '{ "names" : [], "files" : [] }';
-
-    $sql = "INSERT INTO studios (owner, instruments, settings) VALUES (?, ?, ?)";
+    // Fetch the updated properties from the database
+    $param_id = $_SESSION["email"];
+    $sql = "SELECT email, password, username, displayName, bio, profilePic FROM users WHERE email = '" . $param_id . "'";
     if ($stmt = mysqli_prepare($link, $sql)) {
-      // Bind variables to the prepared statement as parameters
-      mysqli_stmt_bind_param($stmt, "sss", $param_email, $param_instruments, $param_settings);
-
-      // Set parameters
-      $param_email = $_SESSION["email"];
-      $param_instruments = $new_instruments;
-      $param_settings = $new_settings;
-
-      // Attempt to execute the prepared statement
-      if (!mysqli_stmt_execute($stmt)) {
-        echo "Something went wrong. Please try again later.";
-      } else {
-        $last_id = $link->insert_id;
-        // echo "HERE";
-        // echo "<script>console.log(HERE);</script>";
-        mkdir("studios/" . $last_id);
-      }
-    }
-  }
-}
-
-// Check if a specific studio was cliked----------------------------------
-if (isset($_POST["studio-clicked"])) {
-  $_SESSION["studioID"] = $_POST["studio-clicked"];
-  header("Location: studio.php");
-}
-
-// Fetch all of the users studios-----------------------------------------
-$studios = array();
-$collab_studios = array();
-
-// Prepare a select statement for studios where this user is the owner
-$sql = "SELECT id, settings FROM studios WHERE owner = '" . $_SESSION["email"] . "'";
-$result = $link->query($sql);
-if ($result->num_rows > 0) {
-  while ($row = $result->fetch_assoc()) {
-    $settings = json_decode($row["settings"]);
-    $title = $settings->{'title'};
-    $visibility = $settings->{'visibility'};
-    $allowFork = $settings->{'allowFork'};
-    $description = $settings->{'description'};
-    $genres = $settings->{'genres'};
-
-    array_push($studios, [
-      "id" => $row["id"],
-      "title" => $title,
-      "visibility" => $visibility,
-      "allowFork" => $allowFork,
-      "description" => $description,
-      "genres" => $genres
-    ]);
-  }
-}
-
-// Prepare a select statement for studios where this user is a collaborator
-$sql2 = "SELECT * FROM collaborators WHERE email = '" . $_SESSION["email"] . "'";
-if ($result2 = $link->query($sql2)) {
-  if ($result2->num_rows > 0) {
-    while ($row2 = $result2->fetch_assoc()) {
-      $sql3 = "SELECT id, settings, owner FROM studios WHERE id = " . $row2["studioID"] . "";
-      $result3 = $link->query($sql3);
-      if ($result3->num_rows > 0) {
-        while ($row3 = $result3->fetch_assoc()) {
-          $settings = json_decode($row3["settings"]);
-          $title = $settings->{'title'};
-          $visibility = $settings->{'visibility'};
-          $allowFork = $settings->{'allowFork'};
-          $description = $settings->{'description'};
-          $genres = $settings->{'genres'};
-          $owner_email = $row3["owner"];
-          // Find the owner's username
-          $sql4 = "SELECT username FROM users WHERE email = '" . $row3["owner"] . "'";
-          $result4 = $link->query($sql4);
-          if ($result4->num_rows == 1) {
-            while ($row4 = $result4->fetch_assoc()) {
-              $owner_username = $row4["username"];
-            }
-          }
-          array_push($collab_studios, [
-            "id" => intval($row3["id"]),
-            "title" => $title,
-            "visibility" => $visibility,
-            "allowFork" => $allowFork,
-            "description" => $description,
-            "genres" => $genres,
-            "owner" => $owner_username
-          ]);
+      if (mysqli_stmt_execute($stmt)) {
+        mysqli_stmt_store_result($stmt);
+        mysqli_stmt_bind_result($stmt, $email, $hashed_password, $username, $displayName, $bio, $profilePic);
+        if (mysqli_stmt_fetch($stmt)) {
+          $_SESSION["loggedin"] = true;
+          $_SESSION["email"] = $email;
+          $_SESSION["username"] = $username;
+          $_SESSION["displayName"] = $displayName;
+          $_SESSION["bio"] = $bio;
+          $_SESSION["profilePic"] = $profilePic;
         }
       }
     }
   }
 }
-$_SESSION["users_studios"] = $studios;
-$_SESSION["users_collab_studios"] = $collab_studios;
+
+// Checks if a new studio was created-------------------------------------------
+function checkNewStudio( $link ) {
+  if (isset($_POST['create-new-studio'])) {
+    // Validate that a title was entered for the Studio
+    if (!empty($_POST["new-title"])) {
+      // Insert the new studio into the database
+      $sql = "INSERT INTO studios (owner, instruments, title, visibility, allowFork, description) VALUES (?, ?, ?, ?, ?, ?)";
+      if ($stmt = mysqli_prepare($link, $sql)) {
+        mysqli_stmt_bind_param($stmt, "ssssss", $email, $instruments, $title, $visibility, $allowFork, $description);
+        $email = $_SESSION["email"];
+        $instruments = '{ "names" : [], "files" : [] }';
+        $title = $_POST["new-title"];
+        $visibility = $_POST["new-visibility"];
+        $allowFork = $_POST["new-allowFork"];
+        $description = $_POST["new-description"];
+        if (mysqli_stmt_execute($stmt)) {
+          // Make a local directory for the new studio
+          $last_id = $link->insert_id;
+          mkdir("studios/" . $last_id);
+        } else {
+          echo "Something went wrong. Please try again later.";
+        }
+      }
+    } else { // If the title of the studio is empty
+      echo "<script>alert( 'Empty Title' );</script>";
+    }
+  }
+}
+
+// Checks if a studio was clicked on--------------------------------------------
+function checkStudioClicked() {
+  if (isset($_POST["studio-clicked"])) {
+    $_SESSION["studioID"] = $_POST["studio-clicked"];
+    header("Location: studio.php");
+  }
+}
+
+// Fetches all of the users owned studios---------------------------------------
+function fetchOwnedStudios( $link ) {
+  $owned_studios = array();
+  // Prepare a select statement for studios where this user is the owner
+  $sql = "SELECT id, title, visibility, allowFork, description FROM studios WHERE owner = '" . $_SESSION["email"] . "'";
+  $result = $link->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      array_push( $owned_studios, [ 'id' => $row['id'],
+                                    'title' => $row['title'],
+                                    'visibility' => $row['visibility'],
+                                    'allowFork' => $row['allowFork'],
+                                    'description' => $row['description'] ] );
+    }
+  }
+  return $owned_studios;
+}
+
+// Fetches all of the studios the user is a collaborator on---------------------
+function fetchCollabStudios( $link ) {
+  $collab_studios = array();
+  // Prepare a select statement for studios where this user is a collaborator
+  $sql = "SELECT * FROM collaborators WHERE email = '" . $_SESSION["email"] . "'";
+  if ($result = $link->query($sql)) {
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $sql2 = "SELECT id, title, visibility, allowFork, description, owner FROM studios WHERE id = " . $row["studioID"] . "";
+        $result2 = $link->query($sql2);
+        if ($result2->num_rows > 0) {
+          while ($row2 = $result2->fetch_assoc()) {
+            $title = $row2['title'];
+            $visibility = $row2['visibility'];
+            $allowFork = $row2['allowFork'];
+            $description = $row2['description'];
+            // Find the owner of the studio's username
+            $sql3 = "SELECT username FROM users WHERE email = '" . $row2["owner"] . "'";
+            $result3 = $link->query($sql3);
+            if ($result3->num_rows == 1) {
+              while ($row3 = $result3->fetch_assoc()) {
+                $owner_username = $row3["username"];
+              }
+            }
+            array_push( $collab_studios, [ 'id' => $row['id'],
+                                          'title' => $row['title'],
+                                          'visibility' => $row['visibility'],
+                                          'allowFork' => $row['allowFork'],
+                                          'description' => $row['description'],
+                                          'owner' => $owner_username ] );
+          }
+        }
+      }
+    }
+  }
+}
+
+checkEditProfile( $link );
+checkNewStudio( $link );
+checkStudioClicked();
+$_SESSION["users_studios"] = fetchOwnedStudios( $link );
+$_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
 ?>
 
 <!DOCTYPE html>
@@ -348,7 +343,7 @@ $_SESSION["users_collab_studios"] = $collab_studios;
       </a>
       <hr />
       <div class="genreContainer d-flex flex-row">
-        <?php
+        <!-- <?php
         $all_genres = array();
         if (@$_SESSION["users_studios"]) {
           foreach ($_SESSION["users_studios"] as $s) {
@@ -361,7 +356,7 @@ $_SESSION["users_collab_studios"] = $collab_studios;
             echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
           }
         }
-        ?>
+        ?> -->
       </div>
     </div>
     <div class="d-flex flex-column text-center studioSection">
@@ -378,11 +373,8 @@ $_SESSION["users_collab_studios"] = $collab_studios;
           echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
           echo "<div class='studioTitle text-left'>" . $s["title"] . "</div>";
           echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
-          echo "<div class='studioGenres d-flex flex-row'>";
-          foreach ($s["genres"] as $g) {
-            echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
-          }
-          echo "</div>";
+          // echo "<div class='studioGenres d-flex flex-row'>";
+          // echo "</div>";
           echo "</button>";
           echo "</form>";
         }
@@ -400,11 +392,11 @@ $_SESSION["users_collab_studios"] = $collab_studios;
           echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
           echo "<div class='studioTitle text-left'>@" . $s["owner"] . "/" . $s["title"] . "</div>";
           echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
-          echo "<div class='studioGenres d-flex flex-row'>";
-          foreach ($s["genres"] as $g) {
-            echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
-          }
-          echo "</div>";
+          // echo "<div class='studioGenres d-flex flex-row'>";
+          // foreach ($s["genres"] as $g) {
+          //   echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+          // }
+          // echo "</div>";
           echo "</button>";
           echo "</form>";
         }
@@ -422,11 +414,11 @@ $_SESSION["users_collab_studios"] = $collab_studios;
           echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
           echo "<div class='studioTitle text-left'>@" . $s["owner"] . "/" . $s["title"] . "</div>";
           echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
-          echo "<div class='studioGenres d-flex flex-row'>";
-          foreach ($s["genres"] as $g) {
-            echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
-          }
-          echo "</div>";
+          // echo "<div class='studioGenres d-flex flex-row'>";
+          // foreach ($s["genres"] as $g) {
+          //   echo "<p class='btn btn-light action-button genres'>" . $g . "</p>";
+          // }
+          // echo "</div>";
           echo "</button>";
           echo "</form>";
         }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2020 at 04:58 PM
+-- Generation Time: Dec 08, 2020 at 01:40 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -31,6 +31,13 @@ CREATE TABLE `collaborators` (
   `studioID` int(11) NOT NULL,
   `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `collaborators`
+--
+
+INSERT INTO `collaborators` (`studioID`, `email`) VALUES
+(14, 'barnev@rpi.edu');
 
 -- --------------------------------------------------------
 
@@ -64,7 +71,10 @@ CREATE TABLE `studios` (
   `id` int(11) NOT NULL,
   `owner` varchar(50) DEFAULT NULL,
   `instruments` mediumtext DEFAULT '',
-  `settings` mediumtext DEFAULT '',
+  `title` varchar(50) NOT NULL DEFAULT 'Title',
+  `visibility` varchar(10) NOT NULL DEFAULT 'Public',
+  `allowFork` varchar(5) NOT NULL DEFAULT 'Yes',
+  `description` varchar(2048) NOT NULL DEFAULT 'Description',
   `forks` int(10) NOT NULL DEFAULT 0,
   `isAFork` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -73,11 +83,15 @@ CREATE TABLE `studios` (
 -- Dumping data for table `studios`
 --
 
-INSERT INTO `studios` (`id`, `owner`, `instruments`, `settings`, `forks`, `isAFork`) VALUES
-(1, 'virginiabarnes0825@gmail.com', '{\"names\":[\"Drums\",\"Viola\",\"Violin 1\",\"Violin 2\",\"Cello\"],\"files\":[\"studios/1/Drums.mp3\",\"studios/1/Viola.mp3\",\"studios/1/Violin 1.mp3\",\"studios/1/Violin 2.mp3\",\"studios/1/Cello.mp3\"]}', '{\"title\":\"Bad Guy!!!!\",\"visibility\":\"Public\",\"allowFork\":\"Yes\",\"description\":\"my attempt at being billy eilish\",\"genres\":[]}', 0, NULL),
-(14, 'virginiabarnes0825@gmail.com', '{\"names\":[\"Oboe\",\"Cello\",\"Piano\",\"Guitar 1\",\"Guitar 2\"],\"files\":[\"studios/14/Oboe.mp3\",\"studios/14/Cello.mp3\",\"studios/14/Piano.mp3\",\"studios/14/Guitar 1.mp3\",\"studios/14/Guitar 2.mp3\"]}', '{ \"title\" : \"Take On Me\",\r\n                              \"visibility\" : \"Public\",\r\n                              \"allowFork\" : \"Yes\",\r\n                              \"description\" : \"a song by a-ha!\",\r\n                              \"genres\" : [] }', 0, NULL),
-(31, 'virginiabarnes0825@gmail.com', '{\"names\":[\"Alto Sax\",\"Banjo\",\"Bass\",\"Cello\",\"Clarinet\",\"Drumset\",\"Euphonium\",\"Flute\",\"Honky Tonk Piano\",\"Horn\",\"Tenor Sax\",\"Trombone\",\"Trumpet 1\",\"Trumpet 2\",\"Tuba\",\"Viola\",\"Violin\"],\"files\":[\"studios/31/Alto Sax.mp3\",\"studios/31/Banjo.mp3\",\"studios/31/Bass.mp3\",\"studios/31/Cello.mp3\",\"studios/31/Clarinet.mp3\",\"studios/31/Drumset.mp3\",\"studios/31/Euphonium.mp3\",\"studios/31/Flute.mp3\",\"studios/31/Honky Tonk Piano.mp3\",\"studios/31/Horn.mp3\",\"studios/31/Tenor Sax.mp3\",\"studios/31/Trombone.mp3\",\"studios/31/Trumpet 1.mp3\",\"studios/31/Trumpet 2.mp3\",\"studios/31/Tuba.mp3\",\"studios/31/Viola.mp3\",\"studios/31/Violin.mp3\"]}', '{\"title\":\"Baby Shark Orchestra\",\"visibility\":\"Public\",\"allowFork\":\"Yes\",\"description\":\"do doo doo do do\",\"genres\":[]}', 0, NULL),
-(32, 'wildg@rpi.edu', '{ \"names\" : [], \"files\" : [] }', '{\"title\":\"My Studio\",\"visibility\":\"Public\",\"allowFork\":\"Yes\",\"description\":\"Description\",\"genres\":[]}', 0, NULL),
+INSERT INTO `studios` (`id`, `owner`, `instruments`, `title`, `visibility`, `allowFork`, `description`, `forks`, `isAFork`) VALUES
+(14, 'virginiabarnes0825@gmail.com', '{\"names\":[\"Oboe\",\"Cello\",\"Piano\",\"Guitar 1\",\"Guitar 2\"],\"files\":[\"studios/14/Oboe.mp3\",\"studios/14/Cello.mp3\",\"studios/14/Piano.mp3\",\"studios/14/Guitar 1.mp3\",\"studios/14/Guitar 2.mp3\"]}', 'Title', 'Public', 'Yes', 'Description', 1, NULL),
+(31, 'virginiabarnes0825@gmail.com', '{\"names\":[\"Alto Sax\",\"Banjo\",\"Bass\",\"Cello\",\"Clarinet\",\"Drumset\",\"Euphonium\",\"Flute\",\"Honky Tonk Piano\",\"Horn\",\"Tenor Sax\",\"Trombone\",\"Trumpet 1\",\"Trumpet 2\",\"Tuba\",\"Viola\",\"Violin\"],\"files\":[\"studios/31/Alto Sax.mp3\",\"studios/31/Banjo.mp3\",\"studios/31/Bass.mp3\",\"studios/31/Cello.mp3\",\"studios/31/Clarinet.mp3\",\"studios/31/Drumset.mp3\",\"studios/31/Euphonium.mp3\",\"studios/31/Flute.mp3\",\"studios/31/Honky Tonk Piano.mp3\",\"studios/31/Horn.mp3\",\"studios/31/Tenor Sax.mp3\",\"studios/31/Trombone.mp3\",\"studios/31/Trumpet 1.mp3\",\"studios/31/Trumpet 2.mp3\",\"studios/31/Tuba.mp3\",\"studios/31/Viola.mp3\",\"studios/31/Violin.mp3\"]}', 'Title', 'Public', 'Yes', 'Description', 0, NULL),
+(40, 'barnev@rpi.edu', '{ \"names\" : [], \"files\" : [] }', 'Title', 'Public', 'Yes', 'Description', 0, NULL),
+(41, 'barnev@rpi.edu', '{ \"names\" : [], \"files\" : [] }', 'Title', 'Public', 'Yes', 'Description', 0, NULL),
+(42, 'barnev@rpi.edu', '{ \"names\" : [], \"files\" : [] }', 'Title', 'Public', 'Yes', 'Description', 0, NULL),
+(43, 'barnev@rpi.edu', '{ \"names\" : [], \"files\" : [] }', 'Title', 'Public', 'Yes', 'Description', 0, NULL),
+(45, 'virginiabarnes0825@gmail.com', '{ \"names\" : [], \"files\" : [] }', 'Title', 'Public', 'Yes', 'Description', 0, NULL),
+(48, 'virginiabarnes0825@gmail.com', '{\"names\":[\"Oboe\",\"Cello\",\"Piano\",\"Guitar 1\",\"Guitar 2\"],\"files\":[\"studios/14/Oboe.mp3\",\"studios/14/Cello.mp3\",\"studios/14/Piano.mp3\",\"studios/14/Guitar 1.mp3\",\"studios/14/Guitar 2.mp3\"]}', 'Title', 'Public', 'Yes', 'Description', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -100,7 +114,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`email`, `password`, `username`, `displayName`, `bio`, `profilePic`) VALUES
 ('barnev@rpi.edu', '$2y$10$dJ2rG/KxcJGZ5bhsRpjkWuwwF85wLz61GtFRmMmFua.qmCFyCrczK', 'johne', 'Elton John', '', 'assets/img/profile-pictures/profilepic1.jpg'),
-('virginiabarnes0825@gmail.com', '$2y$10$k2WzMzkOjGmZNaTC.Mw7l.swj..rbbefS5zVCYtZWnRgrwPx4uoIm', 'barnesv17', 'Virginia Barnes', 'this is my bio', 'assets/img/profile-pictures/profilepic3.jpg'),
+('virginiabarnes0825@gmail.com', '$2y$10$k2WzMzkOjGmZNaTC.Mw7l.swj..rbbefS5zVCYtZWnRgrwPx4uoIm', 'barnesv', 'John Legend', 'hello', 'assets/img/profile-pictures/profilepic3.jpg'),
 ('wildg@rpi.edu', '$2y$10$TnSWLoN7kq8KV6Ga3Zh6TeFyxCgCIP1WBPWE8THUBA.p6rYPfoSWq', 'wildg', 'FirstName LastName', '', 'assets/img/profile-pictures/blank-avatar.png');
 
 --
@@ -149,7 +163,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `studios`
 --
 ALTER TABLE `studios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- Constraints for dumped tables
