@@ -2,7 +2,7 @@
   flex: 1 1;
   /* align-content: flex-start; */
   justify-content: left;
-  padding: 5px;
+  padding: 15px;
 }
 
 .pic {
@@ -25,13 +25,14 @@
 }
 
 .changePic {
-  align-self: center;
-  background: #222222;
+  /* align-self: center; */
+  /* background: #222222; */
   /* width: 150px; */
   /* height: 30; */
   flex-basis: auto;
   border-radius: 8px;
-  color: rgb(255,255,255);
+  border: 1px solid grey;
+  /* color: rgb(255,255,255); */
 }
 
 hr {
@@ -50,40 +51,61 @@ hr {
 }
 
 .studioHeader {
+  flex-direction: column;
   color: rgb(34,34,34);
   font-weight: bold;
+  margin-bottom: 10px;
   margin-top: 10px;
+
   padding: 10px;
   justify-content: space-between;
 }
 
+.studioHeader p {
+  color: grey;
+  font-weight: 400;
+}
+
 .addStudio {
   margin: 5px;
-  border: 1px solid #3aafa9;
+  background-color: #3aafa9;
   flex-basis: auto;
-  color: #3aafa9;
+  color: white;
   border-radius: 8px;
   padding: 10px;
 }
+
 
 .pad {
   padding: 20px;
   justify-content: space-around;
 }
 
+hr {
+  border-top: 1px solid white;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: -1px;
+}
+
 .studio:hover {
+  transition: all .8s ease;
   text-decoration: none;
   color: rgb(255,255,255);
+  box-shadow:0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.20);
 }
 
 .studio {
+  transition: all .8s ease;
   justify-content: start;
   margin-top: 10px;
   margin-bottom: 10px;
   flex: 1 0;
   background: #3aafa9;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);  ;
   border-radius: 16px;
   color: rgb(255,255,255);
+  border: none;
   width: 100%;
 }
 
@@ -96,6 +118,7 @@ hr {
 
 .studioDescription {
   padding-left: 15px;
+  padding-bottom: 15px;
   color: black;
 }
 
