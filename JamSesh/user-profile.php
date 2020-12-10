@@ -372,6 +372,7 @@ $_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
           echo "<form method='POST' action='user-profile.php'>";
           echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
           echo "<div class='studioTitle text-left'>" . $s["title"] . "</div>";
+          echo "<hr />";
           echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
           // echo "<div class='studioGenres d-flex flex-row'>";
           // echo "</div>";
@@ -391,6 +392,7 @@ $_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
           echo "<form method='POST' action='user-profile.php'>";
           echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
           echo "<div class='studioTitle text-left'>@" . $s["owner"] . "/" . $s["title"] . "</div>";
+          echo "<hr />";
           echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
           // echo "<div class='studioGenres d-flex flex-row'>";
           // foreach ($s["genres"] as $g) {
@@ -412,6 +414,7 @@ $_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
           echo "<form method='POST' action='user-profile.php'>";
           echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
           echo "<div class='studioTitle text-left'>@" . $s["owner"] . "/" . $s["title"] . "</div>";
+          echo "<hr />";
           echo "<p class='studioDescription text-left'>" . $s["description"] . "</p>";
           // echo "<div class='studioGenres d-flex flex-row'>";
           // foreach ($s["genres"] as $g) {
