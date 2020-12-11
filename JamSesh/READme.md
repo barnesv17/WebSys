@@ -14,10 +14,12 @@ Navigate to JamSesh/assets/php/db_conn.php, replace the DB_USERNAME and DB_PASSW
 
 Navigate to your host JamSesh folder and start JamSeshing!
 
-### Home Page
+### Home Page / Log-in Page
 
-Log in with your email and password.
-If you're not registered, please sign up with your email, username, and password. You'll be redirected to user-profile page when signing up is completed.
+Users log in with email and password.
+If not registered, users sign up with an email, username, and password. User will be redirected to user-profile page when signing up is completed.
+
+If the user already has an account, log in with an registered email and password
 
 ### User Profile Page
 
