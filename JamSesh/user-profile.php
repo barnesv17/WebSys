@@ -56,9 +56,9 @@ function checkDisplayName( $link ) {
         echo "Oops! Something went wrong. Please try again later.";
       }
     }
-  } else { // If the user's name is an empty string, alert the user
-    echo "<script>alert( 'Please enter a Profile Name' );</script>";
-  }
+  } /*else { // If the user's name is an empty string, alert the user
+    echo "<script>alert( 'Profile Name was not changed, but other settings have been applied!' );</script>";
+  }*/
 }
 
 // Updates the user's username--------------------------------------------------
@@ -74,9 +74,9 @@ function checkUsername( $link ) {
         echo "Oops! Something went wrong. Please try again later.";
       }
     }
-  } else { // If the username is an empty string, alert the user
-    echo "<script>alert( 'Please enter a username' );</script>";
-  }
+  } /*else { // If the username is an empty string, alert the user
+    echo "<script>alert( 'Username was not changed, but other settings have been applied!' );</script>";
+  }*/
 }
 
 // Checks if changes have been made in the "Edit Profile" block
@@ -88,7 +88,7 @@ function checkEditProfile( $link ) {
     checkBio( $link );
     checkDisplayName( $link );
     checkUsername( $link );
-
+    echo "<script>alert('Changes applied!');</script>";
     // Fetch the updated properties from the database
     $param_id = $_SESSION["email"];
     $sql = "SELECT email, password, username, displayName, bio, profilePic FROM users WHERE email = '" . $param_id . "'";
@@ -132,9 +132,9 @@ function checkNewStudio( $link ) {
           echo "Something went wrong. Please try again later.";
         }
       }
-    } else { // If the title of the studio is empty
+    } /*else { // If the title of the studio is empty
       echo "<script>alert( 'Empty Title' );</script>";
-    }
+    }*/
   }
 }
 
@@ -230,6 +230,11 @@ $_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
         </ul>
         <span class="navbar-text actions">
           <a class="btn btn-link" role="button" href="search_button.php">Search</a>
+          <?php
+            if ($_SESSION["isAdmin"] == 'Yes') {
+              echo '<a class="btn btn-link" role="button" href="admin.php">Admin Panel</a>';
+            }
+          ?>
           <a class="btn btn-light action-button" role="button" href="logout.php">Log Out</a>
         </span>
       </div>
