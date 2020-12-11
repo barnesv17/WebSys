@@ -123,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["displayName"] = $displayName;
             $_SESSION["bio"] = $bio;
             $_SESSION["profilePic"] = $profilePic;
-
+            $_SESSION["isAdmin"] = 'No';
             // Redirect user to user profile page
             header("location: user-profile.php");
           }
