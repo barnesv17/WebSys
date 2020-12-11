@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2020 at 01:40 AM
+-- Generation Time: Dec 11, 2020 at 10:46 AM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.9
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -61,6 +61,15 @@ CREATE TABLE `genres` (
   `genre` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `genres`
+--
+
+INSERT INTO `genres` (`studioID`, `genre`) VALUES
+(50, 'Folk'),
+(51, 'Religious'),
+(52, 'Electronic');
+
 -- --------------------------------------------------------
 
 --
@@ -91,7 +100,10 @@ INSERT INTO `studios` (`id`, `owner`, `instruments`, `title`, `visibility`, `all
 (42, 'barnev@rpi.edu', '{ \"names\" : [], \"files\" : [] }', 'Title', 'Public', 'Yes', 'Description', 0, NULL),
 (43, 'barnev@rpi.edu', '{ \"names\" : [], \"files\" : [] }', 'Title', 'Public', 'Yes', 'Description', 0, NULL),
 (45, 'virginiabarnes0825@gmail.com', '{ \"names\" : [], \"files\" : [] }', 'Title', 'Public', 'Yes', 'Description', 0, NULL),
-(48, 'virginiabarnes0825@gmail.com', '{\"names\":[\"Oboe\",\"Cello\",\"Piano\",\"Guitar 1\",\"Guitar 2\"],\"files\":[\"studios/14/Oboe.mp3\",\"studios/14/Cello.mp3\",\"studios/14/Piano.mp3\",\"studios/14/Guitar 1.mp3\",\"studios/14/Guitar 2.mp3\"]}', 'Title', 'Public', 'Yes', 'Description', 0, NULL);
+(48, 'virginiabarnes0825@gmail.com', '{\"names\":[\"Oboe\",\"Cello\",\"Piano\",\"Guitar 1\",\"Guitar 2\"],\"files\":[\"studios/14/Oboe.mp3\",\"studios/14/Cello.mp3\",\"studios/14/Piano.mp3\",\"studios/14/Guitar 1.mp3\",\"studios/14/Guitar 2.mp3\"]}', 'Title', 'Public', 'Yes', 'Description', 0, NULL),
+(50, 'qinz@rpi.edu', '{ \"names\" : [], \"files\" : [] }', 'Hanukkah Party', 'Public', 'Yes', 'We love Hanukkah', 0, NULL),
+(51, 'qinz@rpi.edu', '{ \"names\" : [], \"files\" : [] }', 'Cities on Flame with Jam and Sesh', 'Public', 'Yes', 'ft. Blue Oyster Heathens', 1, NULL),
+(52, 'qinz@rpi.edu', '{ \"names\" : [], \"files\" : [] }', 'Blade Runner', 'Public', 'Yes', 'ft. CyberBUNk', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -105,17 +117,20 @@ CREATE TABLE `users` (
   `username` varchar(255) DEFAULT 'random_username',
   `displayName` varchar(255) DEFAULT 'FirstName LastName',
   `bio` varchar(255) DEFAULT '',
-  `profilePic` varchar(255) DEFAULT 'assets/img/profile-pictures/blank-avatar.png'
+  `profilePic` varchar(255) DEFAULT 'assets/img/profile-pictures/blank-avatar.png',
+  `isAdmin` varchar(5) DEFAULT 'No'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`email`, `password`, `username`, `displayName`, `bio`, `profilePic`) VALUES
-('barnev@rpi.edu', '$2y$10$dJ2rG/KxcJGZ5bhsRpjkWuwwF85wLz61GtFRmMmFua.qmCFyCrczK', 'johne', 'Elton John', '', 'assets/img/profile-pictures/profilepic1.jpg'),
-('virginiabarnes0825@gmail.com', '$2y$10$k2WzMzkOjGmZNaTC.Mw7l.swj..rbbefS5zVCYtZWnRgrwPx4uoIm', 'barnesv', 'John Legend', 'hello', 'assets/img/profile-pictures/profilepic3.jpg'),
-('wildg@rpi.edu', '$2y$10$TnSWLoN7kq8KV6Ga3Zh6TeFyxCgCIP1WBPWE8THUBA.p6rYPfoSWq', 'wildg', 'FirstName LastName', '', 'assets/img/profile-pictures/blank-avatar.png');
+INSERT INTO `users` (`email`, `password`, `username`, `displayName`, `bio`, `profilePic`, `isAdmin`) VALUES
+('barnev@rpi.edu', '$2y$10$dJ2rG/KxcJGZ5bhsRpjkWuwwF85wLz61GtFRmMmFua.qmCFyCrczK', 'johne', 'Elton John', '', 'assets/img/profile-pictures/profilepic1.jpg', 'Yes'),
+('qinz@rpi.edu', '$2y$10$2ksj0hI1a2Nm6r0MOOmX2OIGl2aEsZ/mPzKl9/bzbHM/t8bhRt3Dy', 'kylecccx', 'Kyle Qin', 'I used Nigua Hamooz on my burger king order yesterday', 'assets/img/profile-pictures/profilepic1.jpg', 'Yes'),
+('root@rpi.edu', '$2y$10$YTvU9YTUYao7FNb/yf6H2OvDmNfWntWsCeaw8bLq/S1y8CnAfLWca', 'root_test', 'root_test', '', 'assets/img/profile-pictures/blank-avatar.png', 'No'),
+('virginiabarnes0825@gmail.com', '$2y$10$k2WzMzkOjGmZNaTC.Mw7l.swj..rbbefS5zVCYtZWnRgrwPx4uoIm', 'barnesv', 'John Legend', 'hello', 'assets/img/profile-pictures/profilepic3.jpg', 'Yes'),
+('wildg@rpi.edu', '$2y$10$TnSWLoN7kq8KV6Ga3Zh6TeFyxCgCIP1WBPWE8THUBA.p6rYPfoSWq', 'wildg', 'FirstName LastName', '', 'assets/img/profile-pictures/blank-avatar.png', 'Yes');
 
 --
 -- Indexes for dumped tables
@@ -163,7 +178,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `studios`
 --
 ALTER TABLE `studios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Constraints for dumped tables
