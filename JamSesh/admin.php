@@ -178,6 +178,8 @@
         echo "<th>Displayed Name</th>";
         echo "<th>User Name</th>";
         echo "<th>Studios</th>";
+        echo "<th>User Type</th>";
+        echo "<th colspan='2'>Options</th>";
         echo "</tr>";
       while ($row=mysqli_fetch_array($all_users)) {
         echo "<tr id='" . $row['email'] . "'>";
@@ -185,7 +187,17 @@
         echo "<td>" . $row['displayName'] . "</td>";
         echo "<td>" . $row['username'] . "</td>";
         echo "<td>" . $row['num_studio'] . "</td>";
+        echo "<td>";
+        if ($row['isAdmin'] == 'Yes') {
+          echo 'Admin</td>';
+          echo "<td><a class='admin' href='./assets/php/authorize.php?rmAdmin=". $row['email'] ."'>Romove Admin</a></td>";
+        } else {
+          echo 'Normal User</td>';
+          echo "<td><a class='admin' href='./assets/php/authorize.php?addAdmin=". $row['email'] ."'>Authorize as Admin</a></td>";
+        }
+        echo "</td>";
         echo "<td><a class='del' href='./assets/php/delete.php?duser=". $row['email'] ."'>Delete</a></td>";
+        
         echo "</tr>";
       }
       echo "</table>";
@@ -204,20 +216,31 @@
         echo "<th scope='row'>Genres</th>";
         echo "<th>Title</th>";
         echo "<th>Visibility</th>";
-        echo "<th>Allow Fork</th>";
+        echo "<th>Allows Fork</th>";
+        echo "<th>Forks</th>";
+        echo "<th>Option</th>";
         echo "</tr>";
       while ($row=mysqli_fetch_array($all_studios)) {
-        $settings = json_decode($row['settings']);
         echo "<tr id='" . $row['id'] . "'>";
         echo "<td>" . $row['displayName'] . "</td>";
         echo "<td>" . $row['owner'] . "</td>";
         echo "<td>";
-        $genre_string = implode(' / ',$settings->{'genres'});
-        echo $genre_string;
+        // $genre_string = implode(' / ',$settings->{'genres'});
+        // echo $genre_string;
+        $genre_query = "SELECT * from genres g WHERE g.studioID = '{$row['id']}';";
+        $genre = mysqli_query($conn, $genre_query);
+        $genre_row = mysqli_fetch_array($genre);
+        // The current DB allows only one genre per studio
+        if (mysqli_num_rows($genre) == 0) {
+          echo 'N/A';
+        } else {
+          echo $genre_row['genre'];
+        }
         echo "</td>";
-        echo "<td>" . $settings->{'title'} . "</td>";
-        echo "<td>" . $settings->{'visibility'} . "</td>";
-        echo "<td>" . $settings->{'allowFork'} . "</td>";
+        echo "<td>" . $row['title'] . "</td>";
+        echo "<td>" . $row['visibility'] . "</td>";
+        echo "<td>" . $row['allowFork'] . "</td>";
+        echo "<td>" . $row['forks'] . "</td>";
         echo "<td><a class='del' href='./assets/php/delete.php?dstudio={$row['id']}'>Delete</a></td>";
         echo "</tr>";
       }
