@@ -122,6 +122,7 @@ function checkFav($link) {
         // Direct the user to the new forked studio page
         $_SESSION["studioID"] = $last_id;
         getStudio($link);
+        $_SESSION['favorites'] = $_SESSION['favorites'] + 1;
         header("Location: studio.php");
       } else {
         echo "Something went wrong. Please try again later1.";
