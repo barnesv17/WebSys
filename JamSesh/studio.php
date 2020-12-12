@@ -90,6 +90,7 @@ function checkFork($link)
         getStudio($link);
         $_SESSION['forks'] = $_SESSION['forks'] + 1;
         header("Location: studio.php");
+        echo "<script>window.location.reload();</script>";
       } else {
         echo "Something went wrong. Please try again later.";
       }
@@ -125,6 +126,7 @@ function checkFav($link) {
         getStudio($link);
         $_SESSION['favorites'] = $_SESSION['favorites'] + 1;
         header("Location: studio.php");
+        echo "<script>window.location.reload();</script>";
       } else {
         echo "Something went wrong. Please try again later1.";
       }
