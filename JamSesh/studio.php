@@ -386,7 +386,7 @@ getStudio($link);
       echo "</button>";
     } else*/ {
       echo "<button class='btn btn-secondary fork-button' name='favorite' type='submit'>Favorite&nbsp;";
-      // echo "<span class='badge badge-light'>". $_SESSION["favorites"] . "</span>";
+      echo "<span class='badge badge-light'>". $_SESSION["favorites"] . "</span>";
       echo "</button>";
     }
 
@@ -396,11 +396,11 @@ getStudio($link);
     echo "<form action='studio.php' method='POST' id='fork-form'>";
     if ($_SESSION["allowFork"] == "No") {
       echo "<button class='btn btn-secondary invisible fork-button' name='fork' type='submit'>Fork&nbsp;";
-      // echo "<span class='badge badge-light'>" . $_SESSION["forks"] . "</span>";
+      echo "<span class='badge badge-light'>" . $_SESSION["forks"] . "</span>";
       echo "</button>";
     } else {
       echo "<button class='btn btn-secondary fork-button' name='fork' type='submit'>Fork&nbsp;";
-      // echo "<span class='badge badge-light'>" . $_SESSION["forks"] . "</span>";
+      echo "<span class='badge badge-light'>" . $_SESSION["forks"] . "</span>";
       echo "</button>";
     }
     echo "</form>";
