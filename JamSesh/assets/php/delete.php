@@ -22,7 +22,14 @@ try {
     header("location: ../../admin.php");
     exit;
   }
-
+  if(isset($_GET['delete-studio'])) {
+    $delete_studio = $_GET["delete-studio"];
+    $sql = "DELETE FROM studios where id = {$delete_studio} ;";
+    $result = mysqli_query($conn, $sql);
+    echo "<br/><br/><span>deleted successfully...!!</span>";
+    header("location: ../../user-profile.php");
+    exit;
+  }
   $conn->close();
 }  catch(Exception $e) {
   echo $e->getMessage();

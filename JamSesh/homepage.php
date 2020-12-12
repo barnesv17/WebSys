@@ -172,7 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <p id="summary">JamSesh provides an environment for remote musicians to compose music collaboratively. Share a
           Studio and begin composing today.</p>
       </div>
-      <div class="text-center d-xl-flex justify-content-xl-center form-container">
+      <div class="text-center d-xl-flex justify-content-xl-center form-container" id="signUp">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" id="signupForm" method="post">
           <h2 class="text-center" id="create">Create an account.</h2>
           <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>" id="email">

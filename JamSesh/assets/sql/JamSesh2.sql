@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 12, 2020 at 02:48 AM
+-- Host: localhost
+-- Generation Time: Dec 12, 2020 at 05:46 AM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `jamsesh2`
+-- Database: `JamSesh2`
 --
 
 -- --------------------------------------------------------
@@ -142,6 +142,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`email`, `password`, `username`, `displayName`, `bio`, `profilePic`, `isAdmin`) VALUES
 ('barnev@rpi.edu', '$2y$10$dJ2rG/KxcJGZ5bhsRpjkWuwwF85wLz61GtFRmMmFua.qmCFyCrczK', 'johne', 'Elton John', '', 'assets/img/profile-pictures/profilepic1.jpg', 'Yes'),
+('email@email.com', '$2y$10$0TCpUNewivT12eJ0fDfRVOozp15Z1ZUltKHSR8PSxwgczuMFlOeeS', 'username1', 'FirstName LastName', '', 'assets/img/profile-pictures/blank-avatar.png', 'No'),
+('gdude37@gmail.com', '$2y$10$qCFpSBRD94tf.p2Q.03usuM4N8w/decf4qXhXutXddJWJtFQV0Oqq', 'gdude', 'FirstName LastName', '', 'assets/img/profile-pictures/blank-avatar.png', 'No'),
 ('qinz@rpi.edu', '$2y$10$2ksj0hI1a2Nm6r0MOOmX2OIGl2aEsZ/mPzKl9/bzbHM/t8bhRt3Dy', 'kylecccx', 'Kyle Qin', 'I used Nigua Hamooz on my burger king order yesterday', 'assets/img/profile-pictures/profilepic1.jpg', 'Yes'),
 ('root@rpi.edu', '$2y$10$u9I/eSTRGa0pN1m6kPLvlOwylGQRKHh2Bz8pSfujUt0FFBLg0uauG', 'root_test', 'FirstName LastName', '', 'assets/img/profile-pictures/blank-avatar.png', 'No'),
 ('virginiabarnes0825@gmail.com', '$2y$10$k2WzMzkOjGmZNaTC.Mw7l.swj..rbbefS5zVCYtZWnRgrwPx4uoIm', 'barnesv', 'John Legend', 'hello', 'assets/img/profile-pictures/profilepic3.jpg', 'Yes'),
@@ -193,7 +195,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `studios`
 --
 ALTER TABLE `studios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- Constraints for dumped tables
@@ -211,7 +213,7 @@ ALTER TABLE `collaborators`
 --
 ALTER TABLE `favorites`
   ADD CONSTRAINT `favorites_ibfk_1` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `favorites_ibfk_2` FOREIGN KEY (`studioID`) REFERENCES `studios` (`id`);
+  ADD CONSTRAINT `favorites_ibfk_2` FOREIGN KEY (`studioID`) REFERENCES `studios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `genres`

@@ -4,7 +4,7 @@ session_start();
 // Check if the user is logged in, if not then redirect him to homepage---------
 // include 'assets/php/login_check.php';
 // Include db config file-------------------------------------------------------
-include 'assets/php/db_conn.php';
+include 'assets/php/delete.php';
 
 // Updates all properties of the studio from the database-----------------------
 function getStudio($link)
@@ -671,6 +671,9 @@ getStudio($link);
 
       // Submit Button
       echo "<button name='update-settings' type='submit' class='btn btn-info'>Save Changes</button>";
+      echo "<button form='delete-form' name='delete-studio' value=" . $_SESSION['studioID'] . " type='submit' class='btn btn-danger'>Delete Studio</button>";
+      echo "</form>";
+      echo "<form action='assets/php/delete.php' method='GET' id='delete-form'>";
       echo "</form>";
       echo "</div>";
       echo "</div>";
