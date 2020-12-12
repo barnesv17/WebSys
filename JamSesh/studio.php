@@ -20,6 +20,7 @@ function getStudio($link)
       $_SESSION["allowFork"] = $row["allowFork"];
       $_SESSION["description"] = $row["description"];
       $_SESSION["forks"] = $row["forks"];
+      $_SESSION["favorites"] = $row["favorites"];
     }
     $sql2 = "SELECT genre FROM genres WHERE studioID = " . $_SESSION["studioID"] . ";";
     $result2 = $link->query($sql2);
@@ -97,6 +98,40 @@ function checkFork($link)
   }
 }
 
+// Checks if the studio is favorited i.e. "favorite" button is clicked
+
+function checkFav($link) {
+  if (isset($_POST['favorite'])) {
+    // Same as checkFork, update the studio
+    getStudio($link);
+    $sql = "INSERT INTO favorites (email, studioID) VALUES (?, ?)";
+    if ($stmt = mysqli_prepare($link, $sql)) {
+      mysqli_stmt_bind_param($stmt, "ss", $email, $studioID);
+      $email = $_SESSION["email"];
+      $studioID = $_SESSION["studioID"];
+      if (mysqli_stmt_execute($stmt)) {
+        $last_id = $link->insert_id;
+        // Add one to the number of favorites of the current studio
+        $sql = "UPDATE studios SET favorites = " . ($_SESSION["favorites"] + 1) . " WHERE id = " . $_SESSION["studioID"] . "";
+        if ($stmt = mysqli_prepare($link, $sql)) {
+          if (!mysqli_stmt_execute($stmt)) {
+            echo "Oops! Something went wrong. Please try again later.";
+            exit();
+          }
+        }
+        // Direct the user to the new forked studio page
+        $_SESSION["studioID"] = $last_id;
+        getStudio($link);
+        header("Location: studio.php");
+      } else {
+        echo "Something went wrong. Please try again later1.";
+      }
+    } else {
+      echo "Something went wrong. Please try again later2.";
+    }
+  }
+}
+   
 // Checks if an instrument was added--------------------------------------------
 function addInstrument($link)
 {
@@ -289,6 +324,7 @@ function updateSettings($link)
 
 getStudio($link);
 checkFork($link);
+checkFav($link);
 addInstrument($link);
 deleteInstrument($link);
 updateSettings($link);
@@ -344,13 +380,13 @@ getStudio($link);
   // Only display favorite and fork if you are not an owner and only if logged in
   if (isset($_SESSION["email"])) {
     echo "<form action='studio.php' method='POST' id='favorite-form'>";
-    if ($_SESSION["email"] == $_SESSION["ownerEmail"]) {
+    if ($_SESSION["email"] != $_SESSION["ownerEmail"]) /*{
       echo "<button class='btn btn-secondary invisible fork-button' name='favorite' type='submit'>Favorite&nbsp;";
-      echo "<span class='badge badge-light'>0</span>";
+      echo "<span class='badge badge-light'>". $_SESSION["favorites"] . "</span>";
       echo "</button>";
-    } else {
+    } else*/ {
       echo "<button class='btn btn-secondary fork-button' name='favorite' type='submit'>Favorite&nbsp;";
-      echo "<span class='badge badge-light'>0</span>";
+      echo "<span class='badge badge-light'>". $_SESSION["favorites"] . "</span>";
       echo "</button>";
     }
 

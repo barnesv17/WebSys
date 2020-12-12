@@ -202,11 +202,49 @@ function fetchCollabStudios( $link ) {
   return $collab_studios;
 }
 
+function fetchFavoritedStudios( $link ) {
+  $fav_studios = array();
+  // Prepare a select statement for studios where this user has favorited
+  $sql = "SELECT * FROM favorites WHERE email = '" . $_SESSION["email"] . "'";
+  if ($result = $link->query($sql)) {
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc() ) {
+        $sql2 = "SELECT * FROM studios WHERE id = " . $row["studioID"] . "";
+        $result2 = $link->query($sql2);
+        if ($result2->num_rows > 0) {
+          while ($row2 = $result2->fetch_assoc()) {
+            $title = $row2['title'];
+            $visibility = $row2['visibility'];
+            $allowFork = $row2['allowFork'];
+            $description = $row2['description'];
+            // Find the owner of the studio's username
+            $sql3 = "SELECT username FROM users WHERE email = '" . $row2["owner"] . "'";
+            $result3 = $link->query($sql3);
+            if ($result3->num_rows == 1) {
+              while ($row3 = $result3->fetch_assoc()) {
+                $owner_username = $row3["username"];
+              }
+            }
+            array_push( $fav_studios, [ 'id' => $row2['id'],
+                                          'title' => $row2['title'],
+                                          'visibility' => $row2['visibility'],
+                                          'allowFork' => $row2['allowFork'],
+                                          'description' => $row2['description'],
+                                          'owner' => $owner_username ] );
+          }
+        }
+      }
+    }
+  }
+  return $fav_studios;
+}
+
 checkEditProfile( $link );
 checkNewStudio( $link );
 checkStudioClicked();
 $_SESSION["users_studios"] = fetchOwnedStudios( $link );
 $_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
+$_SESSION["favorited-studios"] = fetchFavoritedStudios( $link );
 ?>
 
 <!DOCTYPE html>
@@ -415,7 +453,7 @@ $_SESSION["users_collab_studios"] = fetchCollabStudios( $link );
       echo "<h1>Favorited Studios</h1>";
       echo "</div>";
       if (@$_SESSION["favorited-studios"]) {
-        foreach ($_SESSION["users_collab_studios"] as $s) {
+        foreach ($_SESSION["favorited-studios"] as $s) {
           echo "<form method='POST' action='user-profile.php'>";
           echo "<button type='submit' name='studio-clicked' value=" . $s["id"] . " class='studio'>";
           echo "<div class='studioTitle text-left'>@" . $s["owner"] . "/" . $s["title"] . "</div>";
